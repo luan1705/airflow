@@ -7873,3 +7873,87 @@
 [2025-09-08T09:41:58.458+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:41:58.458+0000] {dag.py:3096} INFO - Sync 1 DAGs
 [2025-09-08T09:41:58.483+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:41:58.483+0000] {dag.py:3954} INFO - Setting next_dagrun for saveDatabase to 2025-09-08 08:15:00+00:00, run_after=2025-09-09 08:15:00+00:00
 [2025-09-08T09:41:58.499+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dag_saveDB_redis.py took 0.553 seconds
+[2025-09-08T09:42:29.244+0000] {processor.py:161} INFO - Started process (PID=199187) to work on /opt/airflow/dags/dag_saveDB_redis.py
+[2025-09-08T09:42:29.245+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dag_saveDB_redis.py for tasks to queue
+[2025-09-08T09:42:29.248+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:42:29.247+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/dag_saveDB_redis.py
+[2025-09-08T09:42:29.733+0000] {processor.py:840} INFO - DAG(s) 'saveDatabase' retrieved from /opt/airflow/dags/dag_saveDB_redis.py
+[2025-09-08T09:42:29.758+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:42:29.758+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-09-08T09:42:29.782+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:42:29.782+0000] {dag.py:3954} INFO - Setting next_dagrun for saveDatabase to 2025-09-08 08:15:00+00:00, run_after=2025-09-09 08:15:00+00:00
+[2025-09-08T09:42:29.801+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dag_saveDB_redis.py took 0.567 seconds
+[2025-09-08T09:43:00.437+0000] {processor.py:161} INFO - Started process (PID=199214) to work on /opt/airflow/dags/dag_saveDB_redis.py
+[2025-09-08T09:43:00.437+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dag_saveDB_redis.py for tasks to queue
+[2025-09-08T09:43:00.439+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:43:00.439+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/dag_saveDB_redis.py
+[2025-09-08T09:43:00.920+0000] {processor.py:840} INFO - DAG(s) 'saveDatabase' retrieved from /opt/airflow/dags/dag_saveDB_redis.py
+[2025-09-08T09:43:00.942+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:43:00.941+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-09-08T09:43:00.963+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:43:00.963+0000] {dag.py:3954} INFO - Setting next_dagrun for saveDatabase to 2025-09-08 08:15:00+00:00, run_after=2025-09-09 08:15:00+00:00
+[2025-09-08T09:43:00.979+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dag_saveDB_redis.py took 0.550 seconds
+[2025-09-08T09:43:31.243+0000] {processor.py:161} INFO - Started process (PID=199256) to work on /opt/airflow/dags/dag_saveDB_redis.py
+[2025-09-08T09:43:31.244+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dag_saveDB_redis.py for tasks to queue
+[2025-09-08T09:43:31.246+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:43:31.245+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/dag_saveDB_redis.py
+[2025-09-08T09:43:31.864+0000] {processor.py:840} INFO - DAG(s) 'saveDatabase' retrieved from /opt/airflow/dags/dag_saveDB_redis.py
+[2025-09-08T09:43:31.894+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:43:31.894+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-09-08T09:43:31.926+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:43:31.926+0000] {dag.py:3954} INFO - Setting next_dagrun for saveDatabase to 2025-09-08 08:15:00+00:00, run_after=2025-09-09 08:15:00+00:00
+[2025-09-08T09:43:31.945+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dag_saveDB_redis.py took 0.710 seconds
+[2025-09-08T09:44:02.026+0000] {processor.py:161} INFO - Started process (PID=199292) to work on /opt/airflow/dags/dag_saveDB_redis.py
+[2025-09-08T09:44:02.027+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dag_saveDB_redis.py for tasks to queue
+[2025-09-08T09:44:02.029+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:44:02.028+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/dag_saveDB_redis.py
+[2025-09-08T09:44:02.656+0000] {processor.py:840} INFO - DAG(s) 'saveDatabase' retrieved from /opt/airflow/dags/dag_saveDB_redis.py
+[2025-09-08T09:44:02.696+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:44:02.695+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-09-08T09:44:02.735+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:44:02.735+0000] {dag.py:3954} INFO - Setting next_dagrun for saveDatabase to 2025-09-08 08:15:00+00:00, run_after=2025-09-09 08:15:00+00:00
+[2025-09-08T09:44:02.758+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dag_saveDB_redis.py took 0.741 seconds
+[2025-09-08T09:44:33.272+0000] {processor.py:161} INFO - Started process (PID=199325) to work on /opt/airflow/dags/dag_saveDB_redis.py
+[2025-09-08T09:44:33.273+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dag_saveDB_redis.py for tasks to queue
+[2025-09-08T09:44:33.275+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:44:33.274+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/dag_saveDB_redis.py
+[2025-09-08T09:44:34.015+0000] {processor.py:840} INFO - DAG(s) 'saveDatabase' retrieved from /opt/airflow/dags/dag_saveDB_redis.py
+[2025-09-08T09:44:34.042+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:44:34.042+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-09-08T09:44:34.069+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:44:34.069+0000] {dag.py:3954} INFO - Setting next_dagrun for saveDatabase to 2025-09-08 08:15:00+00:00, run_after=2025-09-09 08:15:00+00:00
+[2025-09-08T09:44:34.089+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dag_saveDB_redis.py took 0.826 seconds
+[2025-09-08T09:45:04.429+0000] {processor.py:161} INFO - Started process (PID=199361) to work on /opt/airflow/dags/dag_saveDB_redis.py
+[2025-09-08T09:45:04.430+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dag_saveDB_redis.py for tasks to queue
+[2025-09-08T09:45:04.432+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:45:04.432+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/dag_saveDB_redis.py
+[2025-09-08T09:45:04.898+0000] {processor.py:840} INFO - DAG(s) 'saveDatabase' retrieved from /opt/airflow/dags/dag_saveDB_redis.py
+[2025-09-08T09:45:04.921+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:45:04.920+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-09-08T09:45:04.943+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:45:04.943+0000] {dag.py:3954} INFO - Setting next_dagrun for saveDatabase to 2025-09-08 08:15:00+00:00, run_after=2025-09-09 08:15:00+00:00
+[2025-09-08T09:45:04.959+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dag_saveDB_redis.py took 0.539 seconds
+[2025-09-08T09:45:35.402+0000] {processor.py:161} INFO - Started process (PID=199394) to work on /opt/airflow/dags/dag_saveDB_redis.py
+[2025-09-08T09:45:35.403+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dag_saveDB_redis.py for tasks to queue
+[2025-09-08T09:45:35.405+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:45:35.405+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/dag_saveDB_redis.py
+[2025-09-08T09:45:35.898+0000] {processor.py:840} INFO - DAG(s) 'saveDatabase' retrieved from /opt/airflow/dags/dag_saveDB_redis.py
+[2025-09-08T09:45:35.929+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:45:35.929+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-09-08T09:45:35.969+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:45:35.969+0000] {dag.py:3954} INFO - Setting next_dagrun for saveDatabase to 2025-09-08 08:15:00+00:00, run_after=2025-09-09 08:15:00+00:00
+[2025-09-08T09:45:35.987+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dag_saveDB_redis.py took 0.595 seconds
+[2025-09-08T09:46:06.242+0000] {processor.py:161} INFO - Started process (PID=199436) to work on /opt/airflow/dags/dag_saveDB_redis.py
+[2025-09-08T09:46:06.243+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dag_saveDB_redis.py for tasks to queue
+[2025-09-08T09:46:06.245+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:46:06.245+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/dag_saveDB_redis.py
+[2025-09-08T09:46:06.932+0000] {processor.py:840} INFO - DAG(s) 'saveDatabase' retrieved from /opt/airflow/dags/dag_saveDB_redis.py
+[2025-09-08T09:46:06.957+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:46:06.957+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-09-08T09:46:06.982+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:46:06.982+0000] {dag.py:3954} INFO - Setting next_dagrun for saveDatabase to 2025-09-08 08:15:00+00:00, run_after=2025-09-09 08:15:00+00:00
+[2025-09-08T09:46:06.999+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dag_saveDB_redis.py took 0.765 seconds
+[2025-09-08T09:46:37.143+0000] {processor.py:161} INFO - Started process (PID=199463) to work on /opt/airflow/dags/dag_saveDB_redis.py
+[2025-09-08T09:46:37.144+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dag_saveDB_redis.py for tasks to queue
+[2025-09-08T09:46:37.146+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:46:37.146+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/dag_saveDB_redis.py
+[2025-09-08T09:46:37.708+0000] {processor.py:840} INFO - DAG(s) 'saveDatabase' retrieved from /opt/airflow/dags/dag_saveDB_redis.py
+[2025-09-08T09:46:37.734+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:46:37.734+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-09-08T09:46:37.759+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:46:37.759+0000] {dag.py:3954} INFO - Setting next_dagrun for saveDatabase to 2025-09-08 08:15:00+00:00, run_after=2025-09-09 08:15:00+00:00
+[2025-09-08T09:46:37.777+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dag_saveDB_redis.py took 0.643 seconds
+[2025-09-08T09:47:08.013+0000] {processor.py:161} INFO - Started process (PID=199505) to work on /opt/airflow/dags/dag_saveDB_redis.py
+[2025-09-08T09:47:08.014+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dag_saveDB_redis.py for tasks to queue
+[2025-09-08T09:47:08.016+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:47:08.016+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/dag_saveDB_redis.py
+[2025-09-08T09:47:08.579+0000] {processor.py:840} INFO - DAG(s) 'saveDatabase' retrieved from /opt/airflow/dags/dag_saveDB_redis.py
+[2025-09-08T09:47:08.610+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:47:08.610+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-09-08T09:47:08.640+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:47:08.640+0000] {dag.py:3954} INFO - Setting next_dagrun for saveDatabase to 2025-09-08 08:15:00+00:00, run_after=2025-09-09 08:15:00+00:00
+[2025-09-08T09:47:08.662+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dag_saveDB_redis.py took 0.657 seconds
+[2025-09-08T09:47:38.879+0000] {processor.py:161} INFO - Started process (PID=199531) to work on /opt/airflow/dags/dag_saveDB_redis.py
+[2025-09-08T09:47:38.880+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dag_saveDB_redis.py for tasks to queue
+[2025-09-08T09:47:38.882+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:47:38.882+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/dag_saveDB_redis.py
+[2025-09-08T09:47:39.447+0000] {processor.py:840} INFO - DAG(s) 'saveDatabase' retrieved from /opt/airflow/dags/dag_saveDB_redis.py
+[2025-09-08T09:47:39.470+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:47:39.470+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-09-08T09:47:39.492+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:47:39.492+0000] {dag.py:3954} INFO - Setting next_dagrun for saveDatabase to 2025-09-08 08:15:00+00:00, run_after=2025-09-09 08:15:00+00:00
+[2025-09-08T09:47:39.509+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dag_saveDB_redis.py took 0.638 seconds
+[2025-09-08T09:48:09.971+0000] {processor.py:161} INFO - Started process (PID=199573) to work on /opt/airflow/dags/dag_saveDB_redis.py
+[2025-09-08T09:48:09.972+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dag_saveDB_redis.py for tasks to queue
+[2025-09-08T09:48:09.974+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:48:09.974+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/dag_saveDB_redis.py
+[2025-09-08T09:48:10.491+0000] {processor.py:840} INFO - DAG(s) 'saveDatabase' retrieved from /opt/airflow/dags/dag_saveDB_redis.py
+[2025-09-08T09:48:10.515+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:48:10.514+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-09-08T09:48:10.535+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:48:10.535+0000] {dag.py:3954} INFO - Setting next_dagrun for saveDatabase to 2025-09-08 08:15:00+00:00, run_after=2025-09-09 08:15:00+00:00
+[2025-09-08T09:48:10.551+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dag_saveDB_redis.py took 0.590 seconds

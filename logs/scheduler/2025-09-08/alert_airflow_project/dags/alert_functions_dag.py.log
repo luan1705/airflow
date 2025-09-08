@@ -7950,3 +7950,80 @@
 [2025-09-08T09:42:21.247+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:42:21.247+0000] {dag.py:3096} INFO - Sync 1 DAGs
 [2025-09-08T09:42:21.277+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:42:21.277+0000] {dag.py:3954} INFO - Setting next_dagrun for run_all_alerts_and_save_to_postgres to 2025-09-08 08:55:00+00:00, run_after=2025-09-09 02:00:00+00:00
 [2025-09-08T09:42:21.296+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/alert_airflow_project/dags/alert_functions_dag.py took 0.113 seconds
+[2025-09-08T09:42:51.356+0000] {processor.py:161} INFO - Started process (PID=199204) to work on /opt/airflow/dags/alert_airflow_project/dags/alert_functions_dag.py
+[2025-09-08T09:42:51.357+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/alert_airflow_project/dags/alert_functions_dag.py for tasks to queue
+[2025-09-08T09:42:51.360+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:42:51.359+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/alert_airflow_project/dags/alert_functions_dag.py
+[2025-09-08T09:42:51.376+0000] {processor.py:840} INFO - DAG(s) 'run_all_alerts_and_save_to_postgres' retrieved from /opt/airflow/dags/alert_airflow_project/dags/alert_functions_dag.py
+[2025-09-08T09:42:51.415+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:42:51.415+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-09-08T09:42:51.460+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:42:51.459+0000] {dag.py:3954} INFO - Setting next_dagrun for run_all_alerts_and_save_to_postgres to 2025-09-08 08:55:00+00:00, run_after=2025-09-09 02:00:00+00:00
+[2025-09-08T09:42:51.482+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/alert_airflow_project/dags/alert_functions_dag.py took 0.135 seconds
+[2025-09-08T09:43:22.143+0000] {processor.py:161} INFO - Started process (PID=199246) to work on /opt/airflow/dags/alert_airflow_project/dags/alert_functions_dag.py
+[2025-09-08T09:43:22.144+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/alert_airflow_project/dags/alert_functions_dag.py for tasks to queue
+[2025-09-08T09:43:22.146+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:43:22.146+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/alert_airflow_project/dags/alert_functions_dag.py
+[2025-09-08T09:43:22.162+0000] {processor.py:840} INFO - DAG(s) 'run_all_alerts_and_save_to_postgres' retrieved from /opt/airflow/dags/alert_airflow_project/dags/alert_functions_dag.py
+[2025-09-08T09:43:22.204+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:43:22.204+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-09-08T09:43:22.237+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:43:22.237+0000] {dag.py:3954} INFO - Setting next_dagrun for run_all_alerts_and_save_to_postgres to 2025-09-08 08:55:00+00:00, run_after=2025-09-09 02:00:00+00:00
+[2025-09-08T09:43:22.259+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/alert_airflow_project/dags/alert_functions_dag.py took 0.125 seconds
+[2025-09-08T09:43:52.879+0000] {processor.py:161} INFO - Started process (PID=199273) to work on /opt/airflow/dags/alert_airflow_project/dags/alert_functions_dag.py
+[2025-09-08T09:43:52.880+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/alert_airflow_project/dags/alert_functions_dag.py for tasks to queue
+[2025-09-08T09:43:52.882+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:43:52.881+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/alert_airflow_project/dags/alert_functions_dag.py
+[2025-09-08T09:43:52.896+0000] {processor.py:840} INFO - DAG(s) 'run_all_alerts_and_save_to_postgres' retrieved from /opt/airflow/dags/alert_airflow_project/dags/alert_functions_dag.py
+[2025-09-08T09:43:52.950+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:43:52.949+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-09-08T09:43:52.984+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:43:52.983+0000] {dag.py:3954} INFO - Setting next_dagrun for run_all_alerts_and_save_to_postgres to 2025-09-08 08:55:00+00:00, run_after=2025-09-09 02:00:00+00:00
+[2025-09-08T09:43:53.006+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/alert_airflow_project/dags/alert_functions_dag.py took 0.135 seconds
+[2025-09-08T09:44:23.267+0000] {processor.py:161} INFO - Started process (PID=199315) to work on /opt/airflow/dags/alert_airflow_project/dags/alert_functions_dag.py
+[2025-09-08T09:44:23.269+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/alert_airflow_project/dags/alert_functions_dag.py for tasks to queue
+[2025-09-08T09:44:23.271+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:44:23.270+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/alert_airflow_project/dags/alert_functions_dag.py
+[2025-09-08T09:44:23.286+0000] {processor.py:840} INFO - DAG(s) 'run_all_alerts_and_save_to_postgres' retrieved from /opt/airflow/dags/alert_airflow_project/dags/alert_functions_dag.py
+[2025-09-08T09:44:23.330+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:44:23.330+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-09-08T09:44:23.363+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:44:23.363+0000] {dag.py:3954} INFO - Setting next_dagrun for run_all_alerts_and_save_to_postgres to 2025-09-08 08:55:00+00:00, run_after=2025-09-09 02:00:00+00:00
+[2025-09-08T09:44:23.385+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/alert_airflow_project/dags/alert_functions_dag.py took 0.126 seconds
+[2025-09-08T09:44:54.239+0000] {processor.py:161} INFO - Started process (PID=199348) to work on /opt/airflow/dags/alert_airflow_project/dags/alert_functions_dag.py
+[2025-09-08T09:44:54.240+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/alert_airflow_project/dags/alert_functions_dag.py for tasks to queue
+[2025-09-08T09:44:54.241+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:44:54.241+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/alert_airflow_project/dags/alert_functions_dag.py
+[2025-09-08T09:44:54.256+0000] {processor.py:840} INFO - DAG(s) 'run_all_alerts_and_save_to_postgres' retrieved from /opt/airflow/dags/alert_airflow_project/dags/alert_functions_dag.py
+[2025-09-08T09:44:54.288+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:44:54.288+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-09-08T09:44:54.314+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:44:54.313+0000] {dag.py:3954} INFO - Setting next_dagrun for run_all_alerts_and_save_to_postgres to 2025-09-08 08:55:00+00:00, run_after=2025-09-09 02:00:00+00:00
+[2025-09-08T09:44:54.331+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/alert_airflow_project/dags/alert_functions_dag.py took 0.100 seconds
+[2025-09-08T09:45:25.109+0000] {processor.py:161} INFO - Started process (PID=199390) to work on /opt/airflow/dags/alert_airflow_project/dags/alert_functions_dag.py
+[2025-09-08T09:45:25.110+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/alert_airflow_project/dags/alert_functions_dag.py for tasks to queue
+[2025-09-08T09:45:25.112+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:45:25.112+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/alert_airflow_project/dags/alert_functions_dag.py
+[2025-09-08T09:45:25.130+0000] {processor.py:840} INFO - DAG(s) 'run_all_alerts_and_save_to_postgres' retrieved from /opt/airflow/dags/alert_airflow_project/dags/alert_functions_dag.py
+[2025-09-08T09:45:25.168+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:45:25.167+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-09-08T09:45:25.195+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:45:25.195+0000] {dag.py:3954} INFO - Setting next_dagrun for run_all_alerts_and_save_to_postgres to 2025-09-08 08:55:00+00:00, run_after=2025-09-09 02:00:00+00:00
+[2025-09-08T09:45:25.213+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/alert_airflow_project/dags/alert_functions_dag.py took 0.114 seconds
+[2025-09-08T09:45:56.010+0000] {processor.py:161} INFO - Started process (PID=199417) to work on /opt/airflow/dags/alert_airflow_project/dags/alert_functions_dag.py
+[2025-09-08T09:45:56.011+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/alert_airflow_project/dags/alert_functions_dag.py for tasks to queue
+[2025-09-08T09:45:56.013+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:45:56.013+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/alert_airflow_project/dags/alert_functions_dag.py
+[2025-09-08T09:45:56.031+0000] {processor.py:840} INFO - DAG(s) 'run_all_alerts_and_save_to_postgres' retrieved from /opt/airflow/dags/alert_airflow_project/dags/alert_functions_dag.py
+[2025-09-08T09:45:56.069+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:45:56.068+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-09-08T09:45:56.097+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:45:56.096+0000] {dag.py:3954} INFO - Setting next_dagrun for run_all_alerts_and_save_to_postgres to 2025-09-08 08:55:00+00:00, run_after=2025-09-09 02:00:00+00:00
+[2025-09-08T09:45:56.117+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/alert_airflow_project/dags/alert_functions_dag.py took 0.117 seconds
+[2025-09-08T09:46:26.176+0000] {processor.py:161} INFO - Started process (PID=199459) to work on /opt/airflow/dags/alert_airflow_project/dags/alert_functions_dag.py
+[2025-09-08T09:46:26.178+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/alert_airflow_project/dags/alert_functions_dag.py for tasks to queue
+[2025-09-08T09:46:26.180+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:46:26.180+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/alert_airflow_project/dags/alert_functions_dag.py
+[2025-09-08T09:46:26.197+0000] {processor.py:840} INFO - DAG(s) 'run_all_alerts_and_save_to_postgres' retrieved from /opt/airflow/dags/alert_airflow_project/dags/alert_functions_dag.py
+[2025-09-08T09:46:26.234+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:46:26.233+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-09-08T09:46:26.261+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:46:26.261+0000] {dag.py:3954} INFO - Setting next_dagrun for run_all_alerts_and_save_to_postgres to 2025-09-08 08:55:00+00:00, run_after=2025-09-09 02:00:00+00:00
+[2025-09-08T09:46:26.280+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/alert_airflow_project/dags/alert_functions_dag.py took 0.113 seconds
+[2025-09-08T09:46:56.840+0000] {processor.py:161} INFO - Started process (PID=199486) to work on /opt/airflow/dags/alert_airflow_project/dags/alert_functions_dag.py
+[2025-09-08T09:46:56.841+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/alert_airflow_project/dags/alert_functions_dag.py for tasks to queue
+[2025-09-08T09:46:56.843+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:46:56.843+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/alert_airflow_project/dags/alert_functions_dag.py
+[2025-09-08T09:46:56.861+0000] {processor.py:840} INFO - DAG(s) 'run_all_alerts_and_save_to_postgres' retrieved from /opt/airflow/dags/alert_airflow_project/dags/alert_functions_dag.py
+[2025-09-08T09:46:56.901+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:46:56.901+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-09-08T09:46:56.942+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:46:56.942+0000] {dag.py:3954} INFO - Setting next_dagrun for run_all_alerts_and_save_to_postgres to 2025-09-08 08:55:00+00:00, run_after=2025-09-09 02:00:00+00:00
+[2025-09-08T09:46:56.965+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/alert_airflow_project/dags/alert_functions_dag.py took 0.135 seconds
+[2025-09-08T09:47:27.653+0000] {processor.py:161} INFO - Started process (PID=199528) to work on /opt/airflow/dags/alert_airflow_project/dags/alert_functions_dag.py
+[2025-09-08T09:47:27.654+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/alert_airflow_project/dags/alert_functions_dag.py for tasks to queue
+[2025-09-08T09:47:27.656+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:47:27.656+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/alert_airflow_project/dags/alert_functions_dag.py
+[2025-09-08T09:47:27.674+0000] {processor.py:840} INFO - DAG(s) 'run_all_alerts_and_save_to_postgres' retrieved from /opt/airflow/dags/alert_airflow_project/dags/alert_functions_dag.py
+[2025-09-08T09:47:27.712+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:47:27.712+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-09-08T09:47:27.739+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:47:27.739+0000] {dag.py:3954} INFO - Setting next_dagrun for run_all_alerts_and_save_to_postgres to 2025-09-08 08:55:00+00:00, run_after=2025-09-09 02:00:00+00:00
+[2025-09-08T09:47:27.759+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/alert_airflow_project/dags/alert_functions_dag.py took 0.116 seconds
+[2025-09-08T09:47:58.579+0000] {processor.py:161} INFO - Started process (PID=199555) to work on /opt/airflow/dags/alert_airflow_project/dags/alert_functions_dag.py
+[2025-09-08T09:47:58.580+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/alert_airflow_project/dags/alert_functions_dag.py for tasks to queue
+[2025-09-08T09:47:58.582+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:47:58.582+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/alert_airflow_project/dags/alert_functions_dag.py
+[2025-09-08T09:47:58.598+0000] {processor.py:840} INFO - DAG(s) 'run_all_alerts_and_save_to_postgres' retrieved from /opt/airflow/dags/alert_airflow_project/dags/alert_functions_dag.py
+[2025-09-08T09:47:58.636+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:47:58.636+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-09-08T09:47:58.826+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:47:58.826+0000] {dag.py:3954} INFO - Setting next_dagrun for run_all_alerts_and_save_to_postgres to 2025-09-08 08:55:00+00:00, run_after=2025-09-09 02:00:00+00:00
+[2025-09-08T09:47:58.845+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/alert_airflow_project/dags/alert_functions_dag.py took 0.274 seconds

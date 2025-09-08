@@ -7887,3 +7887,80 @@
 [2025-09-08T09:42:08.689+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:42:08.689+0000] {dag.py:3096} INFO - Sync 1 DAGs
 [2025-09-08T09:42:08.710+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:42:08.710+0000] {dag.py:3954} INFO - Setting next_dagrun for proprietary to 2025-09-07 17:01:00+00:00, run_after=2025-09-08 17:01:00+00:00
 [2025-09-08T09:42:08.728+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dag_proprietary.py took 0.599 seconds
+[2025-09-08T09:42:38.895+0000] {processor.py:161} INFO - Started process (PID=199189) to work on /opt/airflow/dags/dag_proprietary.py
+[2025-09-08T09:42:38.896+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dag_proprietary.py for tasks to queue
+[2025-09-08T09:42:38.898+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:42:38.897+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/dag_proprietary.py
+[2025-09-08T09:42:39.343+0000] {processor.py:840} INFO - DAG(s) 'proprietary' retrieved from /opt/airflow/dags/dag_proprietary.py
+[2025-09-08T09:42:39.368+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:42:39.368+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-09-08T09:42:39.394+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:42:39.394+0000] {dag.py:3954} INFO - Setting next_dagrun for proprietary to 2025-09-07 17:01:00+00:00, run_after=2025-09-08 17:01:00+00:00
+[2025-09-08T09:42:39.415+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dag_proprietary.py took 0.529 seconds
+[2025-09-08T09:43:09.730+0000] {processor.py:161} INFO - Started process (PID=199231) to work on /opt/airflow/dags/dag_proprietary.py
+[2025-09-08T09:43:09.731+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dag_proprietary.py for tasks to queue
+[2025-09-08T09:43:09.733+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:43:09.732+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/dag_proprietary.py
+[2025-09-08T09:43:10.341+0000] {processor.py:840} INFO - DAG(s) 'proprietary' retrieved from /opt/airflow/dags/dag_proprietary.py
+[2025-09-08T09:43:10.365+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:43:10.365+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-09-08T09:43:10.391+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:43:10.391+0000] {dag.py:3954} INFO - Setting next_dagrun for proprietary to 2025-09-07 17:01:00+00:00, run_after=2025-09-08 17:01:00+00:00
+[2025-09-08T09:43:10.411+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dag_proprietary.py took 0.689 seconds
+[2025-09-08T09:43:40.497+0000] {processor.py:161} INFO - Started process (PID=199258) to work on /opt/airflow/dags/dag_proprietary.py
+[2025-09-08T09:43:40.499+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dag_proprietary.py for tasks to queue
+[2025-09-08T09:43:40.500+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:43:40.500+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/dag_proprietary.py
+[2025-09-08T09:43:40.945+0000] {processor.py:840} INFO - DAG(s) 'proprietary' retrieved from /opt/airflow/dags/dag_proprietary.py
+[2025-09-08T09:43:40.969+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:43:40.968+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-09-08T09:43:40.994+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:43:40.994+0000] {dag.py:3954} INFO - Setting next_dagrun for proprietary to 2025-09-07 17:01:00+00:00, run_after=2025-09-08 17:01:00+00:00
+[2025-09-08T09:43:41.012+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dag_proprietary.py took 0.522 seconds
+[2025-09-08T09:44:11.225+0000] {processor.py:161} INFO - Started process (PID=199300) to work on /opt/airflow/dags/dag_proprietary.py
+[2025-09-08T09:44:11.226+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dag_proprietary.py for tasks to queue
+[2025-09-08T09:44:11.228+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:44:11.228+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/dag_proprietary.py
+[2025-09-08T09:44:11.837+0000] {processor.py:840} INFO - DAG(s) 'proprietary' retrieved from /opt/airflow/dags/dag_proprietary.py
+[2025-09-08T09:44:11.863+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:44:11.863+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-09-08T09:44:11.893+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:44:11.893+0000] {dag.py:3954} INFO - Setting next_dagrun for proprietary to 2025-09-07 17:01:00+00:00, run_after=2025-09-08 17:01:00+00:00
+[2025-09-08T09:44:11.920+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dag_proprietary.py took 0.703 seconds
+[2025-09-08T09:44:42.180+0000] {processor.py:161} INFO - Started process (PID=199327) to work on /opt/airflow/dags/dag_proprietary.py
+[2025-09-08T09:44:42.182+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dag_proprietary.py for tasks to queue
+[2025-09-08T09:44:42.184+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:44:42.183+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/dag_proprietary.py
+[2025-09-08T09:44:42.739+0000] {processor.py:840} INFO - DAG(s) 'proprietary' retrieved from /opt/airflow/dags/dag_proprietary.py
+[2025-09-08T09:44:42.764+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:44:42.764+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-09-08T09:44:42.792+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:44:42.791+0000] {dag.py:3954} INFO - Setting next_dagrun for proprietary to 2025-09-07 17:01:00+00:00, run_after=2025-09-08 17:01:00+00:00
+[2025-09-08T09:44:42.812+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dag_proprietary.py took 0.641 seconds
+[2025-09-08T09:45:13.045+0000] {processor.py:161} INFO - Started process (PID=199369) to work on /opt/airflow/dags/dag_proprietary.py
+[2025-09-08T09:45:13.047+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dag_proprietary.py for tasks to queue
+[2025-09-08T09:45:13.049+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:45:13.049+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/dag_proprietary.py
+[2025-09-08T09:45:13.565+0000] {processor.py:840} INFO - DAG(s) 'proprietary' retrieved from /opt/airflow/dags/dag_proprietary.py
+[2025-09-08T09:45:13.588+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:45:13.588+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-09-08T09:45:13.612+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:45:13.612+0000] {dag.py:3954} INFO - Setting next_dagrun for proprietary to 2025-09-07 17:01:00+00:00, run_after=2025-09-08 17:01:00+00:00
+[2025-09-08T09:45:13.630+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dag_proprietary.py took 0.594 seconds
+[2025-09-08T09:45:44.072+0000] {processor.py:161} INFO - Started process (PID=199396) to work on /opt/airflow/dags/dag_proprietary.py
+[2025-09-08T09:45:44.073+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dag_proprietary.py for tasks to queue
+[2025-09-08T09:45:44.076+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:45:44.075+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/dag_proprietary.py
+[2025-09-08T09:45:44.577+0000] {processor.py:840} INFO - DAG(s) 'proprietary' retrieved from /opt/airflow/dags/dag_proprietary.py
+[2025-09-08T09:45:44.600+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:45:44.599+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-09-08T09:45:44.624+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:45:44.624+0000] {dag.py:3954} INFO - Setting next_dagrun for proprietary to 2025-09-07 17:01:00+00:00, run_after=2025-09-08 17:01:00+00:00
+[2025-09-08T09:45:44.642+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dag_proprietary.py took 0.579 seconds
+[2025-09-08T09:46:15.092+0000] {processor.py:161} INFO - Started process (PID=199438) to work on /opt/airflow/dags/dag_proprietary.py
+[2025-09-08T09:46:15.094+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dag_proprietary.py for tasks to queue
+[2025-09-08T09:46:15.096+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:46:15.096+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/dag_proprietary.py
+[2025-09-08T09:46:15.635+0000] {processor.py:840} INFO - DAG(s) 'proprietary' retrieved from /opt/airflow/dags/dag_proprietary.py
+[2025-09-08T09:46:15.656+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:46:15.656+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-09-08T09:46:15.681+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:46:15.681+0000] {dag.py:3954} INFO - Setting next_dagrun for proprietary to 2025-09-07 17:01:00+00:00, run_after=2025-09-08 17:01:00+00:00
+[2025-09-08T09:46:15.698+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dag_proprietary.py took 0.617 seconds
+[2025-09-08T09:46:45.851+0000] {processor.py:161} INFO - Started process (PID=199465) to work on /opt/airflow/dags/dag_proprietary.py
+[2025-09-08T09:46:45.852+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dag_proprietary.py for tasks to queue
+[2025-09-08T09:46:45.854+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:46:45.854+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/dag_proprietary.py
+[2025-09-08T09:46:46.319+0000] {processor.py:840} INFO - DAG(s) 'proprietary' retrieved from /opt/airflow/dags/dag_proprietary.py
+[2025-09-08T09:46:46.339+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:46:46.339+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-09-08T09:46:46.360+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:46:46.360+0000] {dag.py:3954} INFO - Setting next_dagrun for proprietary to 2025-09-07 17:01:00+00:00, run_after=2025-09-08 17:01:00+00:00
+[2025-09-08T09:46:46.375+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dag_proprietary.py took 0.533 seconds
+[2025-09-08T09:47:16.753+0000] {processor.py:161} INFO - Started process (PID=199507) to work on /opt/airflow/dags/dag_proprietary.py
+[2025-09-08T09:47:16.754+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dag_proprietary.py for tasks to queue
+[2025-09-08T09:47:16.756+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:47:16.756+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/dag_proprietary.py
+[2025-09-08T09:47:17.410+0000] {processor.py:840} INFO - DAG(s) 'proprietary' retrieved from /opt/airflow/dags/dag_proprietary.py
+[2025-09-08T09:47:17.447+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:47:17.446+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-09-08T09:47:17.488+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:47:17.487+0000] {dag.py:3954} INFO - Setting next_dagrun for proprietary to 2025-09-07 17:01:00+00:00, run_after=2025-09-08 17:01:00+00:00
+[2025-09-08T09:47:17.518+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dag_proprietary.py took 0.776 seconds
+[2025-09-08T09:47:47.597+0000] {processor.py:161} INFO - Started process (PID=199534) to work on /opt/airflow/dags/dag_proprietary.py
+[2025-09-08T09:47:47.599+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dag_proprietary.py for tasks to queue
+[2025-09-08T09:47:47.602+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:47:47.601+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/dag_proprietary.py
+[2025-09-08T09:47:48.165+0000] {processor.py:840} INFO - DAG(s) 'proprietary' retrieved from /opt/airflow/dags/dag_proprietary.py
+[2025-09-08T09:47:48.189+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:47:48.188+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-09-08T09:47:48.214+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:47:48.214+0000] {dag.py:3954} INFO - Setting next_dagrun for proprietary to 2025-09-07 17:01:00+00:00, run_after=2025-09-08 17:01:00+00:00
+[2025-09-08T09:47:48.232+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dag_proprietary.py took 0.643 seconds

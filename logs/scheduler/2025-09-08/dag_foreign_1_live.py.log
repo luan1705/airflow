@@ -7887,3 +7887,80 @@
 [2025-09-08T09:42:09.891+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:42:09.890+0000] {dag.py:3096} INFO - Sync 1 DAGs
 [2025-09-08T09:42:09.922+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:42:09.921+0000] {dag.py:3954} INFO - Setting next_dagrun for foreign_1_live to 2025-09-08 09:42:00+00:00, run_after=2025-09-08 09:43:00+00:00
 [2025-09-08T09:42:09.940+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dag_foreign_1_live.py took 0.719 seconds
+[2025-09-08T09:42:40.023+0000] {processor.py:161} INFO - Started process (PID=199195) to work on /opt/airflow/dags/dag_foreign_1_live.py
+[2025-09-08T09:42:40.024+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dag_foreign_1_live.py for tasks to queue
+[2025-09-08T09:42:40.026+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:42:40.026+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/dag_foreign_1_live.py
+[2025-09-08T09:42:40.466+0000] {processor.py:840} INFO - DAG(s) 'foreign_1_live' retrieved from /opt/airflow/dags/dag_foreign_1_live.py
+[2025-09-08T09:42:40.490+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:42:40.490+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-09-08T09:42:40.516+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:42:40.516+0000] {dag.py:3954} INFO - Setting next_dagrun for foreign_1_live to 2025-09-08 09:42:00+00:00, run_after=2025-09-08 09:43:00+00:00
+[2025-09-08T09:42:40.535+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dag_foreign_1_live.py took 0.520 seconds
+[2025-09-08T09:43:10.689+0000] {processor.py:161} INFO - Started process (PID=199236) to work on /opt/airflow/dags/dag_foreign_1_live.py
+[2025-09-08T09:43:10.690+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dag_foreign_1_live.py for tasks to queue
+[2025-09-08T09:43:10.692+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:43:10.692+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/dag_foreign_1_live.py
+[2025-09-08T09:43:11.213+0000] {processor.py:840} INFO - DAG(s) 'foreign_1_live' retrieved from /opt/airflow/dags/dag_foreign_1_live.py
+[2025-09-08T09:43:11.236+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:43:11.236+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-09-08T09:43:11.263+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:43:11.263+0000] {dag.py:3954} INFO - Setting next_dagrun for foreign_1_live to 2025-09-08 09:43:00+00:00, run_after=2025-09-08 09:44:00+00:00
+[2025-09-08T09:43:11.283+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dag_foreign_1_live.py took 0.601 seconds
+[2025-09-08T09:43:41.625+0000] {processor.py:161} INFO - Started process (PID=199263) to work on /opt/airflow/dags/dag_foreign_1_live.py
+[2025-09-08T09:43:41.626+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dag_foreign_1_live.py for tasks to queue
+[2025-09-08T09:43:41.628+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:43:41.627+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/dag_foreign_1_live.py
+[2025-09-08T09:43:42.141+0000] {processor.py:840} INFO - DAG(s) 'foreign_1_live' retrieved from /opt/airflow/dags/dag_foreign_1_live.py
+[2025-09-08T09:43:42.164+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:43:42.164+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-09-08T09:43:42.188+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:43:42.188+0000] {dag.py:3954} INFO - Setting next_dagrun for foreign_1_live to 2025-09-08 09:43:00+00:00, run_after=2025-09-08 09:44:00+00:00
+[2025-09-08T09:43:42.206+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dag_foreign_1_live.py took 0.589 seconds
+[2025-09-08T09:44:12.472+0000] {processor.py:161} INFO - Started process (PID=199305) to work on /opt/airflow/dags/dag_foreign_1_live.py
+[2025-09-08T09:44:12.473+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dag_foreign_1_live.py for tasks to queue
+[2025-09-08T09:44:12.475+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:44:12.475+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/dag_foreign_1_live.py
+[2025-09-08T09:44:12.933+0000] {processor.py:840} INFO - DAG(s) 'foreign_1_live' retrieved from /opt/airflow/dags/dag_foreign_1_live.py
+[2025-09-08T09:44:12.953+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:44:12.952+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-09-08T09:44:12.973+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:44:12.973+0000] {dag.py:3954} INFO - Setting next_dagrun for foreign_1_live to 2025-09-08 09:44:00+00:00, run_after=2025-09-08 09:45:00+00:00
+[2025-09-08T09:44:12.988+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dag_foreign_1_live.py took 0.524 seconds
+[2025-09-08T09:44:43.340+0000] {processor.py:161} INFO - Started process (PID=199332) to work on /opt/airflow/dags/dag_foreign_1_live.py
+[2025-09-08T09:44:43.341+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dag_foreign_1_live.py for tasks to queue
+[2025-09-08T09:44:43.343+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:44:43.343+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/dag_foreign_1_live.py
+[2025-09-08T09:44:44.100+0000] {processor.py:840} INFO - DAG(s) 'foreign_1_live' retrieved from /opt/airflow/dags/dag_foreign_1_live.py
+[2025-09-08T09:44:44.126+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:44:44.125+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-09-08T09:44:44.151+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:44:44.151+0000] {dag.py:3954} INFO - Setting next_dagrun for foreign_1_live to 2025-09-08 09:44:00+00:00, run_after=2025-09-08 09:45:00+00:00
+[2025-09-08T09:44:44.169+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dag_foreign_1_live.py took 0.837 seconds
+[2025-09-08T09:45:14.527+0000] {processor.py:161} INFO - Started process (PID=199374) to work on /opt/airflow/dags/dag_foreign_1_live.py
+[2025-09-08T09:45:14.528+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dag_foreign_1_live.py for tasks to queue
+[2025-09-08T09:45:14.530+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:45:14.530+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/dag_foreign_1_live.py
+[2025-09-08T09:45:15.047+0000] {processor.py:840} INFO - DAG(s) 'foreign_1_live' retrieved from /opt/airflow/dags/dag_foreign_1_live.py
+[2025-09-08T09:45:15.073+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:45:15.072+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-09-08T09:45:15.098+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:45:15.098+0000] {dag.py:3954} INFO - Setting next_dagrun for foreign_1_live to 2025-09-08 09:45:00+00:00, run_after=2025-09-08 09:46:00+00:00
+[2025-09-08T09:45:15.117+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dag_foreign_1_live.py took 0.599 seconds
+[2025-09-08T09:45:45.182+0000] {processor.py:161} INFO - Started process (PID=199400) to work on /opt/airflow/dags/dag_foreign_1_live.py
+[2025-09-08T09:45:45.183+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dag_foreign_1_live.py for tasks to queue
+[2025-09-08T09:45:45.185+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:45:45.184+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/dag_foreign_1_live.py
+[2025-09-08T09:45:45.699+0000] {processor.py:840} INFO - DAG(s) 'foreign_1_live' retrieved from /opt/airflow/dags/dag_foreign_1_live.py
+[2025-09-08T09:45:45.722+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:45:45.722+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-09-08T09:45:45.748+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:45:45.748+0000] {dag.py:3954} INFO - Setting next_dagrun for foreign_1_live to 2025-09-08 09:45:00+00:00, run_after=2025-09-08 09:46:00+00:00
+[2025-09-08T09:45:45.770+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dag_foreign_1_live.py took 0.595 seconds
+[2025-09-08T09:46:15.941+0000] {processor.py:161} INFO - Started process (PID=199442) to work on /opt/airflow/dags/dag_foreign_1_live.py
+[2025-09-08T09:46:15.942+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dag_foreign_1_live.py for tasks to queue
+[2025-09-08T09:46:15.944+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:46:15.944+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/dag_foreign_1_live.py
+[2025-09-08T09:46:16.382+0000] {processor.py:840} INFO - DAG(s) 'foreign_1_live' retrieved from /opt/airflow/dags/dag_foreign_1_live.py
+[2025-09-08T09:46:16.403+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:46:16.403+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-09-08T09:46:16.433+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:46:16.433+0000] {dag.py:3954} INFO - Setting next_dagrun for foreign_1_live to 2025-09-08 09:46:00+00:00, run_after=2025-09-08 09:47:00+00:00
+[2025-09-08T09:46:16.463+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dag_foreign_1_live.py took 0.529 seconds
+[2025-09-08T09:46:46.871+0000] {processor.py:161} INFO - Started process (PID=199469) to work on /opt/airflow/dags/dag_foreign_1_live.py
+[2025-09-08T09:46:46.872+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dag_foreign_1_live.py for tasks to queue
+[2025-09-08T09:46:46.874+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:46:46.874+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/dag_foreign_1_live.py
+[2025-09-08T09:46:47.376+0000] {processor.py:840} INFO - DAG(s) 'foreign_1_live' retrieved from /opt/airflow/dags/dag_foreign_1_live.py
+[2025-09-08T09:46:47.396+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:46:47.396+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-09-08T09:46:47.416+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:46:47.416+0000] {dag.py:3954} INFO - Setting next_dagrun for foreign_1_live to 2025-09-08 09:46:00+00:00, run_after=2025-09-08 09:47:00+00:00
+[2025-09-08T09:46:47.433+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dag_foreign_1_live.py took 0.570 seconds
+[2025-09-08T09:47:17.700+0000] {processor.py:161} INFO - Started process (PID=199512) to work on /opt/airflow/dags/dag_foreign_1_live.py
+[2025-09-08T09:47:17.701+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dag_foreign_1_live.py for tasks to queue
+[2025-09-08T09:47:17.703+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:47:17.702+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/dag_foreign_1_live.py
+[2025-09-08T09:47:18.227+0000] {processor.py:840} INFO - DAG(s) 'foreign_1_live' retrieved from /opt/airflow/dags/dag_foreign_1_live.py
+[2025-09-08T09:47:18.249+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:47:18.249+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-09-08T09:47:18.274+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:47:18.273+0000] {dag.py:3954} INFO - Setting next_dagrun for foreign_1_live to 2025-09-08 09:47:00+00:00, run_after=2025-09-08 09:48:00+00:00
+[2025-09-08T09:47:18.293+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dag_foreign_1_live.py took 0.599 seconds
+[2025-09-08T09:47:48.503+0000] {processor.py:161} INFO - Started process (PID=199539) to work on /opt/airflow/dags/dag_foreign_1_live.py
+[2025-09-08T09:47:48.504+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dag_foreign_1_live.py for tasks to queue
+[2025-09-08T09:47:48.506+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:47:48.506+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/dag_foreign_1_live.py
+[2025-09-08T09:47:49.033+0000] {processor.py:840} INFO - DAG(s) 'foreign_1_live' retrieved from /opt/airflow/dags/dag_foreign_1_live.py
+[2025-09-08T09:47:49.057+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:47:49.057+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-09-08T09:47:49.085+0000] {logging_mixin.py:188} INFO - [2025-09-08T09:47:49.084+0000] {dag.py:3954} INFO - Setting next_dagrun for foreign_1_live to 2025-09-08 09:47:00+00:00, run_after=2025-09-08 09:48:00+00:00
+[2025-09-08T09:47:49.104+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dag_foreign_1_live.py took 0.610 seconds
