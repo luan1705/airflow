@@ -3,4 +3,5 @@ logs/
 chromedriver-linux64/
 bigquerrykey/
 __pycache__/
+*.log
 *.pyc

@@ -16,8 +16,8 @@ def proprietary_ALL():
         enginedb=create_engine('postgresql://vnsfintech:%40Vns123456@videv.cloud:5432/vnsfintech')
         logging.info('Kết nối DB')
         df = pd.read_sql('SELECT * FROM "market_history"."proprietary_ALL_1D"', con=enginedb)
-        df = df[df['tradingDate'].eq(df['tradingDate'].max())].copy()
-        ngay=df['tradingDate'].iloc[0]
+        df = df[df['time'].eq(df['time'].max())].copy()
+        ngay=df['time'].iloc[0]
         net_match_val= int(df['netMatchVal'].sum())
         net_deal_val= int(df['netDealVal'].sum())
         net_val= int(net_match_val + net_deal_val)

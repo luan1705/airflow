@@ -42,12 +42,13 @@ def proprietary(symbol):
     data['netMatchVal'] = (data['totalBuyValue'] - data['totalSellValue']).astype('Int64')
     data['netDealVol']  = (data['totalDealBuyVolume'] - data['totalDealSellVolume']).astype('Int64')
     data['netDealVal']  = (data['totalDealBuyValue']  - data['totalDealSellValue']).astype('Int64')
+    data = data.rename(columns={'tradingDate': 'time'})
     intcol=['totalBuyValue','totalSellValue','totalDealBuyValue','totalDealSellValue']
     data[intcol] = (data[intcol]
                    .apply(pd.to_numeric, errors='coerce')
                    .fillna(0)
                    .astype('Int64'))
-    cols=['tradingDate','totalBuyValue','totalSellValue','netMatchVal','totalBuyVolume','totalSellVolume','netMatchVol','totalDealBuyVolume','totalDealSellVolume','netDealVol','totalDealBuyValue','totalDealSellValue','netDealVal']
+    cols=['time','totalBuyValue','totalSellValue','netMatchVal','totalBuyVolume','totalSellVolume','netMatchVol','totalDealBuyVolume','totalDealSellVolume','netDealVol','totalDealBuyValue','totalDealSellValue','netDealVal']
     data=data[cols]
     return data
   except Exception as E:
@@ -55,15 +56,22 @@ def proprietary(symbol):
 
 def save_proprietary(symbol):
   try:
-    bang=f'"proprietary_{symbol}_1D"'
+    mapping={
+       'ALL':'ALL',
+       'HSX':'HOSE',
+       'HNX':'HNX',
+       'UPCOM':'UPCOM'
+    }
+    showsymbol = mapping.get(symbol, symbol) 
+    bang=f'"proprietary_{showsymbol}_1D"'
     enginedb=create_engine('postgresql://vnsfintech:%40Vns123456@videv.cloud:5432/vnsfintech')
-    df_db=pd.read_sql(f'SELECT "tradingDate" FROM "market_history".{bang}',enginedb)
+    df_db=pd.read_sql(f'SELECT "time" FROM "market_history".{bang}',enginedb)
     data=proprietary(symbol)
-    df_db["tradingDate"] = pd.to_datetime(df_db["tradingDate"]).dt.date
-    data["tradingDate"]  = pd.to_datetime(data["tradingDate"]).dt.date
-    existing_dates = set(df_db["tradingDate"])
-    new_data = data[~data["tradingDate"].isin(existing_dates)].copy()
-    new_data.to_sql(name=f'proprietary_{symbol}_1D',
+    df_db["time"] = pd.to_datetime(df_db["time"]).dt.date
+    data["time"]  = pd.to_datetime(data["time"]).dt.date
+    existing_dates = set(df_db["time"])
+    new_data = data[~data["time"].isin(existing_dates)].copy()
+    new_data.to_sql(name=f'proprietary_{showsymbol}_1D',
                          schema='market_history',
                          con=enginedb,
                          if_exists='append',

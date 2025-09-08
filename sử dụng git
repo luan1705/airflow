@@ -1,0 +1,30 @@
+
+
+đẩy code lên githubL:
+gitpush 'comment ở đây'
+
+5️⃣ Cách dùng gitpull
+
+Pull thông thường:
+
+./gitpull.sh
+
+
+Pull mạnh, ghi đè local:
+
+./gitpull_hard.sh
+
+
+Pull + checkout commit/branch để test:
+
+./gitpull_checkout.sh <commit_id>
+
+
+Quay lại main sau khi checkout:
+
+git checkout main
+
+
+Quay lại backup (nếu test commit cũ):
+
+git checkout backup-main
