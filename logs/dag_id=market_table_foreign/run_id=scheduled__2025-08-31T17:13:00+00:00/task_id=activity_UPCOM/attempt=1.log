@@ -1,0 +1,45 @@
+[2025-09-01T10:26:10.560+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-09-01T10:26:10.590+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: market_table_foreign.activity_UPCOM scheduled__2025-08-31T17:13:00+00:00 [queued]>
+[2025-09-01T10:26:10.602+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: market_table_foreign.activity_UPCOM scheduled__2025-08-31T17:13:00+00:00 [queued]>
+[2025-09-01T10:26:10.602+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 11
+[2025-09-01T10:26:10.618+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): activity_UPCOM> on 2025-08-31 17:13:00+00:00
+[2025-09-01T10:26:10.627+0000] {standard_task_runner.py:63} INFO - Started process 2318077 to run task
+[2025-09-01T10:26:10.631+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'market_table_foreign', 'activity_UPCOM', 'scheduled__2025-08-31T17:13:00+00:00', '--job-id', '42162', '--raw', '--subdir', 'DAGS_FOLDER/dag_market_live.py', '--cfg-path', '/tmp/tmpdgqzidz0']
+[2025-09-01T10:26:10.634+0000] {standard_task_runner.py:91} INFO - Job 42162: Subtask activity_UPCOM
+[2025-09-01T10:26:10.688+0000] {task_command.py:426} INFO - Running <TaskInstance: market_table_foreign.activity_UPCOM scheduled__2025-08-31T17:13:00+00:00 [running]> on host 1877907bc043
+[2025-09-01T10:26:10.788+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='market_table_foreign' AIRFLOW_CTX_TASK_ID='activity_UPCOM' AIRFLOW_CTX_EXECUTION_DATE='2025-08-31T17:13:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-08-31T17:13:00+00:00'
+[2025-09-01T10:26:10.789+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-09-01T10:26:10.806+0000] {activity_UPCOM.py:17} INFO - Kết nối DB
+[2025-09-01T10:26:11.014+0000] {activity_UPCOM.py:55} ERROR - Lỗi lưu activity_UPCOM
+Traceback (most recent call last):
+  File "/opt/airflow/dags/utils/market_data/activity_UPCOM.py", line 35, in activity_UPCOM
+    point=float(dfindex.loc[dfindex['symbol']=='UpcomIndex','point'].values[0])
+IndexError: index 0 is out of bounds for axis 0 with size 0
+[2025-09-01T10:26:11.015+0000] {python.py:237} INFO - Done. Returned value was: None
+[2025-09-01T10:26:11.016+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-09-01T10:26:11.027+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=market_table_foreign, task_id=activity_UPCOM, run_id=scheduled__2025-08-31T17:13:00+00:00, execution_date=20250831T171300, start_date=20250901T102610, end_date=20250901T102611
+[2025-09-01T10:26:11.083+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-09-01T10:26:11.096+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
+[2025-09-01T10:27:17.339+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-09-01T10:27:17.362+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: market_table_foreign.activity_UPCOM scheduled__2025-08-31T17:13:00+00:00 [queued]>
+[2025-09-01T10:27:17.371+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: market_table_foreign.activity_UPCOM scheduled__2025-08-31T17:13:00+00:00 [queued]>
+[2025-09-01T10:27:17.372+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 11
+[2025-09-01T10:27:17.384+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): activity_UPCOM> on 2025-08-31 17:13:00+00:00
+[2025-09-01T10:27:17.392+0000] {standard_task_runner.py:63} INFO - Started process 2318891 to run task
+[2025-09-01T10:27:17.396+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'market_table_foreign', 'activity_UPCOM', 'scheduled__2025-08-31T17:13:00+00:00', '--job-id', '42401', '--raw', '--subdir', 'DAGS_FOLDER/dag_market_live.py', '--cfg-path', '/tmp/tmpn6_xdud5']
+[2025-09-01T10:27:17.400+0000] {standard_task_runner.py:91} INFO - Job 42401: Subtask activity_UPCOM
+[2025-09-01T10:27:17.464+0000] {task_command.py:426} INFO - Running <TaskInstance: market_table_foreign.activity_UPCOM scheduled__2025-08-31T17:13:00+00:00 [running]> on host 1877907bc043
+[2025-09-01T10:27:17.572+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='market_table_foreign' AIRFLOW_CTX_TASK_ID='activity_UPCOM' AIRFLOW_CTX_EXECUTION_DATE='2025-08-31T17:13:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-08-31T17:13:00+00:00'
+[2025-09-01T10:27:17.574+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-09-01T10:27:17.590+0000] {activity_UPCOM.py:17} INFO - Kết nối DB
+[2025-09-01T10:27:17.842+0000] {activity_UPCOM.py:55} ERROR - Lỗi lưu activity_UPCOM
+Traceback (most recent call last):
+  File "/opt/airflow/dags/utils/market_data/activity_UPCOM.py", line 35, in activity_UPCOM
+    point=float(dfindex.loc[dfindex['symbol']=='UpcomIndex','point'].values[0])
+IndexError: index 0 is out of bounds for axis 0 with size 0
+[2025-09-01T10:27:17.843+0000] {python.py:237} INFO - Done. Returned value was: None
+[2025-09-01T10:27:17.844+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-09-01T10:27:17.855+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=market_table_foreign, task_id=activity_UPCOM, run_id=scheduled__2025-08-31T17:13:00+00:00, execution_date=20250831T171300, start_date=20250901T102717, end_date=20250901T102717
+[2025-09-01T10:27:17.889+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-09-01T10:27:17.910+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-09-01T10:27:17.911+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

@@ -1,0 +1,89 @@
+[2025-08-17T15:02:27.244+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-08-17T15:02:27.271+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: crypto_collector_dag.run_crypto_collector scheduled__2025-08-17T14:58:00+00:00 [queued]>
+[2025-08-17T15:02:27.280+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: crypto_collector_dag.run_crypto_collector scheduled__2025-08-17T14:58:00+00:00 [queued]>
+[2025-08-17T15:02:27.281+0000] {taskinstance.py:2306} INFO - Starting attempt 2 of 2
+[2025-08-17T15:02:27.293+0000] {taskinstance.py:2330} INFO - Executing <Task(BashOperator): run_crypto_collector> on 2025-08-17 14:58:00+00:00
+[2025-08-17T15:02:27.300+0000] {standard_task_runner.py:63} INFO - Started process 57631 to run task
+[2025-08-17T15:02:27.305+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'crypto_collector_dag', 'run_crypto_collector', 'scheduled__2025-08-17T14:58:00+00:00', '--job-id', '7481', '--raw', '--subdir', 'DAGS_FOLDER/crawl_crypto/dags_crypto.py', '--cfg-path', '/tmp/tmp79u0uh5a']
+[2025-08-17T15:02:27.306+0000] {standard_task_runner.py:91} INFO - Job 7481: Subtask run_crypto_collector
+[2025-08-17T15:02:27.366+0000] {task_command.py:426} INFO - Running <TaskInstance: crypto_collector_dag.run_crypto_collector scheduled__2025-08-17T14:58:00+00:00 [running]> on host 1877907bc043
+[2025-08-17T15:02:27.475+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='crypto_collector_dag' AIRFLOW_CTX_TASK_ID='run_crypto_collector' AIRFLOW_CTX_EXECUTION_DATE='2025-08-17T14:58:00+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-08-17T14:58:00+00:00'
+[2025-08-17T15:02:27.475+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-08-17T15:02:27.495+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-08-17T15:02:27.496+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', 'python3 /opt/***/dags/crawl_crypto/crawl_data_crypto.py']
+[2025-08-17T15:02:27.510+0000] {subprocess.py:86} INFO - Output:
+[2025-08-17T15:02:39.728+0000] {subprocess.py:93} INFO - 🔹 Kết nối DB...
+[2025-08-17T15:02:39.728+0000] {subprocess.py:93} INFO - 🔹 Lấy top 100 crypto...
+[2025-08-17T15:02:39.729+0000] {subprocess.py:93} INFO - Traceback (most recent call last):
+[2025-08-17T15:02:39.729+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.10/site-packages/urllib3/connection.py", line 198, in _new_conn
+[2025-08-17T15:02:39.729+0000] {subprocess.py:93} INFO -     sock = connection.create_connection(
+[2025-08-17T15:02:39.729+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.10/site-packages/urllib3/util/connection.py", line 85, in create_connection
+[2025-08-17T15:02:39.730+0000] {subprocess.py:93} INFO -     raise err
+[2025-08-17T15:02:39.730+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.10/site-packages/urllib3/util/connection.py", line 73, in create_connection
+[2025-08-17T15:02:39.730+0000] {subprocess.py:93} INFO -     sock.connect(sa)
+[2025-08-17T15:02:39.730+0000] {subprocess.py:93} INFO - TimeoutError: timed out
+[2025-08-17T15:02:39.731+0000] {subprocess.py:93} INFO - 
+[2025-08-17T15:02:39.731+0000] {subprocess.py:93} INFO - The above exception was the direct cause of the following exception:
+[2025-08-17T15:02:39.731+0000] {subprocess.py:93} INFO - 
+[2025-08-17T15:02:39.731+0000] {subprocess.py:93} INFO - Traceback (most recent call last):
+[2025-08-17T15:02:39.731+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+[2025-08-17T15:02:39.732+0000] {subprocess.py:93} INFO -     response = self._make_request(
+[2025-08-17T15:02:39.732+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 488, in _make_request
+[2025-08-17T15:02:39.732+0000] {subprocess.py:93} INFO -     raise new_e
+[2025-08-17T15:02:39.732+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 464, in _make_request
+[2025-08-17T15:02:39.733+0000] {subprocess.py:93} INFO -     self._validate_conn(conn)
+[2025-08-17T15:02:39.733+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 1093, in _validate_conn
+[2025-08-17T15:02:39.733+0000] {subprocess.py:93} INFO -     conn.connect()
+[2025-08-17T15:02:39.733+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.10/site-packages/urllib3/connection.py", line 753, in connect
+[2025-08-17T15:02:39.733+0000] {subprocess.py:93} INFO -     self.sock = sock = self._new_conn()
+[2025-08-17T15:02:39.734+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.10/site-packages/urllib3/connection.py", line 207, in _new_conn
+[2025-08-17T15:02:39.734+0000] {subprocess.py:93} INFO -     raise ConnectTimeoutError(
+[2025-08-17T15:02:39.734+0000] {subprocess.py:93} INFO - urllib3.exceptions.ConnectTimeoutError: (<urllib3.connection.HTTPSConnection object at 0x7f561ad743a0>, 'Connection to api.binance.com timed out. (connect timeout=10)')
+[2025-08-17T15:02:39.734+0000] {subprocess.py:93} INFO - 
+[2025-08-17T15:02:39.735+0000] {subprocess.py:93} INFO - The above exception was the direct cause of the following exception:
+[2025-08-17T15:02:39.735+0000] {subprocess.py:93} INFO - 
+[2025-08-17T15:02:39.735+0000] {subprocess.py:93} INFO - Traceback (most recent call last):
+[2025-08-17T15:02:39.735+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.10/site-packages/requests/adapters.py", line 486, in send
+[2025-08-17T15:02:39.736+0000] {subprocess.py:93} INFO -     resp = conn.urlopen(
+[2025-08-17T15:02:39.736+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 841, in urlopen
+[2025-08-17T15:02:39.736+0000] {subprocess.py:93} INFO -     retries = retries.increment(
+[2025-08-17T15:02:39.736+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.10/site-packages/urllib3/util/retry.py", line 519, in increment
+[2025-08-17T15:02:39.737+0000] {subprocess.py:93} INFO -     raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+[2025-08-17T15:02:39.737+0000] {subprocess.py:93} INFO - urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='api.binance.com', port=443): Max retries exceeded with url: /api/v3/ticker/24hr (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7f561ad743a0>, 'Connection to api.binance.com timed out. (connect timeout=10)'))
+[2025-08-17T15:02:39.737+0000] {subprocess.py:93} INFO - 
+[2025-08-17T15:02:39.737+0000] {subprocess.py:93} INFO - During handling of the above exception, another exception occurred:
+[2025-08-17T15:02:39.737+0000] {subprocess.py:93} INFO - 
+[2025-08-17T15:02:39.738+0000] {subprocess.py:93} INFO - Traceback (most recent call last):
+[2025-08-17T15:02:39.738+0000] {subprocess.py:93} INFO -   File "/opt/***/dags/crawl_crypto/crawl_data_crypto.py", line 134, in <module>
+[2025-08-17T15:02:39.738+0000] {subprocess.py:93} INFO -     top_symbols = get_top_symbols(limit=TOP_LIMIT)
+[2025-08-17T15:02:39.738+0000] {subprocess.py:93} INFO -   File "/opt/***/dags/crawl_crypto/crawl_data_crypto.py", line 75, in get_top_symbols
+[2025-08-17T15:02:39.738+0000] {subprocess.py:93} INFO -     resp = requests.get(url, timeout=10)
+[2025-08-17T15:02:39.739+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.10/site-packages/requests/api.py", line 73, in get
+[2025-08-17T15:02:39.739+0000] {subprocess.py:93} INFO -     return request("get", url, params=params, **kwargs)
+[2025-08-17T15:02:39.739+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.10/site-packages/requests/api.py", line 59, in request
+[2025-08-17T15:02:39.739+0000] {subprocess.py:93} INFO -     return session.request(method=method, url=url, **kwargs)
+[2025-08-17T15:02:39.739+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.10/site-packages/requests/sessions.py", line 589, in request
+[2025-08-17T15:02:39.740+0000] {subprocess.py:93} INFO -     resp = self.send(prep, **send_kwargs)
+[2025-08-17T15:02:39.740+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.10/site-packages/requests/sessions.py", line 703, in send
+[2025-08-17T15:02:39.740+0000] {subprocess.py:93} INFO -     r = adapter.send(request, **kwargs)
+[2025-08-17T15:02:39.740+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.10/site-packages/requests/adapters.py", line 507, in send
+[2025-08-17T15:02:39.741+0000] {subprocess.py:93} INFO -     raise ConnectTimeout(e, request=request)
+[2025-08-17T15:02:39.741+0000] {subprocess.py:93} INFO - requests.exceptions.ConnectTimeout: HTTPSConnectionPool(host='api.binance.com', port=443): Max retries exceeded with url: /api/v3/ticker/24hr (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7f561ad743a0>, 'Connection to api.binance.com timed out. (connect timeout=10)'))
+[2025-08-17T15:02:39.823+0000] {subprocess.py:97} INFO - Command exited with return code 1
+[2025-08-17T15:02:39.824+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-08-17T15:02:39.843+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/baseoperator.py", line 400, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/bash.py", line 243, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 1.
+[2025-08-17T15:02:39.848+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=crypto_collector_dag, task_id=run_crypto_collector, run_id=scheduled__2025-08-17T14:58:00+00:00, execution_date=20250817T145800, start_date=20250817T150227, end_date=20250817T150239
+[2025-08-17T15:02:39.865+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 7481 for task run_crypto_collector (Bash command failed. The command returned a non-zero exit code 1.; 57631)
+[2025-08-17T15:02:39.917+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2025-08-17T15:02:39.935+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-08-17T15:02:39.935+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

@@ -1,0 +1,17 @@
+[2025-08-20T07:55:01.749+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-08-20T07:55:01.776+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: run_all_alerts_and_save_to_postgres.run_alert_intraday scheduled__2025-08-20T07:50:00+00:00 [queued]>
+[2025-08-20T07:55:01.786+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: run_all_alerts_and_save_to_postgres.run_alert_intraday scheduled__2025-08-20T07:50:00+00:00 [queued]>
+[2025-08-20T07:55:01.786+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 2
+[2025-08-20T07:55:01.802+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): run_alert_intraday> on 2025-08-20 07:50:00+00:00
+[2025-08-20T07:55:01.808+0000] {standard_task_runner.py:63} INFO - Started process 440739 to run task
+[2025-08-20T07:55:01.813+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'run_all_alerts_and_save_to_postgres', 'run_alert_intraday', 'scheduled__2025-08-20T07:50:00+00:00', '--job-id', '13523', '--raw', '--subdir', 'DAGS_FOLDER/alert_***_project/dags/alert_functions_dag.py', '--cfg-path', '/tmp/tmpk73p7gka']
+[2025-08-20T07:55:01.814+0000] {standard_task_runner.py:91} INFO - Job 13523: Subtask run_alert_intraday
+[2025-08-20T07:55:01.872+0000] {task_command.py:426} INFO - Running <TaskInstance: run_all_alerts_and_save_to_postgres.run_alert_intraday scheduled__2025-08-20T07:50:00+00:00 [running]> on host 1877907bc043
+[2025-08-20T07:55:02.005+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='alert_system' AIRFLOW_CTX_DAG_ID='run_all_alerts_and_save_to_postgres' AIRFLOW_CTX_TASK_ID='run_alert_intraday' AIRFLOW_CTX_EXECUTION_DATE='2025-08-20T07:50:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-08-20T07:50:00+00:00'
+[2025-08-20T07:55:02.006+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-08-20T07:55:02.023+0000] {logging_mixin.py:188} INFO - ⏹ Outside trading time: 2025-08-20 07:55:02.023707. Skipping Alert_Intraday.py...
+[2025-08-20T07:55:02.024+0000] {python.py:237} INFO - Done. Returned value was: None
+[2025-08-20T07:55:02.025+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-08-20T07:55:02.039+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=run_all_alerts_and_save_to_postgres, task_id=run_alert_intraday, run_id=scheduled__2025-08-20T07:50:00+00:00, execution_date=20250820T075000, start_date=20250820T075501, end_date=20250820T075502
+[2025-08-20T07:55:02.065+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-08-20T07:55:02.081+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

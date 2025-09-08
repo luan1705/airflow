@@ -1,0 +1,44 @@
+[2025-09-07T04:33:01.460+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-09-07T04:33:01.675+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: liquidity.save_liquidity scheduled__2025-09-07T04:32:00+00:00 [queued]>
+[2025-09-07T04:33:01.684+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: liquidity.save_liquidity scheduled__2025-09-07T04:32:00+00:00 [queued]>
+[2025-09-07T04:33:01.685+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 11
+[2025-09-07T04:33:01.700+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): save_liquidity> on 2025-09-07 04:32:00+00:00
+[2025-09-07T04:33:01.710+0000] {standard_task_runner.py:63} INFO - Started process 141179 to run task
+[2025-09-07T04:33:01.715+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'liquidity', 'save_liquidity', 'scheduled__2025-09-07T04:32:00+00:00', '--job-id', '141702', '--raw', '--subdir', 'DAGS_FOLDER/dag_liquidity.py', '--cfg-path', '/tmp/tmp5f9uil0a']
+[2025-09-07T04:33:01.718+0000] {standard_task_runner.py:91} INFO - Job 141702: Subtask save_liquidity
+[2025-09-07T04:33:01.780+0000] {task_command.py:426} INFO - Running <TaskInstance: liquidity.save_liquidity scheduled__2025-09-07T04:32:00+00:00 [running]> on host 8d9cea3aac78
+[2025-09-07T04:33:01.939+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='liquidity' AIRFLOW_CTX_TASK_ID='save_liquidity' AIRFLOW_CTX_EXECUTION_DATE='2025-09-07T04:32:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-09-07T04:32:00+00:00'
+[2025-09-07T04:33:01.940+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-09-07T04:33:02.397+0000] {liquidity.py:95} ERROR - Lỗi lưu liquidity_ALL
+Traceback (most recent call last):
+  File "/opt/airflow/dags/utils/market_history/liquidity/liquidity.py", line 84, in save_liquidity
+    data=liquidity(realsymbol)
+  File "/opt/airflow/dags/utils/market_history/liquidity/liquidity.py", line 56, in liquidity
+    data = response.json()[0]
+IndexError: list index out of range
+[2025-09-07T04:33:02.704+0000] {liquidity.py:95} ERROR - Lỗi lưu liquidity_HOSE
+Traceback (most recent call last):
+  File "/opt/airflow/dags/utils/market_history/liquidity/liquidity.py", line 84, in save_liquidity
+    data=liquidity(realsymbol)
+  File "/opt/airflow/dags/utils/market_history/liquidity/liquidity.py", line 56, in liquidity
+    data = response.json()[0]
+IndexError: list index out of range
+[2025-09-07T04:33:03.120+0000] {liquidity.py:95} ERROR - Lỗi lưu liquidity_HNX
+Traceback (most recent call last):
+  File "/opt/airflow/dags/utils/market_history/liquidity/liquidity.py", line 84, in save_liquidity
+    data=liquidity(realsymbol)
+  File "/opt/airflow/dags/utils/market_history/liquidity/liquidity.py", line 56, in liquidity
+    data = response.json()[0]
+IndexError: list index out of range
+[2025-09-07T04:33:03.516+0000] {liquidity.py:95} ERROR - Lỗi lưu liquidity_UPCOM
+Traceback (most recent call last):
+  File "/opt/airflow/dags/utils/market_history/liquidity/liquidity.py", line 84, in save_liquidity
+    data=liquidity(realsymbol)
+  File "/opt/airflow/dags/utils/market_history/liquidity/liquidity.py", line 56, in liquidity
+    data = response.json()[0]
+IndexError: list index out of range
+[2025-09-07T04:33:03.519+0000] {python.py:237} INFO - Done. Returned value was: None
+[2025-09-07T04:33:03.520+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-09-07T04:33:03.533+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=liquidity, task_id=save_liquidity, run_id=scheduled__2025-09-07T04:32:00+00:00, execution_date=20250907T043200, start_date=20250907T043301, end_date=20250907T043303
+[2025-09-07T04:33:03.572+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-09-07T04:33:03.589+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

@@ -1,0 +1,22 @@
+[2025-09-02T21:04:02.143+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-09-02T21:04:02.186+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: market_table_foreign.activity_HNX scheduled__2025-09-02T21:03:00+00:00 [queued]>
+[2025-09-02T21:04:02.202+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: market_table_foreign.activity_HNX scheduled__2025-09-02T21:03:00+00:00 [queued]>
+[2025-09-02T21:04:02.203+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 11
+[2025-09-02T21:04:02.225+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): activity_HNX> on 2025-09-02 21:03:00+00:00
+[2025-09-02T21:04:02.234+0000] {standard_task_runner.py:63} INFO - Started process 2601124 to run task
+[2025-09-02T21:04:02.238+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'market_table_foreign', 'activity_HNX', 'scheduled__2025-09-02T21:03:00+00:00', '--job-id', '62579', '--raw', '--subdir', 'DAGS_FOLDER/dag_market_live.py', '--cfg-path', '/tmp/tmpaq5rojuo']
+[2025-09-02T21:04:02.241+0000] {standard_task_runner.py:91} INFO - Job 62579: Subtask activity_HNX
+[2025-09-02T21:04:02.290+0000] {task_command.py:426} INFO - Running <TaskInstance: market_table_foreign.activity_HNX scheduled__2025-09-02T21:03:00+00:00 [running]> on host 1877907bc043
+[2025-09-02T21:04:02.406+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='market_table_foreign' AIRFLOW_CTX_TASK_ID='activity_HNX' AIRFLOW_CTX_EXECUTION_DATE='2025-09-02T21:03:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-09-02T21:03:00+00:00'
+[2025-09-02T21:04:02.408+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-09-02T21:04:02.440+0000] {activity_HNX.py:17} INFO - Kết nối DB
+[2025-09-02T21:04:02.721+0000] {activity_HNX.py:55} ERROR - Lỗi lưu activity_HNX
+Traceback (most recent call last):
+  File "/opt/airflow/dags/utils/market_data/activity_HNX.py", line 35, in activity_HNX
+    point=float(dfindex.loc[dfindex['symbol']=='HNXIndex','point'].values[0])
+IndexError: index 0 is out of bounds for axis 0 with size 0
+[2025-09-02T21:04:02.722+0000] {python.py:237} INFO - Done. Returned value was: None
+[2025-09-02T21:04:02.723+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-09-02T21:04:02.735+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=market_table_foreign, task_id=activity_HNX, run_id=scheduled__2025-09-02T21:03:00+00:00, execution_date=20250902T210300, start_date=20250902T210402, end_date=20250902T210402
+[2025-09-02T21:04:02.771+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-09-02T21:04:02.784+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

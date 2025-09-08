@@ -1,0 +1,6 @@
+.env
+logs/
+chromedriver-linux64/
+bigquerrykey/
+__pycache__/
+*.pyc

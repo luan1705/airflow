@@ -1,0 +1,60 @@
+[2025-09-05T07:59:01.805+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-09-05T07:59:01.835+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: activity.activity_ALL scheduled__2025-09-05T07:58:00+00:00 [queued]>
+[2025-09-05T07:59:01.845+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: activity.activity_ALL scheduled__2025-09-05T07:58:00+00:00 [queued]>
+[2025-09-05T07:59:01.846+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 11
+[2025-09-05T07:59:01.861+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): activity_ALL> on 2025-09-05 07:58:00+00:00
+[2025-09-05T07:59:01.870+0000] {standard_task_runner.py:63} INFO - Started process 3155669 to run task
+[2025-09-05T07:59:01.875+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'activity', 'activity_ALL', 'scheduled__2025-09-05T07:58:00+00:00', '--job-id', '112008', '--raw', '--subdir', 'DAGS_FOLDER/dag_activity.py', '--cfg-path', '/tmp/tmpnyf4t4oc']
+[2025-09-05T07:59:01.878+0000] {standard_task_runner.py:91} INFO - Job 112008: Subtask activity_ALL
+[2025-09-05T07:59:01.933+0000] {task_command.py:426} INFO - Running <TaskInstance: activity.activity_ALL scheduled__2025-09-05T07:58:00+00:00 [running]> on host 1877907bc043
+[2025-09-05T07:59:02.029+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='activity' AIRFLOW_CTX_TASK_ID='activity_ALL' AIRFLOW_CTX_EXECUTION_DATE='2025-09-05T07:58:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-09-05T07:58:00+00:00'
+[2025-09-05T07:59:02.031+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-09-05T07:59:02.062+0000] {activity_ALL.py:17} INFO - Kết nối DB
+[2025-09-05T07:59:02.154+0000] {activity_ALL.py:55} ERROR - Lỗi lưu activity_ALL
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.UndefinedTable: relation "history_data.eboard_table" does not exist
+LINE 1: SELECT * FROM "history_data"."eboard_table"
+                      ^
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/opt/airflow/dags/utils/market_data/activity/activity_ALL.py", line 18, in activity_ALL
+    df = pd.read_sql('SELECT * FROM "history_data"."eboard_table"', con=enginedb).sort_values(by='symbol',ascending=True)
+  File "/home/airflow/.local/lib/python3.10/site-packages/pandas/io/sql.py", line 682, in read_sql
+    return pandas_sql.read_query(
+  File "/home/airflow/.local/lib/python3.10/site-packages/pandas/io/sql.py", line 1776, in read_query
+    result = self.execute(sql, params)
+  File "/home/airflow/.local/lib/python3.10/site-packages/pandas/io/sql.py", line 1599, in execute
+    return self.con.exec_driver_sql(sql, *args)
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1770, in exec_driver_sql
+    return self._exec_driver_sql(
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1674, in _exec_driver_sql
+    ret = self._execute_context(
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1953, in _execute_context
+    self._handle_dbapi_exception(
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2134, in _handle_dbapi_exception
+    util.raise_(
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.UndefinedTable) relation "history_data.eboard_table" does not exist
+LINE 1: SELECT * FROM "history_data"."eboard_table"
+                      ^
+
+[SQL: SELECT * FROM "history_data"."eboard_table"]
+(Background on this error at: https://sqlalche.me/e/14/f405)
+[2025-09-05T07:59:02.159+0000] {python.py:237} INFO - Done. Returned value was: None
+[2025-09-05T07:59:02.160+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-09-05T07:59:02.172+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=activity, task_id=activity_ALL, run_id=scheduled__2025-09-05T07:58:00+00:00, execution_date=20250905T075800, start_date=20250905T075901, end_date=20250905T075902
+[2025-09-05T07:59:02.206+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-09-05T07:59:02.237+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-09-05T07:59:02.238+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

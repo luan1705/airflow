@@ -1,0 +1,139 @@
+[2025-08-15T07:41:04.709+0000] {processor.py:161} INFO - Started process (PID=495265) to work on /opt/airflow/dags/dag_dashboarddatabase.py
+[2025-08-15T07:41:04.711+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dag_dashboarddatabase.py for tasks to queue
+[2025-08-15T07:41:04.712+0000] {logging_mixin.py:188} INFO - [2025-08-15T07:41:04.711+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/dag_dashboarddatabase.py
+[2025-08-15T07:41:04.731+0000] {processor.py:840} INFO - DAG(s) 'run_scripts_forever' retrieved from /opt/airflow/dags/dag_dashboarddatabase.py
+[2025-08-15T07:41:04.844+0000] {logging_mixin.py:188} INFO - [2025-08-15T07:41:04.843+0000] {override.py:1829} INFO - Created Permission View: can read on DAG:run_scripts_forever
+[2025-08-15T07:41:04.852+0000] {logging_mixin.py:188} INFO - [2025-08-15T07:41:04.852+0000] {override.py:1829} INFO - Created Permission View: can delete on DAG:run_scripts_forever
+[2025-08-15T07:41:04.858+0000] {logging_mixin.py:188} INFO - [2025-08-15T07:41:04.857+0000] {override.py:1829} INFO - Created Permission View: can edit on DAG:run_scripts_forever
+[2025-08-15T07:41:04.858+0000] {logging_mixin.py:188} INFO - [2025-08-15T07:41:04.858+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-08-15T07:41:04.870+0000] {logging_mixin.py:188} INFO - [2025-08-15T07:41:04.870+0000] {dag.py:3118} INFO - Creating ORM DAG for run_scripts_forever
+[2025-08-15T07:41:04.882+0000] {logging_mixin.py:188} INFO - [2025-08-15T07:41:04.882+0000] {dag.py:3954} INFO - Setting next_dagrun for run_scripts_forever to 2025-08-15 07:35:00+00:00, run_after=2025-08-15 07:40:00+00:00
+[2025-08-15T07:41:04.895+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dag_dashboarddatabase.py took 0.196 seconds
+[2025-08-15T07:41:25.878+0000] {processor.py:161} INFO - Started process (PID=495274) to work on /opt/airflow/dags/dag_dashboarddatabase.py
+[2025-08-15T07:41:25.879+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dag_dashboarddatabase.py for tasks to queue
+[2025-08-15T07:41:25.880+0000] {logging_mixin.py:188} INFO - [2025-08-15T07:41:25.880+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/dag_dashboarddatabase.py
+[2025-08-15T07:41:25.897+0000] {processor.py:840} INFO - DAG(s) 'run_scripts_loop' retrieved from /opt/airflow/dags/dag_dashboarddatabase.py
+[2025-08-15T07:41:26.033+0000] {logging_mixin.py:188} INFO - [2025-08-15T07:41:26.032+0000] {override.py:1829} INFO - Created Permission View: can read on DAG:run_scripts_loop
+[2025-08-15T07:41:26.045+0000] {logging_mixin.py:188} INFO - [2025-08-15T07:41:26.045+0000] {override.py:1829} INFO - Created Permission View: can delete on DAG:run_scripts_loop
+[2025-08-15T07:41:26.052+0000] {logging_mixin.py:188} INFO - [2025-08-15T07:41:26.052+0000] {override.py:1829} INFO - Created Permission View: can edit on DAG:run_scripts_loop
+[2025-08-15T07:41:26.052+0000] {logging_mixin.py:188} INFO - [2025-08-15T07:41:26.052+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-08-15T07:41:26.065+0000] {logging_mixin.py:188} INFO - [2025-08-15T07:41:26.065+0000] {dag.py:3118} INFO - Creating ORM DAG for run_scripts_loop
+[2025-08-15T07:41:26.066+0000] {logging_mixin.py:188} INFO - [2025-08-15T07:41:26.066+0000] {dag.py:3954} INFO - Setting next_dagrun for run_scripts_loop to None, run_after=None
+[2025-08-15T07:41:26.081+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dag_dashboarddatabase.py took 0.214 seconds
+[2025-08-15T07:41:56.172+0000] {processor.py:161} INFO - Started process (PID=495287) to work on /opt/airflow/dags/dag_dashboarddatabase.py
+[2025-08-15T07:41:56.173+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dag_dashboarddatabase.py for tasks to queue
+[2025-08-15T07:41:56.174+0000] {logging_mixin.py:188} INFO - [2025-08-15T07:41:56.173+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/dag_dashboarddatabase.py
+[2025-08-15T07:41:56.186+0000] {processor.py:840} INFO - DAG(s) 'run_scripts_loop' retrieved from /opt/airflow/dags/dag_dashboarddatabase.py
+[2025-08-15T07:41:56.213+0000] {logging_mixin.py:188} INFO - [2025-08-15T07:41:56.213+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-08-15T07:41:56.228+0000] {logging_mixin.py:188} INFO - [2025-08-15T07:41:56.228+0000] {dag.py:3954} INFO - Setting next_dagrun for run_scripts_loop to None, run_after=None
+[2025-08-15T07:41:56.247+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dag_dashboarddatabase.py took 0.084 seconds
+[2025-08-15T07:42:02.892+0000] {processor.py:161} INFO - Started process (PID=495292) to work on /opt/airflow/dags/dag_dashboarddatabase.py
+[2025-08-15T07:42:02.893+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dag_dashboarddatabase.py for tasks to queue
+[2025-08-15T07:42:02.895+0000] {logging_mixin.py:188} INFO - [2025-08-15T07:42:02.894+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/dag_dashboarddatabase.py
+[2025-08-15T07:42:02.911+0000] {processor.py:840} INFO - DAG(s) 'dashboarddatabase_loop' retrieved from /opt/airflow/dags/dag_dashboarddatabase.py
+[2025-08-15T07:42:03.069+0000] {logging_mixin.py:188} INFO - [2025-08-15T07:42:03.068+0000] {override.py:1829} INFO - Created Permission View: can read on DAG:dashboarddatabase_loop
+[2025-08-15T07:42:03.083+0000] {logging_mixin.py:188} INFO - [2025-08-15T07:42:03.082+0000] {override.py:1829} INFO - Created Permission View: can delete on DAG:dashboarddatabase_loop
+[2025-08-15T07:42:03.092+0000] {logging_mixin.py:188} INFO - [2025-08-15T07:42:03.091+0000] {override.py:1829} INFO - Created Permission View: can edit on DAG:dashboarddatabase_loop
+[2025-08-15T07:42:03.092+0000] {logging_mixin.py:188} INFO - [2025-08-15T07:42:03.092+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-08-15T07:42:03.109+0000] {logging_mixin.py:188} INFO - [2025-08-15T07:42:03.109+0000] {dag.py:3118} INFO - Creating ORM DAG for dashboarddatabase_loop
+[2025-08-15T07:42:03.110+0000] {logging_mixin.py:188} INFO - [2025-08-15T07:42:03.110+0000] {dag.py:3954} INFO - Setting next_dagrun for dashboarddatabase_loop to None, run_after=None
+[2025-08-15T07:42:03.130+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dag_dashboarddatabase.py took 0.249 seconds
+[2025-08-15T07:42:33.236+0000] {processor.py:161} INFO - Started process (PID=495305) to work on /opt/airflow/dags/dag_dashboarddatabase.py
+[2025-08-15T07:42:33.237+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dag_dashboarddatabase.py for tasks to queue
+[2025-08-15T07:42:33.239+0000] {logging_mixin.py:188} INFO - [2025-08-15T07:42:33.238+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/dag_dashboarddatabase.py
+[2025-08-15T07:42:33.253+0000] {processor.py:840} INFO - DAG(s) 'dashboarddatabase_loop' retrieved from /opt/airflow/dags/dag_dashboarddatabase.py
+[2025-08-15T07:42:33.285+0000] {logging_mixin.py:188} INFO - [2025-08-15T07:42:33.285+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-08-15T07:42:33.302+0000] {logging_mixin.py:188} INFO - [2025-08-15T07:42:33.301+0000] {dag.py:3954} INFO - Setting next_dagrun for dashboarddatabase_loop to None, run_after=None
+[2025-08-15T07:42:33.322+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dag_dashboarddatabase.py took 0.097 seconds
+[2025-08-15T07:43:03.378+0000] {processor.py:161} INFO - Started process (PID=495318) to work on /opt/airflow/dags/dag_dashboarddatabase.py
+[2025-08-15T07:43:03.379+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dag_dashboarddatabase.py for tasks to queue
+[2025-08-15T07:43:03.380+0000] {logging_mixin.py:188} INFO - [2025-08-15T07:43:03.380+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/dag_dashboarddatabase.py
+[2025-08-15T07:43:03.394+0000] {processor.py:840} INFO - DAG(s) 'dashboarddatabase_loop' retrieved from /opt/airflow/dags/dag_dashboarddatabase.py
+[2025-08-15T07:43:03.423+0000] {logging_mixin.py:188} INFO - [2025-08-15T07:43:03.423+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-08-15T07:43:03.438+0000] {logging_mixin.py:188} INFO - [2025-08-15T07:43:03.438+0000] {dag.py:3954} INFO - Setting next_dagrun for dashboarddatabase_loop to None, run_after=None
+[2025-08-15T07:43:03.456+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dag_dashboarddatabase.py took 0.088 seconds
+[2025-08-15T07:43:32.371+0000] {processor.py:161} INFO - Started process (PID=495331) to work on /opt/airflow/dags/dag_dashboarddatabase.py
+[2025-08-15T07:43:32.372+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dag_dashboarddatabase.py for tasks to queue
+[2025-08-15T07:43:32.373+0000] {logging_mixin.py:188} INFO - [2025-08-15T07:43:32.373+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/dag_dashboarddatabase.py
+[2025-08-15T07:43:32.389+0000] {processor.py:840} INFO - DAG(s) 'run_scripts_loop' retrieved from /opt/airflow/dags/dag_dashboarddatabase.py
+[2025-08-15T07:43:32.533+0000] {logging_mixin.py:188} INFO - [2025-08-15T07:43:32.532+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-08-15T07:43:32.557+0000] {logging_mixin.py:188} INFO - [2025-08-15T07:43:32.557+0000] {dag.py:3954} INFO - Setting next_dagrun for run_scripts_loop to None, run_after=None
+[2025-08-15T07:43:32.585+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dag_dashboarddatabase.py took 0.224 seconds
+[2025-08-15T07:44:03.488+0000] {processor.py:161} INFO - Started process (PID=495344) to work on /opt/airflow/dags/dag_dashboarddatabase.py
+[2025-08-15T07:44:03.489+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dag_dashboarddatabase.py for tasks to queue
+[2025-08-15T07:44:03.491+0000] {logging_mixin.py:188} INFO - [2025-08-15T07:44:03.490+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/dag_dashboarddatabase.py
+[2025-08-15T07:44:03.505+0000] {processor.py:840} INFO - DAG(s) 'run_scripts_loop' retrieved from /opt/airflow/dags/dag_dashboarddatabase.py
+[2025-08-15T07:44:03.695+0000] {logging_mixin.py:188} INFO - [2025-08-15T07:44:03.695+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-08-15T07:44:03.709+0000] {logging_mixin.py:188} INFO - [2025-08-15T07:44:03.709+0000] {dag.py:3118} INFO - Creating ORM DAG for run_scripts_loop
+[2025-08-15T07:44:03.710+0000] {logging_mixin.py:188} INFO - [2025-08-15T07:44:03.709+0000] {dag.py:3954} INFO - Setting next_dagrun for run_scripts_loop to None, run_after=None
+[2025-08-15T07:44:03.729+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dag_dashboarddatabase.py took 0.251 seconds
+[2025-08-15T07:44:07.793+0000] {processor.py:161} INFO - Started process (PID=495351) to work on /opt/airflow/dags/dag_dashboarddatabase.py
+[2025-08-15T07:44:07.794+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dag_dashboarddatabase.py for tasks to queue
+[2025-08-15T07:44:07.795+0000] {logging_mixin.py:188} INFO - [2025-08-15T07:44:07.795+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/dag_dashboarddatabase.py
+[2025-08-15T07:44:07.811+0000] {processor.py:840} INFO - DAG(s) 'dashboarddatabase_loop' retrieved from /opt/airflow/dags/dag_dashboarddatabase.py
+[2025-08-15T07:44:07.952+0000] {logging_mixin.py:188} INFO - [2025-08-15T07:44:07.952+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-08-15T07:44:07.966+0000] {logging_mixin.py:188} INFO - [2025-08-15T07:44:07.966+0000] {dag.py:3954} INFO - Setting next_dagrun for dashboarddatabase_loop to None, run_after=None
+[2025-08-15T07:44:07.987+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dag_dashboarddatabase.py took 0.204 seconds
+[2025-08-15T07:44:38.649+0000] {processor.py:161} INFO - Started process (PID=495374) to work on /opt/airflow/dags/dag_dashboarddatabase.py
+[2025-08-15T07:44:38.651+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dag_dashboarddatabase.py for tasks to queue
+[2025-08-15T07:44:38.652+0000] {logging_mixin.py:188} INFO - [2025-08-15T07:44:38.651+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/dag_dashboarddatabase.py
+[2025-08-15T07:44:38.665+0000] {processor.py:840} INFO - DAG(s) 'dashboarddatabase_loop' retrieved from /opt/airflow/dags/dag_dashboarddatabase.py
+[2025-08-15T07:44:38.692+0000] {logging_mixin.py:188} INFO - [2025-08-15T07:44:38.691+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-08-15T07:44:38.707+0000] {logging_mixin.py:188} INFO - [2025-08-15T07:44:38.707+0000] {dag.py:3954} INFO - Setting next_dagrun for dashboarddatabase_loop to None, run_after=None
+[2025-08-15T07:44:38.725+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dag_dashboarddatabase.py took 0.085 seconds
+[2025-08-15T07:45:08.962+0000] {processor.py:161} INFO - Started process (PID=495395) to work on /opt/airflow/dags/dag_dashboarddatabase.py
+[2025-08-15T07:45:08.964+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dag_dashboarddatabase.py for tasks to queue
+[2025-08-15T07:45:08.965+0000] {logging_mixin.py:188} INFO - [2025-08-15T07:45:08.964+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/dag_dashboarddatabase.py
+[2025-08-15T07:45:08.980+0000] {processor.py:840} INFO - DAG(s) 'dashboarddatabase_loop' retrieved from /opt/airflow/dags/dag_dashboarddatabase.py
+[2025-08-15T07:45:09.009+0000] {logging_mixin.py:188} INFO - [2025-08-15T07:45:09.009+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-08-15T07:45:09.034+0000] {logging_mixin.py:188} INFO - [2025-08-15T07:45:09.034+0000] {dag.py:3954} INFO - Setting next_dagrun for dashboarddatabase_loop to None, run_after=None
+[2025-08-15T07:45:09.058+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dag_dashboarddatabase.py took 0.106 seconds
+[2025-08-15T07:45:40.014+0000] {processor.py:161} INFO - Started process (PID=495408) to work on /opt/airflow/dags/dag_dashboarddatabase.py
+[2025-08-15T07:45:40.016+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dag_dashboarddatabase.py for tasks to queue
+[2025-08-15T07:45:40.017+0000] {logging_mixin.py:188} INFO - [2025-08-15T07:45:40.016+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/dag_dashboarddatabase.py
+[2025-08-15T07:45:40.029+0000] {processor.py:840} INFO - DAG(s) 'dashboarddatabase_loop' retrieved from /opt/airflow/dags/dag_dashboarddatabase.py
+[2025-08-15T07:45:40.059+0000] {logging_mixin.py:188} INFO - [2025-08-15T07:45:40.058+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-08-15T07:45:40.074+0000] {logging_mixin.py:188} INFO - [2025-08-15T07:45:40.074+0000] {dag.py:3954} INFO - Setting next_dagrun for dashboarddatabase_loop to None, run_after=None
+[2025-08-15T07:45:40.095+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dag_dashboarddatabase.py took 0.092 seconds
+[2025-08-15T07:46:10.240+0000] {processor.py:161} INFO - Started process (PID=495421) to work on /opt/airflow/dags/dag_dashboarddatabase.py
+[2025-08-15T07:46:10.242+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dag_dashboarddatabase.py for tasks to queue
+[2025-08-15T07:46:10.243+0000] {logging_mixin.py:188} INFO - [2025-08-15T07:46:10.243+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/dag_dashboarddatabase.py
+[2025-08-15T07:46:10.257+0000] {processor.py:840} INFO - DAG(s) 'dashboarddatabase_loop' retrieved from /opt/airflow/dags/dag_dashboarddatabase.py
+[2025-08-15T07:46:10.288+0000] {logging_mixin.py:188} INFO - [2025-08-15T07:46:10.287+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-08-15T07:46:10.304+0000] {logging_mixin.py:188} INFO - [2025-08-15T07:46:10.304+0000] {dag.py:3954} INFO - Setting next_dagrun for dashboarddatabase_loop to None, run_after=None
+[2025-08-15T07:46:10.324+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dag_dashboarddatabase.py took 0.093 seconds
+[2025-08-15T07:46:13.318+0000] {processor.py:161} INFO - Started process (PID=495422) to work on /opt/airflow/dags/dag_dashboarddatabase.py
+[2025-08-15T07:46:13.320+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dag_dashboarddatabase.py for tasks to queue
+[2025-08-15T07:46:13.322+0000] {logging_mixin.py:188} INFO - [2025-08-15T07:46:13.320+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/dag_dashboarddatabase.py
+[2025-08-15T07:46:13.337+0000] {processor.py:840} INFO - DAG(s) 'dashboarddatabase_loop' retrieved from /opt/airflow/dags/dag_dashboarddatabase.py
+[2025-08-15T07:46:13.368+0000] {logging_mixin.py:188} INFO - [2025-08-15T07:46:13.368+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-08-15T07:46:13.385+0000] {logging_mixin.py:188} INFO - [2025-08-15T07:46:13.384+0000] {dag.py:3954} INFO - Setting next_dagrun for dashboarddatabase_loop to None, run_after=None
+[2025-08-15T07:46:13.408+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dag_dashboarddatabase.py took 0.100 seconds
+[2025-08-15T07:46:44.287+0000] {processor.py:161} INFO - Started process (PID=495444) to work on /opt/airflow/dags/dag_dashboarddatabase.py
+[2025-08-15T07:46:44.288+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dag_dashboarddatabase.py for tasks to queue
+[2025-08-15T07:46:44.289+0000] {logging_mixin.py:188} INFO - [2025-08-15T07:46:44.289+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/dag_dashboarddatabase.py
+[2025-08-15T07:46:44.303+0000] {processor.py:840} INFO - DAG(s) 'dashboarddatabase_loop' retrieved from /opt/airflow/dags/dag_dashboarddatabase.py
+[2025-08-15T07:46:44.331+0000] {logging_mixin.py:188} INFO - [2025-08-15T07:46:44.331+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-08-15T07:46:44.346+0000] {logging_mixin.py:188} INFO - [2025-08-15T07:46:44.346+0000] {dag.py:3954} INFO - Setting next_dagrun for dashboarddatabase_loop to None, run_after=None
+[2025-08-15T07:46:44.364+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dag_dashboarddatabase.py took 0.087 seconds
+[2025-08-15T07:47:15.258+0000] {processor.py:161} INFO - Started process (PID=495457) to work on /opt/airflow/dags/dag_dashboarddatabase.py
+[2025-08-15T07:47:15.259+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dag_dashboarddatabase.py for tasks to queue
+[2025-08-15T07:47:15.260+0000] {logging_mixin.py:188} INFO - [2025-08-15T07:47:15.260+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/dag_dashboarddatabase.py
+[2025-08-15T07:47:15.275+0000] {processor.py:840} INFO - DAG(s) 'dashboarddatabase_loop' retrieved from /opt/airflow/dags/dag_dashboarddatabase.py
+[2025-08-15T07:47:15.306+0000] {logging_mixin.py:188} INFO - [2025-08-15T07:47:15.306+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-08-15T07:47:15.324+0000] {logging_mixin.py:188} INFO - [2025-08-15T07:47:15.324+0000] {dag.py:3954} INFO - Setting next_dagrun for dashboarddatabase_loop to None, run_after=None
+[2025-08-15T07:47:15.346+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dag_dashboarddatabase.py took 0.098 seconds
+[2025-08-15T07:47:46.263+0000] {processor.py:161} INFO - Started process (PID=495470) to work on /opt/airflow/dags/dag_dashboarddatabase.py
+[2025-08-15T07:47:46.264+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dag_dashboarddatabase.py for tasks to queue
+[2025-08-15T07:47:46.266+0000] {logging_mixin.py:188} INFO - [2025-08-15T07:47:46.265+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/dag_dashboarddatabase.py
+[2025-08-15T07:47:46.280+0000] {processor.py:840} INFO - DAG(s) 'dashboarddatabase_loop' retrieved from /opt/airflow/dags/dag_dashboarddatabase.py
+[2025-08-15T07:47:46.310+0000] {logging_mixin.py:188} INFO - [2025-08-15T07:47:46.310+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-08-15T07:47:46.326+0000] {logging_mixin.py:188} INFO - [2025-08-15T07:47:46.326+0000] {dag.py:3954} INFO - Setting next_dagrun for dashboarddatabase_loop to None, run_after=None
+[2025-08-15T07:47:46.347+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dag_dashboarddatabase.py took 0.095 seconds
+[2025-08-15T07:48:17.329+0000] {processor.py:161} INFO - Started process (PID=495483) to work on /opt/airflow/dags/dag_dashboarddatabase.py
+[2025-08-15T07:48:17.330+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dag_dashboarddatabase.py for tasks to queue
+[2025-08-15T07:48:17.331+0000] {logging_mixin.py:188} INFO - [2025-08-15T07:48:17.330+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/dag_dashboarddatabase.py
+[2025-08-15T07:48:17.344+0000] {processor.py:840} INFO - DAG(s) 'dashboarddatabase_loop' retrieved from /opt/airflow/dags/dag_dashboarddatabase.py
+[2025-08-15T07:48:17.372+0000] {logging_mixin.py:188} INFO - [2025-08-15T07:48:17.372+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-08-15T07:48:17.388+0000] {logging_mixin.py:188} INFO - [2025-08-15T07:48:17.388+0000] {dag.py:3954} INFO - Setting next_dagrun for dashboarddatabase_loop to None, run_after=None
+[2025-08-15T07:48:17.410+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dag_dashboarddatabase.py took 0.090 seconds

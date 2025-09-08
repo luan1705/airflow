@@ -1,0 +1,34 @@
+[2025-08-15T07:44:32.559+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-08-15T07:44:32.607+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: dashboarddatabase_loop.run_indices manual__2025-08-15T07:44:30.978772+00:00 [queued]>
+[2025-08-15T07:44:32.623+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: dashboarddatabase_loop.run_indices manual__2025-08-15T07:44:30.978772+00:00 [queued]>
+[2025-08-15T07:44:32.624+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 2
+[2025-08-15T07:44:32.646+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): run_indices> on 2025-08-15 07:44:30.978772+00:00
+[2025-08-15T07:44:32.655+0000] {standard_task_runner.py:63} INFO - Started process 417728 to run task
+[2025-08-15T07:44:32.661+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'dashboarddatabase_loop', 'run_indices', 'manual__2025-08-15T07:44:30.978772+00:00', '--job-id', '7160', '--raw', '--subdir', 'DAGS_FOLDER/dag_dashboarddatabase.py', '--cfg-path', '/tmp/tmp6jaiha1t']
+[2025-08-15T07:44:32.663+0000] {standard_task_runner.py:91} INFO - Job 7160: Subtask run_indices
+[2025-08-15T07:44:32.718+0000] {task_command.py:426} INFO - Running <TaskInstance: dashboarddatabase_loop.run_indices manual__2025-08-15T07:44:30.978772+00:00 [running]> on host 1877907bc043
+[2025-08-15T07:44:32.814+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='luan' AIRFLOW_CTX_DAG_ID='dashboarddatabase_loop' AIRFLOW_CTX_TASK_ID='run_indices' AIRFLOW_CTX_EXECUTION_DATE='2025-08-15T07:44:30.978772+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-08-15T07:44:30.978772+00:00'
+[2025-08-15T07:44:32.815+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-08-15T07:44:32.835+0000] {logging_mixin.py:188} INFO - 🚀 Running indices.py ...
+[2025-08-15T07:44:32.954+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-08-15T07:44:32.955+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/baseoperator.py", line 400, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/dag_dashboarddatabase.py", line 15, in run_script
+    subprocess.run(["python", file_name], check=True)
+  File "/usr/local/lib/python3.10/subprocess.py", line 526, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['python', 'indices.py']' returned non-zero exit status 2.
+[2025-08-15T07:44:32.965+0000] {taskinstance.py:1206} INFO - Marking task as UP_FOR_RETRY. dag_id=dashboarddatabase_loop, task_id=run_indices, run_id=manual__2025-08-15T07:44:30.978772+00:00, execution_date=20250815T074430, start_date=20250815T074432, end_date=20250815T074432
+[2025-08-15T07:44:32.977+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 7160 for task run_indices (Command '['python', 'indices.py']' returned non-zero exit status 2.; 417728)
+[2025-08-15T07:44:32.993+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2025-08-15T07:44:33.011+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

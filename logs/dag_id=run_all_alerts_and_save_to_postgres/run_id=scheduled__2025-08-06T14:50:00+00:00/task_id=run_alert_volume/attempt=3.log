@@ -1,0 +1,248 @@
+[2025-08-07T07:07:26.404+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-08-07T07:07:26.429+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: run_all_alerts_and_save_to_postgres.run_alert_volume scheduled__2025-08-06T14:50:00+00:00 [queued]>
+[2025-08-07T07:07:26.437+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: run_all_alerts_and_save_to_postgres.run_alert_volume scheduled__2025-08-06T14:50:00+00:00 [queued]>
+[2025-08-07T07:07:26.437+0000] {taskinstance.py:2306} INFO - Starting attempt 3 of 3
+[2025-08-07T07:07:26.449+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): run_alert_volume> on 2025-08-06 14:50:00+00:00
+[2025-08-07T07:07:26.456+0000] {standard_task_runner.py:63} INFO - Started process 136687 to run task
+[2025-08-07T07:07:26.462+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'run_all_alerts_and_save_to_postgres', 'run_alert_volume', 'scheduled__2025-08-06T14:50:00+00:00', '--job-id', '2689', '--raw', '--subdir', 'DAGS_FOLDER/alert to db/alert_scripts/alert_all_to_postgres_dag.py', '--cfg-path', '/tmp/tmp4pn78gxa']
+[2025-08-07T07:07:26.463+0000] {standard_task_runner.py:91} INFO - Job 2689: Subtask run_alert_volume
+[2025-08-07T07:07:26.524+0000] {task_command.py:426} INFO - Running <TaskInstance: run_all_alerts_and_save_to_postgres.run_alert_volume scheduled__2025-08-06T14:50:00+00:00 [running]> on host 1877907bc043
+[2025-08-07T07:07:26.630+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='alert_system' AIRFLOW_CTX_DAG_ID='run_all_alerts_and_save_to_postgres' AIRFLOW_CTX_TASK_ID='run_alert_volume' AIRFLOW_CTX_EXECUTION_DATE='2025-08-06T14:50:00+00:00' AIRFLOW_CTX_TRY_NUMBER='3' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-08-06T14:50:00+00:00'
+[2025-08-07T07:07:26.630+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-08-07T07:07:26.749+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-08-07T07:07:26.750+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/baseoperator.py", line 400, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/alert to db/alert_scripts/alert_all_to_postgres_dag.py", line 40, in run_alert_script
+    result = subprocess.run(['python', script_path], check=True, capture_output=True, text=True)
+  File "/usr/local/lib/python3.10/subprocess.py", line 526, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['python', '/opt/airflow/dags/alert_scripts/Alert_Volume.py']' returned non-zero exit status 2.
+[2025-08-07T07:07:26.761+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=run_all_alerts_and_save_to_postgres, task_id=run_alert_volume, run_id=scheduled__2025-08-06T14:50:00+00:00, execution_date=20250806T145000, start_date=20250807T070726, end_date=20250807T070726
+[2025-08-07T07:07:26.773+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 2689 for task run_alert_volume (Command '['python', '/opt/airflow/dags/alert_scripts/Alert_Volume.py']' returned non-zero exit status 2.; 136687)
+[2025-08-07T07:07:26.792+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2025-08-07T07:07:26.813+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-08-07T07:07:26.814+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
+[2025-08-07T07:13:31.373+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-08-07T07:13:31.402+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: run_all_alerts_and_save_to_postgres.run_alert_volume scheduled__2025-08-06T14:50:00+00:00 [queued]>
+[2025-08-07T07:13:31.411+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: run_all_alerts_and_save_to_postgres.run_alert_volume scheduled__2025-08-06T14:50:00+00:00 [queued]>
+[2025-08-07T07:13:31.412+0000] {taskinstance.py:2306} INFO - Starting attempt 3 of 3
+[2025-08-07T07:13:31.425+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): run_alert_volume> on 2025-08-06 14:50:00+00:00
+[2025-08-07T07:13:31.432+0000] {standard_task_runner.py:63} INFO - Started process 136819 to run task
+[2025-08-07T07:13:31.436+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'run_all_alerts_and_save_to_postgres', 'run_alert_volume', 'scheduled__2025-08-06T14:50:00+00:00', '--job-id', '2707', '--raw', '--subdir', 'DAGS_FOLDER/alert to db/alert_all_to_postgres_dag.py', '--cfg-path', '/tmp/tmprmj923_y']
+[2025-08-07T07:13:31.438+0000] {standard_task_runner.py:91} INFO - Job 2707: Subtask run_alert_volume
+[2025-08-07T07:13:31.493+0000] {task_command.py:426} INFO - Running <TaskInstance: run_all_alerts_and_save_to_postgres.run_alert_volume scheduled__2025-08-06T14:50:00+00:00 [running]> on host 1877907bc043
+[2025-08-07T07:13:31.611+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='alert_system' AIRFLOW_CTX_DAG_ID='run_all_alerts_and_save_to_postgres' AIRFLOW_CTX_TASK_ID='run_alert_volume' AIRFLOW_CTX_EXECUTION_DATE='2025-08-06T14:50:00+00:00' AIRFLOW_CTX_TRY_NUMBER='3' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-08-06T14:50:00+00:00'
+[2025-08-07T07:13:31.612+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-08-07T07:13:31.741+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-08-07T07:13:31.742+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/baseoperator.py", line 400, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/alert to db/alert_all_to_postgres_dag.py", line 40, in run_alert_script
+    result = subprocess.run(['python', script_path], check=True, capture_output=True, text=True)
+  File "/usr/local/lib/python3.10/subprocess.py", line 526, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['python', '/opt/airflow/dags/alert_scripts/Alert_Volume.py']' returned non-zero exit status 2.
+[2025-08-07T07:13:31.753+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=run_all_alerts_and_save_to_postgres, task_id=run_alert_volume, run_id=scheduled__2025-08-06T14:50:00+00:00, execution_date=20250806T145000, start_date=20250807T071331, end_date=20250807T071331
+[2025-08-07T07:13:31.767+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 2707 for task run_alert_volume (Command '['python', '/opt/airflow/dags/alert_scripts/Alert_Volume.py']' returned non-zero exit status 2.; 136819)
+[2025-08-07T07:13:31.809+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2025-08-07T07:13:31.837+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-08-07T07:13:31.838+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
+[2025-08-07T07:32:46.956+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-08-07T07:32:46.984+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: run_all_alerts_and_save_to_postgres.run_alert_volume scheduled__2025-08-06T14:50:00+00:00 [queued]>
+[2025-08-07T07:32:46.994+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: run_all_alerts_and_save_to_postgres.run_alert_volume scheduled__2025-08-06T14:50:00+00:00 [queued]>
+[2025-08-07T07:32:46.994+0000] {taskinstance.py:2306} INFO - Starting attempt 3 of 3
+[2025-08-07T07:32:47.008+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): run_alert_volume> on 2025-08-06 14:50:00+00:00
+[2025-08-07T07:32:47.017+0000] {standard_task_runner.py:63} INFO - Started process 137125 to run task
+[2025-08-07T07:32:47.022+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'run_all_alerts_and_save_to_postgres', 'run_alert_volume', 'scheduled__2025-08-06T14:50:00+00:00', '--job-id', '2727', '--raw', '--subdir', 'DAGS_FOLDER/alert to db/alert_all_to_postgres_dag.py', '--cfg-path', '/tmp/tmpzmhx2ax9']
+[2025-08-07T07:32:47.024+0000] {standard_task_runner.py:91} INFO - Job 2727: Subtask run_alert_volume
+[2025-08-07T07:32:47.082+0000] {task_command.py:426} INFO - Running <TaskInstance: run_all_alerts_and_save_to_postgres.run_alert_volume scheduled__2025-08-06T14:50:00+00:00 [running]> on host 1877907bc043
+[2025-08-07T07:32:47.170+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='alert_system' AIRFLOW_CTX_DAG_ID='run_all_alerts_and_save_to_postgres' AIRFLOW_CTX_TASK_ID='run_alert_volume' AIRFLOW_CTX_EXECUTION_DATE='2025-08-06T14:50:00+00:00' AIRFLOW_CTX_TRY_NUMBER='3' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-08-06T14:50:00+00:00'
+[2025-08-07T07:32:47.171+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-08-07T07:32:47.273+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-08-07T07:32:47.274+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/baseoperator.py", line 400, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/alert to db/alert_all_to_postgres_dag.py", line 40, in run_alert_script
+    result = subprocess.run(['python', script_path], check=True, capture_output=True, text=True)
+  File "/usr/local/lib/python3.10/subprocess.py", line 526, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['python', '/opt/airflow/dags/alert_scripts/Alert_Volume.py']' returned non-zero exit status 2.
+[2025-08-07T07:32:47.284+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=run_all_alerts_and_save_to_postgres, task_id=run_alert_volume, run_id=scheduled__2025-08-06T14:50:00+00:00, execution_date=20250806T145000, start_date=20250807T073246, end_date=20250807T073247
+[2025-08-07T07:32:47.296+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 2727 for task run_alert_volume (Command '['python', '/opt/airflow/dags/alert_scripts/Alert_Volume.py']' returned non-zero exit status 2.; 137125)
+[2025-08-07T07:32:47.315+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2025-08-07T07:32:47.327+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
+[2025-08-07T07:44:02.581+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-08-07T07:44:02.624+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: run_all_alerts_and_save_to_postgres.run_alert_volume scheduled__2025-08-06T14:50:00+00:00 [queued]>
+[2025-08-07T07:44:02.636+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: run_all_alerts_and_save_to_postgres.run_alert_volume scheduled__2025-08-06T14:50:00+00:00 [queued]>
+[2025-08-07T07:44:02.637+0000] {taskinstance.py:2306} INFO - Starting attempt 3 of 3
+[2025-08-07T07:44:02.654+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): run_alert_volume> on 2025-08-06 14:50:00+00:00
+[2025-08-07T07:44:02.662+0000] {standard_task_runner.py:63} INFO - Started process 137333 to run task
+[2025-08-07T07:44:02.666+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'run_all_alerts_and_save_to_postgres', 'run_alert_volume', 'scheduled__2025-08-06T14:50:00+00:00', '--job-id', '2748', '--raw', '--subdir', 'DAGS_FOLDER/alert to db/alert_all_to_postgres_dag.py', '--cfg-path', '/tmp/tmp3s993lxx']
+[2025-08-07T07:44:02.668+0000] {standard_task_runner.py:91} INFO - Job 2748: Subtask run_alert_volume
+[2025-08-07T07:44:02.722+0000] {task_command.py:426} INFO - Running <TaskInstance: run_all_alerts_and_save_to_postgres.run_alert_volume scheduled__2025-08-06T14:50:00+00:00 [running]> on host 1877907bc043
+[2025-08-07T07:44:02.811+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='alert_system' AIRFLOW_CTX_DAG_ID='run_all_alerts_and_save_to_postgres' AIRFLOW_CTX_TASK_ID='run_alert_volume' AIRFLOW_CTX_EXECUTION_DATE='2025-08-06T14:50:00+00:00' AIRFLOW_CTX_TRY_NUMBER='3' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-08-06T14:50:00+00:00'
+[2025-08-07T07:44:02.811+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-08-07T07:44:02.937+0000] {logging_mixin.py:188} INFO - [ERROR] Alert_Volume.py failed:
+python: can't open file '/www/server/***/dags/alert to db/alert_scripts/Alert_Volume.py': [Errno 2] No such file or directory
+[2025-08-07T07:44:02.937+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-08-07T07:44:02.938+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/baseoperator.py", line 400, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/alert to db/alert_all_to_postgres_dag.py", line 40, in run_alert_script
+    result = subprocess.run(['python', script_path], check=True, capture_output=True, text=True)
+  File "/usr/local/lib/python3.10/subprocess.py", line 526, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['python', '/www/server/airflow/dags/alert to db/alert_scripts/Alert_Volume.py']' returned non-zero exit status 2.
+[2025-08-07T07:44:02.947+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=run_all_alerts_and_save_to_postgres, task_id=run_alert_volume, run_id=scheduled__2025-08-06T14:50:00+00:00, execution_date=20250806T145000, start_date=20250807T074402, end_date=20250807T074402
+[2025-08-07T07:44:02.961+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 2748 for task run_alert_volume (Command '['python', '/www/server/airflow/dags/alert to db/alert_scripts/Alert_Volume.py']' returned non-zero exit status 2.; 137333)
+[2025-08-07T07:44:02.999+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2025-08-07T07:44:03.030+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-08-07T07:44:03.031+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
+[2025-08-07T07:53:47.781+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-08-07T07:53:47.805+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: run_all_alerts_and_save_to_postgres.run_alert_volume scheduled__2025-08-06T14:50:00+00:00 [queued]>
+[2025-08-07T07:53:47.813+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: run_all_alerts_and_save_to_postgres.run_alert_volume scheduled__2025-08-06T14:50:00+00:00 [queued]>
+[2025-08-07T07:53:47.813+0000] {taskinstance.py:2306} INFO - Starting attempt 3 of 3
+[2025-08-07T07:53:47.825+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): run_alert_volume> on 2025-08-06 14:50:00+00:00
+[2025-08-07T07:53:47.831+0000] {standard_task_runner.py:63} INFO - Started process 137551 to run task
+[2025-08-07T07:53:47.835+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'run_all_alerts_and_save_to_postgres', 'run_alert_volume', 'scheduled__2025-08-06T14:50:00+00:00', '--job-id', '2780', '--raw', '--subdir', 'DAGS_FOLDER/alert to db/alert_scripts/alert_all_to_postgres_dag.py', '--cfg-path', '/tmp/tmprkaydrzn']
+[2025-08-07T07:53:47.836+0000] {standard_task_runner.py:91} INFO - Job 2780: Subtask run_alert_volume
+[2025-08-07T07:53:47.901+0000] {task_command.py:426} INFO - Running <TaskInstance: run_all_alerts_and_save_to_postgres.run_alert_volume scheduled__2025-08-06T14:50:00+00:00 [running]> on host 1877907bc043
+[2025-08-07T07:53:48.003+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='alert_system' AIRFLOW_CTX_DAG_ID='run_all_alerts_and_save_to_postgres' AIRFLOW_CTX_TASK_ID='run_alert_volume' AIRFLOW_CTX_EXECUTION_DATE='2025-08-06T14:50:00+00:00' AIRFLOW_CTX_TRY_NUMBER='3' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-08-06T14:50:00+00:00'
+[2025-08-07T07:53:48.004+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-08-07T07:53:48.023+0000] {logging_mixin.py:188} INFO - Running script: /www/server/***/dags/alert to db/alert_scripts/Alert_Volume.py
+[2025-08-07T07:53:48.135+0000] {logging_mixin.py:188} INFO - [ERROR] Alert_Volume.py failed with stderr:
+python: can't open file '/www/server/***/dags/alert to db/alert_scripts/Alert_Volume.py': [Errno 2] No such file or directory
+[2025-08-07T07:53:48.135+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-08-07T07:53:48.135+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/baseoperator.py", line 400, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/alert to db/alert_scripts/alert_all_to_postgres_dag.py", line 41, in run_alert_script
+    result = subprocess.run(
+  File "/usr/local/lib/python3.10/subprocess.py", line 526, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['python', '/www/server/airflow/dags/alert to db/alert_scripts/Alert_Volume.py']' returned non-zero exit status 2.
+[2025-08-07T07:53:48.149+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=run_all_alerts_and_save_to_postgres, task_id=run_alert_volume, run_id=scheduled__2025-08-06T14:50:00+00:00, execution_date=20250806T145000, start_date=20250807T075347, end_date=20250807T075348
+[2025-08-07T07:53:48.165+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 2780 for task run_alert_volume (Command '['python', '/www/server/airflow/dags/alert to db/alert_scripts/Alert_Volume.py']' returned non-zero exit status 2.; 137551)
+[2025-08-07T07:53:48.207+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2025-08-07T07:53:48.236+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-08-07T07:53:48.237+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
+[2025-08-07T08:18:47.072+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-08-07T08:18:47.108+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: run_all_alerts_and_save_to_postgres.run_alert_volume scheduled__2025-08-06T14:50:00+00:00 [queued]>
+[2025-08-07T08:18:47.118+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: run_all_alerts_and_save_to_postgres.run_alert_volume scheduled__2025-08-06T14:50:00+00:00 [queued]>
+[2025-08-07T08:18:47.118+0000] {taskinstance.py:2306} INFO - Starting attempt 3 of 3
+[2025-08-07T08:18:47.132+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): run_alert_volume> on 2025-08-06 14:50:00+00:00
+[2025-08-07T08:18:47.140+0000] {standard_task_runner.py:63} INFO - Started process 137951 to run task
+[2025-08-07T08:18:47.145+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'run_all_alerts_and_save_to_postgres', 'run_alert_volume', 'scheduled__2025-08-06T14:50:00+00:00', '--job-id', '2808', '--raw', '--subdir', 'DAGS_FOLDER/alert_to_db/alert_all_to_postgres_dag.py', '--cfg-path', '/tmp/tmpnjatxynl']
+[2025-08-07T08:18:47.147+0000] {standard_task_runner.py:91} INFO - Job 2808: Subtask run_alert_volume
+[2025-08-07T08:18:47.201+0000] {task_command.py:426} INFO - Running <TaskInstance: run_all_alerts_and_save_to_postgres.run_alert_volume scheduled__2025-08-06T14:50:00+00:00 [running]> on host 1877907bc043
+[2025-08-07T08:18:47.287+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='alert_system' AIRFLOW_CTX_DAG_ID='run_all_alerts_and_save_to_postgres' AIRFLOW_CTX_TASK_ID='run_alert_volume' AIRFLOW_CTX_EXECUTION_DATE='2025-08-06T14:50:00+00:00' AIRFLOW_CTX_TRY_NUMBER='3' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-08-06T14:50:00+00:00'
+[2025-08-07T08:18:47.288+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-08-07T08:18:47.300+0000] {logging_mixin.py:188} INFO - Running script: /www/server/***/dags/alert to db/alert_scripts/Alert_Volume.py
+[2025-08-07T08:18:47.391+0000] {logging_mixin.py:188} INFO - [ERROR] Alert_Volume.py failed with stderr:
+python: can't open file '/www/server/***/dags/alert to db/alert_scripts/Alert_Volume.py': [Errno 2] No such file or directory
+[2025-08-07T08:18:47.391+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-08-07T08:18:47.392+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/baseoperator.py", line 400, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/alert_to_db/alert_all_to_postgres_dag.py", line 41, in run_alert_script
+    result = subprocess.run(
+  File "/usr/local/lib/python3.10/subprocess.py", line 526, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['python', '/www/server/airflow/dags/alert to db/alert_scripts/Alert_Volume.py']' returned non-zero exit status 2.
+[2025-08-07T08:18:47.400+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=run_all_alerts_and_save_to_postgres, task_id=run_alert_volume, run_id=scheduled__2025-08-06T14:50:00+00:00, execution_date=20250806T145000, start_date=20250807T081847, end_date=20250807T081847
+[2025-08-07T08:18:47.411+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 2808 for task run_alert_volume (Command '['python', '/www/server/airflow/dags/alert to db/alert_scripts/Alert_Volume.py']' returned non-zero exit status 2.; 137951)
+[2025-08-07T08:18:47.437+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2025-08-07T08:18:47.466+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-08-07T08:18:47.467+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
+[2025-08-07T09:01:37.353+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-08-07T09:01:37.398+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: run_all_alerts_and_save_to_postgres.run_alert_volume scheduled__2025-08-06T14:50:00+00:00 [queued]>
+[2025-08-07T09:01:37.413+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: run_all_alerts_and_save_to_postgres.run_alert_volume scheduled__2025-08-06T14:50:00+00:00 [queued]>
+[2025-08-07T09:01:37.413+0000] {taskinstance.py:2306} INFO - Starting attempt 3 of 3
+[2025-08-07T09:01:37.435+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): run_alert_volume> on 2025-08-06 14:50:00+00:00
+[2025-08-07T09:01:37.444+0000] {standard_task_runner.py:63} INFO - Started process 138610 to run task
+[2025-08-07T09:01:37.449+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'run_all_alerts_and_save_to_postgres', 'run_alert_volume', 'scheduled__2025-08-06T14:50:00+00:00', '--job-id', '2838', '--raw', '--subdir', 'DAGS_FOLDER/alert_to_db/alert_all_to_postgres_dag.py', '--cfg-path', '/tmp/tmpas2gywvu']
+[2025-08-07T09:01:37.450+0000] {standard_task_runner.py:91} INFO - Job 2838: Subtask run_alert_volume
+[2025-08-07T09:01:37.503+0000] {task_command.py:426} INFO - Running <TaskInstance: run_all_alerts_and_save_to_postgres.run_alert_volume scheduled__2025-08-06T14:50:00+00:00 [running]> on host 1877907bc043
+[2025-08-07T09:01:37.620+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='alert_system' AIRFLOW_CTX_DAG_ID='run_all_alerts_and_save_to_postgres' AIRFLOW_CTX_TASK_ID='run_alert_volume' AIRFLOW_CTX_EXECUTION_DATE='2025-08-06T14:50:00+00:00' AIRFLOW_CTX_TRY_NUMBER='3' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-08-06T14:50:00+00:00'
+[2025-08-07T09:01:37.621+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-08-07T09:01:37.638+0000] {logging_mixin.py:188} INFO - Running script: /www/server/***/dags/alert_to_db/alert_scripts/Alert_Volume.py
+[2025-08-07T09:01:37.727+0000] {logging_mixin.py:188} INFO - [ERROR] Alert_Volume.py failed with stderr:
+python: can't open file '/www/server/***/dags/alert_to_db/alert_scripts/Alert_Volume.py': [Errno 2] No such file or directory
+[2025-08-07T09:01:37.728+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-08-07T09:01:37.728+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/baseoperator.py", line 400, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/alert_to_db/alert_all_to_postgres_dag.py", line 41, in run_alert_script
+    result = subprocess.run(
+  File "/usr/local/lib/python3.10/subprocess.py", line 526, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['python', '/www/server/airflow/dags/alert_to_db/alert_scripts/Alert_Volume.py']' returned non-zero exit status 2.
+[2025-08-07T09:01:37.739+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=run_all_alerts_and_save_to_postgres, task_id=run_alert_volume, run_id=scheduled__2025-08-06T14:50:00+00:00, execution_date=20250806T145000, start_date=20250807T090137, end_date=20250807T090137
+[2025-08-07T09:01:37.751+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 2838 for task run_alert_volume (Command '['python', '/www/server/airflow/dags/alert_to_db/alert_scripts/Alert_Volume.py']' returned non-zero exit status 2.; 138610)
+[2025-08-07T09:01:37.781+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2025-08-07T09:01:37.811+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-08-07T09:01:37.812+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

@@ -1,0 +1,32 @@
+[2025-08-13T03:40:01.127+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-08-13T03:40:01.157+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: run_all_alerts_and_save_to_postgres.run_alert_ma scheduled__2025-08-13T03:35:00+00:00 [queued]>
+[2025-08-13T03:40:01.167+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: run_all_alerts_and_save_to_postgres.run_alert_ma scheduled__2025-08-13T03:35:00+00:00 [queued]>
+[2025-08-13T03:40:01.167+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 2
+[2025-08-13T03:40:01.182+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): run_alert_ma> on 2025-08-13 03:35:00+00:00
+[2025-08-13T03:40:01.189+0000] {standard_task_runner.py:63} INFO - Started process 375109 to run task
+[2025-08-13T03:40:01.193+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'run_all_alerts_and_save_to_postgres', 'run_alert_ma', 'scheduled__2025-08-13T03:35:00+00:00', '--job-id', '6075', '--raw', '--subdir', 'DAGS_FOLDER/alert_***_project/dags/alert_functions_dag.py', '--cfg-path', '/tmp/tmpz609cwb8']
+[2025-08-13T03:40:01.194+0000] {standard_task_runner.py:91} INFO - Job 6075: Subtask run_alert_ma
+[2025-08-13T03:40:01.248+0000] {task_command.py:426} INFO - Running <TaskInstance: run_all_alerts_and_save_to_postgres.run_alert_ma scheduled__2025-08-13T03:35:00+00:00 [running]> on host 1877907bc043
+[2025-08-13T03:40:01.335+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='alert_system' AIRFLOW_CTX_DAG_ID='run_all_alerts_and_save_to_postgres' AIRFLOW_CTX_TASK_ID='run_alert_ma' AIRFLOW_CTX_EXECUTION_DATE='2025-08-13T03:35:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-08-13T03:35:00+00:00'
+[2025-08-13T03:40:01.336+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-08-13T03:40:01.347+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-08-13T03:40:01.347+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/baseoperator.py", line 400, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/alert_airflow_project/dags/alert_functions_dag.py", line 24, in run_alert_script
+    raise FileNotFoundError(f"❌ Script not found: {script_path}")
+FileNotFoundError: ❌ Script not found: /www/server/***/dags/alert_***_project/alert_scripts/Alert_MA.py
+[2025-08-13T03:40:01.356+0000] {taskinstance.py:1206} INFO - Marking task as UP_FOR_RETRY. dag_id=run_all_alerts_and_save_to_postgres, task_id=run_alert_ma, run_id=scheduled__2025-08-13T03:35:00+00:00, execution_date=20250813T033500, start_date=20250813T034001, end_date=20250813T034001
+[2025-08-13T03:40:01.366+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 6075 for task run_alert_ma (❌ Script not found: /www/server/***/dags/alert_***_project/alert_scripts/Alert_MA.py; 375109)
+[2025-08-13T03:40:01.406+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2025-08-13T03:40:01.431+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-08-13T03:40:01.432+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

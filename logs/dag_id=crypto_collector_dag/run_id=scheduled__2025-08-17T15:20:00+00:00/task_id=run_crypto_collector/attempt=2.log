@@ -1,0 +1,43 @@
+[2025-08-17T15:23:11.684+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-08-17T15:23:11.714+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: crypto_collector_dag.run_crypto_collector scheduled__2025-08-17T15:20:00+00:00 [queued]>
+[2025-08-17T15:23:11.725+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: crypto_collector_dag.run_crypto_collector scheduled__2025-08-17T15:20:00+00:00 [queued]>
+[2025-08-17T15:23:11.726+0000] {taskinstance.py:2306} INFO - Starting attempt 2 of 2
+[2025-08-17T15:23:11.741+0000] {taskinstance.py:2330} INFO - Executing <Task(BashOperator): run_crypto_collector> on 2025-08-17 15:20:00+00:00
+[2025-08-17T15:23:11.747+0000] {standard_task_runner.py:63} INFO - Started process 58376 to run task
+[2025-08-17T15:23:11.751+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'crypto_collector_dag', 'run_crypto_collector', 'scheduled__2025-08-17T15:20:00+00:00', '--job-id', '7488', '--raw', '--subdir', 'DAGS_FOLDER/crawl_crypto/dags_crypto.py', '--cfg-path', '/tmp/tmpxhobku3h']
+[2025-08-17T15:23:11.753+0000] {standard_task_runner.py:91} INFO - Job 7488: Subtask run_crypto_collector
+[2025-08-17T15:23:11.813+0000] {task_command.py:426} INFO - Running <TaskInstance: crypto_collector_dag.run_crypto_collector scheduled__2025-08-17T15:20:00+00:00 [running]> on host 1877907bc043
+[2025-08-17T15:23:11.916+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='crypto_collector_dag' AIRFLOW_CTX_TASK_ID='run_crypto_collector' AIRFLOW_CTX_EXECUTION_DATE='2025-08-17T15:20:00+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-08-17T15:20:00+00:00'
+[2025-08-17T15:23:11.917+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-08-17T15:23:11.932+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-08-17T15:23:11.933+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', 'python3 /opt/***/dags/crawl_crypto/crawl_data_crypto.py']
+[2025-08-17T15:23:11.946+0000] {subprocess.py:86} INFO - Output:
+[2025-08-17T15:25:23.511+0000] {subprocess.py:93} INFO - 🔹 Kết nối DB...
+[2025-08-17T15:25:23.512+0000] {subprocess.py:93} INFO - Traceback (most recent call last):
+[2025-08-17T15:25:23.512+0000] {subprocess.py:93} INFO -   File "/opt/***/dags/crawl_crypto/crawl_data_crypto.py", line 131, in <module>
+[2025-08-17T15:25:23.512+0000] {subprocess.py:93} INFO -     init_db()
+[2025-08-17T15:25:23.513+0000] {subprocess.py:93} INFO -   File "/opt/***/dags/crawl_crypto/crawl_data_crypto.py", line 26, in init_db
+[2025-08-17T15:25:23.513+0000] {subprocess.py:93} INFO -     conn = psycopg2.connect(**DB_CONFIG)
+[2025-08-17T15:25:23.513+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.10/site-packages/psycopg2/__init__.py", line 122, in connect
+[2025-08-17T15:25:23.514+0000] {subprocess.py:93} INFO -     conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+[2025-08-17T15:25:23.514+0000] {subprocess.py:93} INFO - psycopg2.OperationalError: connection to server at "videv.cloud" (27.74.74.29), port 5432 failed: Connection timed out
+[2025-08-17T15:25:23.514+0000] {subprocess.py:93} INFO - 	Is the server running on that host and accepting TCP/IP connections?
+[2025-08-17T15:25:23.514+0000] {subprocess.py:93} INFO - 
+[2025-08-17T15:25:23.626+0000] {subprocess.py:97} INFO - Command exited with return code 1
+[2025-08-17T15:25:23.627+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-08-17T15:25:23.642+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/baseoperator.py", line 400, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/bash.py", line 243, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 1.
+[2025-08-17T15:25:23.646+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=crypto_collector_dag, task_id=run_crypto_collector, run_id=scheduled__2025-08-17T15:20:00+00:00, execution_date=20250817T152000, start_date=20250817T152311, end_date=20250817T152523
+[2025-08-17T15:25:23.663+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 7488 for task run_crypto_collector (Bash command failed. The command returned a non-zero exit code 1.; 58376)
+[2025-08-17T15:25:23.698+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2025-08-17T15:25:23.724+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-08-17T15:25:23.729+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

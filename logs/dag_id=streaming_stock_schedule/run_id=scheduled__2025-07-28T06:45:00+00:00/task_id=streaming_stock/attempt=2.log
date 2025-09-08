@@ -1,0 +1,67 @@
+[2025-07-28T07:02:02.153+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-07-28T07:02:02.176+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: streaming_stock_schedule.streaming_stock scheduled__2025-07-28T06:45:00+00:00 [queued]>
+[2025-07-28T07:02:02.182+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: streaming_stock_schedule.streaming_stock scheduled__2025-07-28T06:45:00+00:00 [queued]>
+[2025-07-28T07:02:02.182+0000] {taskinstance.py:2306} INFO - Starting attempt 2 of 2
+[2025-07-28T07:02:02.192+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): streaming_stock> on 2025-07-28 06:45:00+00:00
+[2025-07-28T07:02:02.198+0000] {standard_task_runner.py:63} INFO - Started process 2344 to run task
+[2025-07-28T07:02:02.202+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'streaming_stock_schedule', 'streaming_stock', 'scheduled__2025-07-28T06:45:00+00:00', '--job-id', '61', '--raw', '--subdir', 'DAGS_FOLDER/dags_streaming_stock.py', '--cfg-path', '/tmp/tmpo0zwv5pf']
+[2025-07-28T07:02:02.204+0000] {standard_task_runner.py:91} INFO - Job 61: Subtask streaming_stock
+[2025-07-28T07:02:02.252+0000] {task_command.py:426} INFO - Running <TaskInstance: streaming_stock_schedule.streaming_stock scheduled__2025-07-28T06:45:00+00:00 [running]> on host 85cf6d18c15a
+[2025-07-28T07:02:02.348+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='videv' AIRFLOW_CTX_DAG_ID='streaming_stock_schedule' AIRFLOW_CTX_TASK_ID='streaming_stock' AIRFLOW_CTX_EXECUTION_DATE='2025-07-28T06:45:00+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-07-28T06:45:00+00:00'
+[2025-07-28T07:02:02.348+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-07-28T07:02:02.471+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-07-28T07:02:02.472+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/baseoperator.py", line 400, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/dags_streaming_stock.py", line 26, in run_stream
+    subprocess.run(['python3', '/opt/airflow/dags/streaming_stock.py'], check=True)
+  File "/usr/local/lib/python3.10/subprocess.py", line 526, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['python3', '/opt/airflow/dags/streaming_stock.py']' returned non-zero exit status 1.
+[2025-07-28T07:02:02.482+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=streaming_stock_schedule, task_id=streaming_stock, run_id=scheduled__2025-07-28T06:45:00+00:00, execution_date=20250728T064500, start_date=20250728T070202, end_date=20250728T070202
+[2025-07-28T07:02:02.492+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 61 for task streaming_stock (Command '['python3', '/opt/airflow/dags/streaming_stock.py']' returned non-zero exit status 1.; 2344)
+[2025-07-28T07:02:02.534+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2025-07-28T07:02:02.547+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
+[2025-07-28T07:16:03.102+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-07-28T07:16:03.134+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: streaming_stock_schedule.streaming_stock scheduled__2025-07-28T06:45:00+00:00 [queued]>
+[2025-07-28T07:16:03.144+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: streaming_stock_schedule.streaming_stock scheduled__2025-07-28T06:45:00+00:00 [queued]>
+[2025-07-28T07:16:03.145+0000] {taskinstance.py:2306} INFO - Starting attempt 2 of 2
+[2025-07-28T07:16:03.159+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): streaming_stock> on 2025-07-28 06:45:00+00:00
+[2025-07-28T07:16:03.167+0000] {standard_task_runner.py:63} INFO - Started process 2535 to run task
+[2025-07-28T07:16:03.173+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'streaming_stock_schedule', 'streaming_stock', 'scheduled__2025-07-28T06:45:00+00:00', '--job-id', '64', '--raw', '--subdir', 'DAGS_FOLDER/dags_streaming_stock.py', '--cfg-path', '/tmp/tmpfwy35xgn']
+[2025-07-28T07:16:03.174+0000] {standard_task_runner.py:91} INFO - Job 64: Subtask streaming_stock
+[2025-07-28T07:16:03.228+0000] {task_command.py:426} INFO - Running <TaskInstance: streaming_stock_schedule.streaming_stock scheduled__2025-07-28T06:45:00+00:00 [running]> on host 85cf6d18c15a
+[2025-07-28T07:16:03.326+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='videv' AIRFLOW_CTX_DAG_ID='streaming_stock_schedule' AIRFLOW_CTX_TASK_ID='streaming_stock' AIRFLOW_CTX_EXECUTION_DATE='2025-07-28T06:45:00+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-07-28T06:45:00+00:00'
+[2025-07-28T07:16:03.328+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-07-28T07:16:03.445+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-07-28T07:16:03.446+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/baseoperator.py", line 400, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/dags_streaming_stock.py", line 26, in run_stream
+    subprocess.run(['python3', '/opt/airflow/dags/streaming_stock.py'], check=True)
+  File "/usr/local/lib/python3.10/subprocess.py", line 526, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['python3', '/opt/airflow/dags/streaming_stock.py']' returned non-zero exit status 1.
+[2025-07-28T07:16:03.456+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=streaming_stock_schedule, task_id=streaming_stock, run_id=scheduled__2025-07-28T06:45:00+00:00, execution_date=20250728T064500, start_date=20250728T071603, end_date=20250728T071603
+[2025-07-28T07:16:03.469+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 64 for task streaming_stock (Command '['python3', '/opt/airflow/dags/streaming_stock.py']' returned non-zero exit status 1.; 2535)
+[2025-07-28T07:16:03.504+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2025-07-28T07:16:03.532+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-07-28T07:16:03.533+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

@@ -1,0 +1,18 @@
+[2025-08-15T02:15:01.376+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-08-15T02:15:01.404+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: run_all_alerts_and_save_to_postgres.run_alert_macd scheduled__2025-08-15T02:10:00+00:00 [queued]>
+[2025-08-15T02:15:01.414+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: run_all_alerts_and_save_to_postgres.run_alert_macd scheduled__2025-08-15T02:10:00+00:00 [queued]>
+[2025-08-15T02:15:01.414+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 2
+[2025-08-15T02:15:01.428+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): run_alert_macd> on 2025-08-15 02:10:00+00:00
+[2025-08-15T02:15:01.435+0000] {standard_task_runner.py:63} INFO - Started process 412755 to run task
+[2025-08-15T02:15:01.440+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'run_all_alerts_and_save_to_postgres', 'run_alert_macd', 'scheduled__2025-08-15T02:10:00+00:00', '--job-id', '6765', '--raw', '--subdir', 'DAGS_FOLDER/alert_***_project/dags/alert_functions_dag.py', '--cfg-path', '/tmp/tmpdzz37qbq']
+[2025-08-15T02:15:01.441+0000] {standard_task_runner.py:91} INFO - Job 6765: Subtask run_alert_macd
+[2025-08-15T02:15:01.498+0000] {task_command.py:426} INFO - Running <TaskInstance: run_all_alerts_and_save_to_postgres.run_alert_macd scheduled__2025-08-15T02:10:00+00:00 [running]> on host 1877907bc043
+[2025-08-15T02:15:01.607+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='alert_system' AIRFLOW_CTX_DAG_ID='run_all_alerts_and_save_to_postgres' AIRFLOW_CTX_TASK_ID='run_alert_macd' AIRFLOW_CTX_EXECUTION_DATE='2025-08-15T02:10:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-08-15T02:10:00+00:00'
+[2025-08-15T02:15:01.608+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-08-15T02:15:01.623+0000] {logging_mixin.py:188} INFO - ⏹ Outside trading time: 2025-08-15 02:15:01.623611. Skipping Alert_MACD.py...
+[2025-08-15T02:15:01.623+0000] {python.py:237} INFO - Done. Returned value was: None
+[2025-08-15T02:15:01.625+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-08-15T02:15:01.636+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=run_all_alerts_and_save_to_postgres, task_id=run_alert_macd, run_id=scheduled__2025-08-15T02:10:00+00:00, execution_date=20250815T021000, start_date=20250815T021501, end_date=20250815T021501
+[2025-08-15T02:15:01.692+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-08-15T02:15:01.726+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-08-15T02:15:01.728+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

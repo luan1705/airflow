@@ -1,0 +1,18 @@
+[2025-09-05T16:42:01.831+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-09-05T16:42:02.045+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: liquidity.save_liquidity scheduled__2025-09-05T16:41:00+00:00 [queued]>
+[2025-09-05T16:42:02.054+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: liquidity.save_liquidity scheduled__2025-09-05T16:41:00+00:00 [queued]>
+[2025-09-05T16:42:02.054+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 11
+[2025-09-05T16:42:02.069+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): save_liquidity> on 2025-09-05 16:41:00+00:00
+[2025-09-05T16:42:02.078+0000] {standard_task_runner.py:63} INFO - Started process 33244 to run task
+[2025-09-05T16:42:02.082+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'liquidity', 'save_liquidity', 'scheduled__2025-09-05T16:41:00+00:00', '--job-id', '117964', '--raw', '--subdir', 'DAGS_FOLDER/dag_liquidity.py', '--cfg-path', '/tmp/tmp__m_045q']
+[2025-09-05T16:42:02.085+0000] {standard_task_runner.py:91} INFO - Job 117964: Subtask save_liquidity
+[2025-09-05T16:42:02.153+0000] {task_command.py:426} INFO - Running <TaskInstance: liquidity.save_liquidity scheduled__2025-09-05T16:41:00+00:00 [running]> on host d4d2fe648a81
+[2025-09-05T16:42:02.252+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='liquidity' AIRFLOW_CTX_TASK_ID='save_liquidity' AIRFLOW_CTX_EXECUTION_DATE='2025-09-05T16:41:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-09-05T16:41:00+00:00'
+[2025-09-05T16:42:02.253+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-09-05T16:42:02.265+0000] {logging_mixin.py:188} INFO - Skip run at 2025-09-05 23:42:02.265741+07:00
+[2025-09-05T16:42:02.266+0000] {python.py:237} INFO - Done. Returned value was: None
+[2025-09-05T16:42:02.266+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-09-05T16:42:02.276+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=liquidity, task_id=save_liquidity, run_id=scheduled__2025-09-05T16:41:00+00:00, execution_date=20250905T164100, start_date=20250905T164202, end_date=20250905T164202
+[2025-09-05T16:42:02.334+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-09-05T16:42:02.361+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-09-05T16:42:02.362+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

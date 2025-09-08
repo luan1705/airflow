@@ -1,0 +1,66 @@
+[2025-08-28T08:26:01.862+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-08-28T08:26:01.893+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: stock_details_dag.run_fetch_stock_details scheduled__2025-08-28T08:25:00+00:00 [queued]>
+[2025-08-28T08:26:01.902+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: stock_details_dag.run_fetch_stock_details scheduled__2025-08-28T08:25:00+00:00 [queued]>
+[2025-08-28T08:26:01.902+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 2
+[2025-08-28T08:26:01.919+0000] {taskinstance.py:2330} INFO - Executing <Task(BashOperator): run_fetch_stock_details> on 2025-08-28 08:25:00+00:00
+[2025-08-28T08:26:01.926+0000] {standard_task_runner.py:63} INFO - Started process 1665161 to run task
+[2025-08-28T08:26:01.932+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'stock_details_dag', 'run_fetch_stock_details', 'scheduled__2025-08-28T08:25:00+00:00', '--job-id', '30738', '--raw', '--subdir', 'DAGS_FOLDER/stock_detail/dags.py', '--cfg-path', '/tmp/tmpx_aa4o0i']
+[2025-08-28T08:26:01.934+0000] {standard_task_runner.py:91} INFO - Job 30738: Subtask run_fetch_stock_details
+[2025-08-28T08:26:01.991+0000] {task_command.py:426} INFO - Running <TaskInstance: stock_details_dag.run_fetch_stock_details scheduled__2025-08-28T08:25:00+00:00 [running]> on host 1877907bc043
+[2025-08-28T08:26:02.079+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='stock_details_dag' AIRFLOW_CTX_TASK_ID='run_fetch_stock_details' AIRFLOW_CTX_EXECUTION_DATE='2025-08-28T08:25:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-08-28T08:25:00+00:00'
+[2025-08-28T08:26:02.080+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-08-28T08:26:02.094+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-08-28T08:26:02.095+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', 'python /www/server/***/dags/stock_detail/stockdetail.py']
+[2025-08-28T08:26:02.107+0000] {subprocess.py:86} INFO - Output:
+[2025-08-28T08:26:02.199+0000] {subprocess.py:93} INFO - python: can't open file '/www/server/***/dags/stock_detail/stockdetail.py': [Errno 2] No such file or directory
+[2025-08-28T08:26:02.204+0000] {subprocess.py:97} INFO - Command exited with return code 2
+[2025-08-28T08:26:02.205+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-08-28T08:26:02.223+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/baseoperator.py", line 400, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/bash.py", line 243, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 2.
+[2025-08-28T08:26:02.229+0000] {taskinstance.py:1206} INFO - Marking task as UP_FOR_RETRY. dag_id=stock_details_dag, task_id=run_fetch_stock_details, run_id=scheduled__2025-08-28T08:25:00+00:00, execution_date=20250828T082500, start_date=20250828T082601, end_date=20250828T082602
+[2025-08-28T08:26:02.247+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 30738 for task run_fetch_stock_details (Bash command failed. The command returned a non-zero exit code 2.; 1665161)
+[2025-08-28T08:26:02.263+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2025-08-28T08:26:02.295+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-08-28T08:26:02.296+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
+[2025-08-28T08:26:46.269+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-08-28T08:26:46.293+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: stock_details_dag.run_fetch_stock_details scheduled__2025-08-28T08:25:00+00:00 [queued]>
+[2025-08-28T08:26:46.300+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: stock_details_dag.run_fetch_stock_details scheduled__2025-08-28T08:25:00+00:00 [queued]>
+[2025-08-28T08:26:46.300+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 2
+[2025-08-28T08:26:46.309+0000] {taskinstance.py:2330} INFO - Executing <Task(BashOperator): run_fetch_stock_details> on 2025-08-28 08:25:00+00:00
+[2025-08-28T08:26:46.315+0000] {standard_task_runner.py:63} INFO - Started process 1665318 to run task
+[2025-08-28T08:26:46.320+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'stock_details_dag', 'run_fetch_stock_details', 'scheduled__2025-08-28T08:25:00+00:00', '--job-id', '30741', '--raw', '--subdir', 'DAGS_FOLDER/stock_detail/dags.py', '--cfg-path', '/tmp/tmpc_av6los']
+[2025-08-28T08:26:46.321+0000] {standard_task_runner.py:91} INFO - Job 30741: Subtask run_fetch_stock_details
+[2025-08-28T08:26:46.365+0000] {task_command.py:426} INFO - Running <TaskInstance: stock_details_dag.run_fetch_stock_details scheduled__2025-08-28T08:25:00+00:00 [running]> on host 1877907bc043
+[2025-08-28T08:26:46.445+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='stock_details_dag' AIRFLOW_CTX_TASK_ID='run_fetch_stock_details' AIRFLOW_CTX_EXECUTION_DATE='2025-08-28T08:25:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-08-28T08:25:00+00:00'
+[2025-08-28T08:26:46.445+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-08-28T08:26:46.460+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-08-28T08:26:46.461+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', 'python python3 /opt/***/dags/stock_detail/stockdetail.py']
+[2025-08-28T08:26:46.475+0000] {subprocess.py:86} INFO - Output:
+[2025-08-28T08:26:46.553+0000] {subprocess.py:93} INFO - python: can't open file '/tmp/***tmpcxnoi7vm/python3': [Errno 2] No such file or directory
+[2025-08-28T08:26:46.556+0000] {subprocess.py:97} INFO - Command exited with return code 2
+[2025-08-28T08:26:46.557+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-08-28T08:26:46.573+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/baseoperator.py", line 400, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/bash.py", line 243, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 2.
+[2025-08-28T08:26:46.579+0000] {taskinstance.py:1206} INFO - Marking task as UP_FOR_RETRY. dag_id=stock_details_dag, task_id=run_fetch_stock_details, run_id=scheduled__2025-08-28T08:25:00+00:00, execution_date=20250828T082500, start_date=20250828T082646, end_date=20250828T082646
+[2025-08-28T08:26:46.595+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 30741 for task run_fetch_stock_details (Bash command failed. The command returned a non-zero exit code 2.; 1665318)
+[2025-08-28T08:26:46.612+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2025-08-28T08:26:46.642+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-08-28T08:26:46.644+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

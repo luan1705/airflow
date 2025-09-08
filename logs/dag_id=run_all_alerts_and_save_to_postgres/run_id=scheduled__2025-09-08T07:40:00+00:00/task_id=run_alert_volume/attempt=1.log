@@ -1,0 +1,18 @@
+[2025-09-08T07:45:02.009+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-09-08T07:45:02.047+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: run_all_alerts_and_save_to_postgres.run_alert_volume scheduled__2025-09-08T07:40:00+00:00 [queued]>
+[2025-09-08T07:45:02.056+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: run_all_alerts_and_save_to_postgres.run_alert_volume scheduled__2025-09-08T07:40:00+00:00 [queued]>
+[2025-09-08T07:45:02.057+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 2
+[2025-09-08T07:45:02.073+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): run_alert_volume> on 2025-09-08 07:40:00+00:00
+[2025-09-08T07:45:02.082+0000] {standard_task_runner.py:63} INFO - Started process 339660 to run task
+[2025-09-08T07:45:02.087+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'run_all_alerts_and_save_to_postgres', 'run_alert_volume', 'scheduled__2025-09-08T07:40:00+00:00', '--job-id', '160783', '--raw', '--subdir', 'DAGS_FOLDER/alert_***_project/dags/alert_functions_dag.py', '--cfg-path', '/tmp/tmp2x0d8n8i']
+[2025-09-08T07:45:02.088+0000] {standard_task_runner.py:91} INFO - Job 160783: Subtask run_alert_volume
+[2025-09-08T07:45:02.147+0000] {task_command.py:426} INFO - Running <TaskInstance: run_all_alerts_and_save_to_postgres.run_alert_volume scheduled__2025-09-08T07:40:00+00:00 [running]> on host 8d9cea3aac78
+[2025-09-08T07:45:02.253+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='alert_system' AIRFLOW_CTX_DAG_ID='run_all_alerts_and_save_to_postgres' AIRFLOW_CTX_TASK_ID='run_alert_volume' AIRFLOW_CTX_EXECUTION_DATE='2025-09-08T07:40:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-09-08T07:40:00+00:00'
+[2025-09-08T07:45:02.254+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-09-08T07:45:02.274+0000] {logging_mixin.py:188} INFO - ⏹ Outside trading time: 2025-09-08 07:45:02.274159. Skipping Alert_Volume.py...
+[2025-09-08T07:45:02.274+0000] {python.py:237} INFO - Done. Returned value was: None
+[2025-09-08T07:45:02.276+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-09-08T07:45:02.287+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=run_all_alerts_and_save_to_postgres, task_id=run_alert_volume, run_id=scheduled__2025-09-08T07:40:00+00:00, execution_date=20250908T074000, start_date=20250908T074502, end_date=20250908T074502
+[2025-09-08T07:45:02.339+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-09-08T07:45:02.361+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-09-08T07:45:02.362+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

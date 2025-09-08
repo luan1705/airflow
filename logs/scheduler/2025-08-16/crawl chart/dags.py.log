@@ -1,0 +1,47 @@
+[2025-08-16T17:25:12.390+0000] {processor.py:161} INFO - Started process (PID=45773) to work on /opt/airflow/dags/crawl chart/dags.py
+[2025-08-16T17:25:12.391+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/crawl chart/dags.py for tasks to queue
+[2025-08-16T17:25:12.393+0000] {logging_mixin.py:188} INFO - [2025-08-16T17:25:12.392+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/crawl chart/dags.py
+[2025-08-16T17:25:12.408+0000] {processor.py:840} INFO - DAG(s) 'update_stock_history' retrieved from /opt/airflow/dags/crawl chart/dags.py
+[2025-08-16T17:25:12.574+0000] {logging_mixin.py:188} INFO - [2025-08-16T17:25:12.573+0000] {override.py:1829} INFO - Created Permission View: can read on DAG:update_stock_history
+[2025-08-16T17:25:12.585+0000] {logging_mixin.py:188} INFO - [2025-08-16T17:25:12.585+0000] {override.py:1829} INFO - Created Permission View: can edit on DAG:update_stock_history
+[2025-08-16T17:25:12.593+0000] {logging_mixin.py:188} INFO - [2025-08-16T17:25:12.593+0000] {override.py:1829} INFO - Created Permission View: can delete on DAG:update_stock_history
+[2025-08-16T17:25:12.594+0000] {logging_mixin.py:188} INFO - [2025-08-16T17:25:12.594+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-08-16T17:25:12.609+0000] {logging_mixin.py:188} INFO - [2025-08-16T17:25:12.608+0000] {dag.py:3118} INFO - Creating ORM DAG for update_stock_history
+[2025-08-16T17:25:12.630+0000] {logging_mixin.py:188} INFO - [2025-08-16T17:25:12.630+0000] {dag.py:3954} INFO - Setting next_dagrun for update_stock_history to 2025-08-18 02:00:00+00:00, run_after=2025-08-18 02:01:00+00:00
+[2025-08-16T17:25:12.652+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/crawl chart/dags.py took 0.270 seconds
+[2025-08-16T17:25:42.714+0000] {processor.py:161} INFO - Started process (PID=45786) to work on /opt/airflow/dags/crawl chart/dags.py
+[2025-08-16T17:25:42.715+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/crawl chart/dags.py for tasks to queue
+[2025-08-16T17:25:42.717+0000] {logging_mixin.py:188} INFO - [2025-08-16T17:25:42.717+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/crawl chart/dags.py
+[2025-08-16T17:25:42.732+0000] {processor.py:840} INFO - DAG(s) 'update_stock_history' retrieved from /opt/airflow/dags/crawl chart/dags.py
+[2025-08-16T17:25:42.763+0000] {logging_mixin.py:188} INFO - [2025-08-16T17:25:42.763+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-08-16T17:25:42.794+0000] {logging_mixin.py:188} INFO - [2025-08-16T17:25:42.794+0000] {dag.py:3954} INFO - Setting next_dagrun for update_stock_history to 2025-08-18 02:00:00+00:00, run_after=2025-08-18 02:01:00+00:00
+[2025-08-16T17:25:42.813+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/crawl chart/dags.py took 0.108 seconds
+[2025-08-16T17:26:12.877+0000] {processor.py:161} INFO - Started process (PID=45799) to work on /opt/airflow/dags/crawl chart/dags.py
+[2025-08-16T17:26:12.879+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/crawl chart/dags.py for tasks to queue
+[2025-08-16T17:26:12.881+0000] {logging_mixin.py:188} INFO - [2025-08-16T17:26:12.880+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/crawl chart/dags.py
+[2025-08-16T17:26:12.896+0000] {processor.py:840} INFO - DAG(s) 'update_stock_history' retrieved from /opt/airflow/dags/crawl chart/dags.py
+[2025-08-16T17:26:12.927+0000] {logging_mixin.py:188} INFO - [2025-08-16T17:26:12.927+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-08-16T17:26:12.958+0000] {logging_mixin.py:188} INFO - [2025-08-16T17:26:12.958+0000] {dag.py:3954} INFO - Setting next_dagrun for update_stock_history to 2025-08-18 02:00:00+00:00, run_after=2025-08-18 02:01:00+00:00
+[2025-08-16T17:26:12.978+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/crawl chart/dags.py took 0.109 seconds
+[2025-08-16T17:26:43.030+0000] {processor.py:161} INFO - Started process (PID=45812) to work on /opt/airflow/dags/crawl chart/dags.py
+[2025-08-16T17:26:43.031+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/crawl chart/dags.py for tasks to queue
+[2025-08-16T17:26:43.033+0000] {logging_mixin.py:188} INFO - [2025-08-16T17:26:43.033+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/crawl chart/dags.py
+[2025-08-16T17:26:43.051+0000] {processor.py:840} INFO - DAG(s) 'update_stock_history' retrieved from /opt/airflow/dags/crawl chart/dags.py
+[2025-08-16T17:26:43.162+0000] {logging_mixin.py:188} INFO - [2025-08-16T17:26:43.162+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-08-16T17:26:43.174+0000] {logging_mixin.py:188} INFO - [2025-08-16T17:26:43.174+0000] {dag.py:3118} INFO - Creating ORM DAG for update_stock_history
+[2025-08-16T17:26:43.188+0000] {logging_mixin.py:188} INFO - [2025-08-16T17:26:43.188+0000] {dag.py:3954} INFO - Setting next_dagrun for update_stock_history to 2025-08-18 02:00:00+00:00, run_after=2025-08-18 02:01:00+00:00
+[2025-08-16T17:26:43.209+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/crawl chart/dags.py took 0.190 seconds
+[2025-08-16T17:27:13.361+0000] {processor.py:161} INFO - Started process (PID=45825) to work on /opt/airflow/dags/crawl chart/dags.py
+[2025-08-16T17:27:13.363+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/crawl chart/dags.py for tasks to queue
+[2025-08-16T17:27:13.364+0000] {logging_mixin.py:188} INFO - [2025-08-16T17:27:13.364+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/crawl chart/dags.py
+[2025-08-16T17:27:13.379+0000] {processor.py:840} INFO - DAG(s) 'update_stock_history' retrieved from /opt/airflow/dags/crawl chart/dags.py
+[2025-08-16T17:27:13.413+0000] {logging_mixin.py:188} INFO - [2025-08-16T17:27:13.413+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-08-16T17:27:13.450+0000] {logging_mixin.py:188} INFO - [2025-08-16T17:27:13.449+0000] {dag.py:3954} INFO - Setting next_dagrun for update_stock_history to 2025-08-18 02:00:00+00:00, run_after=2025-08-18 02:01:00+00:00
+[2025-08-16T17:27:13.471+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/crawl chart/dags.py took 0.118 seconds
+[2025-08-16T17:27:43.736+0000] {processor.py:161} INFO - Started process (PID=45834) to work on /opt/airflow/dags/crawl chart/dags.py
+[2025-08-16T17:27:43.737+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/crawl chart/dags.py for tasks to queue
+[2025-08-16T17:27:43.740+0000] {logging_mixin.py:188} INFO - [2025-08-16T17:27:43.739+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/crawl chart/dags.py
+[2025-08-16T17:27:43.757+0000] {processor.py:840} INFO - DAG(s) 'update_stock_history' retrieved from /opt/airflow/dags/crawl chart/dags.py
+[2025-08-16T17:27:43.792+0000] {logging_mixin.py:188} INFO - [2025-08-16T17:27:43.791+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-08-16T17:27:43.822+0000] {logging_mixin.py:188} INFO - [2025-08-16T17:27:43.822+0000] {dag.py:3954} INFO - Setting next_dagrun for update_stock_history to 2025-08-18 02:00:00+00:00, run_after=2025-08-18 02:01:00+00:00
+[2025-08-16T17:27:43.841+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/crawl chart/dags.py took 0.113 seconds

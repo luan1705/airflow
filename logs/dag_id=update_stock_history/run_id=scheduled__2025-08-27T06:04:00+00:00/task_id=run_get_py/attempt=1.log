@@ -1,0 +1,55 @@
+[2025-08-27T06:05:01.258+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-08-27T06:05:01.289+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: update_stock_history.run_get_py scheduled__2025-08-27T06:04:00+00:00 [queued]>
+[2025-08-27T06:05:01.299+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: update_stock_history.run_get_py scheduled__2025-08-27T06:04:00+00:00 [queued]>
+[2025-08-27T06:05:01.300+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 2
+[2025-08-27T06:05:01.315+0000] {taskinstance.py:2330} INFO - Executing <Task(BashOperator): run_get_py> on 2025-08-27 06:04:00+00:00
+[2025-08-27T06:05:01.321+0000] {standard_task_runner.py:63} INFO - Started process 1483712 to run task
+[2025-08-27T06:05:01.326+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'update_stock_history', 'run_get_py', 'scheduled__2025-08-27T06:04:00+00:00', '--job-id', '27877', '--raw', '--subdir', 'DAGS_FOLDER/crawlchart/dags.py', '--cfg-path', '/tmp/tmpkqo_2w3l']
+[2025-08-27T06:05:01.327+0000] {standard_task_runner.py:91} INFO - Job 27877: Subtask run_get_py
+[2025-08-27T06:05:01.384+0000] {task_command.py:426} INFO - Running <TaskInstance: update_stock_history.run_get_py scheduled__2025-08-27T06:04:00+00:00 [running]> on host 1877907bc043
+[2025-08-27T06:05:01.492+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='update_stock_history' AIRFLOW_CTX_TASK_ID='run_get_py' AIRFLOW_CTX_EXECUTION_DATE='2025-08-27T06:04:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-08-27T06:04:00+00:00'
+[2025-08-27T06:05:01.493+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-08-27T06:05:01.508+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-08-27T06:05:01.509+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', 'python3 /opt/***/dags/crawlchart/get.py']
+[2025-08-27T06:05:01.520+0000] {subprocess.py:86} INFO - Output:
+[2025-08-27T06:06:00.991+0000] {subprocess.py:93} INFO - 🚀 Bắt đầu cập nhật dữ liệu...
+[2025-08-27T06:06:00.992+0000] {subprocess.py:93} INFO - 
+[2025-08-27T06:06:00.993+0000] {subprocess.py:93} INFO - 📋 Kết quả cập nhật:
+[2025-08-27T06:06:00.993+0000] {subprocess.py:93} INFO - ✅ Đã lưu HNX Construction Index vào bảng HNX Construction Index
+[2025-08-27T06:06:00.994+0000] {subprocess.py:93} INFO - ✅ Đã lưu HNX Mid/Small Cap Index vào bảng HNX Mid/Small Cap Index
+[2025-08-27T06:06:00.994+0000] {subprocess.py:93} INFO - ✅ Đã lưu HNX Financials Index vào bảng HNX Financials Index
+[2025-08-27T06:06:00.995+0000] {subprocess.py:93} INFO - ✅ Đã lưu HNX Manufacturing Index vào bảng HNX Manufacturing Index
+[2025-08-27T06:06:00.995+0000] {subprocess.py:93} INFO - ✅ Đã lưu HNX Large Cap Index vào bảng HNX Large Cap Index
+[2025-08-27T06:06:00.995+0000] {subprocess.py:93} INFO - ✅ Đã lưu HNX30 vào bảng HNX30
+[2025-08-27T06:06:00.996+0000] {subprocess.py:93} INFO - ⚠️ Không có dữ liệu cho UPCOM Small Index
+[2025-08-27T06:06:00.996+0000] {subprocess.py:93} INFO - ✅ Đã lưu HNXIndex vào bảng HNXIndex
+[2025-08-27T06:06:00.996+0000] {subprocess.py:93} INFO - ✅ Đã lưu HNXUpcomIndex vào bảng UpcomIndex
+[2025-08-27T06:06:00.996+0000] {subprocess.py:93} INFO - ✅ Đã lưu UPCOM Large Index vào bảng UPCOM Large Index
+[2025-08-27T06:06:00.997+0000] {subprocess.py:93} INFO - ✅ Đã lưu UPCOM Medium Index vào bảng UPCOM Medium Index
+[2025-08-27T06:06:00.997+0000] {subprocess.py:93} INFO - ✅ Đã lưu VN100 vào bảng VN100
+[2025-08-27T06:06:00.997+0000] {subprocess.py:93} INFO - ✅ Đã lưu VN30 vào bảng VN30
+[2025-08-27T06:06:00.997+0000] {subprocess.py:93} INFO - ✅ Đã lưu VNALLSHARE vào bảng VNALLSHARE
+[2025-08-27T06:06:00.998+0000] {subprocess.py:93} INFO - ✅ Đã lưu VNCOND vào bảng VNCOND
+[2025-08-27T06:06:00.998+0000] {subprocess.py:93} INFO - ✅ Đã lưu VNDIAMOND vào bảng VNDIAMOND
+[2025-08-27T06:06:00.998+0000] {subprocess.py:93} INFO - ✅ Đã lưu VNCONS vào bảng VNCONS
+[2025-08-27T06:06:00.998+0000] {subprocess.py:93} INFO - ✅ Đã lưu VNFINLEAD vào bảng VNFINLEAD
+[2025-08-27T06:06:00.999+0000] {subprocess.py:93} INFO - ✅ Đã lưu VNFINSELECT vào bảng VNFINSELECT
+[2025-08-27T06:06:00.999+0000] {subprocess.py:93} INFO - ⚠️ Không có dữ liệu cho VNINDEXVNIT
+[2025-08-27T06:06:00.999+0000] {subprocess.py:93} INFO - ✅ Đã lưu VNENE vào bảng VNENE
+[2025-08-27T06:06:00.999+0000] {subprocess.py:93} INFO - ✅ Đã lưu VNFIN vào bảng VNFIN
+[2025-08-27T06:06:01.000+0000] {subprocess.py:93} INFO - ✅ Đã lưu VNHEAL vào bảng VNHEAL
+[2025-08-27T06:06:01.000+0000] {subprocess.py:93} INFO - ✅ Đã lưu VNIND vào bảng VNIND
+[2025-08-27T06:06:01.000+0000] {subprocess.py:93} INFO - ✅ Đã lưu VNMAT vào bảng VNMAT
+[2025-08-27T06:06:01.000+0000] {subprocess.py:93} INFO - ✅ Đã lưu VNMIDCAP vào bảng VNMIDCAP
+[2025-08-27T06:06:01.001+0000] {subprocess.py:93} INFO - ✅ Đã lưu VNREAL vào bảng VNREAL
+[2025-08-27T06:06:01.001+0000] {subprocess.py:93} INFO - ✅ Đã lưu VNSI vào bảng VNSI
+[2025-08-27T06:06:01.001+0000] {subprocess.py:93} INFO - ✅ Đã lưu VNSMALLCAP vào bảng VNSMALLCAP
+[2025-08-27T06:06:01.001+0000] {subprocess.py:93} INFO - ✅ Đã lưu VNX50 vào bảng VNX50
+[2025-08-27T06:06:01.001+0000] {subprocess.py:93} INFO - ✅ Đã lưu VNUTI vào bảng VNUTI
+[2025-08-27T06:06:01.002+0000] {subprocess.py:93} INFO - ✅ Đã hoàn tất cập nhật dữ liệu vào cơ sở dữ liệu.
+[2025-08-27T06:06:01.137+0000] {subprocess.py:97} INFO - Command exited with return code 0
+[2025-08-27T06:06:01.138+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-08-27T06:06:01.179+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=update_stock_history, task_id=run_get_py, run_id=scheduled__2025-08-27T06:04:00+00:00, execution_date=20250827T060400, start_date=20250827T060501, end_date=20250827T060601
+[2025-08-27T06:06:01.228+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-08-27T06:06:01.252+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-08-27T06:06:01.254+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

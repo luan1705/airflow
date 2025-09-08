@@ -1,0 +1,21 @@
+[2025-09-04T07:55:45.788+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-09-04T07:55:46.007+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: proprietary.save_proprietary_1D manual__2025-09-04T07:55:44.322446+00:00 [queued]>
+[2025-09-04T07:55:46.018+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: proprietary.save_proprietary_1D manual__2025-09-04T07:55:44.322446+00:00 [queued]>
+[2025-09-04T07:55:46.018+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 11
+[2025-09-04T07:55:46.033+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): save_proprietary_1D> on 2025-09-04 07:55:44.322446+00:00
+[2025-09-04T07:55:46.043+0000] {standard_task_runner.py:63} INFO - Started process 2945430 to run task
+[2025-09-04T07:55:46.047+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'proprietary', 'save_proprietary_1D', 'manual__2025-09-04T07:55:44.322446+00:00', '--job-id', '95386', '--raw', '--subdir', 'DAGS_FOLDER/dag_proprietary.py', '--cfg-path', '/tmp/tmpk44p72ar']
+[2025-09-04T07:55:46.051+0000] {standard_task_runner.py:91} INFO - Job 95386: Subtask save_proprietary_1D
+[2025-09-04T07:55:46.106+0000] {task_command.py:426} INFO - Running <TaskInstance: proprietary.save_proprietary_1D manual__2025-09-04T07:55:44.322446+00:00 [running]> on host 1877907bc043
+[2025-09-04T07:55:46.197+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='proprietary' AIRFLOW_CTX_TASK_ID='save_proprietary_1D' AIRFLOW_CTX_EXECUTION_DATE='2025-09-04T07:55:44.322446+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-09-04T07:55:44.322446+00:00'
+[2025-09-04T07:55:46.198+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-09-04T07:55:46.748+0000] {proprietary.py:59} INFO - Đã lưu propietary_ALL_1D
+[2025-09-04T07:55:47.387+0000] {proprietary.py:59} INFO - Đã lưu propietary_HSX_1D
+[2025-09-04T07:55:47.924+0000] {proprietary.py:59} INFO - Đã lưu propietary_HNX_1D
+[2025-09-04T07:55:48.541+0000] {proprietary.py:59} INFO - Đã lưu propietary_UPCOM_1D
+[2025-09-04T07:55:48.543+0000] {python.py:237} INFO - Done. Returned value was: None
+[2025-09-04T07:55:48.544+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-09-04T07:55:48.557+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=proprietary, task_id=save_proprietary_1D, run_id=manual__2025-09-04T07:55:44.322446+00:00, execution_date=20250904T075544, start_date=20250904T075546, end_date=20250904T075548
+[2025-09-04T07:55:48.589+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-09-04T07:55:48.625+0000] {taskinstance.py:3498} INFO - 4 downstream tasks scheduled from follow-on schedule check
+[2025-09-04T07:55:48.627+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

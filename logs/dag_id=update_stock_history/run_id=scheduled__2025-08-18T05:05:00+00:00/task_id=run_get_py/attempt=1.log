@@ -1,0 +1,29 @@
+[2025-08-18T05:06:01.123+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-08-18T05:06:01.149+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: update_stock_history.run_get_py scheduled__2025-08-18T05:05:00+00:00 [queued]>
+[2025-08-18T05:06:01.158+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: update_stock_history.run_get_py scheduled__2025-08-18T05:05:00+00:00 [queued]>
+[2025-08-18T05:06:01.158+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 2
+[2025-08-18T05:06:01.170+0000] {taskinstance.py:2330} INFO - Executing <Task(BashOperator): run_get_py> on 2025-08-18 05:05:00+00:00
+[2025-08-18T05:06:01.176+0000] {standard_task_runner.py:63} INFO - Started process 114437 to run task
+[2025-08-18T05:06:01.179+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'update_stock_history', 'run_get_py', 'scheduled__2025-08-18T05:05:00+00:00', '--job-id', '8539', '--raw', '--subdir', 'DAGS_FOLDER/crawlchart/dags.py', '--cfg-path', '/tmp/tmpq4hgaap_']
+[2025-08-18T05:06:01.181+0000] {standard_task_runner.py:91} INFO - Job 8539: Subtask run_get_py
+[2025-08-18T05:06:01.233+0000] {task_command.py:426} INFO - Running <TaskInstance: update_stock_history.run_get_py scheduled__2025-08-18T05:05:00+00:00 [running]> on host 1877907bc043
+[2025-08-18T05:06:01.320+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='update_stock_history' AIRFLOW_CTX_TASK_ID='run_get_py' AIRFLOW_CTX_EXECUTION_DATE='2025-08-18T05:05:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-08-18T05:05:00+00:00'
+[2025-08-18T05:06:01.321+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-08-18T05:06:01.338+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-08-18T05:06:01.339+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', 'python3 /opt/***/dags/crawlchart/get.py']
+[2025-08-18T05:06:01.351+0000] {subprocess.py:86} INFO - Output:
+[2025-08-18T05:06:26.909+0000] {subprocess.py:93} INFO - 🚀 Bắt đầu cập nhật dữ liệu...
+[2025-08-18T05:06:26.909+0000] {subprocess.py:93} INFO - 
+[2025-08-18T05:06:26.910+0000] {subprocess.py:93} INFO - 📋 Kết quả cập nhật:
+[2025-08-18T05:06:26.910+0000] {subprocess.py:93} INFO - ✅ Đã lưu HNXUpcomIndex vào bảng UpcomIndex
+[2025-08-18T05:06:26.910+0000] {subprocess.py:93} INFO - ✅ Đã lưu HNXIndex vào bảng HNXIndex
+[2025-08-18T05:06:26.911+0000] {subprocess.py:93} INFO - ✅ Đã lưu HNX30 vào bảng HNX30
+[2025-08-18T05:06:26.911+0000] {subprocess.py:93} INFO - ✅ Đã lưu VNINDEX vào bảng VNINDEX
+[2025-08-18T05:06:26.911+0000] {subprocess.py:93} INFO - ✅ Đã lưu VN30 vào bảng VN30
+[2025-08-18T05:06:26.912+0000] {subprocess.py:93} INFO - ✅ Đã hoàn tất cập nhật dữ liệu vào cơ sở dữ liệu.
+[2025-08-18T05:06:27.053+0000] {subprocess.py:97} INFO - Command exited with return code 0
+[2025-08-18T05:06:27.055+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-08-18T05:06:27.093+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=update_stock_history, task_id=run_get_py, run_id=scheduled__2025-08-18T05:05:00+00:00, execution_date=20250818T050500, start_date=20250818T050601, end_date=20250818T050627
+[2025-08-18T05:06:27.149+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-08-18T05:06:27.177+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-08-18T05:06:27.179+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

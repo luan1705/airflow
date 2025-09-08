@@ -1,0 +1,21 @@
+[2025-09-08T02:26:01.786+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-09-08T02:26:02.038+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: liquidity.save_liquidity scheduled__2025-09-08T02:25:00+00:00 [queued]>
+[2025-09-08T02:26:02.048+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: liquidity.save_liquidity scheduled__2025-09-08T02:25:00+00:00 [queued]>
+[2025-09-08T02:26:02.048+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 11
+[2025-09-08T02:26:02.062+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): save_liquidity> on 2025-09-08 02:25:00+00:00
+[2025-09-08T02:26:02.070+0000] {standard_task_runner.py:63} INFO - Started process 298909 to run task
+[2025-09-08T02:26:02.075+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'liquidity', 'save_liquidity', 'scheduled__2025-09-08T02:25:00+00:00', '--job-id', '156257', '--raw', '--subdir', 'DAGS_FOLDER/dag_liquidity.py', '--cfg-path', '/tmp/tmplgmewixj']
+[2025-09-08T02:26:02.078+0000] {standard_task_runner.py:91} INFO - Job 156257: Subtask save_liquidity
+[2025-09-08T02:26:02.131+0000] {task_command.py:426} INFO - Running <TaskInstance: liquidity.save_liquidity scheduled__2025-09-08T02:25:00+00:00 [running]> on host 8d9cea3aac78
+[2025-09-08T02:26:02.227+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='liquidity' AIRFLOW_CTX_TASK_ID='save_liquidity' AIRFLOW_CTX_EXECUTION_DATE='2025-09-08T02:25:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-09-08T02:25:00+00:00'
+[2025-09-08T02:26:02.228+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-09-08T02:26:02.626+0000] {liquidity.py:93} INFO - Đã lưu liquidity_ALL
+[2025-09-08T02:26:02.912+0000] {liquidity.py:93} INFO - Đã lưu liquidity_HOSE
+[2025-09-08T02:26:03.387+0000] {liquidity.py:93} INFO - Đã lưu liquidity_HNX
+[2025-09-08T02:26:04.228+0000] {liquidity.py:93} INFO - Đã lưu liquidity_UPCOM
+[2025-09-08T02:26:04.229+0000] {python.py:237} INFO - Done. Returned value was: None
+[2025-09-08T02:26:04.230+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-09-08T02:26:04.243+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=liquidity, task_id=save_liquidity, run_id=scheduled__2025-09-08T02:25:00+00:00, execution_date=20250908T022500, start_date=20250908T022602, end_date=20250908T022604
+[2025-09-08T02:26:04.292+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-09-08T02:26:04.323+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-09-08T02:26:04.324+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

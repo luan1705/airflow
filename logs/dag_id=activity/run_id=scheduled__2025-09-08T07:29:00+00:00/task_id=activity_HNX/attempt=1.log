@@ -1,0 +1,118 @@
+[2025-09-08T07:30:01.790+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-09-08T07:30:01.818+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: activity.activity_HNX scheduled__2025-09-08T07:29:00+00:00 [queued]>
+[2025-09-08T07:30:01.827+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: activity.activity_HNX scheduled__2025-09-08T07:29:00+00:00 [queued]>
+[2025-09-08T07:30:01.827+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 11
+[2025-09-08T07:30:01.842+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): activity_HNX> on 2025-09-08 07:29:00+00:00
+[2025-09-08T07:30:01.851+0000] {standard_task_runner.py:63} INFO - Started process 337826 to run task
+[2025-09-08T07:30:01.855+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'activity', 'activity_HNX', 'scheduled__2025-09-08T07:29:00+00:00', '--job-id', '160581', '--raw', '--subdir', 'DAGS_FOLDER/dag_activity.py', '--cfg-path', '/tmp/tmp98r92ufm']
+[2025-09-08T07:30:01.858+0000] {standard_task_runner.py:91} INFO - Job 160581: Subtask activity_HNX
+[2025-09-08T07:30:01.914+0000] {task_command.py:426} INFO - Running <TaskInstance: activity.activity_HNX scheduled__2025-09-08T07:29:00+00:00 [running]> on host 8d9cea3aac78
+[2025-09-08T07:30:02.033+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='activity' AIRFLOW_CTX_TASK_ID='activity_HNX' AIRFLOW_CTX_EXECUTION_DATE='2025-09-08T07:29:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-09-08T07:29:00+00:00'
+[2025-09-08T07:30:02.035+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-09-08T07:30:02.051+0000] {activity_HNX.py:17} INFO - Kết nối DB
+[2025-09-08T07:32:12.087+0000] {activity_HNX.py:55} ERROR - Lỗi lưu activity_HNX
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3371, in _wrap_pool_connect
+    return fn()
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 327, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 894, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 493, in checkout
+    rec = pool._do_get()
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 145, in _do_get
+    with util.safe_reraise():
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 70, in __exit__
+    compat.raise_(
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 143, in _do_get
+    return self._create_connection()
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 273, in _create_connection
+    return _ConnectionRecord(self)
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 388, in __init__
+    self.__connect()
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 690, in __connect
+    with util.safe_reraise():
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 70, in __exit__
+    compat.raise_(
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 686, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/create.py", line 574, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 598, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/home/airflow/.local/lib/python3.10/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "videv.cloud" (27.74.74.29), port 5432 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/opt/airflow/dags/utils/market_data/activity/activity_HNX.py", line 18, in activity_HNX
+    df = pd.read_sql('SELECT * FROM "history_data"."eboard_table"', con=enginedb).sort_values(by='symbol',ascending=True)
+  File "/home/airflow/.local/lib/python3.10/site-packages/pandas/io/sql.py", line 652, in read_sql
+    with pandasSQL_builder(con) as pandas_sql:
+  File "/home/airflow/.local/lib/python3.10/site-packages/pandas/io/sql.py", line 851, in pandasSQL_builder
+    return SQLDatabase(con, schema, need_transaction)
+  File "/home/airflow/.local/lib/python3.10/site-packages/pandas/io/sql.py", line 1576, in __init__
+    con = self.exit_stack.enter_context(con.connect())
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3325, in connect
+    return self._connection_cls(self, close_with_result=close_with_result)
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 96, in __init__
+    else engine.raw_connection()
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3404, in raw_connection
+    return self._wrap_pool_connect(self.pool.connect, _connection)
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3374, in _wrap_pool_connect
+    Connection._handle_dbapi_exception_noconnection(
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2208, in _handle_dbapi_exception_noconnection
+    util.raise_(
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3371, in _wrap_pool_connect
+    return fn()
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 327, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 894, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 493, in checkout
+    rec = pool._do_get()
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 145, in _do_get
+    with util.safe_reraise():
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 70, in __exit__
+    compat.raise_(
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 143, in _do_get
+    return self._create_connection()
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 273, in _create_connection
+    return _ConnectionRecord(self)
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 388, in __init__
+    self.__connect()
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 690, in __connect
+    with util.safe_reraise():
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 70, in __exit__
+    compat.raise_(
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 686, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/create.py", line 574, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 598, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/home/airflow/.local/lib/python3.10/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "videv.cloud" (27.74.74.29), port 5432 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+[2025-09-08T07:32:12.092+0000] {python.py:237} INFO - Done. Returned value was: None
+[2025-09-08T07:32:12.092+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-09-08T07:32:12.108+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=activity, task_id=activity_HNX, run_id=scheduled__2025-09-08T07:29:00+00:00, execution_date=20250908T072900, start_date=20250908T073001, end_date=20250908T073212
+[2025-09-08T07:32:12.169+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-09-08T07:32:12.186+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

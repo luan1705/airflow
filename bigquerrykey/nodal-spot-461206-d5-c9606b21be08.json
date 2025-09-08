@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "nodal-spot-461206-d5",
+  "private_key_id": "c9606b21be082f45e9a1f11e5c861256451c8557",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCiPUt4A290V4H9\ni4NSvx6J3CDTOdKE5YE0KQNUDqywx3fH9Yrd372ocfmXTsbjuIJsp93rmMgTuTut\nLSFIutfcxf0i4HPJy7/Wt6bG6mT8L7/FUbSV2zrIvunrU0536edXwRwzwJzfpTl3\nZH7uWjap8isyBOlEvCxLgXSDKNM6AZ4yKGrRD4rbXFsNSYXEXixO5BSFWkeg8EO7\nCCufrrADDHI+lyQGAADQ/5W7uzoOC5HUbYmw3G2acgLQYaGbG3oonavepMyxIVAm\nQ37QCJbyya4AHMAoLTSP2k/93YT0n5jEfgg0CSqqWiEQxZburgBKmKECJ8exVk0j\n1u1brXmnAgMBAAECggEAAyubdpmVQKVtHt1DuwbiZo3sqPQE+cqE/ytGALXWCLun\nyuUwyivTHaA3NmO4Xel/HaHHeREf58gY3cYh/l/YVAdybjoLSTLivs677ZXVqgVC\nLsLtT82xlQwAr4k4i/4AIqYyvOLTWJ4hRK9WuPr+UnfZrD04VGWGSrtu4W6Xd2yv\nWwFOrizoTfWujp58sViOndoZbtaK3nxRGXia8bLNFeaXGidwJknS/dKmExHAD9O6\noVXlubOkHZCTUnvL5/UHY+q8gjV3Uup7CDlk/l2LFmtQ8FjbFzaxnRyPhXA0I/0T\nZKn3EEYEu5tAwPo/vqtcVzFlhyK5hdRqrHa4FaNP0QKBgQDY+Jp56JZn1sx+EsTs\nmJsQIgwAoeD9w0eY49yUs78M12LKe4s+h3lhzhuefzLmZc+hkE1ngFRyT9ENv1yS\nt360zfUU2D3qjl26D4N78+DHF6z4V34yiAsEWDUGnjQyb+Z+q3K/VSvfgZlBIznc\nowyUTDHzgAgvUXnDco89Z1K4swKBgQC/bFQq2RjTBPbn+rWCrsb7cZkv0eNKufk9\n333dF0w7e/PQ7MiJmMi7ETi9/URnEJ8g9g+Hrv3065tQ8K31fCVdFgCXorm70AvT\nYfV5HPKdn3ZkKyAyucNn08vOgSpn732oE3EnG2qeZA8HU/VlFudRGNcCKGLlKCtU\nWB1VQ4AtPQKBgQDCb3avjNlMUNeMm3FRvSgoevpajra7cgZ1Yq1HrRSmg1YKslAE\nRw9lsHhbvw10HwTEejaDbCNBFXn4YeaprDql+HOKrIY/7jjcBg8EQ3bJs9PT8UQs\nMHH/ALT0K04HbPQXy7jW8ZKRhug50UGHEa6yLt4Mok2zacY+eikXE8KztQKBgQCL\nMVN2oMx7TUXY46Yu87Y/SphQfHehc9/4DNZx+Sn2qyhcyID+BPoZhOlUxaCCrUR4\n7FPYnveNq/ERhyGHuxFUQdaGbM5P8nVW7QlZWyJUWYr2RaGxIQElM44kiCn0z+H4\nYMLL5BTAPhPriTKMon3rq3tU11cqOO5g833I7T98JQKBgDJ74huGxFHswzcQFlPn\nbRfxT2X3jgnMIgEwml3uwDgQ7rw55AzWP111XamSThi2bIAIBK1SAciM9vgCukhx\nSrmZQXHSlu+7/lE1zJFBLNZM/XvP7VKCmKQ1yE3p5Z9B8PdS0ZUYIeXrl6oVCr4f\ncLruKK3+eVCmMhBEAWJD8VPB\n-----END PRIVATE KEY-----\n",
+  "client_email": "upload-bigquerry@nodal-spot-461206-d5.iam.gserviceaccount.com",
+  "client_id": "110748332550969535731",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/upload-bigquerry%40nodal-spot-461206-d5.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

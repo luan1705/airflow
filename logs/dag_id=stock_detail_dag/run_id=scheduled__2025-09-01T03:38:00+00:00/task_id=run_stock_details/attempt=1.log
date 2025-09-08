@@ -1,0 +1,21 @@
+[2025-09-01T03:39:16.797+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-09-01T03:39:16.822+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: stock_detail_dag.run_stock_details scheduled__2025-09-01T03:38:00+00:00 [queued]>
+[2025-09-01T03:39:16.830+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: stock_detail_dag.run_stock_details scheduled__2025-09-01T03:38:00+00:00 [queued]>
+[2025-09-01T03:39:16.830+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 2
+[2025-09-01T03:39:16.841+0000] {taskinstance.py:2330} INFO - Executing <Task(BashOperator): run_stock_details> on 2025-09-01 03:38:00+00:00
+[2025-09-01T03:39:16.848+0000] {standard_task_runner.py:63} INFO - Started process 2234345 to run task
+[2025-09-01T03:39:16.852+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'stock_detail_dag', 'run_stock_details', 'scheduled__2025-09-01T03:38:00+00:00', '--job-id', '37878', '--raw', '--subdir', 'DAGS_FOLDER/stock_detail/dags.py', '--cfg-path', '/tmp/tmpqy_7eqbc']
+[2025-09-01T03:39:16.853+0000] {standard_task_runner.py:91} INFO - Job 37878: Subtask run_stock_details
+[2025-09-01T03:39:16.913+0000] {task_command.py:426} INFO - Running <TaskInstance: stock_detail_dag.run_stock_details scheduled__2025-09-01T03:38:00+00:00 [running]> on host 1877907bc043
+[2025-09-01T03:39:17.038+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='stock_detail_dag' AIRFLOW_CTX_TASK_ID='run_stock_details' AIRFLOW_CTX_EXECUTION_DATE='2025-09-01T03:38:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-09-01T03:38:00+00:00'
+[2025-09-01T03:39:17.039+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-09-01T03:39:17.055+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-09-01T03:39:17.056+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', 'python3 /opt/***/dags/stock_detail/stockdetail.py']
+[2025-09-01T03:39:17.068+0000] {subprocess.py:86} INFO - Output:
+[2025-09-01T03:43:07.390+0000] {subprocess.py:93} INFO - ✅ Đã lưu 2084 bản ghi vào history_data.stock_details
+[2025-09-01T03:43:07.521+0000] {subprocess.py:97} INFO - Command exited with return code 0
+[2025-09-01T03:43:07.522+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-09-01T03:43:07.559+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=stock_detail_dag, task_id=run_stock_details, run_id=scheduled__2025-09-01T03:38:00+00:00, execution_date=20250901T033800, start_date=20250901T033916, end_date=20250901T034307
+[2025-09-01T03:43:07.604+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-09-01T03:43:07.623+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-09-01T03:43:07.624+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

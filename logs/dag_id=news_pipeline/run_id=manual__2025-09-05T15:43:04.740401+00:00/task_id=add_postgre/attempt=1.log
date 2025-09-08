@@ -1,0 +1,98 @@
+[2025-09-05T15:43:06.098+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-09-05T15:43:06.130+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: news_pipeline.add_postgre manual__2025-09-05T15:43:04.740401+00:00 [queued]>
+[2025-09-05T15:43:06.144+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: news_pipeline.add_postgre manual__2025-09-05T15:43:04.740401+00:00 [queued]>
+[2025-09-05T15:43:06.144+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 11
+[2025-09-05T15:43:06.158+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): add_postgre> on 2025-09-05 15:43:04.740401+00:00
+[2025-09-05T15:43:06.166+0000] {standard_task_runner.py:63} INFO - Started process 22634 to run task
+[2025-09-05T15:43:06.172+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'news_pipeline', 'add_postgre', 'manual__2025-09-05T15:43:04.740401+00:00', '--job-id', '117318', '--raw', '--subdir', 'DAGS_FOLDER/dag_news.py', '--cfg-path', '/tmp/tmp4op8eiug']
+[2025-09-05T15:43:06.175+0000] {standard_task_runner.py:91} INFO - Job 117318: Subtask add_postgre
+[2025-09-05T15:43:06.227+0000] {task_command.py:426} INFO - Running <TaskInstance: news_pipeline.add_postgre manual__2025-09-05T15:43:04.740401+00:00 [running]> on host d4d2fe648a81
+[2025-09-05T15:43:06.307+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='news_pipeline' AIRFLOW_CTX_TASK_ID='add_postgre' AIRFLOW_CTX_EXECUTION_DATE='2025-09-05T15:43:04.740401+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-09-05T15:43:04.740401+00:00'
+[2025-09-05T15:43:06.308+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-09-05T15:43:06.320+0000] {logger.py:11} INFO - ====== WebDriver manager ======
+[2025-09-05T15:43:06.446+0000] {logger.py:11} INFO - Get LATEST chromedriver version for google-chrome
+[2025-09-05T15:43:06.737+0000] {logger.py:11} INFO - Get LATEST chromedriver version for google-chrome
+[2025-09-05T15:43:06.954+0000] {logger.py:11} INFO - Driver [/home/***/.wdm/drivers/chromedriver/linux64/140.0.7339.80/chromedriver-linux64/chromedriver] found in cache
+[2025-09-05T15:44:16.163+0000] {logger.py:11} INFO - ====== WebDriver manager ======
+[2025-09-05T15:44:16.306+0000] {logger.py:11} INFO - Get LATEST chromedriver version for google-chrome
+[2025-09-05T15:44:16.552+0000] {logger.py:11} INFO - Get LATEST chromedriver version for google-chrome
+[2025-09-05T15:44:16.839+0000] {logger.py:11} INFO - Driver [/home/***/.wdm/drivers/chromedriver/linux64/140.0.7339.80/chromedriver-linux64/chromedriver] found in cache
+[2025-09-05T15:44:25.443+0000] {tinnhanh_ngay.py:43} INFO - Get link
+[2025-09-05T15:44:47.090+0000] {tinnhanh_ngay.py:62} INFO - Beautiful Soup start
+[2025-09-05T15:44:47.714+0000] {tinnhanh_ngay.py:64} INFO - Beautiful Soup end
+[2025-09-05T15:44:47.855+0000] {logger.py:11} INFO - ====== WebDriver manager ======
+[2025-09-05T15:44:47.978+0000] {logger.py:11} INFO - Get LATEST chromedriver version for google-chrome
+[2025-09-05T15:44:48.225+0000] {logger.py:11} INFO - Get LATEST chromedriver version for google-chrome
+[2025-09-05T15:44:48.475+0000] {logger.py:11} INFO - Driver [/home/***/.wdm/drivers/chromedriver/linux64/140.0.7339.80/chromedriver-linux64/chromedriver] found in cache
+[2025-09-05T15:46:55.752+0000] {add_postgre.py:16} INFO - df info :
+[2025-09-05T15:46:55.753+0000] {add_postgre.py:17} INFO -                                                Titles  ...                 Source
+18  Cổ phiếu nào trên HOSE tăng mạnh nhất trong th...  ...           vietstock.vn
+19  Thị trường chứng quyền ngày 05/09/2025: Khối n...  ...           vietstock.vn
+20  Chứng khoán phái sinh ngày 05/09/2025: Triển v...  ...           vietstock.vn
+21                 Góc nhìn 05/09: Tiếp tục giằng co?  ...           vietstock.vn
+22  TKG bị xử phạt 92.5 triệu đồng vì vi phạm công...  ...           vietstock.vn
+23  Theo dấu dòng tiền cá mập 04/09: Khối ngoại qu...  ...           vietstock.vn
+24  Vietstock Daily 05/09/2025: Tiếp tục chinh phụ...  ...           vietstock.vn
+25    HSBC: Việt Nam tiến gần mục tiêu nâng hạng FTSE  ...           vietstock.vn
+26  Ông Lã Giang Trung: Giai đoạn tăng điểm tiếp t...  ...           vietstock.vn
+27  VFS dự báo thanh khoản trở lại mạnh mẽ, cơ hội...  ...           vietstock.vn
+28  Tổng Giám đốc ILA rời ghế cổ đông lớn giữa lúc...  ...           vietstock.vn
+29  Nhịp đập Thị trường 04/09: Bộ ba trụ cột hồi s...  ...           vietstock.vn
+30     Bỏ đề xuất áp thuế 20% với lãi bán chứng khoán  ...           vietstock.vn
+31  Phân tích kỹ thuật phiên chiều 04/09: Test lạ...  ...           vietstock.vn
+32  SRF bị lưu ý về khả năng hủy niêm yết do ý kiế...  ...           vietstock.vn
+33  IR không còn là "đọc số" mà là "định hình câu ...  ...           vietstock.vn
+34  Quỹ FTSE ETF thay tên, đổi chỉ số tham chiếu, ...  ...           vietstock.vn
+35    Tự doanh Chứng khoán SmartMind muốn bán hết SSH  ...           vietstock.vn
+36               Sóng ngầm đổi chủ tại Cát Bà Amatina  ...           vietstock.vn
+37  Ngày 04/09/2025: 10 cổ phiếu nóng dưới góc nh...  ...           vietstock.vn
+38   Cổ phiếu nào thường tăng trong tháng cuối quý 3?  ...           vietstock.vn
+39  Vietstock LIVE #20: VN-Index vượt rào cản, địn...  ...           vietstock.vn
+40            Top cổ phiếu đáng chú ý đầu phiên 04/09  ...           vietstock.vn
+41     04/09: Đọc gì trước giờ giao dịch chứng khoán?  ...           vietstock.vn
+0   HSBC: Giải đáp 5 câu hỏi quanh câu chuyện nâng...  ...  tinnhanhchungkhoan.vn
+1                      Cổ phiếu cần quan tâm ngày 5/9  ...  tinnhanhchungkhoan.vn
+2   Nhận định thị trường phiên giao dịch ngày 5/9:...  ...  tinnhanhchungkhoan.vn
+3   Góc nhìn kỹ thuật phiên giao dịch chứng khoán ...  ...  tinnhanhchungkhoan.vn
+4             Sự kiện chứng khoán đáng chú ý ngày 5/9  ...  tinnhanhchungkhoan.vn
+5   Thị trường tài chính 24h: Kỳ vọng thị trường đ...  ...  tinnhanhchungkhoan.vn
+6   Mua mạnh cổ phiếu HPG, khối ngoại vẫn bán ròng...  ...  tinnhanhchungkhoan.vn
+7   Cổ phiếu thép nổi sóng, VN-Index tiến sát mốc ...  ...  tinnhanhchungkhoan.vn
+8   Quỹ mở SSIAM gia nhập hệ sinh thái chứng chỉ q...  ...  tinnhanhchungkhoan.vn
+9              Mở “cao tốc” cho giao dịch chứng khoán  ...  tinnhanhchungkhoan.vn
+10               Giới đầu tư ồ ạt mua cổ phiếu Google  ...  tinnhanhchungkhoan.vn
+11  Giao dịch chứng khoán sáng 4/9: Thị trường tiế...  ...  tinnhanhchungkhoan.vn
+20                   Cổ phiếu thép hút mạnh dòng tiền  ...               Cafef.vn
+21  Chứng khoán ngày 5-9: VN-Index vượt ngưỡng 1.7...  ...               Cafef.vn
+23  VinFast chính thức công bố báo cáo tài chính, ...  ...               Cafef.vn
+24  Mã chứng khoán nào là tâm điểm "gom" hàng của ...  ...               Cafef.vn
+25  Tài sản của 2 con trai Tổng thống Trump tăng v...  ...               Cafef.vn
+26  Vừa báo lỗ bán niên, doanh nghiệp liên quan đế...  ...               Cafef.vn
+27                   Cổ phiếu thép tiếp tục “bứt phá”  ...               Cafef.vn
+28  F88 báo lãi ròng hơn 252 tỷ đồng trong nửa đầu...  ...               Cafef.vn
+29  “Vượt nắng, thắng mưa”, chứng khoán Việt Nam l...  ...               Cafef.vn
+30  Khối ngoại chi gần 700 tỷ "gom" một mã Bluechi...  ...               Cafef.vn
+31  Bộ Tài chính bỏ đề xuất áp thuế 20% đối với lã...  ...               Cafef.vn
+32  IPA chi hơn 209 tỷ đồng thanh toán gốc lãi trá...  ...               Cafef.vn
+33  Người nhà lãnh đạo Chứng khoán Rồng Việt muốn ...  ...               Cafef.vn
+34  Tỷ phú Trần Đình Long đón tin vui từ dự án Khu...  ...               Cafef.vn
+35  Quỹ mở SSIAM gia nhập hệ sinh thái chứng chỉ q...  ...               Cafef.vn
+36  VPBankS nâng kế hoạch lợi nhuận năm 2025 lên 4...  ...               Cafef.vn
+37  VPBankS dự kiến chào bán tối đa 25% cổ phần tr...  ...               Cafef.vn
+38  Becamex IJC chốt ngày trả cổ tức tiền mặt và c...  ...               Cafef.vn
+39  T+2, T+0 là gì và ảnh hưởng ra sao đến nhà đầu...  ...               Cafef.vn
+40  Lịch sự kiện và tin vắn chứng khoán ngày 4/9/2025  ...               Cafef.vn
+41  Cổ phiếu này có thể lọt "tầm ngắm" của cả hai ...  ...               Cafef.vn
+42  CTCK gọi tên loạt cơ hội đầu tư hấp dẫn trong ...  ...               Cafef.vn
+43  Mã chứng khoán nào sẽ "sáng cửa" lọt hai rổ ch...  ...               Cafef.vn
+44  Vingroup và thực tế con số nợ tài chính, doanh...  ...               Cafef.vn
+
+[60 rows x 4 columns]
+[2025-09-05T15:46:55.774+0000] {add_postgre.py:23} INFO - ✅ Kết nối PostgreSQL thành công.
+[2025-09-05T15:46:56.088+0000] {add_postgre.py:39} INFO - ✅ Đã thêm 4 bản ghi mới vào DB.
+[2025-09-05T15:46:56.090+0000] {python.py:237} INFO - Done. Returned value was: Đã thêm 4 bản ghi mới vào DB
+[2025-09-05T15:46:56.091+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-09-05T15:46:56.137+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=news_pipeline, task_id=add_postgre, run_id=manual__2025-09-05T15:43:04.740401+00:00, execution_date=20250905T154304, start_date=20250905T154306, end_date=20250905T154656
+[2025-09-05T15:46:56.217+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-09-05T15:46:56.254+0000] {taskinstance.py:3498} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-09-05T15:46:56.256+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

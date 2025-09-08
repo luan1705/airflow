@@ -1,0 +1,260 @@
+[2025-08-19T05:06:31.507+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-08-19T05:06:31.534+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: crypto_collector_dag.run_crypto_collector scheduled__2025-08-19T05:05:00+00:00 [queued]>
+[2025-08-19T05:06:31.543+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: crypto_collector_dag.run_crypto_collector scheduled__2025-08-19T05:05:00+00:00 [queued]>
+[2025-08-19T05:06:31.543+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 2
+[2025-08-19T05:06:31.556+0000] {taskinstance.py:2330} INFO - Executing <Task(BashOperator): run_crypto_collector> on 2025-08-19 05:05:00+00:00
+[2025-08-19T05:06:31.563+0000] {standard_task_runner.py:63} INFO - Started process 252315 to run task
+[2025-08-19T05:06:31.567+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'crypto_collector_dag', 'run_crypto_collector', 'scheduled__2025-08-19T05:05:00+00:00', '--job-id', '10614', '--raw', '--subdir', 'DAGS_FOLDER/crawl_crypto/dags_crypto.py', '--cfg-path', '/tmp/tmpg8sa1p0p']
+[2025-08-19T05:06:31.569+0000] {standard_task_runner.py:91} INFO - Job 10614: Subtask run_crypto_collector
+[2025-08-19T05:06:31.667+0000] {task_command.py:426} INFO - Running <TaskInstance: crypto_collector_dag.run_crypto_collector scheduled__2025-08-19T05:05:00+00:00 [running]> on host 1877907bc043
+[2025-08-19T05:06:31.777+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='crypto_collector_dag' AIRFLOW_CTX_TASK_ID='run_crypto_collector' AIRFLOW_CTX_EXECUTION_DATE='2025-08-19T05:05:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-08-19T05:05:00+00:00'
+[2025-08-19T05:06:31.778+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-08-19T05:06:31.793+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-08-19T05:06:31.794+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', 'python3 /opt/***/dags/crawl_crypto/crawl_data_crypto.py']
+[2025-08-19T05:06:31.806+0000] {subprocess.py:86} INFO - Output:
+[2025-08-19T05:06:41.203+0000] {subprocess.py:93} INFO - 🔹 Kết nối DB...
+[2025-08-19T05:06:41.204+0000] {subprocess.py:93} INFO - 🔹 Lấy top 100 crypto...
+[2025-08-19T05:06:41.204+0000] {subprocess.py:93} INFO - Top 100: ['ETHUSDT', 'USDCUSDT', 'BTCUSDT', 'SOLUSDT', 'FDUSDUSDT', 'XRPUSDT', 'DOGEUSDT', 'LINKUSDT', 'ADAUSDT', 'PROVEUSDT', 'TRXUSDT', 'BNBUSDT', 'SUIUSDT', 'TOWNSUSDT', 'ENAUSDT', 'ARBUSDT', 'UNIUSDT', 'PEPEUSDT', 'AVAXUSDT', 'BIOUSDT', 'PENGUUSDT', 'SEIUSDT', 'PLUMEUSDT', 'POLUSDT', 'LTCUSDT', 'HBARUSDT', 'AEURUSDT', 'CRVUSDT', 'AAVEUSDT', 'BFUSDUSDT', 'NEARUSDT', 'BONKUSDT', 'WLDUSDT', 'SUSDT', 'TONUSDT', 'DOTUSDT', 'API3USDT', 'XLMUSDT', 'TRUMPUSDT', 'INJUSDT', 'WIFUSDT', 'MEMEUSDT', 'LDOUSDT', 'VIRTUALUSDT', 'APTUSDT', 'FLOKIUSDT', 'TAOUSDT', 'ONDOUSDT', 'ETHFIUSDT', 'SKLUSDT', 'PENDLEUSDT', 'OPUSDT', 'SHIBUSDT', 'EPICUSDT', 'EURUSDT', 'RAYUSDT', 'PNUTUSDT', 'NEIROUSDT', 'MAGICUSDT', 'FETUSDT', 'XUSDUSDT', 'ALGOUSDT', 'TIAUSDT', 'ALPINEUSDT', 'ETCUSDT', 'UTKUSDT', 'JUVUSDT', 'BCHUSDT', 'CFXUSDT', 'EIGENUSDT', 'OGUSDT', 'FILUSDT', 'GALAUSDT', 'RENDERUSDT', 'ASRUSDT', 'CAKEUSDT', 'MDTUSDT', 'PONDUSDT', 'SPKUSDT', 'BERAUSDT', 'VETUSDT', 'CTSIUSDT', 'ICPUSDT', 'WBTCUSDT', 'TSTUSDT', 'RUNEUSDT', 'MKRUSDT', 'MAVUSDT', 'ATOMUSDT', 'SYRUPUSDT', 'LAYERUSDT', 'ORDIUSDT', 'CYBERUSDT', 'PAXGUSDT', 'AIXBTUSDT', 'RESOLVUSDT', 'ENSUSDT', 'PORTOUSDT', 'WCTUSDT', 'STRKUSDT']
+[2025-08-19T05:06:41.204+0000] {subprocess.py:93} INFO - 🔹 Lưu lịch sử giá vào DB bằng threading...
+[2025-08-19T05:06:41.204+0000] {subprocess.py:93} INFO - ✅ USDCUSDT: thêm 4 dòng mới
+[2025-08-19T05:06:41.205+0000] {subprocess.py:93} INFO - ✅ FDUSDUSDT: thêm 1 dòng mới
+[2025-08-19T05:06:41.205+0000] {subprocess.py:93} INFO - ✅ LINKUSDT: thêm 1 dòng mới
+[2025-08-19T05:06:41.205+0000] {subprocess.py:93} INFO - ✅ XRPUSDT: thêm 1 dòng mới
+[2025-08-19T05:06:41.205+0000] {subprocess.py:93} INFO - ✅ SOLUSDT: thêm 12 dòng mới
+[2025-08-19T05:06:41.206+0000] {subprocess.py:93} INFO - ✅ PROVEUSDT: thêm 1 dòng mới
+[2025-08-19T05:06:41.206+0000] {subprocess.py:93} INFO - ✅ BTCUSDT: thêm 1 dòng mới
+[2025-08-19T05:06:41.206+0000] {subprocess.py:93} INFO - ✅ ADAUSDT: thêm 10 dòng mới
+[2025-08-19T05:06:41.206+0000] {subprocess.py:93} INFO - 1/100 USDCUSDT lưu OK
+[2025-08-19T05:06:41.206+0000] {subprocess.py:93} INFO - 2/100 FDUSDUSDT lưu OK
+[2025-08-19T05:06:41.207+0000] {subprocess.py:93} INFO - 3/100 LINKUSDT lưu OK
+[2025-08-19T05:06:41.207+0000] {subprocess.py:93} INFO - 4/100 XRPUSDT lưu OK
+[2025-08-19T05:06:41.207+0000] {subprocess.py:93} INFO - 5/100 SOLUSDT lưu OK
+[2025-08-19T05:06:41.207+0000] {subprocess.py:93} INFO - 6/100 BTCUSDT lưu OK
+[2025-08-19T05:06:41.207+0000] {subprocess.py:93} INFO - 7/100 PROVEUSDT lưu OK
+[2025-08-19T05:06:41.208+0000] {subprocess.py:93} INFO - ✅ DOGEUSDT: thêm 4 dòng mới
+[2025-08-19T05:06:41.208+0000] {subprocess.py:93} INFO - 8/100 ADAUSDT lưu OK
+[2025-08-19T05:06:41.208+0000] {subprocess.py:93} INFO - ✅ ETHUSDT: thêm 4 dòng mới
+[2025-08-19T05:06:41.208+0000] {subprocess.py:93} INFO - 9/100 DOGEUSDT lưu OK
+[2025-08-19T05:06:41.208+0000] {subprocess.py:93} INFO - 10/100 ETHUSDT lưu OK
+[2025-08-19T05:06:41.209+0000] {subprocess.py:93} INFO - 11/100 BIOUSDT lỗi: relation "cryptocurrency.biousdt" does not exist
+[2025-08-19T05:06:41.209+0000] {subprocess.py:93} INFO - LINE 1: SELECT MAX(time) FROM cryptocurrency.biousdt;
+[2025-08-19T05:06:41.209+0000] {subprocess.py:93} INFO -                               ^
+[2025-08-19T05:06:41.209+0000] {subprocess.py:93} INFO - 
+[2025-08-19T05:06:41.209+0000] {subprocess.py:93} INFO - ✅ SUIUSDT: thêm 1 dòng mới
+[2025-08-19T05:06:41.210+0000] {subprocess.py:93} INFO - ✅ ENAUSDT: thêm 1 dòng mới
+[2025-08-19T05:06:41.210+0000] {subprocess.py:93} INFO - 12/100 ENAUSDT lưu OK
+[2025-08-19T05:06:41.210+0000] {subprocess.py:93} INFO - 13/100 SUIUSDT lưu OK
+[2025-08-19T05:06:41.210+0000] {subprocess.py:93} INFO - ✅ AVAXUSDT: thêm 1 dòng mới
+[2025-08-19T05:06:41.210+0000] {subprocess.py:93} INFO - ✅ TOWNSUSDT: thêm 1 dòng mới
+[2025-08-19T05:06:41.211+0000] {subprocess.py:93} INFO - 14/100 AVAXUSDT lưu OK
+[2025-08-19T05:06:41.211+0000] {subprocess.py:93} INFO - 15/100 TOWNSUSDT lưu OK
+[2025-08-19T05:06:41.211+0000] {subprocess.py:93} INFO - ✅ ARBUSDT: thêm 1 dòng mới
+[2025-08-19T05:06:41.211+0000] {subprocess.py:93} INFO - 16/100 ARBUSDT lưu OK
+[2025-08-19T05:06:41.211+0000] {subprocess.py:93} INFO - ✅ TRXUSDT: thêm 1 dòng mới
+[2025-08-19T05:06:41.212+0000] {subprocess.py:93} INFO - 17/100 TRXUSDT lưu OK
+[2025-08-19T05:06:41.212+0000] {subprocess.py:93} INFO - ✅ UNIUSDT: thêm 1 dòng mới
+[2025-08-19T05:06:41.212+0000] {subprocess.py:93} INFO - 18/100 UNIUSDT lưu OK
+[2025-08-19T05:06:41.212+0000] {subprocess.py:93} INFO - ✅ PEPEUSDT: thêm 1 dòng mới
+[2025-08-19T05:06:41.212+0000] {subprocess.py:93} INFO - 19/100 PEPEUSDT lưu OK
+[2025-08-19T05:06:41.213+0000] {subprocess.py:93} INFO - ✅ BNBUSDT: thêm 1 dòng mới
+[2025-08-19T05:06:41.213+0000] {subprocess.py:93} INFO - 20/100 BNBUSDT lưu OK
+[2025-08-19T05:06:41.213+0000] {subprocess.py:93} INFO - ✅ PENGUUSDT: thêm 1 dòng mới
+[2025-08-19T05:06:41.213+0000] {subprocess.py:93} INFO - 21/100 PENGUUSDT lưu OK
+[2025-08-19T05:06:41.213+0000] {subprocess.py:93} INFO - ⏩ AAVEUSDT: không có dữ liệu mới, skip.
+[2025-08-19T05:06:41.214+0000] {subprocess.py:93} INFO - 22/100 AAVEUSDT lưu OK
+[2025-08-19T05:06:41.214+0000] {subprocess.py:93} INFO - 23/100 PLUMEUSDT lỗi: relation "cryptocurrency.plumeusdt" does not exist
+[2025-08-19T05:06:41.214+0000] {subprocess.py:93} INFO - LINE 1: SELECT MAX(time) FROM cryptocurrency.plumeusdt;
+[2025-08-19T05:06:41.214+0000] {subprocess.py:93} INFO -                               ^
+[2025-08-19T05:06:41.214+0000] {subprocess.py:93} INFO - 
+[2025-08-19T05:06:41.215+0000] {subprocess.py:93} INFO - ✅ LTCUSDT: thêm 1 dòng mới
+[2025-08-19T05:06:41.215+0000] {subprocess.py:93} INFO - ✅ POLUSDT: thêm 1 dòng mới
+[2025-08-19T05:06:41.215+0000] {subprocess.py:93} INFO - ⏩ CRVUSDT: không có dữ liệu mới, skip.
+[2025-08-19T05:06:41.215+0000] {subprocess.py:93} INFO - 24/100 LTCUSDT lưu OK
+[2025-08-19T05:06:41.215+0000] {subprocess.py:93} INFO - ⏩ BFUSDUSDT: không có dữ liệu mới, skip.
+[2025-08-19T05:06:41.216+0000] {subprocess.py:93} INFO - ⏩ HBARUSDT: không có dữ liệu mới, skip.
+[2025-08-19T05:06:41.216+0000] {subprocess.py:93} INFO - ✅ SEIUSDT: thêm 1 dòng mới
+[2025-08-19T05:06:41.216+0000] {subprocess.py:93} INFO - 25/100 POLUSDT lưu OK
+[2025-08-19T05:06:41.216+0000] {subprocess.py:93} INFO - 26/100 CRVUSDT lưu OK
+[2025-08-19T05:06:41.216+0000] {subprocess.py:93} INFO - 27/100 HBARUSDT lưu OK
+[2025-08-19T05:06:41.217+0000] {subprocess.py:93} INFO - 28/100 BFUSDUSDT lưu OK
+[2025-08-19T05:06:41.217+0000] {subprocess.py:93} INFO - 29/100 SEIUSDT lưu OK
+[2025-08-19T05:06:41.217+0000] {subprocess.py:93} INFO - 30/100 AEURUSDT lỗi: relation "cryptocurrency.aeurusdt" does not exist
+[2025-08-19T05:06:41.217+0000] {subprocess.py:93} INFO - LINE 1: SELECT MAX(time) FROM cryptocurrency.aeurusdt;
+[2025-08-19T05:06:41.217+0000] {subprocess.py:93} INFO -                               ^
+[2025-08-19T05:06:41.217+0000] {subprocess.py:93} INFO - 
+[2025-08-19T05:06:41.218+0000] {subprocess.py:93} INFO - ✅ NEARUSDT: thêm 1 dòng mới
+[2025-08-19T05:06:41.218+0000] {subprocess.py:93} INFO - 31/100 NEARUSDT lưu OK
+[2025-08-19T05:06:41.218+0000] {subprocess.py:93} INFO - ⏩ DOTUSDT: không có dữ liệu mới, skip.
+[2025-08-19T05:06:41.218+0000] {subprocess.py:93} INFO - ⏩ API3USDT: không có dữ liệu mới, skip.
+[2025-08-19T05:06:41.218+0000] {subprocess.py:93} INFO - 32/100 DOTUSDT lưu OK
+[2025-08-19T05:06:41.219+0000] {subprocess.py:93} INFO - 33/100 API3USDT lưu OK
+[2025-08-19T05:06:41.219+0000] {subprocess.py:93} INFO - ⏩ TONUSDT: không có dữ liệu mới, skip.
+[2025-08-19T05:06:41.219+0000] {subprocess.py:93} INFO - ⏩ WIFUSDT: không có dữ liệu mới, skip.
+[2025-08-19T05:06:41.219+0000] {subprocess.py:93} INFO - 34/100 TONUSDT lưu OK
+[2025-08-19T05:06:41.219+0000] {subprocess.py:93} INFO - 35/100 WIFUSDT lưu OK
+[2025-08-19T05:06:41.220+0000] {subprocess.py:93} INFO - ✅ SUSDT: thêm 1 dòng mới
+[2025-08-19T05:06:41.220+0000] {subprocess.py:93} INFO - 36/100 SUSDT lưu OK
+[2025-08-19T05:06:41.220+0000] {subprocess.py:93} INFO - ⏩ TRUMPUSDT: không có dữ liệu mới, skip.
+[2025-08-19T05:06:41.220+0000] {subprocess.py:93} INFO - ⏩ XLMUSDT: không có dữ liệu mới, skip.
+[2025-08-19T05:06:41.220+0000] {subprocess.py:93} INFO - 37/100 TRUMPUSDT lưu OK
+[2025-08-19T05:06:41.220+0000] {subprocess.py:93} INFO - 38/100 XLMUSDT lưu OK
+[2025-08-19T05:06:41.221+0000] {subprocess.py:93} INFO - ✅ WLDUSDT: thêm 1 dòng mới
+[2025-08-19T05:06:41.221+0000] {subprocess.py:93} INFO - 39/100 WLDUSDT lưu OK
+[2025-08-19T05:06:41.221+0000] {subprocess.py:93} INFO - ✅ BONKUSDT: thêm 1 dòng mới
+[2025-08-19T05:06:41.221+0000] {subprocess.py:93} INFO - 40/100 BONKUSDT lưu OK
+[2025-08-19T05:06:41.221+0000] {subprocess.py:93} INFO - ⏩ INJUSDT: không có dữ liệu mới, skip.
+[2025-08-19T05:06:41.222+0000] {subprocess.py:93} INFO - 41/100 INJUSDT lưu OK
+[2025-08-19T05:06:41.222+0000] {subprocess.py:93} INFO - ⏩ APTUSDT: không có dữ liệu mới, skip.
+[2025-08-19T05:06:41.222+0000] {subprocess.py:93} INFO - ⏩ LDOUSDT: không có dữ liệu mới, skip.
+[2025-08-19T05:06:41.222+0000] {subprocess.py:93} INFO - 42/100 MEMEUSDT lỗi: relation "cryptocurrency.memeusdt" does not exist
+[2025-08-19T05:06:41.222+0000] {subprocess.py:93} INFO - LINE 1: SELECT MAX(time) FROM cryptocurrency.memeusdt;
+[2025-08-19T05:06:41.223+0000] {subprocess.py:93} INFO -                               ^
+[2025-08-19T05:06:41.223+0000] {subprocess.py:93} INFO - 
+[2025-08-19T05:06:41.223+0000] {subprocess.py:93} INFO - 43/100 APTUSDT lưu OK
+[2025-08-19T05:06:41.223+0000] {subprocess.py:93} INFO - 44/100 LDOUSDT lưu OK
+[2025-08-19T05:06:41.223+0000] {subprocess.py:93} INFO - ⏩ VIRTUALUSDT: không có dữ liệu mới, skip.
+[2025-08-19T05:06:41.224+0000] {subprocess.py:93} INFO - ⏩ TAOUSDT: không có dữ liệu mới, skip.
+[2025-08-19T05:06:41.224+0000] {subprocess.py:93} INFO - 45/100 VIRTUALUSDT lưu OK
+[2025-08-19T05:06:41.224+0000] {subprocess.py:93} INFO - 46/100 TAOUSDT lưu OK
+[2025-08-19T05:06:41.224+0000] {subprocess.py:93} INFO - ⏩ PENDLEUSDT: không có dữ liệu mới, skip.
+[2025-08-19T05:06:41.224+0000] {subprocess.py:93} INFO - ⏩ SKLUSDT: không có dữ liệu mới, skip.
+[2025-08-19T05:06:41.224+0000] {subprocess.py:93} INFO - 47/100 PENDLEUSDT lưu OK
+[2025-08-19T05:06:41.225+0000] {subprocess.py:93} INFO - 48/100 SKLUSDT lưu OK
+[2025-08-19T05:06:41.225+0000] {subprocess.py:93} INFO - ⏩ ETHFIUSDT: không có dữ liệu mới, skip.
+[2025-08-19T05:06:41.225+0000] {subprocess.py:93} INFO - 49/100 ETHFIUSDT lưu OK
+[2025-08-19T05:06:41.225+0000] {subprocess.py:93} INFO - ⏩ FLOKIUSDT: không có dữ liệu mới, skip.
+[2025-08-19T05:06:41.225+0000] {subprocess.py:93} INFO - ⏩ ONDOUSDT: không có dữ liệu mới, skip.
+[2025-08-19T05:06:41.226+0000] {subprocess.py:93} INFO - 50/100 FLOKIUSDT lưu OK
+[2025-08-19T05:06:41.226+0000] {subprocess.py:93} INFO - 51/100 ONDOUSDT lưu OK
+[2025-08-19T05:06:41.226+0000] {subprocess.py:93} INFO - ⏩ EPICUSDT: không có dữ liệu mới, skip.
+[2025-08-19T05:06:41.226+0000] {subprocess.py:93} INFO - 52/100 EPICUSDT lưu OK
+[2025-08-19T05:06:41.226+0000] {subprocess.py:93} INFO - ⏩ EURUSDT: không có dữ liệu mới, skip.
+[2025-08-19T05:06:41.227+0000] {subprocess.py:93} INFO - 53/100 EURUSDT lưu OK
+[2025-08-19T05:06:41.227+0000] {subprocess.py:93} INFO - ⏩ SHIBUSDT: không có dữ liệu mới, skip.
+[2025-08-19T05:06:41.227+0000] {subprocess.py:93} INFO - ⏩ OPUSDT: không có dữ liệu mới, skip.
+[2025-08-19T05:06:41.227+0000] {subprocess.py:93} INFO - 54/100 SHIBUSDT lưu OK
+[2025-08-19T05:06:41.227+0000] {subprocess.py:93} INFO - 55/100 OPUSDT lưu OK
+[2025-08-19T05:06:41.227+0000] {subprocess.py:93} INFO - ⏩ NEIROUSDT: không có dữ liệu mới, skip.
+[2025-08-19T05:06:41.228+0000] {subprocess.py:93} INFO - ⏩ RAYUSDT: không có dữ liệu mới, skip.
+[2025-08-19T05:06:41.228+0000] {subprocess.py:93} INFO - 56/100 NEIROUSDT lưu OK
+[2025-08-19T05:06:41.228+0000] {subprocess.py:93} INFO - 57/100 RAYUSDT lưu OK
+[2025-08-19T05:06:41.228+0000] {subprocess.py:93} INFO - ⏩ XUSDUSDT: không có dữ liệu mới, skip.
+[2025-08-19T05:06:41.228+0000] {subprocess.py:93} INFO - 58/100 XUSDUSDT lưu OK
+[2025-08-19T05:06:41.229+0000] {subprocess.py:93} INFO - ⏩ PNUTUSDT: không có dữ liệu mới, skip.
+[2025-08-19T05:06:41.229+0000] {subprocess.py:93} INFO - 59/100 PNUTUSDT lưu OK
+[2025-08-19T05:06:41.229+0000] {subprocess.py:93} INFO - ⏩ MAGICUSDT: không có dữ liệu mới, skip.
+[2025-08-19T05:06:41.229+0000] {subprocess.py:93} INFO - 60/100 MAGICUSDT lưu OK
+[2025-08-19T05:06:41.229+0000] {subprocess.py:93} INFO - ⏩ FETUSDT: không có dữ liệu mới, skip.
+[2025-08-19T05:06:41.230+0000] {subprocess.py:93} INFO - 61/100 FETUSDT lưu OK
+[2025-08-19T05:06:41.230+0000] {subprocess.py:93} INFO - ⏩ BCHUSDT: không có dữ liệu mới, skip.
+[2025-08-19T05:06:41.230+0000] {subprocess.py:93} INFO - 62/100 BCHUSDT lưu OK
+[2025-08-19T05:06:41.230+0000] {subprocess.py:93} INFO - ⏩ ALGOUSDT: không có dữ liệu mới, skip.
+[2025-08-19T05:06:41.230+0000] {subprocess.py:93} INFO - 63/100 ALGOUSDT lưu OK
+[2025-08-19T05:06:41.231+0000] {subprocess.py:93} INFO - ⏩ EIGENUSDT: không có dữ liệu mới, skip.
+[2025-08-19T05:06:41.231+0000] {subprocess.py:93} INFO - ⏩ TIAUSDT: không có dữ liệu mới, skip.
+[2025-08-19T05:06:41.231+0000] {subprocess.py:93} INFO - 64/100 EIGENUSDT lưu OK
+[2025-08-19T05:06:41.231+0000] {subprocess.py:93} INFO - 65/100 TIAUSDT lưu OK
+[2025-08-19T05:06:41.231+0000] {subprocess.py:93} INFO - ⏩ CFXUSDT: không có dữ liệu mới, skip.
+[2025-08-19T05:06:41.231+0000] {subprocess.py:93} INFO - ⏩ ALPINEUSDT: không có dữ liệu mới, skip.
+[2025-08-19T05:06:41.232+0000] {subprocess.py:93} INFO - ⏩ JUVUSDT: không có dữ liệu mới, skip.
+[2025-08-19T05:06:41.232+0000] {subprocess.py:93} INFO - 66/100 UTKUSDT lỗi: relation "cryptocurrency.utkusdt" does not exist
+[2025-08-19T05:06:41.232+0000] {subprocess.py:93} INFO - LINE 1: SELECT MAX(time) FROM cryptocurrency.utkusdt;
+[2025-08-19T05:06:41.232+0000] {subprocess.py:93} INFO -                               ^
+[2025-08-19T05:06:41.232+0000] {subprocess.py:93} INFO - 
+[2025-08-19T05:06:41.233+0000] {subprocess.py:93} INFO - 67/100 CFXUSDT lưu OK
+[2025-08-19T05:06:41.233+0000] {subprocess.py:93} INFO - 68/100 JUVUSDT lưu OK
+[2025-08-19T05:06:41.233+0000] {subprocess.py:93} INFO - 69/100 ALPINEUSDT lưu OK
+[2025-08-19T05:06:41.233+0000] {subprocess.py:93} INFO - ⏩ ETCUSDT: không có dữ liệu mới, skip.
+[2025-08-19T05:06:41.233+0000] {subprocess.py:93} INFO - ⏩ OGUSDT: không có dữ liệu mới, skip.
+[2025-08-19T05:06:41.233+0000] {subprocess.py:93} INFO - 70/100 ETCUSDT lưu OK
+[2025-08-19T05:06:41.234+0000] {subprocess.py:93} INFO - 71/100 OGUSDT lưu OK
+[2025-08-19T05:06:41.234+0000] {subprocess.py:93} INFO - ⏩ FILUSDT: không có dữ liệu mới, skip.
+[2025-08-19T05:06:41.234+0000] {subprocess.py:93} INFO - 72/100 FILUSDT lưu OK
+[2025-08-19T05:06:41.234+0000] {subprocess.py:93} INFO - ⏩ GALAUSDT: không có dữ liệu mới, skip.
+[2025-08-19T05:06:41.234+0000] {subprocess.py:93} INFO - 73/100 GALAUSDT lưu OK
+[2025-08-19T05:06:41.235+0000] {subprocess.py:93} INFO - ⏩ RENDERUSDT: không có dữ liệu mới, skip.
+[2025-08-19T05:06:41.235+0000] {subprocess.py:93} INFO - ⏩ ASRUSDT: không có dữ liệu mới, skip.
+[2025-08-19T05:06:41.235+0000] {subprocess.py:93} INFO - 74/100 RENDERUSDT lưu OK
+[2025-08-19T05:06:41.235+0000] {subprocess.py:93} INFO - 75/100 ASRUSDT lưu OK
+[2025-08-19T05:06:41.235+0000] {subprocess.py:93} INFO - ⏩ CAKEUSDT: không có dữ liệu mới, skip.
+[2025-08-19T05:06:41.236+0000] {subprocess.py:93} INFO - ⏩ MDTUSDT: không có dữ liệu mới, skip.
+[2025-08-19T05:06:41.236+0000] {subprocess.py:93} INFO - 76/100 MDTUSDT lưu OK
+[2025-08-19T05:06:41.236+0000] {subprocess.py:93} INFO - 77/100 CAKEUSDT lưu OK
+[2025-08-19T05:06:41.236+0000] {subprocess.py:93} INFO - ⏩ SPKUSDT: không có dữ liệu mới, skip.
+[2025-08-19T05:06:41.236+0000] {subprocess.py:93} INFO - 78/100 VETUSDT lỗi: relation "cryptocurrency.vetusdt" does not exist
+[2025-08-19T05:06:41.236+0000] {subprocess.py:93} INFO - LINE 1: SELECT MAX(time) FROM cryptocurrency.vetusdt;
+[2025-08-19T05:06:41.237+0000] {subprocess.py:93} INFO -                               ^
+[2025-08-19T05:06:41.237+0000] {subprocess.py:93} INFO - 
+[2025-08-19T05:06:41.237+0000] {subprocess.py:93} INFO - 79/100 SPKUSDT lưu OK
+[2025-08-19T05:06:41.237+0000] {subprocess.py:93} INFO - ⏩ BERAUSDT: không có dữ liệu mới, skip.
+[2025-08-19T05:06:41.237+0000] {subprocess.py:93} INFO - 80/100 BERAUSDT lưu OK
+[2025-08-19T05:06:41.238+0000] {subprocess.py:93} INFO - 81/100 PONDUSDT lỗi: relation "cryptocurrency.pondusdt" does not exist
+[2025-08-19T05:06:41.238+0000] {subprocess.py:93} INFO - LINE 1: SELECT MAX(time) FROM cryptocurrency.pondusdt;
+[2025-08-19T05:06:41.238+0000] {subprocess.py:93} INFO -                               ^
+[2025-08-19T05:06:41.238+0000] {subprocess.py:93} INFO - 
+[2025-08-19T05:06:41.238+0000] {subprocess.py:93} INFO - ⏩ CTSIUSDT: không có dữ liệu mới, skip.
+[2025-08-19T05:06:41.239+0000] {subprocess.py:93} INFO - ⏩ TSTUSDT: không có dữ liệu mới, skip.
+[2025-08-19T05:06:41.239+0000] {subprocess.py:93} INFO - ⏩ ICPUSDT: không có dữ liệu mới, skip.
+[2025-08-19T05:06:41.239+0000] {subprocess.py:93} INFO - 82/100 CTSIUSDT lưu OK
+[2025-08-19T05:06:41.239+0000] {subprocess.py:93} INFO - 83/100 TSTUSDT lưu OK
+[2025-08-19T05:06:41.239+0000] {subprocess.py:93} INFO - 84/100 ICPUSDT lưu OK
+[2025-08-19T05:06:41.239+0000] {subprocess.py:93} INFO - 85/100 WBTCUSDT lỗi: relation "cryptocurrency.wbtcusdt" does not exist
+[2025-08-19T05:06:41.240+0000] {subprocess.py:93} INFO - LINE 1: SELECT MAX(time) FROM cryptocurrency.wbtcusdt;
+[2025-08-19T05:06:41.240+0000] {subprocess.py:93} INFO -                               ^
+[2025-08-19T05:06:41.240+0000] {subprocess.py:93} INFO - 
+[2025-08-19T05:06:41.240+0000] {subprocess.py:93} INFO - 86/100 LAYERUSDT lỗi: relation "cryptocurrency.layerusdt" does not exist
+[2025-08-19T05:06:41.240+0000] {subprocess.py:93} INFO - LINE 1: SELECT MAX(time) FROM cryptocurrency.layerusdt;
+[2025-08-19T05:06:41.241+0000] {subprocess.py:93} INFO -                               ^
+[2025-08-19T05:06:41.241+0000] {subprocess.py:93} INFO - 
+[2025-08-19T05:06:41.241+0000] {subprocess.py:93} INFO - ⏩ MAVUSDT: không có dữ liệu mới, skip.
+[2025-08-19T05:06:41.241+0000] {subprocess.py:93} INFO - 87/100 MAVUSDT lưu OK
+[2025-08-19T05:06:41.241+0000] {subprocess.py:93} INFO - 88/100 MKRUSDT lỗi: relation "cryptocurrency.mkrusdt" does not exist
+[2025-08-19T05:06:41.241+0000] {subprocess.py:93} INFO - LINE 1: SELECT MAX(time) FROM cryptocurrency.mkrusdt;
+[2025-08-19T05:06:41.242+0000] {subprocess.py:93} INFO -                               ^
+[2025-08-19T05:06:41.242+0000] {subprocess.py:93} INFO - 
+[2025-08-19T05:06:41.690+0000] {subprocess.py:93} INFO - 89/100 RUNEUSDT lỗi: relation "cryptocurrency.runeusdt" does not exist
+[2025-08-19T05:06:41.691+0000] {subprocess.py:93} INFO - LINE 1: SELECT MAX(time) FROM cryptocurrency.runeusdt;
+[2025-08-19T05:06:41.691+0000] {subprocess.py:93} INFO -                               ^
+[2025-08-19T05:06:41.691+0000] {subprocess.py:93} INFO - 
+[2025-08-19T05:06:41.692+0000] {subprocess.py:93} INFO - 90/100 ATOMUSDT lỗi: relation "cryptocurrency.atomusdt" does not exist
+[2025-08-19T05:06:41.692+0000] {subprocess.py:93} INFO - LINE 1: SELECT MAX(time) FROM cryptocurrency.atomusdt;
+[2025-08-19T05:06:41.692+0000] {subprocess.py:93} INFO -                               ^
+[2025-08-19T05:06:41.692+0000] {subprocess.py:93} INFO - 
+[2025-08-19T05:06:41.692+0000] {subprocess.py:93} INFO - ⏩ ORDIUSDT: không có dữ liệu mới, skip.
+[2025-08-19T05:06:41.693+0000] {subprocess.py:93} INFO - ⏩ SYRUPUSDT: không có dữ liệu mới, skip.
+[2025-08-19T05:06:41.693+0000] {subprocess.py:93} INFO - 91/100 ORDIUSDT lưu OK
+[2025-08-19T05:06:41.693+0000] {subprocess.py:93} INFO - 92/100 SYRUPUSDT lưu OK
+[2025-08-19T05:06:41.693+0000] {subprocess.py:93} INFO - 93/100 CYBERUSDT lỗi: relation "cryptocurrency.cyberusdt" does not exist
+[2025-08-19T05:06:41.694+0000] {subprocess.py:93} INFO - LINE 1: SELECT MAX(time) FROM cryptocurrency.cyberusdt;
+[2025-08-19T05:06:41.694+0000] {subprocess.py:93} INFO -                               ^
+[2025-08-19T05:06:41.694+0000] {subprocess.py:93} INFO - 
+[2025-08-19T05:06:41.694+0000] {subprocess.py:93} INFO - 94/100 AIXBTUSDT lỗi: relation "cryptocurrency.aixbtusdt" does not exist
+[2025-08-19T05:06:41.694+0000] {subprocess.py:93} INFO - LINE 1: SELECT MAX(time) FROM cryptocurrency.aixbtusdt;
+[2025-08-19T05:06:41.695+0000] {subprocess.py:93} INFO -                               ^
+[2025-08-19T05:06:41.695+0000] {subprocess.py:93} INFO - 
+[2025-08-19T05:06:41.695+0000] {subprocess.py:93} INFO - 95/100 PAXGUSDT lỗi: relation "cryptocurrency.paxgusdt" does not exist
+[2025-08-19T05:06:41.695+0000] {subprocess.py:93} INFO - LINE 1: SELECT MAX(time) FROM cryptocurrency.paxgusdt;
+[2025-08-19T05:06:41.695+0000] {subprocess.py:93} INFO -                               ^
+[2025-08-19T05:06:41.696+0000] {subprocess.py:93} INFO - 
+[2025-08-19T05:06:41.696+0000] {subprocess.py:93} INFO - 96/100 WCTUSDT lỗi: relation "cryptocurrency.wctusdt" does not exist
+[2025-08-19T05:06:41.696+0000] {subprocess.py:93} INFO - LINE 1: SELECT MAX(time) FROM cryptocurrency.wctusdt;
+[2025-08-19T05:06:41.696+0000] {subprocess.py:93} INFO -                               ^
+[2025-08-19T05:06:41.696+0000] {subprocess.py:93} INFO - 
+[2025-08-19T05:06:41.697+0000] {subprocess.py:93} INFO - ⏩ ENSUSDT: không có dữ liệu mới, skip.
+[2025-08-19T05:06:41.697+0000] {subprocess.py:93} INFO - 97/100 STRKUSDT lỗi: relation "cryptocurrency.strkusdt" does not exist
+[2025-08-19T05:06:41.697+0000] {subprocess.py:93} INFO - LINE 1: SELECT MAX(time) FROM cryptocurrency.strkusdt;
+[2025-08-19T05:06:41.698+0000] {subprocess.py:93} INFO -                               ^
+[2025-08-19T05:06:41.698+0000] {subprocess.py:93} INFO - 
+[2025-08-19T05:06:41.698+0000] {subprocess.py:93} INFO - 98/100 RESOLVUSDT lỗi: relation "cryptocurrency.resolvusdt" does not exist
+[2025-08-19T05:06:41.698+0000] {subprocess.py:93} INFO - LINE 1: SELECT MAX(time) FROM cryptocurrency.resolvusdt;
+[2025-08-19T05:06:41.698+0000] {subprocess.py:93} INFO -                               ^
+[2025-08-19T05:06:41.699+0000] {subprocess.py:93} INFO - 
+[2025-08-19T05:06:41.699+0000] {subprocess.py:93} INFO - 99/100 ENSUSDT lưu OK
+[2025-08-19T05:06:41.699+0000] {subprocess.py:93} INFO - ⏩ PORTOUSDT: không có dữ liệu mới, skip.
+[2025-08-19T05:06:41.699+0000] {subprocess.py:93} INFO - 100/100 PORTOUSDT lưu OK
+[2025-08-19T05:06:41.803+0000] {subprocess.py:97} INFO - Command exited with return code 0
+[2025-08-19T05:06:41.804+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-08-19T05:06:41.834+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=crypto_collector_dag, task_id=run_crypto_collector, run_id=scheduled__2025-08-19T05:05:00+00:00, execution_date=20250819T050500, start_date=20250819T050631, end_date=20250819T050641
+[2025-08-19T05:06:41.856+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-08-19T05:06:41.885+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-08-19T05:06:41.886+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

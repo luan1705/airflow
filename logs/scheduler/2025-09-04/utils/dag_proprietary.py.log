@@ -1,0 +1,70 @@
+[2025-09-04T07:44:59.268+0000] {processor.py:161} INFO - Started process (PID=990894) to work on /opt/airflow/dags/utils/dag_proprietary.py
+[2025-09-04T07:44:59.269+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/utils/dag_proprietary.py for tasks to queue
+[2025-09-04T07:44:59.270+0000] {logging_mixin.py:188} INFO - [2025-09-04T07:44:59.269+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/utils/dag_proprietary.py
+[2025-09-04T07:44:59.764+0000] {processor.py:840} INFO - DAG(s) 'foreign_1D' retrieved from /opt/airflow/dags/utils/dag_proprietary.py
+[2025-09-04T07:44:59.858+0000] {logging_mixin.py:188} INFO - [2025-09-04T07:44:59.858+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-09-04T07:44:59.880+0000] {logging_mixin.py:188} INFO - [2025-09-04T07:44:59.880+0000] {dag.py:3954} INFO - Setting next_dagrun for foreign_1D to 2025-09-03 17:01:00+00:00, run_after=2025-09-04 17:01:00+00:00
+[2025-09-04T07:44:59.899+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/utils/dag_proprietary.py took 0.640 seconds
+[2025-09-04T07:45:30.480+0000] {processor.py:161} INFO - Started process (PID=990941) to work on /opt/airflow/dags/utils/dag_proprietary.py
+[2025-09-04T07:45:30.481+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/utils/dag_proprietary.py for tasks to queue
+[2025-09-04T07:45:30.482+0000] {logging_mixin.py:188} INFO - [2025-09-04T07:45:30.482+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/utils/dag_proprietary.py
+[2025-09-04T07:45:31.018+0000] {processor.py:840} INFO - DAG(s) 'foreign_1D' retrieved from /opt/airflow/dags/utils/dag_proprietary.py
+[2025-09-04T07:45:31.039+0000] {logging_mixin.py:188} INFO - [2025-09-04T07:45:31.038+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-09-04T07:45:31.064+0000] {logging_mixin.py:188} INFO - [2025-09-04T07:45:31.064+0000] {dag.py:3954} INFO - Setting next_dagrun for foreign_1D to 2025-09-03 17:01:00+00:00, run_after=2025-09-04 17:01:00+00:00
+[2025-09-04T07:45:31.083+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/utils/dag_proprietary.py took 0.612 seconds
+[2025-09-04T07:46:02.045+0000] {processor.py:161} INFO - Started process (PID=990976) to work on /opt/airflow/dags/utils/dag_proprietary.py
+[2025-09-04T07:46:02.046+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/utils/dag_proprietary.py for tasks to queue
+[2025-09-04T07:46:02.047+0000] {logging_mixin.py:188} INFO - [2025-09-04T07:46:02.047+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/utils/dag_proprietary.py
+[2025-09-04T07:46:02.600+0000] {processor.py:840} INFO - DAG(s) 'foreign_1D' retrieved from /opt/airflow/dags/utils/dag_proprietary.py
+[2025-09-04T07:46:02.613+0000] {logging_mixin.py:188} INFO - [2025-09-04T07:46:02.612+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-09-04T07:46:02.640+0000] {logging_mixin.py:188} INFO - [2025-09-04T07:46:02.639+0000] {dag.py:3954} INFO - Setting next_dagrun for foreign_1D to 2025-09-03 17:01:00+00:00, run_after=2025-09-04 17:01:00+00:00
+[2025-09-04T07:46:02.656+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/utils/dag_proprietary.py took 0.620 seconds
+[2025-09-04T07:46:33.251+0000] {processor.py:161} INFO - Started process (PID=991010) to work on /opt/airflow/dags/utils/dag_proprietary.py
+[2025-09-04T07:46:33.252+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/utils/dag_proprietary.py for tasks to queue
+[2025-09-04T07:46:33.253+0000] {logging_mixin.py:188} INFO - [2025-09-04T07:46:33.253+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/utils/dag_proprietary.py
+[2025-09-04T07:46:34.045+0000] {processor.py:840} INFO - DAG(s) 'foreign_1D' retrieved from /opt/airflow/dags/utils/dag_proprietary.py
+[2025-09-04T07:46:34.181+0000] {logging_mixin.py:188} INFO - [2025-09-04T07:46:34.180+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-09-04T07:46:34.207+0000] {logging_mixin.py:188} INFO - [2025-09-04T07:46:34.207+0000] {dag.py:3954} INFO - Setting next_dagrun for foreign_1D to 2025-09-03 17:01:00+00:00, run_after=2025-09-04 17:01:00+00:00
+[2025-09-04T07:46:34.228+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/utils/dag_proprietary.py took 0.986 seconds
+[2025-09-04T07:47:04.616+0000] {processor.py:161} INFO - Started process (PID=991045) to work on /opt/airflow/dags/utils/dag_proprietary.py
+[2025-09-04T07:47:04.617+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/utils/dag_proprietary.py for tasks to queue
+[2025-09-04T07:47:04.617+0000] {logging_mixin.py:188} INFO - [2025-09-04T07:47:04.617+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/utils/dag_proprietary.py
+[2025-09-04T07:47:05.140+0000] {processor.py:840} INFO - DAG(s) 'foreign_1D' retrieved from /opt/airflow/dags/utils/dag_proprietary.py
+[2025-09-04T07:47:05.165+0000] {logging_mixin.py:188} INFO - [2025-09-04T07:47:05.164+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-09-04T07:47:05.192+0000] {logging_mixin.py:188} INFO - [2025-09-04T07:47:05.192+0000] {dag.py:3954} INFO - Setting next_dagrun for foreign_1D to 2025-09-03 17:01:00+00:00, run_after=2025-09-04 17:01:00+00:00
+[2025-09-04T07:47:05.213+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/utils/dag_proprietary.py took 0.604 seconds
+[2025-09-04T07:47:35.533+0000] {processor.py:161} INFO - Started process (PID=991078) to work on /opt/airflow/dags/utils/dag_proprietary.py
+[2025-09-04T07:47:35.535+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/utils/dag_proprietary.py for tasks to queue
+[2025-09-04T07:47:35.537+0000] {logging_mixin.py:188} INFO - [2025-09-04T07:47:35.536+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/utils/dag_proprietary.py
+[2025-09-04T07:47:36.050+0000] {processor.py:840} INFO - DAG(s) 'foreign_1D' retrieved from /opt/airflow/dags/utils/dag_proprietary.py
+[2025-09-04T07:47:36.063+0000] {logging_mixin.py:188} INFO - [2025-09-04T07:47:36.062+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-09-04T07:47:36.087+0000] {logging_mixin.py:188} INFO - [2025-09-04T07:47:36.086+0000] {dag.py:3954} INFO - Setting next_dagrun for foreign_1D to 2025-09-03 17:01:00+00:00, run_after=2025-09-04 17:01:00+00:00
+[2025-09-04T07:47:36.102+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/utils/dag_proprietary.py took 0.579 seconds
+[2025-09-04T07:48:06.776+0000] {processor.py:161} INFO - Started process (PID=991119) to work on /opt/airflow/dags/utils/dag_proprietary.py
+[2025-09-04T07:48:06.777+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/utils/dag_proprietary.py for tasks to queue
+[2025-09-04T07:48:06.778+0000] {logging_mixin.py:188} INFO - [2025-09-04T07:48:06.778+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/utils/dag_proprietary.py
+[2025-09-04T07:48:07.406+0000] {processor.py:840} INFO - DAG(s) 'foreign_1D' retrieved from /opt/airflow/dags/utils/dag_proprietary.py
+[2025-09-04T07:48:07.523+0000] {logging_mixin.py:188} INFO - [2025-09-04T07:48:07.522+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-09-04T07:48:07.548+0000] {logging_mixin.py:188} INFO - [2025-09-04T07:48:07.548+0000] {dag.py:3954} INFO - Setting next_dagrun for foreign_1D to 2025-09-03 17:01:00+00:00, run_after=2025-09-04 17:01:00+00:00
+[2025-09-04T07:48:07.568+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/utils/dag_proprietary.py took 0.801 seconds
+[2025-09-04T07:48:37.659+0000] {processor.py:161} INFO - Started process (PID=991145) to work on /opt/airflow/dags/utils/dag_proprietary.py
+[2025-09-04T07:48:37.661+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/utils/dag_proprietary.py for tasks to queue
+[2025-09-04T07:48:37.662+0000] {logging_mixin.py:188} INFO - [2025-09-04T07:48:37.662+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/utils/dag_proprietary.py
+[2025-09-04T07:48:38.353+0000] {processor.py:840} INFO - DAG(s) 'foreign_1D' retrieved from /opt/airflow/dags/utils/dag_proprietary.py
+[2025-09-04T07:48:38.380+0000] {logging_mixin.py:188} INFO - [2025-09-04T07:48:38.379+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-09-04T07:48:38.411+0000] {logging_mixin.py:188} INFO - [2025-09-04T07:48:38.411+0000] {dag.py:3954} INFO - Setting next_dagrun for foreign_1D to 2025-09-03 17:01:00+00:00, run_after=2025-09-04 17:01:00+00:00
+[2025-09-04T07:48:38.433+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/utils/dag_proprietary.py took 0.785 seconds
+[2025-09-04T07:49:08.562+0000] {processor.py:161} INFO - Started process (PID=991180) to work on /opt/airflow/dags/utils/dag_proprietary.py
+[2025-09-04T07:49:08.563+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/utils/dag_proprietary.py for tasks to queue
+[2025-09-04T07:49:08.564+0000] {logging_mixin.py:188} INFO - [2025-09-04T07:49:08.564+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/utils/dag_proprietary.py
+[2025-09-04T07:49:09.105+0000] {processor.py:840} INFO - DAG(s) 'foreign_1D' retrieved from /opt/airflow/dags/utils/dag_proprietary.py
+[2025-09-04T07:49:09.116+0000] {logging_mixin.py:188} INFO - [2025-09-04T07:49:09.115+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-09-04T07:49:09.141+0000] {logging_mixin.py:188} INFO - [2025-09-04T07:49:09.141+0000] {dag.py:3954} INFO - Setting next_dagrun for foreign_1D to 2025-09-03 17:01:00+00:00, run_after=2025-09-04 17:01:00+00:00
+[2025-09-04T07:49:09.158+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/utils/dag_proprietary.py took 0.604 seconds
+[2025-09-04T07:49:39.472+0000] {processor.py:161} INFO - Started process (PID=991212) to work on /opt/airflow/dags/utils/dag_proprietary.py
+[2025-09-04T07:49:39.474+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/utils/dag_proprietary.py for tasks to queue
+[2025-09-04T07:49:39.476+0000] {logging_mixin.py:188} INFO - [2025-09-04T07:49:39.474+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/utils/dag_proprietary.py
+[2025-09-04T07:49:39.998+0000] {processor.py:840} INFO - DAG(s) 'foreign_1D' retrieved from /opt/airflow/dags/utils/dag_proprietary.py
+[2025-09-04T07:49:40.110+0000] {logging_mixin.py:188} INFO - [2025-09-04T07:49:40.109+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-09-04T07:49:40.132+0000] {logging_mixin.py:188} INFO - [2025-09-04T07:49:40.132+0000] {dag.py:3954} INFO - Setting next_dagrun for foreign_1D to 2025-09-03 17:01:00+00:00, run_after=2025-09-04 17:01:00+00:00
+[2025-09-04T07:49:40.150+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/utils/dag_proprietary.py took 0.688 seconds

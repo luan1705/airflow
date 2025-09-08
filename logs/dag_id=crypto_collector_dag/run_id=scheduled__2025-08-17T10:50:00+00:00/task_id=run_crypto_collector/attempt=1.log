@@ -1,0 +1,301 @@
+[2025-08-17T10:51:57.654+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-08-17T10:51:57.680+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: crypto_collector_dag.run_crypto_collector scheduled__2025-08-17T10:50:00+00:00 [queued]>
+[2025-08-17T10:51:57.689+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: crypto_collector_dag.run_crypto_collector scheduled__2025-08-17T10:50:00+00:00 [queued]>
+[2025-08-17T10:51:57.689+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 2
+[2025-08-17T10:51:57.702+0000] {taskinstance.py:2330} INFO - Executing <Task(BashOperator): run_crypto_collector> on 2025-08-17 10:50:00+00:00
+[2025-08-17T10:51:57.708+0000] {standard_task_runner.py:63} INFO - Started process 51906 to run task
+[2025-08-17T10:51:57.712+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'crypto_collector_dag', 'run_crypto_collector', 'scheduled__2025-08-17T10:50:00+00:00', '--job-id', '7447', '--raw', '--subdir', 'DAGS_FOLDER/crawl_crypto/dags_crypto.py', '--cfg-path', '/tmp/tmp8hyoqf2g']
+[2025-08-17T10:51:57.713+0000] {standard_task_runner.py:91} INFO - Job 7447: Subtask run_crypto_collector
+[2025-08-17T10:51:57.772+0000] {task_command.py:426} INFO - Running <TaskInstance: crypto_collector_dag.run_crypto_collector scheduled__2025-08-17T10:50:00+00:00 [running]> on host 1877907bc043
+[2025-08-17T10:51:57.879+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='crypto_collector_dag' AIRFLOW_CTX_TASK_ID='run_crypto_collector' AIRFLOW_CTX_EXECUTION_DATE='2025-08-17T10:50:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-08-17T10:50:00+00:00'
+[2025-08-17T10:51:57.880+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-08-17T10:51:57.896+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-08-17T10:51:57.896+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', 'python3 /opt/***/dags/crawl_crypto/crawl_data_crypto.py']
+[2025-08-17T10:51:57.907+0000] {subprocess.py:86} INFO - Output:
+[2025-08-17T10:53:06.255+0000] {subprocess.py:93} INFO - 🔹 Kết nối DB...
+[2025-08-17T10:53:06.256+0000] {subprocess.py:93} INFO - 🔹 Lấy top 100 crypto...
+[2025-08-17T10:53:06.256+0000] {subprocess.py:93} INFO - Top 100: ['ETHUSDT', 'USDCUSDT', 'BTCUSDT', 'SOLUSDT', 'ADAUSDT', 'DOGEUSDT', 'LINKUSDT', 'FDUSDUSDT', 'XRPUSDT', 'TRXUSDT', 'BNBUSDT', 'PROVEUSDT', 'ENAUSDT', 'SUIUSDT', 'CTSIUSDT', 'ARBUSDT', 'PEPEUSDT', 'UNIUSDT', 'LTCUSDT', 'AVAXUSDT', 'PENGUUSDT', 'TSTUSDT', 'ALPINEUSDT', 'SKLUSDT', 'SEIUSDT', 'BFUSDUSDT', 'SUSDT', 'HBARUSDT', 'API3USDT', 'TRUMPUSDT', 'AAVEUSDT', 'LDOUSDT', 'EPICUSDT', 'WLDUSDT', 'OGUSDT', 'CYBERUSDT', 'NEARUSDT', 'WIFUSDT', 'PONDUSDT', 'BONKUSDT', 'CHRUSDT', 'CRVUSDT', 'MAVUSDT', 'TOWNSUSDT', 'XLMUSDT', 'OGNUSDT', 'BERAUSDT', 'OPUSDT', 'RAYUSDT', 'DOTUSDT', 'APTUSDT', 'LPTUSDT', 'LRCUSDT', 'FLOKIUSDT', 'ASRUSDT', 'TONUSDT', 'CELRUSDT', 'GALAUSDT', 'BCHUSDT', 'ONDOUSDT', 'MOVRUSDT', 'XUSDUSDT', 'INJUSDT', 'EIGENUSDT', 'ETHFIUSDT', 'PORTOUSDT', 'PENDLEUSDT', 'TIAUSDT', 'TAOUSDT', 'BANDUSDT', 'NMRUSDT', 'BATUSDT', 'NEIROUSDT', 'ETCUSDT', 'BBUSDT', 'ALGOUSDT', 'RENDERUSDT', 'BIOUSDT', 'FILUSDT', 'CAKEUSDT', 'LAUSDT', 'SYRUPUSDT', 'SPKUSDT', 'FETUSDT', 'POLUSDT', 'ERAUSDT', 'VIRTUALUSDT', 'STRKUSDT', 'SHIBUSDT', 'ICPUSDT', 'PNUTUSDT', 'CFXUSDT', 'MDTUSDT', 'EURUSDT', 'HOTUSDT', 'ENSUSDT', 'TREEUSDT', 'ARKMUSDT', 'VETUSDT', 'ZKUSDT']
+[2025-08-17T10:53:06.257+0000] {subprocess.py:93} INFO - 🔹 Lưu lịch sử giá vào DB bằng threading...
+[2025-08-17T10:53:06.257+0000] {subprocess.py:93} INFO - ✅ USDCUSDT: thêm 19 dòng mới
+[2025-08-17T10:53:06.257+0000] {subprocess.py:93} INFO - 1/100 USDCUSDT lưu OK
+[2025-08-17T10:53:06.258+0000] {subprocess.py:93} INFO - ✅ FDUSDUSDT: thêm 19 dòng mới
+[2025-08-17T10:53:06.258+0000] {subprocess.py:93} INFO - 2/100 FDUSDUSDT lưu OK
+[2025-08-17T10:53:06.258+0000] {subprocess.py:93} INFO - ✅ DOGEUSDT: thêm 6 dòng mới
+[2025-08-17T10:53:06.259+0000] {subprocess.py:93} INFO - 3/100 DOGEUSDT lưu OK
+[2025-08-17T10:53:06.259+0000] {subprocess.py:93} INFO - ✅ BNBUSDT: thêm 12 dòng mới
+[2025-08-17T10:53:06.259+0000] {subprocess.py:93} INFO - 4/100 BNBUSDT lưu OK
+[2025-08-17T10:53:06.259+0000] {subprocess.py:93} INFO - ✅ SUIUSDT: thêm 12 dòng mới
+[2025-08-17T10:53:06.260+0000] {subprocess.py:93} INFO - 5/100 SUIUSDT lưu OK
+[2025-08-17T10:53:06.260+0000] {subprocess.py:93} INFO - ⚠️ ADAUSDT lỗi lần 1/3: HTTPSConnectionPool(host='api.binance.com', port=443): Max retries exceeded with url: /api/v3/klines?symbol=ADAUSDT&interval=1m&limit=100 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7f804cd5c460>, 'Connection to api.binance.com timed out. (connect timeout=15)'))
+[2025-08-17T10:53:06.260+0000] {subprocess.py:93} INFO - ⚠️ XRPUSDT lỗi lần 1/3: HTTPSConnectionPool(host='api.binance.com', port=443): Max retries exceeded with url: /api/v3/klines?symbol=XRPUSDT&interval=1m&limit=100 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7f804cd5d1e0>, 'Connection to api.binance.com timed out. (connect timeout=15)'))
+[2025-08-17T10:53:06.261+0000] {subprocess.py:93} INFO - ⚠️ LINKUSDT lỗi lần 1/3: HTTPSConnectionPool(host='api.binance.com', port=443): Max retries exceeded with url: /api/v3/klines?symbol=LINKUSDT&interval=1m&limit=100 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7f804cd5fac0>, 'Connection to api.binance.com timed out. (connect timeout=15)'))
+[2025-08-17T10:53:06.261+0000] {subprocess.py:93} INFO - ⚠️ TRXUSDT lỗi lần 1/3: HTTPSConnectionPool(host='api.binance.com', port=443): Max retries exceeded with url: /api/v3/klines?symbol=TRXUSDT&interval=1m&limit=100 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7f804cd85d50>, 'Connection to api.binance.com timed out. (connect timeout=15)'))
+[2025-08-17T10:53:06.261+0000] {subprocess.py:93} INFO - ⚠️ ENAUSDT lỗi lần 1/3: HTTPSConnectionPool(host='api.binance.com', port=443): Max retries exceeded with url: /api/v3/klines?symbol=ENAUSDT&interval=1m&limit=100 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7f804cd8c7f0>, 'Connection to api.binance.com timed out. (connect timeout=15)'))
+[2025-08-17T10:53:06.261+0000] {subprocess.py:93} INFO - ⚠️ CTSIUSDT lỗi lần 1/3: HTTPSConnectionPool(host='api.binance.com', port=443): Max retries exceeded with url: /api/v3/klines?symbol=CTSIUSDT&interval=1m&limit=100 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7f804cd5c0d0>, 'Connection to api.binance.com timed out. (connect timeout=15)'))
+[2025-08-17T10:53:06.262+0000] {subprocess.py:93} INFO - ✅ CTSIUSDT: thêm 6 dòng mới
+[2025-08-17T10:53:06.262+0000] {subprocess.py:93} INFO - 6/100 CTSIUSDT lưu OK
+[2025-08-17T10:53:06.262+0000] {subprocess.py:93} INFO - ✅ ARBUSDT: thêm 11 dòng mới
+[2025-08-17T10:53:06.262+0000] {subprocess.py:93} INFO - 7/100 ARBUSDT lưu OK
+[2025-08-17T10:53:06.263+0000] {subprocess.py:93} INFO - ✅ PEPEUSDT: thêm 11 dòng mới
+[2025-08-17T10:53:06.263+0000] {subprocess.py:93} INFO - 8/100 PEPEUSDT lưu OK
+[2025-08-17T10:53:06.263+0000] {subprocess.py:93} INFO - ✅ UNIUSDT: thêm 6 dòng mới
+[2025-08-17T10:53:06.264+0000] {subprocess.py:93} INFO - 9/100 UNIUSDT lưu OK
+[2025-08-17T10:53:06.264+0000] {subprocess.py:93} INFO - ✅ PROVEUSDT: thêm 6 dòng mới
+[2025-08-17T10:53:06.264+0000] {subprocess.py:93} INFO - 10/100 PROVEUSDT lưu OK
+[2025-08-17T10:53:06.264+0000] {subprocess.py:93} INFO - ✅ LTCUSDT: thêm 11 dòng mới
+[2025-08-17T10:53:06.265+0000] {subprocess.py:93} INFO - 11/100 LTCUSDT lưu OK
+[2025-08-17T10:53:06.265+0000] {subprocess.py:93} INFO - ✅ AVAXUSDT: thêm 6 dòng mới
+[2025-08-17T10:53:06.265+0000] {subprocess.py:93} INFO - 12/100 AVAXUSDT lưu OK
+[2025-08-17T10:53:06.266+0000] {subprocess.py:93} INFO - ✅ PENGUUSDT: thêm 5 dòng mới
+[2025-08-17T10:53:06.266+0000] {subprocess.py:93} INFO - 13/100 PENGUUSDT lưu OK
+[2025-08-17T10:53:06.268+0000] {subprocess.py:93} INFO - ✅ ENAUSDT: thêm 11 dòng mới
+[2025-08-17T10:53:06.268+0000] {subprocess.py:93} INFO - 14/100 ENAUSDT lưu OK
+[2025-08-17T10:53:06.268+0000] {subprocess.py:93} INFO - ✅ ALPINEUSDT: thêm 5 dòng mới
+[2025-08-17T10:53:06.269+0000] {subprocess.py:93} INFO - 15/100 ALPINEUSDT lưu OK
+[2025-08-17T10:53:06.269+0000] {subprocess.py:93} INFO - ⚠️ ADAUSDT lỗi lần 2/3: HTTPSConnectionPool(host='api.binance.com', port=443): Max retries exceeded with url: /api/v3/klines?symbol=ADAUSDT&interval=1m&limit=100 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7f804cd8d510>, 'Connection to api.binance.com timed out. (connect timeout=15)'))
+[2025-08-17T10:53:06.269+0000] {subprocess.py:93} INFO - ⚠️ XRPUSDT lỗi lần 2/3: HTTPSConnectionPool(host='api.binance.com', port=443): Max retries exceeded with url: /api/v3/klines?symbol=XRPUSDT&interval=1m&limit=100 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7f804cd8ea10>, 'Connection to api.binance.com timed out. (connect timeout=15)'))
+[2025-08-17T10:53:06.270+0000] {subprocess.py:93} INFO - ⚠️ TRXUSDT lỗi lần 2/3: HTTPSConnectionPool(host='api.binance.com', port=443): Max retries exceeded with url: /api/v3/klines?symbol=TRXUSDT&interval=1m&limit=100 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7f804cd5ce80>, 'Connection to api.binance.com timed out. (connect timeout=15)'))
+[2025-08-17T10:53:06.270+0000] {subprocess.py:93} INFO - ⚠️ LINKUSDT lỗi lần 2/3: HTTPSConnectionPool(host='api.binance.com', port=443): Max retries exceeded with url: /api/v3/klines?symbol=LINKUSDT&interval=1m&limit=100 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7f804cd5c1c0>, 'Connection to api.binance.com timed out. (connect timeout=15)'))
+[2025-08-17T10:53:06.270+0000] {subprocess.py:93} INFO - ✅ SKLUSDT: thêm 5 dòng mới
+[2025-08-17T10:53:06.270+0000] {subprocess.py:93} INFO - 16/100 SKLUSDT lưu OK
+[2025-08-17T10:53:06.271+0000] {subprocess.py:93} INFO - ✅ SEIUSDT: thêm 5 dòng mới
+[2025-08-17T10:53:06.271+0000] {subprocess.py:93} INFO - 17/100 SEIUSDT lưu OK
+[2025-08-17T10:53:06.271+0000] {subprocess.py:93} INFO - ✅ SUSDT: thêm 5 dòng mới
+[2025-08-17T10:53:06.271+0000] {subprocess.py:93} INFO - 18/100 SUSDT lưu OK
+[2025-08-17T10:53:06.272+0000] {subprocess.py:93} INFO - ✅ TSTUSDT: thêm 5 dòng mới
+[2025-08-17T10:53:06.272+0000] {subprocess.py:93} INFO - 19/100 TSTUSDT lưu OK
+[2025-08-17T10:53:06.272+0000] {subprocess.py:93} INFO - ✅ BFUSDUSDT: thêm 5 dòng mới
+[2025-08-17T10:53:06.273+0000] {subprocess.py:93} INFO - 20/100 BFUSDUSDT lưu OK
+[2025-08-17T10:53:06.273+0000] {subprocess.py:93} INFO - ✅ API3USDT: thêm 4 dòng mới
+[2025-08-17T10:53:06.273+0000] {subprocess.py:93} INFO - 21/100 API3USDT lưu OK
+[2025-08-17T10:53:06.273+0000] {subprocess.py:93} INFO - ✅ AAVEUSDT: thêm 5 dòng mới
+[2025-08-17T10:53:06.274+0000] {subprocess.py:93} INFO - 22/100 AAVEUSDT lưu OK
+[2025-08-17T10:53:06.274+0000] {subprocess.py:93} INFO - ⚠️ XRPUSDT lỗi lần 3/3: HTTPSConnectionPool(host='api.binance.com', port=443): Max retries exceeded with url: /api/v3/klines?symbol=XRPUSDT&interval=1m&limit=100 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7f804cd8e530>, 'Connection to api.binance.com timed out. (connect timeout=15)'))
+[2025-08-17T10:53:06.274+0000] {subprocess.py:93} INFO - ⚠️ TRXUSDT lỗi lần 3/3: HTTPSConnectionPool(host='api.binance.com', port=443): Max retries exceeded with url: /api/v3/klines?symbol=TRXUSDT&interval=1m&limit=100 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7f804cd8f6d0>, 'Connection to api.binance.com timed out. (connect timeout=15)'))
+[2025-08-17T10:53:06.274+0000] {subprocess.py:93} INFO - ⚠️ LINKUSDT lỗi lần 3/3: HTTPSConnectionPool(host='api.binance.com', port=443): Max retries exceeded with url: /api/v3/klines?symbol=LINKUSDT&interval=1m&limit=100 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7f804cd5c190>, 'Connection to api.binance.com timed out. (connect timeout=15)'))
+[2025-08-17T10:53:06.275+0000] {subprocess.py:93} INFO - ⚠️ LDOUSDT lỗi lần 1/3: HTTPSConnectionPool(host='api.binance.com', port=443): Max retries exceeded with url: /api/v3/klines?symbol=LDOUSDT&interval=1m&limit=100 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7f804cd44f10>, 'Connection to api.binance.com timed out. (connect timeout=15)'))
+[2025-08-17T10:53:06.275+0000] {subprocess.py:93} INFO - 23/100 XRPUSDT bỏ qua (fail)
+[2025-08-17T10:53:06.275+0000] {subprocess.py:93} INFO - 24/100 TRXUSDT bỏ qua (fail)
+[2025-08-17T10:53:06.275+0000] {subprocess.py:93} INFO - 25/100 LINKUSDT bỏ qua (fail)
+[2025-08-17T10:53:06.276+0000] {subprocess.py:93} INFO - ✅ LDOUSDT: thêm 5 dòng mới
+[2025-08-17T10:53:06.276+0000] {subprocess.py:93} INFO - 26/100 LDOUSDT lưu OK
+[2025-08-17T10:53:06.276+0000] {subprocess.py:93} INFO - ✅ ETHUSDT: thêm 5 dòng mới
+[2025-08-17T10:53:06.276+0000] {subprocess.py:93} INFO - 27/100 ETHUSDT lưu OK
+[2025-08-17T10:53:06.277+0000] {subprocess.py:93} INFO - ✅ BTCUSDT: thêm 11 dòng mới
+[2025-08-17T10:53:06.277+0000] {subprocess.py:93} INFO - 28/100 BTCUSDT lưu OK
+[2025-08-17T10:53:06.277+0000] {subprocess.py:93} INFO - ⚠️ EPICUSDT lỗi lần 1/3: HTTPSConnectionPool(host='api.binance.com', port=443): Max retries exceeded with url: /api/v3/klines?symbol=EPICUSDT&interval=1m&limit=100 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7f804cd8e950>, 'Connection to api.binance.com timed out. (connect timeout=15)'))
+[2025-08-17T10:53:06.277+0000] {subprocess.py:93} INFO - ⚠️ WLDUSDT lỗi lần 1/3: HTTPSConnectionPool(host='api.binance.com', port=443): Max retries exceeded with url: /api/v3/klines?symbol=WLDUSDT&interval=1m&limit=100 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7f804cd8d2d0>, 'Connection to api.binance.com timed out. (connect timeout=15)'))
+[2025-08-17T10:54:49.015+0000] {subprocess.py:93} INFO - ⚠️ OGUSDT lỗi lần 1/3: HTTPSConnectionPool(host='api.binance.com', port=443): Max retries exceeded with url: /api/v3/klines?symbol=OGUSDT&interval=1m&limit=100 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7f804cd5f0a0>, 'Connection to api.binance.com timed out. (connect timeout=15)'))
+[2025-08-17T10:54:49.016+0000] {subprocess.py:93} INFO - ⚠️ CYBERUSDT lỗi lần 1/3: HTTPSConnectionPool(host='api.binance.com', port=443): Max retries exceeded with url: /api/v3/klines?symbol=CYBERUSDT&interval=1m&limit=100 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7f804cd8f340>, 'Connection to api.binance.com timed out. (connect timeout=15)'))
+[2025-08-17T10:54:49.017+0000] {subprocess.py:93} INFO - ⚠️ NEARUSDT lỗi lần 1/3: HTTPSConnectionPool(host='api.binance.com', port=443): Max retries exceeded with url: /api/v3/klines?symbol=NEARUSDT&interval=1m&limit=100 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7f804cd8f010>, 'Connection to api.binance.com timed out. (connect timeout=15)'))
+[2025-08-17T10:54:49.017+0000] {subprocess.py:93} INFO - ⚠️ WIFUSDT lỗi lần 1/3: HTTPSConnectionPool(host='api.binance.com', port=443): Max retries exceeded with url: /api/v3/klines?symbol=WIFUSDT&interval=1m&limit=100 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7f804cd44d30>, 'Connection to api.binance.com timed out. (connect timeout=15)'))
+[2025-08-17T10:54:49.017+0000] {subprocess.py:93} INFO - 29/100 CYBERUSDT lỗi: relation "cryptocurrency.cyberusdt" does not exist
+[2025-08-17T10:54:49.018+0000] {subprocess.py:93} INFO - LINE 1: SELECT MAX(time) FROM cryptocurrency.cyberusdt;
+[2025-08-17T10:54:49.018+0000] {subprocess.py:93} INFO -                               ^
+[2025-08-17T10:54:49.018+0000] {subprocess.py:93} INFO - 
+[2025-08-17T10:54:49.019+0000] {subprocess.py:93} INFO - ⚠️ WLDUSDT lỗi lần 2/3: HTTPSConnectionPool(host='api.binance.com', port=443): Max retries exceeded with url: /api/v3/klines?symbol=WLDUSDT&interval=1m&limit=100 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7f804cd840a0>, 'Connection to api.binance.com timed out. (connect timeout=15)'))
+[2025-08-17T10:54:49.019+0000] {subprocess.py:93} INFO - ⚠️ EPICUSDT lỗi lần 2/3: HTTPSConnectionPool(host='api.binance.com', port=443): Max retries exceeded with url: /api/v3/klines?symbol=EPICUSDT&interval=1m&limit=100 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7f804cd5e1d0>, 'Connection to api.binance.com timed out. (connect timeout=15)'))
+[2025-08-17T10:54:49.020+0000] {subprocess.py:93} INFO - ⚠️ OGUSDT lỗi lần 2/3: HTTPSConnectionPool(host='api.binance.com', port=443): Max retries exceeded with url: /api/v3/klines?symbol=OGUSDT&interval=1m&limit=100 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7f804cd5df90>, 'Connection to api.binance.com timed out. (connect timeout=15)'))
+[2025-08-17T10:54:49.020+0000] {subprocess.py:93} INFO - ✅ OGUSDT: thêm 6 dòng mới
+[2025-08-17T10:54:49.020+0000] {subprocess.py:93} INFO - 30/100 OGUSDT lưu OK
+[2025-08-17T10:54:49.020+0000] {subprocess.py:93} INFO - ✅ EPICUSDT: thêm 6 dòng mới
+[2025-08-17T10:54:49.021+0000] {subprocess.py:93} INFO - 31/100 EPICUSDT lưu OK
+[2025-08-17T10:54:49.021+0000] {subprocess.py:93} INFO - ✅ CHRUSDT: thêm 5 dòng mới
+[2025-08-17T10:54:49.021+0000] {subprocess.py:93} INFO - 32/100 CHRUSDT lưu OK
+[2025-08-17T10:54:49.022+0000] {subprocess.py:93} INFO - ✅ CRVUSDT: thêm 5 dòng mới
+[2025-08-17T10:54:49.022+0000] {subprocess.py:93} INFO - 33/100 CRVUSDT lưu OK
+[2025-08-17T10:54:49.022+0000] {subprocess.py:93} INFO - ✅ MAVUSDT: thêm 5 dòng mới
+[2025-08-17T10:54:49.023+0000] {subprocess.py:93} INFO - 34/100 MAVUSDT lưu OK
+[2025-08-17T10:54:49.023+0000] {subprocess.py:93} INFO - ⚠️ NEARUSDT lỗi lần 2/3: HTTPSConnectionPool(host='api.binance.com', port=443): Max retries exceeded with url: /api/v3/klines?symbol=NEARUSDT&interval=1m&limit=100 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7f804cd8e980>, 'Connection to api.binance.com timed out. (connect timeout=15)'))
+[2025-08-17T10:54:49.023+0000] {subprocess.py:93} INFO - ⚠️ WIFUSDT lỗi lần 2/3: HTTPSConnectionPool(host='api.binance.com', port=443): Max retries exceeded with url: /api/v3/klines?symbol=WIFUSDT&interval=1m&limit=100 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7f804cd8ef20>, 'Connection to api.binance.com timed out. (connect timeout=15)'))
+[2025-08-17T10:54:49.024+0000] {subprocess.py:93} INFO - ✅ ADAUSDT: thêm 6 dòng mới
+[2025-08-17T10:54:49.024+0000] {subprocess.py:93} INFO - 35/100 ADAUSDT lưu OK
+[2025-08-17T10:54:49.024+0000] {subprocess.py:93} INFO - ✅ TOWNSUSDT: thêm 5 dòng mới
+[2025-08-17T10:54:49.024+0000] {subprocess.py:93} INFO - 36/100 TOWNSUSDT lưu OK
+[2025-08-17T10:54:49.025+0000] {subprocess.py:93} INFO - ⚠️ BONKUSDT lỗi lần 1/3: HTTPSConnectionPool(host='api.binance.com', port=443): Max retries exceeded with url: /api/v3/klines?symbol=BONKUSDT&interval=1m&limit=100 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7f804cd84250>, 'Connection to api.binance.com timed out. (connect timeout=15)'))
+[2025-08-17T10:54:49.025+0000] {subprocess.py:93} INFO - ✅ OGNUSDT: thêm 5 dòng mới
+[2025-08-17T10:54:49.025+0000] {subprocess.py:93} INFO - 37/100 OGNUSDT lưu OK
+[2025-08-17T10:54:49.026+0000] {subprocess.py:93} INFO - ✅ BONKUSDT: thêm 11 dòng mới
+[2025-08-17T10:54:49.026+0000] {subprocess.py:93} INFO - 38/100 BONKUSDT lưu OK
+[2025-08-17T10:54:49.026+0000] {subprocess.py:93} INFO - ⚠️ NEARUSDT lỗi lần 3/3: HTTPSConnectionPool(host='api.binance.com', port=443): Max retries exceeded with url: /api/v3/klines?symbol=NEARUSDT&interval=1m&limit=100 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7f804cd8c2e0>, 'Connection to api.binance.com timed out. (connect timeout=15)'))
+[2025-08-17T10:54:49.026+0000] {subprocess.py:93} INFO - ⚠️ WIFUSDT lỗi lần 3/3: HTTPSConnectionPool(host='api.binance.com', port=443): Max retries exceeded with url: /api/v3/klines?symbol=WIFUSDT&interval=1m&limit=100 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7f804cd8dc00>, 'Connection to api.binance.com timed out. (connect timeout=15)'))
+[2025-08-17T10:54:49.027+0000] {subprocess.py:93} INFO - 39/100 NEARUSDT bỏ qua (fail)
+[2025-08-17T10:54:49.027+0000] {subprocess.py:93} INFO - 40/100 WIFUSDT bỏ qua (fail)
+[2025-08-17T10:54:49.028+0000] {subprocess.py:93} INFO - ✅ DOTUSDT: thêm 5 dòng mới
+[2025-08-17T10:54:49.028+0000] {subprocess.py:93} INFO - 41/100 DOTUSDT lưu OK
+[2025-08-17T10:54:49.028+0000] {subprocess.py:93} INFO - ✅ RAYUSDT: thêm 5 dòng mới
+[2025-08-17T10:54:49.028+0000] {subprocess.py:93} INFO - 42/100 RAYUSDT lưu OK
+[2025-08-17T10:54:49.029+0000] {subprocess.py:93} INFO - ✅ XLMUSDT: thêm 5 dòng mới
+[2025-08-17T10:54:49.029+0000] {subprocess.py:93} INFO - 43/100 XLMUSDT lưu OK
+[2025-08-17T10:54:49.029+0000] {subprocess.py:93} INFO - 44/100 LPTUSDT lỗi: relation "cryptocurrency.lptusdt" does not exist
+[2025-08-17T10:54:49.029+0000] {subprocess.py:93} INFO - LINE 1: SELECT MAX(time) FROM cryptocurrency.lptusdt;
+[2025-08-17T10:54:49.030+0000] {subprocess.py:93} INFO -                               ^
+[2025-08-17T10:54:49.030+0000] {subprocess.py:93} INFO - 
+[2025-08-17T10:54:49.030+0000] {subprocess.py:93} INFO - ✅ FLOKIUSDT: thêm 5 dòng mới
+[2025-08-17T10:54:49.032+0000] {subprocess.py:93} INFO - 45/100 FLOKIUSDT lưu OK
+[2025-08-17T10:54:49.032+0000] {subprocess.py:93} INFO - ⚠️ BERAUSDT lỗi lần 1/3: HTTPSConnectionPool(host='api.binance.com', port=443): Max retries exceeded with url: /api/v3/klines?symbol=BERAUSDT&interval=1m&limit=100 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7f804cd87700>, 'Connection to api.binance.com timed out. (connect timeout=15)'))
+[2025-08-17T10:54:49.033+0000] {subprocess.py:93} INFO - ✅ ASRUSDT: thêm 5 dòng mới
+[2025-08-17T10:54:49.033+0000] {subprocess.py:93} INFO - 46/100 ASRUSDT lưu OK
+[2025-08-17T10:54:49.034+0000] {subprocess.py:93} INFO - ✅ TONUSDT: thêm 6 dòng mới
+[2025-08-17T10:54:49.034+0000] {subprocess.py:93} INFO - 47/100 TONUSDT lưu OK
+[2025-08-17T10:54:49.034+0000] {subprocess.py:93} INFO - ✅ CELRUSDT: thêm 6 dòng mới
+[2025-08-17T10:54:49.035+0000] {subprocess.py:93} INFO - 48/100 CELRUSDT lưu OK
+[2025-08-17T10:54:49.035+0000] {subprocess.py:93} INFO - 49/100 SOLUSDT lỗi: connection to server at "videv.cloud" (27.74.74.29), port 5432 failed: Connection timed out
+[2025-08-17T10:54:49.035+0000] {subprocess.py:93} INFO - 	Is the server running on that host and accepting TCP/IP connections?
+[2025-08-17T10:54:49.036+0000] {subprocess.py:93} INFO - 
+[2025-08-17T10:54:49.036+0000] {subprocess.py:93} INFO - ⚠️ BERAUSDT lỗi lần 2/3: HTTPSConnectionPool(host='api.binance.com', port=443): Max retries exceeded with url: /api/v3/klines?symbol=BERAUSDT&interval=1m&limit=100 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7f804cd87490>, 'Connection to api.binance.com timed out. (connect timeout=15)'))
+[2025-08-17T10:54:49.037+0000] {subprocess.py:93} INFO - ⚠️ GALAUSDT lỗi lần 1/3: HTTPSConnectionPool(host='api.binance.com', port=443): Max retries exceeded with url: /api/v3/klines?symbol=GALAUSDT&interval=1m&limit=100 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7f804cd87e50>, 'Connection to api.binance.com timed out. (connect timeout=15)'))
+[2025-08-17T10:54:49.037+0000] {subprocess.py:93} INFO - ✅ APTUSDT: thêm 5 dòng mới
+[2025-08-17T10:54:49.037+0000] {subprocess.py:93} INFO - 50/100 APTUSDT lưu OK
+[2025-08-17T10:54:49.038+0000] {subprocess.py:93} INFO - ✅ LRCUSDT: thêm 5 dòng mới
+[2025-08-17T10:54:49.038+0000] {subprocess.py:93} INFO - 51/100 LRCUSDT lưu OK
+[2025-08-17T10:54:49.038+0000] {subprocess.py:93} INFO - ✅ GALAUSDT: thêm 6 dòng mới
+[2025-08-17T10:54:49.039+0000] {subprocess.py:93} INFO - 52/100 GALAUSDT lưu OK
+[2025-08-17T10:54:49.039+0000] {subprocess.py:93} INFO - ✅ ONDOUSDT: thêm 6 dòng mới
+[2025-08-17T10:54:49.040+0000] {subprocess.py:93} INFO - 53/100 ONDOUSDT lưu OK
+[2025-08-17T10:54:49.040+0000] {subprocess.py:93} INFO - 54/100 MOVRUSDT lỗi: relation "cryptocurrency.movrusdt" does not exist
+[2025-08-17T10:54:49.040+0000] {subprocess.py:93} INFO - LINE 1: SELECT MAX(time) FROM cryptocurrency.movrusdt;
+[2025-08-17T10:54:49.041+0000] {subprocess.py:93} INFO -                               ^
+[2025-08-17T10:54:49.041+0000] {subprocess.py:93} INFO - 
+[2025-08-17T10:54:49.041+0000] {subprocess.py:93} INFO - ✅ XUSDUSDT: thêm 6 dòng mới
+[2025-08-17T10:54:49.042+0000] {subprocess.py:93} INFO - 55/100 XUSDUSDT lưu OK
+[2025-08-17T10:54:49.042+0000] {subprocess.py:93} INFO - ✅ INJUSDT: thêm 6 dòng mới
+[2025-08-17T10:54:49.043+0000] {subprocess.py:93} INFO - 56/100 INJUSDT lưu OK
+[2025-08-17T10:54:49.043+0000] {subprocess.py:93} INFO - ✅ EIGENUSDT: thêm 6 dòng mới
+[2025-08-17T10:54:49.043+0000] {subprocess.py:93} INFO - 57/100 EIGENUSDT lưu OK
+[2025-08-17T10:54:49.044+0000] {subprocess.py:93} INFO - ✅ PORTOUSDT: thêm 11 dòng mới
+[2025-08-17T10:54:49.044+0000] {subprocess.py:93} INFO - 58/100 PORTOUSDT lưu OK
+[2025-08-17T10:54:49.044+0000] {subprocess.py:93} INFO - ✅ ETHFIUSDT: thêm 11 dòng mới
+[2025-08-17T10:54:49.045+0000] {subprocess.py:93} INFO - 59/100 ETHFIUSDT lưu OK
+[2025-08-17T10:54:49.045+0000] {subprocess.py:93} INFO - ✅ PENDLEUSDT: thêm 11 dòng mới
+[2025-08-17T10:54:49.045+0000] {subprocess.py:93} INFO - 60/100 PENDLEUSDT lưu OK
+[2025-08-17T10:54:49.046+0000] {subprocess.py:93} INFO - ⚠️ BCHUSDT lỗi lần 1/3: HTTPSConnectionPool(host='api.binance.com', port=443): Max retries exceeded with url: /api/v3/klines?symbol=BCHUSDT&interval=1m&limit=100 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7f804cd8ca60>, 'Connection to api.binance.com timed out. (connect timeout=15)'))
+[2025-08-17T10:54:49.046+0000] {subprocess.py:93} INFO - ✅ TAOUSDT: thêm 6 dòng mới
+[2025-08-17T10:54:49.047+0000] {subprocess.py:93} INFO - 61/100 TAOUSDT lưu OK
+[2025-08-17T10:54:49.047+0000] {subprocess.py:93} INFO - ✅ TIAUSDT: thêm 11 dòng mới
+[2025-08-17T10:54:49.047+0000] {subprocess.py:93} INFO - 62/100 TIAUSDT lưu OK
+[2025-08-17T10:54:49.048+0000] {subprocess.py:93} INFO - ✅ BATUSDT: thêm 11 dòng mới
+[2025-08-17T10:54:49.048+0000] {subprocess.py:93} INFO - 63/100 BATUSDT lưu OK
+[2025-08-17T10:54:49.048+0000] {subprocess.py:93} INFO - 64/100 NMRUSDT lỗi: relation "cryptocurrency.nmrusdt" does not exist
+[2025-08-17T10:54:49.049+0000] {subprocess.py:93} INFO - LINE 1: SELECT MAX(time) FROM cryptocurrency.nmrusdt;
+[2025-08-17T10:54:49.049+0000] {subprocess.py:93} INFO -                               ^
+[2025-08-17T10:54:49.050+0000] {subprocess.py:93} INFO - 
+[2025-08-17T10:54:49.050+0000] {subprocess.py:93} INFO - 65/100 HBARUSDT lỗi: connection to server at "videv.cloud" (27.74.74.29), port 5432 failed: Connection timed out
+[2025-08-17T10:54:49.050+0000] {subprocess.py:93} INFO - 	Is the server running on that host and accepting TCP/IP connections?
+[2025-08-17T10:54:49.051+0000] {subprocess.py:93} INFO - 
+[2025-08-17T10:56:36.115+0000] {subprocess.py:93} INFO - 66/100 TRUMPUSDT lỗi: connection to server at "videv.cloud" (27.74.74.29), port 5432 failed: Connection timed out
+[2025-08-17T10:56:36.116+0000] {subprocess.py:93} INFO - 	Is the server running on that host and accepting TCP/IP connections?
+[2025-08-17T10:56:36.116+0000] {subprocess.py:93} INFO - 
+[2025-08-17T10:56:36.116+0000] {subprocess.py:93} INFO - 67/100 BANDUSDT lỗi: relation "cryptocurrency.bandusdt" does not exist
+[2025-08-17T10:56:36.117+0000] {subprocess.py:93} INFO - LINE 1: SELECT MAX(time) FROM cryptocurrency.bandusdt;
+[2025-08-17T10:56:36.117+0000] {subprocess.py:93} INFO -                               ^
+[2025-08-17T10:56:36.117+0000] {subprocess.py:93} INFO - 
+[2025-08-17T10:56:36.118+0000] {subprocess.py:93} INFO - ⚠️ NEIROUSDT lỗi lần 1/3: HTTPSConnectionPool(host='api.binance.com', port=443): Max retries exceeded with url: /api/v3/klines?symbol=NEIROUSDT&interval=1m&limit=100 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7f804cd8c3d0>, 'Connection to api.binance.com timed out. (connect timeout=15)'))
+[2025-08-17T10:56:36.118+0000] {subprocess.py:93} INFO - ✅ RENDERUSDT: thêm 5 dòng mới
+[2025-08-17T10:56:36.118+0000] {subprocess.py:93} INFO - 68/100 RENDERUSDT lưu OK
+[2025-08-17T10:56:36.118+0000] {subprocess.py:93} INFO - ⚠️ BBUSDT lỗi lần 1/3: HTTPSConnectionPool(host='api.binance.com', port=443): Max retries exceeded with url: /api/v3/klines?symbol=BBUSDT&interval=1m&limit=100 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7f804cd8dba0>, 'Connection to api.binance.com timed out. (connect timeout=15)'))
+[2025-08-17T10:56:36.119+0000] {subprocess.py:93} INFO - ⚠️ ALGOUSDT lỗi lần 1/3: HTTPSConnectionPool(host='api.binance.com', port=443): Max retries exceeded with url: /api/v3/klines?symbol=ALGOUSDT&interval=1m&limit=100 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7f804cd87b50>, 'Connection to api.binance.com timed out. (connect timeout=15)'))
+[2025-08-17T10:56:36.119+0000] {subprocess.py:93} INFO - 69/100 BBUSDT lỗi: relation "cryptocurrency.bbusdt" does not exist
+[2025-08-17T10:56:36.119+0000] {subprocess.py:93} INFO - LINE 1: SELECT MAX(time) FROM cryptocurrency.bbusdt;
+[2025-08-17T10:56:36.119+0000] {subprocess.py:93} INFO -                               ^
+[2025-08-17T10:56:36.120+0000] {subprocess.py:93} INFO - 
+[2025-08-17T10:56:36.120+0000] {subprocess.py:93} INFO - ⚠️ NEIROUSDT lỗi lần 2/3: HTTPSConnectionPool(host='api.binance.com', port=443): Max retries exceeded with url: /api/v3/klines?symbol=NEIROUSDT&interval=1m&limit=100 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7f804cd476d0>, 'Connection to api.binance.com timed out. (connect timeout=15)'))
+[2025-08-17T10:56:36.120+0000] {subprocess.py:93} INFO - ⚠️ BIOUSDT lỗi lần 1/3: HTTPSConnectionPool(host='api.binance.com', port=443): Max retries exceeded with url: /api/v3/klines?symbol=BIOUSDT&interval=1m&limit=100 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7f804cd44400>, 'Connection to api.binance.com timed out. (connect timeout=15)'))
+[2025-08-17T10:56:36.121+0000] {subprocess.py:93} INFO - ⚠️ ALGOUSDT lỗi lần 2/3: HTTPSConnectionPool(host='api.binance.com', port=443): Max retries exceeded with url: /api/v3/klines?symbol=ALGOUSDT&interval=1m&limit=100 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7f804cd5e2f0>, 'Connection to api.binance.com timed out. (connect timeout=15)'))
+[2025-08-17T10:56:36.121+0000] {subprocess.py:93} INFO - ✅ ALGOUSDT: thêm 11 dòng mới
+[2025-08-17T10:56:36.121+0000] {subprocess.py:93} INFO - 70/100 ALGOUSDT lưu OK
+[2025-08-17T10:56:36.121+0000] {subprocess.py:93} INFO - ⚠️ FILUSDT lỗi lần 1/3: HTTPSConnectionPool(host='api.binance.com', port=443): Max retries exceeded with url: /api/v3/klines?symbol=FILUSDT&interval=1m&limit=100 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7f804cd5eec0>, 'Connection to api.binance.com timed out. (connect timeout=15)'))
+[2025-08-17T10:56:36.122+0000] {subprocess.py:93} INFO - ⚠️ NEIROUSDT lỗi lần 3/3: HTTPSConnectionPool(host='api.binance.com', port=443): Max retries exceeded with url: /api/v3/klines?symbol=NEIROUSDT&interval=1m&limit=100 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7f804cd443d0>, 'Connection to api.binance.com timed out. (connect timeout=15)'))
+[2025-08-17T10:56:36.122+0000] {subprocess.py:93} INFO - 71/100 NEIROUSDT bỏ qua (fail)
+[2025-08-17T10:56:36.122+0000] {subprocess.py:93} INFO - ✅ LAUSDT: thêm 6 dòng mới
+[2025-08-17T10:56:36.122+0000] {subprocess.py:93} INFO - 72/100 LAUSDT lưu OK
+[2025-08-17T10:56:36.123+0000] {subprocess.py:93} INFO - 73/100 PONDUSDT lỗi: connection to server at "videv.cloud" (27.74.74.29), port 5432 failed: Connection timed out
+[2025-08-17T10:56:36.123+0000] {subprocess.py:93} INFO - 	Is the server running on that host and accepting TCP/IP connections?
+[2025-08-17T10:56:36.123+0000] {subprocess.py:93} INFO - 
+[2025-08-17T10:56:36.124+0000] {subprocess.py:93} INFO - ⚠️ BIOUSDT lỗi lần 2/3: HTTPSConnectionPool(host='api.binance.com', port=443): Max retries exceeded with url: /api/v3/klines?symbol=BIOUSDT&interval=1m&limit=100 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7f804cd8dab0>, 'Connection to api.binance.com timed out. (connect timeout=15)'))
+[2025-08-17T10:56:36.124+0000] {subprocess.py:93} INFO - ✅ SPKUSDT: thêm 6 dòng mới
+[2025-08-17T10:56:36.124+0000] {subprocess.py:93} INFO - 74/100 SPKUSDT lưu OK
+[2025-08-17T10:56:36.124+0000] {subprocess.py:93} INFO - ✅ SYRUPUSDT: thêm 6 dòng mới
+[2025-08-17T10:56:36.125+0000] {subprocess.py:93} INFO - 75/100 SYRUPUSDT lưu OK
+[2025-08-17T10:56:36.125+0000] {subprocess.py:93} INFO - ✅ FETUSDT: thêm 6 dòng mới
+[2025-08-17T10:56:36.125+0000] {subprocess.py:93} INFO - 76/100 FETUSDT lưu OK
+[2025-08-17T10:56:36.125+0000] {subprocess.py:93} INFO - ✅ ERAUSDT: thêm 6 dòng mới
+[2025-08-17T10:56:36.126+0000] {subprocess.py:93} INFO - 77/100 ERAUSDT lưu OK
+[2025-08-17T10:56:36.126+0000] {subprocess.py:93} INFO - 78/100 BIOUSDT lỗi: relation "cryptocurrency.biousdt" does not exist
+[2025-08-17T10:56:36.126+0000] {subprocess.py:93} INFO - LINE 1: SELECT MAX(time) FROM cryptocurrency.biousdt;
+[2025-08-17T10:56:36.126+0000] {subprocess.py:93} INFO -                               ^
+[2025-08-17T10:56:36.127+0000] {subprocess.py:93} INFO - 
+[2025-08-17T10:56:36.127+0000] {subprocess.py:93} INFO - ⚠️ CAKEUSDT lỗi lần 1/3: HTTPSConnectionPool(host='api.binance.com', port=443): Max retries exceeded with url: /api/v3/klines?symbol=CAKEUSDT&interval=1m&limit=100 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7f804cd5e1a0>, 'Connection to api.binance.com timed out. (connect timeout=15)'))
+[2025-08-17T10:56:36.127+0000] {subprocess.py:93} INFO - ✅ BCHUSDT: thêm 6 dòng mới
+[2025-08-17T10:56:36.128+0000] {subprocess.py:93} INFO - 79/100 BCHUSDT lưu OK
+[2025-08-17T10:56:36.128+0000] {subprocess.py:93} INFO - ⚠️ FILUSDT lỗi lần 2/3: HTTPSConnectionPool(host='api.binance.com', port=443): Max retries exceeded with url: /api/v3/klines?symbol=FILUSDT&interval=1m&limit=100 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7f804cd5f2b0>, 'Connection to api.binance.com timed out. (connect timeout=15)'))
+[2025-08-17T10:56:36.128+0000] {subprocess.py:93} INFO - 80/100 WLDUSDT lỗi: connection to server at "videv.cloud" (27.74.74.29), port 5432 failed: Connection timed out
+[2025-08-17T10:56:36.128+0000] {subprocess.py:93} INFO - 	Is the server running on that host and accepting TCP/IP connections?
+[2025-08-17T10:56:36.129+0000] {subprocess.py:93} INFO - 
+[2025-08-17T10:56:36.129+0000] {subprocess.py:93} INFO - ✅ VIRTUALUSDT: thêm 6 dòng mới
+[2025-08-17T10:56:36.129+0000] {subprocess.py:93} INFO - 81/100 VIRTUALUSDT lưu OK
+[2025-08-17T10:56:36.129+0000] {subprocess.py:93} INFO - ✅ PNUTUSDT: thêm 5 dòng mới
+[2025-08-17T10:56:36.130+0000] {subprocess.py:93} INFO - 82/100 PNUTUSDT lưu OK
+[2025-08-17T10:56:36.130+0000] {subprocess.py:93} INFO - ⚠️ STRKUSDT lỗi lần 1/3: HTTPSConnectionPool(host='api.binance.com', port=443): Max retries exceeded with url: /api/v3/klines?symbol=STRKUSDT&interval=1m&limit=100 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7f804cd855d0>, 'Connection to api.binance.com timed out. (connect timeout=15)'))
+[2025-08-17T10:56:36.130+0000] {subprocess.py:93} INFO - ✅ CFXUSDT: thêm 6 dòng mới
+[2025-08-17T10:56:36.130+0000] {subprocess.py:93} INFO - 83/100 CFXUSDT lưu OK
+[2025-08-17T10:56:36.131+0000] {subprocess.py:93} INFO - ✅ MDTUSDT: thêm 6 dòng mới
+[2025-08-17T10:56:36.131+0000] {subprocess.py:93} INFO - 84/100 MDTUSDT lưu OK
+[2025-08-17T10:56:36.132+0000] {subprocess.py:93} INFO - ✅ EURUSDT: thêm 6 dòng mới
+[2025-08-17T10:56:36.132+0000] {subprocess.py:93} INFO - 85/100 EURUSDT lưu OK
+[2025-08-17T10:56:36.132+0000] {subprocess.py:93} INFO - 86/100 STRKUSDT lỗi: relation "cryptocurrency.strkusdt" does not exist
+[2025-08-17T10:56:36.132+0000] {subprocess.py:93} INFO - LINE 1: SELECT MAX(time) FROM cryptocurrency.strkusdt;
+[2025-08-17T10:56:36.133+0000] {subprocess.py:93} INFO -                               ^
+[2025-08-17T10:56:36.133+0000] {subprocess.py:93} INFO - 
+[2025-08-17T10:56:36.133+0000] {subprocess.py:93} INFO - ⚠️ FILUSDT lỗi lần 3/3: HTTPSConnectionPool(host='api.binance.com', port=443): Max retries exceeded with url: /api/v3/klines?symbol=FILUSDT&interval=1m&limit=100 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7f804cd47ac0>, 'Connection to api.binance.com timed out. (connect timeout=15)'))
+[2025-08-17T10:56:36.133+0000] {subprocess.py:93} INFO - 87/100 OPUSDT lỗi: connection to server at "videv.cloud" (27.74.74.29), port 5432 failed: Connection timed out
+[2025-08-17T10:56:36.134+0000] {subprocess.py:93} INFO - 	Is the server running on that host and accepting TCP/IP connections?
+[2025-08-17T10:56:36.134+0000] {subprocess.py:93} INFO - 
+[2025-08-17T10:56:36.134+0000] {subprocess.py:93} INFO - 88/100 FILUSDT bỏ qua (fail)
+[2025-08-17T10:56:36.134+0000] {subprocess.py:93} INFO - ✅ ENSUSDT: thêm 5 dòng mới
+[2025-08-17T10:56:36.135+0000] {subprocess.py:93} INFO - 89/100 ENSUSDT lưu OK
+[2025-08-17T10:56:36.135+0000] {subprocess.py:93} INFO - 90/100 TREEUSDT lỗi: relation "cryptocurrency.treeusdt" does not exist
+[2025-08-17T10:56:36.135+0000] {subprocess.py:93} INFO - LINE 1: SELECT MAX(time) FROM cryptocurrency.treeusdt;
+[2025-08-17T10:56:36.135+0000] {subprocess.py:93} INFO -                               ^
+[2025-08-17T10:56:36.136+0000] {subprocess.py:93} INFO - 
+[2025-08-17T10:56:36.136+0000] {subprocess.py:93} INFO - 91/100 ZKUSDT lỗi: relation "cryptocurrency.zkusdt" does not exist
+[2025-08-17T10:56:36.136+0000] {subprocess.py:93} INFO - LINE 1: SELECT MAX(time) FROM cryptocurrency.zkusdt;
+[2025-08-17T10:56:36.137+0000] {subprocess.py:93} INFO -                               ^
+[2025-08-17T10:56:36.137+0000] {subprocess.py:93} INFO - 
+[2025-08-17T10:56:36.137+0000] {subprocess.py:93} INFO - ⚠️ ARKMUSDT lỗi lần 1/3: HTTPSConnectionPool(host='api.binance.com', port=443): Max retries exceeded with url: /api/v3/klines?symbol=ARKMUSDT&interval=1m&limit=100 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7f804cd5f220>, 'Connection to api.binance.com timed out. (connect timeout=15)'))
+[2025-08-17T10:56:36.137+0000] {subprocess.py:93} INFO - ⚠️ VETUSDT lỗi lần 1/3: HTTPSConnectionPool(host='api.binance.com', port=443): Max retries exceeded with url: /api/v3/klines?symbol=VETUSDT&interval=1m&limit=100 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7f804cd44c10>, 'Connection to api.binance.com timed out. (connect timeout=15)'))
+[2025-08-17T10:56:36.138+0000] {subprocess.py:93} INFO - 92/100 HOTUSDT lỗi: relation "cryptocurrency.hotusdt" does not exist
+[2025-08-17T10:56:36.138+0000] {subprocess.py:93} INFO - LINE 1: SELECT MAX(time) FROM cryptocurrency.hotusdt;
+[2025-08-17T10:56:36.138+0000] {subprocess.py:93} INFO -                               ^
+[2025-08-17T10:56:36.138+0000] {subprocess.py:93} INFO - 
+[2025-08-17T10:56:36.139+0000] {subprocess.py:93} INFO - 93/100 BERAUSDT lỗi: connection to server at "videv.cloud" (27.74.74.29), port 5432 failed: Connection timed out
+[2025-08-17T10:56:36.139+0000] {subprocess.py:93} INFO - 	Is the server running on that host and accepting TCP/IP connections?
+[2025-08-17T10:56:36.139+0000] {subprocess.py:93} INFO - 
+[2025-08-17T10:58:48.632+0000] {subprocess.py:93} INFO - ⚠️ VETUSDT lỗi lần 2/3: HTTPSConnectionPool(host='api.binance.com', port=443): Max retries exceeded with url: /api/v3/klines?symbol=VETUSDT&interval=1m&limit=100 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7f804cd87df0>, 'Connection to api.binance.com timed out. (connect timeout=15)'))
+[2025-08-17T10:58:48.633+0000] {subprocess.py:93} INFO - 94/100 ETCUSDT lỗi: connection to server at "videv.cloud" (27.74.74.29), port 5432 failed: Connection timed out
+[2025-08-17T10:58:48.633+0000] {subprocess.py:93} INFO - 	Is the server running on that host and accepting TCP/IP connections?
+[2025-08-17T10:58:48.633+0000] {subprocess.py:93} INFO - 
+[2025-08-17T10:58:48.634+0000] {subprocess.py:93} INFO - 95/100 CAKEUSDT lỗi: connection to server at "videv.cloud" (27.74.74.29), port 5432 failed: Connection timed out
+[2025-08-17T10:58:48.634+0000] {subprocess.py:93} INFO - 	Is the server running on that host and accepting TCP/IP connections?
+[2025-08-17T10:58:48.634+0000] {subprocess.py:93} INFO - 
+[2025-08-17T10:58:48.634+0000] {subprocess.py:93} INFO - 96/100 POLUSDT lỗi: connection to server at "videv.cloud" (27.74.74.29), port 5432 failed: Connection timed out
+[2025-08-17T10:58:48.634+0000] {subprocess.py:93} INFO - 	Is the server running on that host and accepting TCP/IP connections?
+[2025-08-17T10:58:48.635+0000] {subprocess.py:93} INFO - 
+[2025-08-17T10:58:48.635+0000] {subprocess.py:93} INFO - 97/100 SHIBUSDT lỗi: connection to server at "videv.cloud" (27.74.74.29), port 5432 failed: Connection timed out
+[2025-08-17T10:58:48.635+0000] {subprocess.py:93} INFO - 	Is the server running on that host and accepting TCP/IP connections?
+[2025-08-17T10:58:48.635+0000] {subprocess.py:93} INFO - 
+[2025-08-17T10:58:48.636+0000] {subprocess.py:93} INFO - 98/100 ICPUSDT lỗi: connection to server at "videv.cloud" (27.74.74.29), port 5432 failed: Connection timed out
+[2025-08-17T10:58:48.636+0000] {subprocess.py:93} INFO - 	Is the server running on that host and accepting TCP/IP connections?
+[2025-08-17T10:58:48.636+0000] {subprocess.py:93} INFO - 
+[2025-08-17T10:58:48.636+0000] {subprocess.py:93} INFO - 99/100 ARKMUSDT lỗi: connection to server at "videv.cloud" (27.74.74.29), port 5432 failed: Connection timed out
+[2025-08-17T10:58:48.636+0000] {subprocess.py:93} INFO - 	Is the server running on that host and accepting TCP/IP connections?
+[2025-08-17T10:58:48.637+0000] {subprocess.py:93} INFO - 
+[2025-08-17T10:58:48.637+0000] {subprocess.py:93} INFO - 100/100 VETUSDT lỗi: connection to server at "videv.cloud" (27.74.74.29), port 5432 failed: Connection timed out
+[2025-08-17T10:58:48.637+0000] {subprocess.py:93} INFO - 	Is the server running on that host and accepting TCP/IP connections?
+[2025-08-17T10:58:48.637+0000] {subprocess.py:93} INFO - 
+[2025-08-17T10:58:48.748+0000] {subprocess.py:97} INFO - Command exited with return code 0
+[2025-08-17T10:58:48.749+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-08-17T10:58:48.781+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=crypto_collector_dag, task_id=run_crypto_collector, run_id=scheduled__2025-08-17T10:50:00+00:00, execution_date=20250817T105000, start_date=20250817T105157, end_date=20250817T105848
+[2025-08-17T10:58:48.812+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-08-17T10:58:48.829+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-08-17T10:58:48.829+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

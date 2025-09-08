@@ -1,0 +1,73 @@
+[2025-09-05T11:23:11.825+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-09-05T11:23:11.846+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: news_pipeline.add_postgre manual__2025-09-05T11:09:55.305363+00:00 [queued]>
+[2025-09-05T11:23:11.854+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: news_pipeline.add_postgre manual__2025-09-05T11:09:55.305363+00:00 [queued]>
+[2025-09-05T11:23:11.854+0000] {taskinstance.py:2306} INFO - Starting attempt 4 of 14
+[2025-09-05T11:23:11.865+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): add_postgre> on 2025-09-05 11:09:55.305363+00:00
+[2025-09-05T11:23:11.874+0000] {standard_task_runner.py:63} INFO - Started process 3197994 to run task
+[2025-09-05T11:23:11.877+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'news_pipeline', 'add_postgre', 'manual__2025-09-05T11:09:55.305363+00:00', '--job-id', '114425', '--raw', '--subdir', 'DAGS_FOLDER/dag_news.py', '--cfg-path', '/tmp/tmpg1a078pp']
+[2025-09-05T11:23:11.880+0000] {standard_task_runner.py:91} INFO - Job 114425: Subtask add_postgre
+[2025-09-05T11:23:11.936+0000] {task_command.py:426} INFO - Running <TaskInstance: news_pipeline.add_postgre manual__2025-09-05T11:09:55.305363+00:00 [running]> on host 1877907bc043
+[2025-09-05T11:23:12.028+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='news_pipeline' AIRFLOW_CTX_TASK_ID='add_postgre' AIRFLOW_CTX_EXECUTION_DATE='2025-09-05T11:09:55.305363+00:00' AIRFLOW_CTX_TRY_NUMBER='4' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-09-05T11:09:55.305363+00:00'
+[2025-09-05T11:23:12.029+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-09-05T11:24:05.843+0000] {logging_mixin.py:188} INFO - Không thể nhấn nút 'Xem thêm' lần 5: Message: tab crashed
+  (Session info: chrome=138.0.7204.183)
+Stacktrace:
+#0 0x55a85fdbb7da <unknown>
+#1 0x55a85f860133 <unknown>
+#2 0x55a85f848125 <unknown>
+#3 0x55a85f845fd5 <unknown>
+#4 0x55a85f84692f <unknown>
+#5 0x55a85f8553e3 <unknown>
+#6 0x55a85f86e83e <unknown>
+#7 0x55a85f87507b <unknown>
+#8 0x55a85f847070 <unknown>
+#9 0x55a85f86df83 <unknown>
+#10 0x55a85f8fd5f6 <unknown>
+#11 0x55a85f8d7683 <unknown>
+#12 0x55a85f8a3b5b <unknown>
+#13 0x55a85f8a4f31 <unknown>
+#14 0x55a85fd8072b <unknown>
+#15 0x55a85fd84534 <unknown>
+#16 0x55a85fd67229 <unknown>
+#17 0x55a85fd850d8 <unknown>
+#18 0x55a85fd4b61f <unknown>
+#19 0x55a85fda8dd8 <unknown>
+#20 0x55a85fda8fb6 <unknown>
+#21 0x55a85fdbaaf6 <unknown>
+#22 0x7f09a7d6e134 <unknown>
+[2025-09-05T11:24:05.941+0000] {add_postgre.py:16} INFO - df info :
+[2025-09-05T11:24:05.941+0000] {add_postgre.py:17} INFO -                                                Titles  ...        Source
+15  Cổ phiếu nào trên HOSE tăng mạnh nhất trong th...  ...  vietstock.vn
+16  Thị trường chứng quyền ngày 05/09/2025: Khối n...  ...  vietstock.vn
+17  Chứng khoán phái sinh ngày 05/09/2025: Triển v...  ...  vietstock.vn
+18                 Góc nhìn 05/09: Tiếp tục giằng co?  ...  vietstock.vn
+19  TKG bị xử phạt 92.5 triệu đồng vì vi phạm công...  ...  vietstock.vn
+20  Theo dấu dòng tiền cá mập 04/09: Khối ngoại qu...  ...  vietstock.vn
+21  Vietstock Daily 05/09/2025: Tiếp tục chinh phụ...  ...  vietstock.vn
+22    HSBC: Việt Nam tiến gần mục tiêu nâng hạng FTSE  ...  vietstock.vn
+23  Ông Lã Giang Trung: Giai đoạn tăng điểm tiếp t...  ...  vietstock.vn
+24  VFS dự báo thanh khoản trở lại mạnh mẽ, cơ hội...  ...  vietstock.vn
+25  Tổng Giám đốc ILA rời ghế cổ đông lớn giữa lúc...  ...  vietstock.vn
+26  Nhịp đập Thị trường 04/09: Bộ ba trụ cột hồi s...  ...  vietstock.vn
+27     Bỏ đề xuất áp thuế 20% với lãi bán chứng khoán  ...  vietstock.vn
+28  Phân tích kỹ thuật phiên chiều 04/09: Test lạ...  ...  vietstock.vn
+29  SRF bị lưu ý về khả năng hủy niêm yết do ý kiế...  ...  vietstock.vn
+30  IR không còn là "đọc số" mà là "định hình câu ...  ...  vietstock.vn
+31  Quỹ FTSE ETF thay tên, đổi chỉ số tham chiếu, ...  ...  vietstock.vn
+32    Tự doanh Chứng khoán SmartMind muốn bán hết SSH  ...  vietstock.vn
+33               Sóng ngầm đổi chủ tại Cát Bà Amatina  ...  vietstock.vn
+34  Ngày 04/09/2025: 10 cổ phiếu nóng dưới góc nh...  ...  vietstock.vn
+35   Cổ phiếu nào thường tăng trong tháng cuối quý 3?  ...  vietstock.vn
+36  Vietstock LIVE #20: VN-Index vượt rào cản, địn...  ...  vietstock.vn
+37            Top cổ phiếu đáng chú ý đầu phiên 04/09  ...  vietstock.vn
+38     04/09: Đọc gì trước giờ giao dịch chứng khoán?  ...  vietstock.vn
+
+[24 rows x 4 columns]
+[2025-09-05T11:24:05.956+0000] {add_postgre.py:23} INFO - ✅ Kết nối PostgreSQL thành công.
+[2025-09-05T11:24:06.243+0000] {add_postgre.py:30} INFO - 📭 Không có bản ghi mới để thêm vào bảng News.
+[2025-09-05T11:24:06.245+0000] {python.py:237} INFO - Done. Returned value was: Không có bản ghi mới
+[2025-09-05T11:24:06.245+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-09-05T11:24:06.283+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=news_pipeline, task_id=add_postgre, run_id=manual__2025-09-05T11:09:55.305363+00:00, execution_date=20250905T110955, start_date=20250905T112311, end_date=20250905T112406
+[2025-09-05T11:24:06.349+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-09-05T11:24:06.392+0000] {taskinstance.py:3498} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-09-05T11:24:06.393+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

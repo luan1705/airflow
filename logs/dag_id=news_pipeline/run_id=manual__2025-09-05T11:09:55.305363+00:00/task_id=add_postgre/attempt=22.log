@@ -1,0 +1,44 @@
+[2025-09-05T12:47:47.792+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-09-05T12:47:47.815+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: news_pipeline.add_postgre manual__2025-09-05T11:09:55.305363+00:00 [queued]>
+[2025-09-05T12:47:47.822+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: news_pipeline.add_postgre manual__2025-09-05T11:09:55.305363+00:00 [queued]>
+[2025-09-05T12:47:47.823+0000] {taskinstance.py:2306} INFO - Starting attempt 22 of 32
+[2025-09-05T12:47:47.833+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): add_postgre> on 2025-09-05 11:09:55.305363+00:00
+[2025-09-05T12:47:47.841+0000] {standard_task_runner.py:63} INFO - Started process 356 to run task
+[2025-09-05T12:47:47.846+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'news_pipeline', 'add_postgre', 'manual__2025-09-05T11:09:55.305363+00:00', '--job-id', '115376', '--raw', '--subdir', 'DAGS_FOLDER/dag_news.py', '--cfg-path', '/tmp/tmp_kviz9oj']
+[2025-09-05T12:47:47.849+0000] {standard_task_runner.py:91} INFO - Job 115376: Subtask add_postgre
+[2025-09-05T12:47:47.901+0000] {task_command.py:426} INFO - Running <TaskInstance: news_pipeline.add_postgre manual__2025-09-05T11:09:55.305363+00:00 [running]> on host d4d2fe648a81
+[2025-09-05T12:47:47.987+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='news_pipeline' AIRFLOW_CTX_TASK_ID='add_postgre' AIRFLOW_CTX_EXECUTION_DATE='2025-09-05T11:09:55.305363+00:00' AIRFLOW_CTX_TRY_NUMBER='22' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-09-05T11:09:55.305363+00:00'
+[2025-09-05T12:47:47.988+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-09-05T12:47:48.000+0000] {logger.py:11} INFO - ====== WebDriver manager ======
+[2025-09-05T12:47:48.131+0000] {logger.py:11} INFO - Get LATEST chromedriver version for google-chrome
+[2025-09-05T12:47:48.374+0000] {logger.py:11} INFO - Get LATEST chromedriver version for google-chrome
+[2025-09-05T12:47:48.643+0000] {logger.py:11} INFO - There is no [linux64] chromedriver "140.0.7339.80" for browser google-chrome "140.0.7339" in cache
+[2025-09-05T12:47:48.644+0000] {logger.py:11} INFO - Get LATEST chromedriver version for google-chrome
+[2025-09-05T12:47:49.321+0000] {logger.py:11} INFO - WebDriver version 140.0.7339.80 selected
+[2025-09-05T12:47:49.327+0000] {logger.py:11} INFO - Modern chrome version https://storage.googleapis.com/chrome-for-testing-public/140.0.7339.80/linux64/chromedriver-linux64.zip
+[2025-09-05T12:47:49.327+0000] {logger.py:11} INFO - About to download new driver from https://storage.googleapis.com/chrome-for-testing-public/140.0.7339.80/linux64/chromedriver-linux64.zip
+[2025-09-05T12:47:49.612+0000] {logger.py:11} INFO - Driver downloading response is 200
+[2025-09-05T12:47:50.698+0000] {logger.py:11} INFO - Get LATEST chromedriver version for google-chrome
+[2025-09-05T12:47:51.167+0000] {logger.py:11} INFO - Driver has been saved in cache [/home/***/.wdm/drivers/chromedriver/linux64/140.0.7339.80]
+[2025-09-05T13:56:51.398+0000] {local_task_job_runner.py:310} WARNING - State of this instance has been externally set to failed. Terminating instance.
+[2025-09-05T13:56:51.407+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
+[2025-09-05T13:56:51.415+0000] {process_utils.py:132} INFO - Sending 15 to group 356. PIDs of all processes in the group: [382, 388, 392, 393, 402, 403, 431, 432, 477, 486, 518, 555, 564, 424, 1294, 356]
+[2025-09-05T13:56:51.416+0000] {process_utils.py:87} INFO - Sending the signal 15 to group 356
+[2025-09-05T13:56:51.418+0000] {taskinstance.py:2611} ERROR - Received SIGTERM. Terminating subprocesses.
+[2025-09-05T13:56:51.419+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-09-05T13:56:51.425+0000] {process_utils.py:80} INFO - Process psutil.Process(pid=564, status='terminated', started='12:47:54') (564) terminated with exit code None
+[2025-09-05T13:56:51.522+0000] {process_utils.py:80} INFO - Process psutil.Process(pid=402, status='terminated', started='12:47:50') (402) terminated with exit code None
+[2025-09-05T13:56:51.523+0000] {process_utils.py:80} INFO - Process psutil.Process(pid=424, status='terminated', started='12:47:50') (424) terminated with exit code None
+[2025-09-05T13:56:51.524+0000] {process_utils.py:80} INFO - Process psutil.Process(pid=392, status='terminated', started='12:47:50') (392) terminated with exit code None
+[2025-09-05T13:56:51.524+0000] {process_utils.py:80} INFO - Process psutil.Process(pid=403, status='terminated', started='12:47:50') (403) terminated with exit code None
+[2025-09-05T13:56:51.524+0000] {process_utils.py:80} INFO - Process psutil.Process(pid=382, status='terminated', started='12:47:50') (382) terminated with exit code None
+[2025-09-05T13:56:51.525+0000] {process_utils.py:80} INFO - Process psutil.Process(pid=356, status='terminated', exitcode=0, started='12:47:47') (356) terminated with exit code 0
+[2025-09-05T13:56:51.526+0000] {process_utils.py:80} INFO - Process psutil.Process(pid=555, status='terminated', started='12:47:54') (555) terminated with exit code None
+[2025-09-05T13:56:51.526+0000] {process_utils.py:80} INFO - Process psutil.Process(pid=1294, status='terminated', started='12:50:51') (1294) terminated with exit code None
+[2025-09-05T13:56:51.526+0000] {process_utils.py:80} INFO - Process psutil.Process(pid=431, status='terminated', started='12:47:51') (431) terminated with exit code None
+[2025-09-05T13:56:51.527+0000] {process_utils.py:80} INFO - Process psutil.Process(pid=518, status='terminated', started='12:47:53') (518) terminated with exit code None
+[2025-09-05T13:56:51.527+0000] {process_utils.py:80} INFO - Process psutil.Process(pid=393, status='terminated', started='12:47:50') (393) terminated with exit code None
+[2025-09-05T13:56:51.528+0000] {process_utils.py:80} INFO - Process psutil.Process(pid=388, status='terminated', started='12:47:50') (388) terminated with exit code None
+[2025-09-05T13:56:51.528+0000] {process_utils.py:80} INFO - Process psutil.Process(pid=486, status='terminated', started='12:47:51') (486) terminated with exit code None
+[2025-09-05T13:56:51.528+0000] {process_utils.py:80} INFO - Process psutil.Process(pid=432, status='terminated', started='12:47:51') (432) terminated with exit code None
+[2025-09-05T13:56:51.542+0000] {process_utils.py:80} INFO - Process psutil.Process(pid=477, status='terminated', started='12:47:51') (477) terminated with exit code None

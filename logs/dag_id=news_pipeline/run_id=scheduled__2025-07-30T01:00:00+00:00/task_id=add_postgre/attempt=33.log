@@ -1,0 +1,76 @@
+[2025-07-31T11:11:27.095+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-07-31T11:11:27.113+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: news_pipeline.add_postgre scheduled__2025-07-30T01:00:00+00:00 [queued]>
+[2025-07-31T11:11:27.120+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: news_pipeline.add_postgre scheduled__2025-07-30T01:00:00+00:00 [queued]>
+[2025-07-31T11:11:27.120+0000] {taskinstance.py:2306} INFO - Starting attempt 33 of 43
+[2025-07-31T11:11:27.130+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): add_postgre> on 2025-07-30 01:00:00+00:00
+[2025-07-31T11:11:27.139+0000] {standard_task_runner.py:63} INFO - Started process 5287 to run task
+[2025-07-31T11:11:27.142+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'news_pipeline', 'add_postgre', 'scheduled__2025-07-30T01:00:00+00:00', '--job-id', '1652', '--raw', '--subdir', 'DAGS_FOLDER/dag_news.py', '--cfg-path', '/tmp/tmpdloc6doa']
+[2025-07-31T11:11:27.145+0000] {standard_task_runner.py:91} INFO - Job 1652: Subtask add_postgre
+[2025-07-31T11:11:27.210+0000] {task_command.py:426} INFO - Running <TaskInstance: news_pipeline.add_postgre scheduled__2025-07-30T01:00:00+00:00 [running]> on host 1877907bc043
+[2025-07-31T11:11:27.334+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='news_pipeline' AIRFLOW_CTX_TASK_ID='add_postgre' AIRFLOW_CTX_EXECUTION_DATE='2025-07-30T01:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='33' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-07-30T01:00:00+00:00'
+[2025-07-31T11:11:27.336+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-07-31T11:14:53.446+0000] {logging_mixin.py:188} INFO - ko thể click 5: Message: element not interactable
+  (Session info: chrome=138.0.7204.183); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#elementnotinteractableexception
+Stacktrace:
+#0 0x558995d777da <unknown>
+#1 0x55899581c133 <unknown>
+#2 0x55899586f00e <unknown>
+#3 0x5589958620ea <unknown>
+#4 0x5589958938b2 <unknown>
+#5 0x558995861a6a <unknown>
+#6 0x558995893a7e <unknown>
+#7 0x5589958b971c <unknown>
+#8 0x558995893683 <unknown>
+#9 0x55899585fb5b <unknown>
+#10 0x558995860f31 <unknown>
+#11 0x558995d3c72b <unknown>
+#12 0x558995d40534 <unknown>
+#13 0x558995d23229 <unknown>
+#14 0x558995d410d8 <unknown>
+#15 0x558995d0761f <unknown>
+#16 0x558995d64dd8 <unknown>
+#17 0x558995d64fb6 <unknown>
+#18 0x558995d76af6 <unknown>
+#19 0x7f743737b134 <unknown>
+[2025-07-31T11:14:54.013+0000] {add_postgre.py:16} INFO - df info :
+[2025-07-31T11:14:54.014+0000] {add_postgre.py:17} INFO -                                                Titles  ...        Source
+9   Thị trường chứng quyền ngày 31/07/2025: Khối n...  ...  vietstock.vn
+10  Theo dấu dòng tiền cá mập 30/07: Tự doanh, khố...  ...  vietstock.vn
+11  Chứng khoán phái sinh ngày 31/07/2025: Triển v...  ...  vietstock.vn
+12   Vợ Thành viên HĐQT BWE mua thành công 1 triệu cp  ...  vietstock.vn
+13                     Góc nhìn 31/07: Phân hóa mạnh?  ...  vietstock.vn
+14  Vietstock Daily 31/07/2025: Vẫn còn rủi ro tiề...  ...  vietstock.vn
+15  Nhịp đập Thị trường 30/07: Khối ngoại quay lại...  ...  vietstock.vn
+16  Phân tích kỹ thuật phiên chiều 29/07: Tình hìn...  ...  vietstock.vn
+17        Quỹ ETF hơn nửa tỷ đô tiếp đà mua ròng mạnh  ...  vietstock.vn
+18  Thị giá DXG rời đỉnh 1 năm, Thành viên HĐQT mu...  ...  vietstock.vn
+19  Cải cách thuế trong đầu tư: Cú hích cho sự min...  ...  vietstock.vn
+20            Top cổ phiếu đáng chú ý đầu phiên 30/07  ...  vietstock.vn
+21     30/07: Đọc gì trước giờ giao dịch chứng khoán?  ...  vietstock.vn
+13  Các chuyên gia nêu điểm "then chốt" sau khi th...  ...      Cafef.vn
+14  Chứng khoán ngày mai, 31-7: Cổ phiếu ngân hàng...  ...      Cafef.vn
+15           Cổ phiếu chứng khoán, ngân hàng nổi sóng  ...      Cafef.vn
+16  Vì sao nhiều ngân hàng muốn ‘thâu tóm’ công ty...  ...      Cafef.vn
+17  Lãnh đạo Ủy ban Chứng khoán Nhà nước chỉ ra mộ...  ...      Cafef.vn
+18  Nhà đầu tư 'full cash' có nên 'nhặt nhạnh' cổ ...  ...      Cafef.vn
+19  Khối ngoại trở lại mua ròng đột biến hơn 1.600...  ...      Cafef.vn
+20           Lý do Vietnam Airlines được giãn hoãn nợ  ...      Cafef.vn
+21  Taseco Land trước thềm HOSE: Nền tảng vững chắ...  ...      Cafef.vn
+22  Đại diện của Keppel Land từ nhiệm thành viên H...  ...      Cafef.vn
+23  Thành viên HĐQT Tập đoàn Đất Xanh muốn bán hơn...  ...      Cafef.vn
+24  Hơn 70.000 tỉ đồng đổ vào chứng khoán đến từ đâu?  ...      Cafef.vn
+25  Chứng khoán Mirae Asset được Ủy ban Chứng khoá...  ...      Cafef.vn
+26  Lịch sự kiện và tin vắn chứng khoán ngày 30/7/...  ...      Cafef.vn
+27  Nhà đầu tư chứng khoán nên hành động thế nào s...  ...      Cafef.vn
+28  Thuỷ lợi Lâm Đồng (LHC) báo lãi quý 2 cao kỷ l...  ...      Cafef.vn
+29  Chứng khoán Việt Nam thường biến động ra sao s...  ...      Cafef.vn
+
+[30 rows x 4 columns]
+[2025-07-31T11:14:54.027+0000] {add_postgre.py:23} INFO - ✅ Kết nối PostgreSQL thành công.
+[2025-07-31T11:14:56.740+0000] {add_postgre.py:39} INFO - ✅ Đã thêm 30 bản ghi mới vào DB.
+[2025-07-31T11:14:56.741+0000] {python.py:237} INFO - Done. Returned value was: Đã thêm 30 bản ghi mới vào DB
+[2025-07-31T11:14:56.742+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-07-31T11:14:56.777+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=news_pipeline, task_id=add_postgre, run_id=scheduled__2025-07-30T01:00:00+00:00, execution_date=20250730T010000, start_date=20250731T111127, end_date=20250731T111456
+[2025-07-31T11:14:56.865+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-07-31T11:14:56.904+0000] {taskinstance.py:3498} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-07-31T11:14:56.906+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

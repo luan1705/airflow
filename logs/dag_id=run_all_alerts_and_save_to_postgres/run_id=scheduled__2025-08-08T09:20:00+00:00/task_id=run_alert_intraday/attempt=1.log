@@ -1,0 +1,181 @@
+[2025-08-08T09:30:00.744+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-08-08T09:30:00.770+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: run_all_alerts_and_save_to_postgres.run_alert_intraday scheduled__2025-08-08T09:20:00+00:00 [queued]>
+[2025-08-08T09:30:00.779+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: run_all_alerts_and_save_to_postgres.run_alert_intraday scheduled__2025-08-08T09:20:00+00:00 [queued]>
+[2025-08-08T09:30:00.779+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 3
+[2025-08-08T09:30:00.790+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): run_alert_intraday> on 2025-08-08 09:20:00+00:00
+[2025-08-08T09:30:00.797+0000] {standard_task_runner.py:63} INFO - Started process 184226 to run task
+[2025-08-08T09:30:00.801+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'run_all_alerts_and_save_to_postgres', 'run_alert_intraday', 'scheduled__2025-08-08T09:20:00+00:00', '--job-id', '3323', '--raw', '--subdir', 'DAGS_FOLDER/alert_to_db/alert_all_to_postgres_dag.py', '--cfg-path', '/tmp/tmpvt589543']
+[2025-08-08T09:30:00.802+0000] {standard_task_runner.py:91} INFO - Job 3323: Subtask run_alert_intraday
+[2025-08-08T09:30:00.862+0000] {task_command.py:426} INFO - Running <TaskInstance: run_all_alerts_and_save_to_postgres.run_alert_intraday scheduled__2025-08-08T09:20:00+00:00 [running]> on host 1877907bc043
+[2025-08-08T09:30:00.988+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='alert_system' AIRFLOW_CTX_DAG_ID='run_all_alerts_and_save_to_postgres' AIRFLOW_CTX_TASK_ID='run_alert_intraday' AIRFLOW_CTX_EXECUTION_DATE='2025-08-08T09:20:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-08-08T09:20:00+00:00'
+[2025-08-08T09:30:00.989+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-08-08T09:30:01.009+0000] {logging_mixin.py:188} INFO - [INFO] Running script: /opt/***/dags/alert_to_db/alert_scripts/Alert_Intraday.py
+[2025-08-08T09:30:02.072+0000] {logging_mixin.py:188} INFO - [ERROR] Alert_Intraday.py failed:
+Traceback (most recent call last):
+  File "/opt/***/dags/alert_to_db/alert_scripts/Alert_Intraday.py", line 4, in <module>
+    from kafka import KafkaConsumer
+ModuleNotFoundError: No module named 'kafka'
+[2025-08-08T09:30:02.073+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-08-08T09:30:02.073+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/baseoperator.py", line 400, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/alert_to_db/alert_all_to_postgres_dag.py", line 20, in run_alert_script
+    result = subprocess.run(
+  File "/usr/local/lib/python3.10/subprocess.py", line 526, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['python', '/opt/airflow/dags/alert_to_db/alert_scripts/Alert_Intraday.py']' returned non-zero exit status 1.
+[2025-08-08T09:30:02.084+0000] {taskinstance.py:1206} INFO - Marking task as UP_FOR_RETRY. dag_id=run_all_alerts_and_save_to_postgres, task_id=run_alert_intraday, run_id=scheduled__2025-08-08T09:20:00+00:00, execution_date=20250808T092000, start_date=20250808T093000, end_date=20250808T093002
+[2025-08-08T09:30:02.096+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 3323 for task run_alert_intraday (Command '['python', '/opt/airflow/dags/alert_to_db/alert_scripts/Alert_Intraday.py']' returned non-zero exit status 1.; 184226)
+[2025-08-08T09:30:02.136+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2025-08-08T09:30:02.179+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-08-08T09:30:02.181+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
+[2025-08-08T09:34:45.303+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-08-08T09:34:45.330+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: run_all_alerts_and_save_to_postgres.run_alert_intraday scheduled__2025-08-08T09:20:00+00:00 [queued]>
+[2025-08-08T09:34:45.346+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: run_all_alerts_and_save_to_postgres.run_alert_intraday scheduled__2025-08-08T09:20:00+00:00 [queued]>
+[2025-08-08T09:34:45.347+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 3
+[2025-08-08T09:34:45.367+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): run_alert_intraday> on 2025-08-08 09:20:00+00:00
+[2025-08-08T09:34:45.374+0000] {standard_task_runner.py:63} INFO - Started process 184576 to run task
+[2025-08-08T09:34:45.379+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'run_all_alerts_and_save_to_postgres', 'run_alert_intraday', 'scheduled__2025-08-08T09:20:00+00:00', '--job-id', '3327', '--raw', '--subdir', 'DAGS_FOLDER/alert_to_db/alert_all_to_postgres_dag.py', '--cfg-path', '/tmp/tmp19fs2jk8']
+[2025-08-08T09:34:45.380+0000] {standard_task_runner.py:91} INFO - Job 3327: Subtask run_alert_intraday
+[2025-08-08T09:34:45.434+0000] {task_command.py:426} INFO - Running <TaskInstance: run_all_alerts_and_save_to_postgres.run_alert_intraday scheduled__2025-08-08T09:20:00+00:00 [running]> on host 1877907bc043
+[2025-08-08T09:34:45.515+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='alert_system' AIRFLOW_CTX_DAG_ID='run_all_alerts_and_save_to_postgres' AIRFLOW_CTX_TASK_ID='run_alert_intraday' AIRFLOW_CTX_EXECUTION_DATE='2025-08-08T09:20:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-08-08T09:20:00+00:00'
+[2025-08-08T09:34:45.516+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-08-08T09:34:45.529+0000] {logging_mixin.py:188} INFO - [INFO] Running script: /opt/***/dags/alert_to_db/alert_scripts/Alert_Intraday.py
+[2025-08-08T09:34:49.222+0000] {logging_mixin.py:188} INFO - [ERROR] Alert_Intraday.py failed:
+2025-08-08 09:34:47,097 - <BrokerConnection client_id=kafka-python-2.2.15, node_id=bootstrap-0 host=kafka.videv.cloud:9092 <connecting> [IPv4 ('104.21.89.52', 9092)]>: connecting to kafka.videv.cloud:9092 [('104.21.89.52', 9092) IPv4]
+Traceback (most recent call last):
+  File "/opt/***/dags/alert_to_db/alert_scripts/Alert_Intraday.py", line 40, in <module>
+    consumer = KafkaConsumer(
+  File "/home/***/.local/lib/python3.10/site-packages/kafka/consumer/group.py", line 387, in __init__
+    self._client = self.config['kafka_client'](metrics=self._metrics, **self.config)
+  File "/home/***/.local/lib/python3.10/site-packages/kafka/client_async.py", line 262, in __init__
+    self.config['api_version'] = self.check_version()
+  File "/home/***/.local/lib/python3.10/site-packages/kafka/client_async.py", line 1074, in check_version
+    raise Errors.NoBrokersAvailable()
+kafka.errors.NoBrokersAvailable: NoBrokersAvailable
+[2025-08-08T09:34:49.223+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-08-08T09:34:49.224+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/baseoperator.py", line 400, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/alert_to_db/alert_all_to_postgres_dag.py", line 20, in run_alert_script
+    result = subprocess.run(
+  File "/usr/local/lib/python3.10/subprocess.py", line 526, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['python', '/opt/airflow/dags/alert_to_db/alert_scripts/Alert_Intraday.py']' returned non-zero exit status 1.
+[2025-08-08T09:34:49.239+0000] {taskinstance.py:1206} INFO - Marking task as UP_FOR_RETRY. dag_id=run_all_alerts_and_save_to_postgres, task_id=run_alert_intraday, run_id=scheduled__2025-08-08T09:20:00+00:00, execution_date=20250808T092000, start_date=20250808T093445, end_date=20250808T093449
+[2025-08-08T09:34:49.258+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 3327 for task run_alert_intraday (Command '['python', '/opt/airflow/dags/alert_to_db/alert_scripts/Alert_Intraday.py']' returned non-zero exit status 1.; 184576)
+[2025-08-08T09:34:49.284+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2025-08-08T09:34:49.328+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-08-08T09:34:49.329+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
+[2025-08-08T09:37:21.984+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-08-08T09:37:22.010+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: run_all_alerts_and_save_to_postgres.run_alert_intraday scheduled__2025-08-08T09:20:00+00:00 [queued]>
+[2025-08-08T09:37:22.020+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: run_all_alerts_and_save_to_postgres.run_alert_intraday scheduled__2025-08-08T09:20:00+00:00 [queued]>
+[2025-08-08T09:37:22.020+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 3
+[2025-08-08T09:37:22.032+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): run_alert_intraday> on 2025-08-08 09:20:00+00:00
+[2025-08-08T09:37:22.039+0000] {standard_task_runner.py:63} INFO - Started process 184678 to run task
+[2025-08-08T09:37:22.044+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'run_all_alerts_and_save_to_postgres', 'run_alert_intraday', 'scheduled__2025-08-08T09:20:00+00:00', '--job-id', '3328', '--raw', '--subdir', 'DAGS_FOLDER/alert_to_db/alert_all_to_postgres_dag.py', '--cfg-path', '/tmp/tmp8l30ndag']
+[2025-08-08T09:37:22.045+0000] {standard_task_runner.py:91} INFO - Job 3328: Subtask run_alert_intraday
+[2025-08-08T09:37:22.095+0000] {task_command.py:426} INFO - Running <TaskInstance: run_all_alerts_and_save_to_postgres.run_alert_intraday scheduled__2025-08-08T09:20:00+00:00 [running]> on host 1877907bc043
+[2025-08-08T09:37:22.175+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='alert_system' AIRFLOW_CTX_DAG_ID='run_all_alerts_and_save_to_postgres' AIRFLOW_CTX_TASK_ID='run_alert_intraday' AIRFLOW_CTX_EXECUTION_DATE='2025-08-08T09:20:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-08-08T09:20:00+00:00'
+[2025-08-08T09:37:22.176+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-08-08T09:37:22.189+0000] {logging_mixin.py:188} INFO - [INFO] Running script: /opt/***/dags/alert_to_db/alert_scripts/Alert_Intraday.py
+[2025-08-08T09:37:25.629+0000] {logging_mixin.py:188} INFO - [ERROR] Alert_Intraday.py failed:
+2025-08-08 09:37:23,484 - <BrokerConnection client_id=kafka-python-2.2.15, node_id=bootstrap-0 host=kafka.videv.cloud:9092 <connecting> [IPv4 ('104.21.89.52', 9092)]>: connecting to kafka.videv.cloud:9092 [('104.21.89.52', 9092) IPv4]
+Traceback (most recent call last):
+  File "/opt/***/dags/alert_to_db/alert_scripts/Alert_Intraday.py", line 40, in <module>
+    consumer = KafkaConsumer(
+  File "/home/***/.local/lib/python3.10/site-packages/kafka/consumer/group.py", line 387, in __init__
+    self._client = self.config['kafka_client'](metrics=self._metrics, **self.config)
+  File "/home/***/.local/lib/python3.10/site-packages/kafka/client_async.py", line 262, in __init__
+    self.config['api_version'] = self.check_version()
+  File "/home/***/.local/lib/python3.10/site-packages/kafka/client_async.py", line 1074, in check_version
+    raise Errors.NoBrokersAvailable()
+kafka.errors.NoBrokersAvailable: NoBrokersAvailable
+[2025-08-08T09:37:25.629+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-08-08T09:37:25.630+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/baseoperator.py", line 400, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/alert_to_db/alert_all_to_postgres_dag.py", line 20, in run_alert_script
+    result = subprocess.run(
+  File "/usr/local/lib/python3.10/subprocess.py", line 526, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['python', '/opt/airflow/dags/alert_to_db/alert_scripts/Alert_Intraday.py']' returned non-zero exit status 1.
+[2025-08-08T09:37:25.647+0000] {taskinstance.py:1206} INFO - Marking task as UP_FOR_RETRY. dag_id=run_all_alerts_and_save_to_postgres, task_id=run_alert_intraday, run_id=scheduled__2025-08-08T09:20:00+00:00, execution_date=20250808T092000, start_date=20250808T093722, end_date=20250808T093725
+[2025-08-08T09:37:25.665+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 3328 for task run_alert_intraday (Command '['python', '/opt/airflow/dags/alert_to_db/alert_scripts/Alert_Intraday.py']' returned non-zero exit status 1.; 184678)
+[2025-08-08T09:37:25.707+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2025-08-08T09:37:25.756+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-08-08T09:37:25.758+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
+[2025-08-08T09:39:16.428+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-08-08T09:39:16.450+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: run_all_alerts_and_save_to_postgres.run_alert_intraday scheduled__2025-08-08T09:20:00+00:00 [queued]>
+[2025-08-08T09:39:16.457+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: run_all_alerts_and_save_to_postgres.run_alert_intraday scheduled__2025-08-08T09:20:00+00:00 [queued]>
+[2025-08-08T09:39:16.458+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 3
+[2025-08-08T09:39:16.468+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): run_alert_intraday> on 2025-08-08 09:20:00+00:00
+[2025-08-08T09:39:16.474+0000] {standard_task_runner.py:63} INFO - Started process 184773 to run task
+[2025-08-08T09:39:16.477+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'run_all_alerts_and_save_to_postgres', 'run_alert_intraday', 'scheduled__2025-08-08T09:20:00+00:00', '--job-id', '3329', '--raw', '--subdir', 'DAGS_FOLDER/alert_to_db/alert_all_to_postgres_dag.py', '--cfg-path', '/tmp/tmp3yu4fri3']
+[2025-08-08T09:39:16.479+0000] {standard_task_runner.py:91} INFO - Job 3329: Subtask run_alert_intraday
+[2025-08-08T09:39:16.526+0000] {task_command.py:426} INFO - Running <TaskInstance: run_all_alerts_and_save_to_postgres.run_alert_intraday scheduled__2025-08-08T09:20:00+00:00 [running]> on host 1877907bc043
+[2025-08-08T09:39:16.603+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='alert_system' AIRFLOW_CTX_DAG_ID='run_all_alerts_and_save_to_postgres' AIRFLOW_CTX_TASK_ID='run_alert_intraday' AIRFLOW_CTX_EXECUTION_DATE='2025-08-08T09:20:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-08-08T09:20:00+00:00'
+[2025-08-08T09:39:16.604+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-08-08T09:39:16.616+0000] {logging_mixin.py:188} INFO - [INFO] Running script: /opt/***/dags/alert_to_db/alert_scripts/Alert_Intraday.py
+[2025-08-08T09:39:20.316+0000] {logging_mixin.py:188} INFO - [ERROR] Alert_Intraday.py failed:
+2025-08-08 09:39:18,357 - <BrokerConnection client_id=kafka-python-2.2.15, node_id=bootstrap-0 host=kafka.videv.cloud:9092 <connecting> [IPv4 ('104.21.89.52', 9092)]>: connecting to kafka.videv.cloud:9092 [('104.21.89.52', 9092) IPv4]
+Traceback (most recent call last):
+  File "/opt/***/dags/alert_to_db/alert_scripts/Alert_Intraday.py", line 40, in <module>
+    consumer = KafkaConsumer(
+  File "/home/***/.local/lib/python3.10/site-packages/kafka/consumer/group.py", line 387, in __init__
+    self._client = self.config['kafka_client'](metrics=self._metrics, **self.config)
+  File "/home/***/.local/lib/python3.10/site-packages/kafka/client_async.py", line 262, in __init__
+    self.config['api_version'] = self.check_version()
+  File "/home/***/.local/lib/python3.10/site-packages/kafka/client_async.py", line 1074, in check_version
+    raise Errors.NoBrokersAvailable()
+kafka.errors.NoBrokersAvailable: NoBrokersAvailable
+[2025-08-08T09:39:20.317+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-08-08T09:39:20.317+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/baseoperator.py", line 400, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/alert_to_db/alert_all_to_postgres_dag.py", line 20, in run_alert_script
+    result = subprocess.run(
+  File "/usr/local/lib/python3.10/subprocess.py", line 526, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['python', '/opt/airflow/dags/alert_to_db/alert_scripts/Alert_Intraday.py']' returned non-zero exit status 1.
+[2025-08-08T09:39:20.332+0000] {taskinstance.py:1206} INFO - Marking task as UP_FOR_RETRY. dag_id=run_all_alerts_and_save_to_postgres, task_id=run_alert_intraday, run_id=scheduled__2025-08-08T09:20:00+00:00, execution_date=20250808T092000, start_date=20250808T093916, end_date=20250808T093920
+[2025-08-08T09:39:20.355+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 3329 for task run_alert_intraday (Command '['python', '/opt/airflow/dags/alert_to_db/alert_scripts/Alert_Intraday.py']' returned non-zero exit status 1.; 184773)
+[2025-08-08T09:39:20.382+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2025-08-08T09:39:20.416+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-08-08T09:39:20.416+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

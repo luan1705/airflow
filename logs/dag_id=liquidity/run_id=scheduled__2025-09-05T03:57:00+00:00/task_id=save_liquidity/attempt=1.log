@@ -1,0 +1,97 @@
+[2025-09-05T03:58:01.457+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-09-05T03:58:01.705+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: liquidity.save_liquidity scheduled__2025-09-05T03:57:00+00:00 [queued]>
+[2025-09-05T03:58:01.717+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: liquidity.save_liquidity scheduled__2025-09-05T03:57:00+00:00 [queued]>
+[2025-09-05T03:58:01.717+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 11
+[2025-09-05T03:58:01.737+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): save_liquidity> on 2025-09-05 03:57:00+00:00
+[2025-09-05T03:58:01.746+0000] {standard_task_runner.py:63} INFO - Started process 3105243 to run task
+[2025-09-05T03:58:01.751+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'liquidity', 'save_liquidity', 'scheduled__2025-09-05T03:57:00+00:00', '--job-id', '108821', '--raw', '--subdir', 'DAGS_FOLDER/dag_liquidity.py', '--cfg-path', '/tmp/tmp8cd3pkzi']
+[2025-09-05T03:58:01.754+0000] {standard_task_runner.py:91} INFO - Job 108821: Subtask save_liquidity
+[2025-09-05T03:58:01.816+0000] {task_command.py:426} INFO - Running <TaskInstance: liquidity.save_liquidity scheduled__2025-09-05T03:57:00+00:00 [running]> on host 1877907bc043
+[2025-09-05T03:58:01.975+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='liquidity' AIRFLOW_CTX_TASK_ID='save_liquidity' AIRFLOW_CTX_EXECUTION_DATE='2025-09-05T03:57:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-09-05T03:57:00+00:00'
+[2025-09-05T03:58:01.976+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-09-05T03:58:02.261+0000] {liquidity.py:95} ERROR - Lỗi lưu liquidity_ALL
+Traceback (most recent call last):
+  File "/opt/airflow/dags/utils/market_history/liquidity/liquidity.py", line 84, in save_liquidity
+    data=liquidity(realsymbol)
+  File "/opt/airflow/dags/utils/market_history/liquidity/liquidity.py", line 67, in liquidity
+    data['t'] = data['t'].astype(int).apply(lambda x: datetime.utcfromtimestamp(x) + timedelta(hours=7))
+  File "/home/airflow/.local/lib/python3.10/site-packages/pandas/core/series.py", line 4764, in apply
+    ).apply()
+  File "/home/airflow/.local/lib/python3.10/site-packages/pandas/core/apply.py", line 1209, in apply
+    return self.apply_standard()
+  File "/home/airflow/.local/lib/python3.10/site-packages/pandas/core/apply.py", line 1289, in apply_standard
+    mapped = obj._map_values(
+  File "/home/airflow/.local/lib/python3.10/site-packages/pandas/core/base.py", line 921, in _map_values
+    return algorithms.map_array(arr, mapper, na_action=na_action, convert=convert)
+  File "/home/airflow/.local/lib/python3.10/site-packages/pandas/core/algorithms.py", line 1814, in map_array
+    return lib.map_infer(values, mapper, convert=convert)
+  File "lib.pyx", line 2926, in pandas._libs.lib.map_infer
+  File "/opt/airflow/dags/utils/market_history/liquidity/liquidity.py", line 67, in <lambda>
+    data['t'] = data['t'].astype(int).apply(lambda x: datetime.utcfromtimestamp(x) + timedelta(hours=7))
+NameError: name 'timedelta' is not defined
+[2025-09-05T03:58:02.493+0000] {liquidity.py:95} ERROR - Lỗi lưu liquidity_HOSE
+Traceback (most recent call last):
+  File "/opt/airflow/dags/utils/market_history/liquidity/liquidity.py", line 84, in save_liquidity
+    data=liquidity(realsymbol)
+  File "/opt/airflow/dags/utils/market_history/liquidity/liquidity.py", line 67, in liquidity
+    data['t'] = data['t'].astype(int).apply(lambda x: datetime.utcfromtimestamp(x) + timedelta(hours=7))
+  File "/home/airflow/.local/lib/python3.10/site-packages/pandas/core/series.py", line 4764, in apply
+    ).apply()
+  File "/home/airflow/.local/lib/python3.10/site-packages/pandas/core/apply.py", line 1209, in apply
+    return self.apply_standard()
+  File "/home/airflow/.local/lib/python3.10/site-packages/pandas/core/apply.py", line 1289, in apply_standard
+    mapped = obj._map_values(
+  File "/home/airflow/.local/lib/python3.10/site-packages/pandas/core/base.py", line 921, in _map_values
+    return algorithms.map_array(arr, mapper, na_action=na_action, convert=convert)
+  File "/home/airflow/.local/lib/python3.10/site-packages/pandas/core/algorithms.py", line 1814, in map_array
+    return lib.map_infer(values, mapper, convert=convert)
+  File "lib.pyx", line 2926, in pandas._libs.lib.map_infer
+  File "/opt/airflow/dags/utils/market_history/liquidity/liquidity.py", line 67, in <lambda>
+    data['t'] = data['t'].astype(int).apply(lambda x: datetime.utcfromtimestamp(x) + timedelta(hours=7))
+NameError: name 'timedelta' is not defined
+[2025-09-05T03:58:02.727+0000] {liquidity.py:95} ERROR - Lỗi lưu liquidity_HNX
+Traceback (most recent call last):
+  File "/opt/airflow/dags/utils/market_history/liquidity/liquidity.py", line 84, in save_liquidity
+    data=liquidity(realsymbol)
+  File "/opt/airflow/dags/utils/market_history/liquidity/liquidity.py", line 67, in liquidity
+    data['t'] = data['t'].astype(int).apply(lambda x: datetime.utcfromtimestamp(x) + timedelta(hours=7))
+  File "/home/airflow/.local/lib/python3.10/site-packages/pandas/core/series.py", line 4764, in apply
+    ).apply()
+  File "/home/airflow/.local/lib/python3.10/site-packages/pandas/core/apply.py", line 1209, in apply
+    return self.apply_standard()
+  File "/home/airflow/.local/lib/python3.10/site-packages/pandas/core/apply.py", line 1289, in apply_standard
+    mapped = obj._map_values(
+  File "/home/airflow/.local/lib/python3.10/site-packages/pandas/core/base.py", line 921, in _map_values
+    return algorithms.map_array(arr, mapper, na_action=na_action, convert=convert)
+  File "/home/airflow/.local/lib/python3.10/site-packages/pandas/core/algorithms.py", line 1814, in map_array
+    return lib.map_infer(values, mapper, convert=convert)
+  File "lib.pyx", line 2926, in pandas._libs.lib.map_infer
+  File "/opt/airflow/dags/utils/market_history/liquidity/liquidity.py", line 67, in <lambda>
+    data['t'] = data['t'].astype(int).apply(lambda x: datetime.utcfromtimestamp(x) + timedelta(hours=7))
+NameError: name 'timedelta' is not defined
+[2025-09-05T03:58:02.908+0000] {liquidity.py:95} ERROR - Lỗi lưu liquidity_UPCOM
+Traceback (most recent call last):
+  File "/opt/airflow/dags/utils/market_history/liquidity/liquidity.py", line 84, in save_liquidity
+    data=liquidity(realsymbol)
+  File "/opt/airflow/dags/utils/market_history/liquidity/liquidity.py", line 67, in liquidity
+    data['t'] = data['t'].astype(int).apply(lambda x: datetime.utcfromtimestamp(x) + timedelta(hours=7))
+  File "/home/airflow/.local/lib/python3.10/site-packages/pandas/core/series.py", line 4764, in apply
+    ).apply()
+  File "/home/airflow/.local/lib/python3.10/site-packages/pandas/core/apply.py", line 1209, in apply
+    return self.apply_standard()
+  File "/home/airflow/.local/lib/python3.10/site-packages/pandas/core/apply.py", line 1289, in apply_standard
+    mapped = obj._map_values(
+  File "/home/airflow/.local/lib/python3.10/site-packages/pandas/core/base.py", line 921, in _map_values
+    return algorithms.map_array(arr, mapper, na_action=na_action, convert=convert)
+  File "/home/airflow/.local/lib/python3.10/site-packages/pandas/core/algorithms.py", line 1814, in map_array
+    return lib.map_infer(values, mapper, convert=convert)
+  File "lib.pyx", line 2926, in pandas._libs.lib.map_infer
+  File "/opt/airflow/dags/utils/market_history/liquidity/liquidity.py", line 67, in <lambda>
+    data['t'] = data['t'].astype(int).apply(lambda x: datetime.utcfromtimestamp(x) + timedelta(hours=7))
+NameError: name 'timedelta' is not defined
+[2025-09-05T03:58:02.911+0000] {python.py:237} INFO - Done. Returned value was: None
+[2025-09-05T03:58:02.912+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-09-05T03:58:02.923+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=liquidity, task_id=save_liquidity, run_id=scheduled__2025-09-05T03:57:00+00:00, execution_date=20250905T035700, start_date=20250905T035801, end_date=20250905T035802
+[2025-09-05T03:58:02.966+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-09-05T03:58:02.991+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-09-05T03:58:02.992+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

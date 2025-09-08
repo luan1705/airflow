@@ -1,0 +1,80 @@
+[2025-09-05T16:24:39.260+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-09-05T16:24:39.281+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: news_pipeline.add_postgre manual__2025-09-05T16:01:06.109769+00:00 [queued]>
+[2025-09-05T16:24:39.291+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: news_pipeline.add_postgre manual__2025-09-05T16:01:06.109769+00:00 [queued]>
+[2025-09-05T16:24:39.291+0000] {taskinstance.py:2306} INFO - Starting attempt 3 of 13
+[2025-09-05T16:24:39.302+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): add_postgre> on 2025-09-05 16:01:06.109769+00:00
+[2025-09-05T16:24:39.310+0000] {standard_task_runner.py:63} INFO - Started process 30332 to run task
+[2025-09-05T16:24:39.314+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'news_pipeline', 'add_postgre', 'manual__2025-09-05T16:01:06.109769+00:00', '--job-id', '117774', '--raw', '--subdir', 'DAGS_FOLDER/dag_news.py', '--cfg-path', '/tmp/tmp0ns_qwvm']
+[2025-09-05T16:24:39.317+0000] {standard_task_runner.py:91} INFO - Job 117774: Subtask add_postgre
+[2025-09-05T16:24:39.366+0000] {task_command.py:426} INFO - Running <TaskInstance: news_pipeline.add_postgre manual__2025-09-05T16:01:06.109769+00:00 [running]> on host d4d2fe648a81
+[2025-09-05T16:24:39.450+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='news_pipeline' AIRFLOW_CTX_TASK_ID='add_postgre' AIRFLOW_CTX_EXECUTION_DATE='2025-09-05T16:01:06.109769+00:00' AIRFLOW_CTX_TRY_NUMBER='3' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-09-05T16:01:06.109769+00:00'
+[2025-09-05T16:24:39.451+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-09-05T16:24:39.467+0000] {logger.py:11} INFO - ====== WebDriver manager ======
+[2025-09-05T16:24:39.468+0000] {logger.py:11} INFO - ====== WebDriver manager ======
+[2025-09-05T16:24:39.469+0000] {logger.py:11} INFO - ====== WebDriver manager ======
+[2025-09-05T16:24:39.598+0000] {logger.py:11} INFO - Get LATEST chromedriver version for google-chrome
+[2025-09-05T16:24:39.598+0000] {logger.py:11} INFO - Get LATEST chromedriver version for google-chrome
+[2025-09-05T16:24:39.605+0000] {logger.py:11} INFO - Get LATEST chromedriver version for google-chrome
+[2025-09-05T16:24:39.899+0000] {logger.py:11} INFO - Get LATEST chromedriver version for google-chrome
+[2025-09-05T16:24:39.917+0000] {logger.py:11} INFO - Get LATEST chromedriver version for google-chrome
+[2025-09-05T16:24:39.932+0000] {logger.py:11} INFO - Get LATEST chromedriver version for google-chrome
+[2025-09-05T16:24:40.206+0000] {logger.py:11} INFO - Driver [/home/***/.wdm/drivers/chromedriver/linux64/140.0.7339.80/chromedriver-linux64/chromedriver] found in cache
+[2025-09-05T16:24:40.217+0000] {logger.py:11} INFO - Driver [/home/***/.wdm/drivers/chromedriver/linux64/140.0.7339.80/chromedriver-linux64/chromedriver] found in cache
+[2025-09-05T16:24:40.249+0000] {logger.py:11} INFO - Driver [/home/***/.wdm/drivers/chromedriver/linux64/140.0.7339.80/chromedriver-linux64/chromedriver] found in cache
+[2025-09-05T16:24:44.933+0000] {logging_mixin.py:188} INFO - Không thể nhấn nút 'Xem thêm' lần 1: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//button[contains(text(),"Xem thêm ")]"}
+  (Session info: chrome=140.0.7339.80); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#nosuchelementexception
+Stacktrace:
+#0 0x56014cc7d94a <unknown>
+#1 0x56014c6f28a0 <unknown>
+#2 0x56014c744540 <unknown>
+#3 0x56014c744731 <unknown>
+#4 0x56014c792824 <unknown>
+#5 0x56014c76a05d <unknown>
+#6 0x56014c78fc23 <unknown>
+#7 0x56014c769e03 <unknown>
+#8 0x56014c736968 <unknown>
+#9 0x56014c7375e1 <unknown>
+#10 0x56014cc41548 <unknown>
+#11 0x56014cc45272 <unknown>
+#12 0x56014cc28313 <unknown>
+#13 0x56014cc45dc5 <unknown>
+#14 0x56014cc0d49f <unknown>
+#15 0x56014cc6a158 <unknown>
+#16 0x56014cc6a332 <unknown>
+#17 0x56014cc7ca53 <unknown>
+#18 0x7f795f5e6134 <unknown>
+[2025-09-05T16:24:44.949+0000] {tinnhanh_ngay.py:63} INFO - Click failed
+[2025-09-05T16:24:45.100+0000] {logging_mixin.py:188} INFO - Không thể nhấn nút 'Xem thêm' lần 1: 'NoneType' object has no attribute 'find_all'
+[2025-09-05T16:24:45.264+0000] {tinnhanh_ngay.py:102} INFO - Cào được 12 tinnhanh
+[2025-09-05T16:24:55.092+0000] {logging_mixin.py:188} INFO - ko thể click 5: Message: no such element: Unable to locate element: {"method":"css selector","selector":".btn-viewmore"}
+  (Session info: chrome=140.0.7339.80); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#nosuchelementexception
+Stacktrace:
+#0 0x55da9bf1794a <unknown>
+#1 0x55da9b98c8a0 <unknown>
+#2 0x55da9b9de540 <unknown>
+#3 0x55da9b9de731 <unknown>
+#4 0x55da9ba2c824 <unknown>
+#5 0x55da9ba0405d <unknown>
+#6 0x55da9ba29c23 <unknown>
+#7 0x55da9ba03e03 <unknown>
+#8 0x55da9b9d0968 <unknown>
+#9 0x55da9b9d15e1 <unknown>
+#10 0x55da9bedb548 <unknown>
+#11 0x55da9bedf272 <unknown>
+#12 0x55da9bec2313 <unknown>
+#13 0x55da9bedfdc5 <unknown>
+#14 0x55da9bea749f <unknown>
+#15 0x55da9bf04158 <unknown>
+#16 0x55da9bf04332 <unknown>
+#17 0x55da9bf16a53 <unknown>
+#18 0x7f75e8d80134 <unknown>
+[2025-09-05T16:24:55.243+0000] {logging_mixin.py:188} INFO - Error in vietstock: name 'tn' is not defined
+[2025-09-05T16:24:55.244+0000] {logging_mixin.py:188} INFO - Error in cafef: 'NoneType' object has no attribute 'find_all'
+[2025-09-05T16:24:55.248+0000] {add_postgre.py:25} INFO - ✅ Kết nối PostgreSQL thành công.
+[2025-09-05T16:24:55.521+0000] {add_postgre.py:32} INFO - 📭 Không có bản ghi mới để thêm vào bảng News.
+[2025-09-05T16:24:55.522+0000] {python.py:237} INFO - Done. Returned value was: Không có bản ghi mới
+[2025-09-05T16:24:55.523+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-09-05T16:24:55.554+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=news_pipeline, task_id=add_postgre, run_id=manual__2025-09-05T16:01:06.109769+00:00, execution_date=20250905T160106, start_date=20250905T162439, end_date=20250905T162455
+[2025-09-05T16:24:55.620+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-09-05T16:24:55.655+0000] {taskinstance.py:3498} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-09-05T16:24:55.656+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

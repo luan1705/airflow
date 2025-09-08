@@ -1,0 +1,124 @@
+[2025-07-31T08:15:14.072+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-07-31T08:15:14.102+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: news_pipeline.add_postgre scheduled__2025-07-30T01:00:00+00:00 [queued]>
+[2025-07-31T08:15:14.111+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: news_pipeline.add_postgre scheduled__2025-07-30T01:00:00+00:00 [queued]>
+[2025-07-31T08:15:14.112+0000] {taskinstance.py:2306} INFO - Starting attempt 12 of 22
+[2025-07-31T08:15:14.128+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): add_postgre> on 2025-07-30 01:00:00+00:00
+[2025-07-31T08:15:14.137+0000] {standard_task_runner.py:63} INFO - Started process 91745 to run task
+[2025-07-31T08:15:14.141+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'news_pipeline', 'add_postgre', 'scheduled__2025-07-30T01:00:00+00:00', '--job-id', '1628', '--raw', '--subdir', 'DAGS_FOLDER/dag_news.py', '--cfg-path', '/tmp/tmp539wjonr']
+[2025-07-31T08:15:14.144+0000] {standard_task_runner.py:91} INFO - Job 1628: Subtask add_postgre
+[2025-07-31T08:15:14.210+0000] {task_command.py:426} INFO - Running <TaskInstance: news_pipeline.add_postgre scheduled__2025-07-30T01:00:00+00:00 [running]> on host 85cf6d18c15a
+[2025-07-31T08:15:14.340+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='news_pipeline' AIRFLOW_CTX_TASK_ID='add_postgre' AIRFLOW_CTX_EXECUTION_DATE='2025-07-30T01:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='12' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-07-30T01:00:00+00:00'
+[2025-07-31T08:15:14.341+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-07-31T08:17:54.705+0000] {add_postgre.py:43} ERROR - ❌ Lỗi trong add_postgres: Message: timeout: Timed out receiving message from renderer: 29.749
+  (Session info: chrome=138.0.7204.157)
+Stacktrace:
+#0 0x55b6c02e57da <unknown>
+#1 0x55b6bfd8a2e0 <unknown>
+#2 0x55b6bfd7246c <unknown>
+#3 0x55b6bfd72175 <unknown>
+#4 0x55b6bfd6ffd5 <unknown>
+#5 0x55b6bfd7092f <unknown>
+#6 0x55b6bfd7f3e3 <unknown>
+#7 0x55b6bfd9883e <unknown>
+#8 0x55b6bfd9f07b <unknown>
+#9 0x55b6bfd71070 <unknown>
+#10 0x55b6bfd98499 <unknown>
+#11 0x55b6bfe27a79 <unknown>
+#12 0x55b6bfe01683 <unknown>
+#13 0x55b6bfdcdb5b <unknown>
+#14 0x55b6bfdcef31 <unknown>
+#15 0x55b6c02aa72b <unknown>
+#16 0x55b6c02ae534 <unknown>
+#17 0x55b6c0291229 <unknown>
+#18 0x55b6c02af0d8 <unknown>
+#19 0x55b6c027561f <unknown>
+#20 0x55b6c02d2dd8 <unknown>
+#21 0x55b6c02d2fb6 <unknown>
+#22 0x55b6c02e4af6 <unknown>
+#23 0x7f365dbb4134 <unknown>
+
+[2025-07-31T08:17:54.706+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-07-31T08:17:54.707+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/baseoperator.py", line 400, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/utils/new_pipeline/add_postgre.py", line 11, in add_postgres
+    df=tintuc()
+  File "/opt/airflow/dags/utils/new_pipeline/merge.py", line 8, in tintuc
+    df2=tinnhanh()
+  File "/opt/airflow/dags/utils/new_pipeline/tinnhanh_ngay.py", line 28, in tinnhanh
+    driver.get(url) #dùng driver mở link
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/remote/webdriver.py", line 479, in get
+    self.execute(Command.GET, {"url": url})
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/remote/webdriver.py", line 454, in execute
+    self.error_handler.check_response(response)
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/remote/errorhandler.py", line 232, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.TimeoutException: Message: timeout: Timed out receiving message from renderer: 29.749
+  (Session info: chrome=138.0.7204.157)
+Stacktrace:
+#0 0x55b6c02e57da <unknown>
+#1 0x55b6bfd8a2e0 <unknown>
+#2 0x55b6bfd7246c <unknown>
+#3 0x55b6bfd72175 <unknown>
+#4 0x55b6bfd6ffd5 <unknown>
+#5 0x55b6bfd7092f <unknown>
+#6 0x55b6bfd7f3e3 <unknown>
+#7 0x55b6bfd9883e <unknown>
+#8 0x55b6bfd9f07b <unknown>
+#9 0x55b6bfd71070 <unknown>
+#10 0x55b6bfd98499 <unknown>
+#11 0x55b6bfe27a79 <unknown>
+#12 0x55b6bfe01683 <unknown>
+#13 0x55b6bfdcdb5b <unknown>
+#14 0x55b6bfdcef31 <unknown>
+#15 0x55b6c02aa72b <unknown>
+#16 0x55b6c02ae534 <unknown>
+#17 0x55b6c0291229 <unknown>
+#18 0x55b6c02af0d8 <unknown>
+#19 0x55b6c027561f <unknown>
+#20 0x55b6c02d2dd8 <unknown>
+#21 0x55b6c02d2fb6 <unknown>
+#22 0x55b6c02e4af6 <unknown>
+#23 0x7f365dbb4134 <unknown>
+
+[2025-07-31T08:17:54.723+0000] {taskinstance.py:1206} INFO - Marking task as UP_FOR_RETRY. dag_id=news_pipeline, task_id=add_postgre, run_id=scheduled__2025-07-30T01:00:00+00:00, execution_date=20250730T010000, start_date=20250731T081514, end_date=20250731T081754
+[2025-07-31T08:17:54.739+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 1628 for task add_postgre (Message: timeout: Timed out receiving message from renderer: 29.749
+  (Session info: chrome=138.0.7204.157)
+Stacktrace:
+#0 0x55b6c02e57da <unknown>
+#1 0x55b6bfd8a2e0 <unknown>
+#2 0x55b6bfd7246c <unknown>
+#3 0x55b6bfd72175 <unknown>
+#4 0x55b6bfd6ffd5 <unknown>
+#5 0x55b6bfd7092f <unknown>
+#6 0x55b6bfd7f3e3 <unknown>
+#7 0x55b6bfd9883e <unknown>
+#8 0x55b6bfd9f07b <unknown>
+#9 0x55b6bfd71070 <unknown>
+#10 0x55b6bfd98499 <unknown>
+#11 0x55b6bfe27a79 <unknown>
+#12 0x55b6bfe01683 <unknown>
+#13 0x55b6bfdcdb5b <unknown>
+#14 0x55b6bfdcef31 <unknown>
+#15 0x55b6c02aa72b <unknown>
+#16 0x55b6c02ae534 <unknown>
+#17 0x55b6c0291229 <unknown>
+#18 0x55b6c02af0d8 <unknown>
+#19 0x55b6c027561f <unknown>
+#20 0x55b6c02d2dd8 <unknown>
+#21 0x55b6c02d2fb6 <unknown>
+#22 0x55b6c02e4af6 <unknown>
+#23 0x7f365dbb4134 <unknown>
+; 91745)
+[2025-07-31T08:17:54.767+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2025-07-31T08:17:54.800+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-07-31T08:17:54.801+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

@@ -1,0 +1,32 @@
+[2025-08-18T02:09:03.825+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-08-18T02:09:03.861+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: update_stock_history.get.py scheduled__2025-08-18T02:03:00+00:00 [queued]>
+[2025-08-18T02:09:03.881+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: update_stock_history.get.py scheduled__2025-08-18T02:03:00+00:00 [queued]>
+[2025-08-18T02:09:03.882+0000] {taskinstance.py:2306} INFO - Starting attempt 2 of 2
+[2025-08-18T02:09:03.907+0000] {taskinstance.py:2330} INFO - Executing <Task(BashOperator): get.py> on 2025-08-18 02:03:00+00:00
+[2025-08-18T02:09:03.916+0000] {standard_task_runner.py:63} INFO - Started process 92309 to run task
+[2025-08-18T02:09:03.924+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'update_stock_history', 'get.py', 'scheduled__2025-08-18T02:03:00+00:00', '--job-id', '7853', '--raw', '--subdir', 'DAGS_FOLDER/crawlchart/dags.py', '--cfg-path', '/tmp/tmpu36qrmc5']
+[2025-08-18T02:09:03.926+0000] {standard_task_runner.py:91} INFO - Job 7853: Subtask get.py
+[2025-08-18T02:09:04.002+0000] {task_command.py:426} INFO - Running <TaskInstance: update_stock_history.get.py scheduled__2025-08-18T02:03:00+00:00 [running]> on host 1877907bc043
+[2025-08-18T02:09:04.147+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='update_stock_history' AIRFLOW_CTX_TASK_ID='get.py' AIRFLOW_CTX_EXECUTION_DATE='2025-08-18T02:03:00+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-08-18T02:03:00+00:00'
+[2025-08-18T02:09:04.149+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-08-18T02:09:04.177+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-08-18T02:09:04.178+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', "python3 '/www/server/***/dags/crawlchart/get.py'"]
+[2025-08-18T02:09:04.195+0000] {subprocess.py:86} INFO - Output:
+[2025-08-18T02:09:04.374+0000] {subprocess.py:93} INFO - python3: can't open file '/www/server/***/dags/crawlchart/get.py': [Errno 2] No such file or directory
+[2025-08-18T02:09:04.382+0000] {subprocess.py:97} INFO - Command exited with return code 2
+[2025-08-18T02:09:04.384+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-08-18T02:09:04.413+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/baseoperator.py", line 400, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/bash.py", line 243, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 2.
+[2025-08-18T02:09:04.422+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=update_stock_history, task_id=get.py, run_id=scheduled__2025-08-18T02:03:00+00:00, execution_date=20250818T020300, start_date=20250818T020903, end_date=20250818T020904
+[2025-08-18T02:09:04.449+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 7853 for task get.py (Bash command failed. The command returned a non-zero exit code 2.; 92309)
+[2025-08-18T02:09:04.496+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2025-08-18T02:09:04.514+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

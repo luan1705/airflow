@@ -1,0 +1,6 @@
+[2025-08-27T08:02:43.460+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-08-27T08:02:43.484+0000] {taskinstance.py:2066} INFO - Dependencies not met for <TaskInstance: crypto_collector_dag.run_crypto_collector scheduled__2025-08-27T07:36:00+00:00 [failed]>, dependency 'Task Instance State' FAILED: Task is in the 'failed' state.
+[2025-08-27T08:02:43.493+0000] {local_task_job_runner.py:163} INFO - Task is not able to be run
+[2025-08-27T08:03:06.257+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-08-27T08:03:06.277+0000] {taskinstance.py:2066} INFO - Dependencies not met for <TaskInstance: crypto_collector_dag.run_crypto_collector scheduled__2025-08-27T07:36:00+00:00 [failed]>, dependency 'Task Instance State' FAILED: Task is in the 'failed' state.
+[2025-08-27T08:03:06.285+0000] {local_task_job_runner.py:163} INFO - Task is not able to be run

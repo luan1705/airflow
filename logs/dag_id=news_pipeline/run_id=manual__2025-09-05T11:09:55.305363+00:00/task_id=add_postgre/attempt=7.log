@@ -1,0 +1,79 @@
+[2025-09-05T11:36:31.048+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-09-05T11:36:31.075+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: news_pipeline.add_postgre manual__2025-09-05T11:09:55.305363+00:00 [queued]>
+[2025-09-05T11:36:31.083+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: news_pipeline.add_postgre manual__2025-09-05T11:09:55.305363+00:00 [queued]>
+[2025-09-05T11:36:31.084+0000] {taskinstance.py:2306} INFO - Starting attempt 7 of 17
+[2025-09-05T11:36:31.098+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): add_postgre> on 2025-09-05 11:09:55.305363+00:00
+[2025-09-05T11:36:31.107+0000] {standard_task_runner.py:63} INFO - Started process 3200663 to run task
+[2025-09-05T11:36:31.111+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'news_pipeline', 'add_postgre', 'manual__2025-09-05T11:09:55.305363+00:00', '--job-id', '114574', '--raw', '--subdir', 'DAGS_FOLDER/dag_news.py', '--cfg-path', '/tmp/tmpe4ws3fz1']
+[2025-09-05T11:36:31.114+0000] {standard_task_runner.py:91} INFO - Job 114574: Subtask add_postgre
+[2025-09-05T11:36:31.182+0000] {task_command.py:426} INFO - Running <TaskInstance: news_pipeline.add_postgre manual__2025-09-05T11:09:55.305363+00:00 [running]> on host 1877907bc043
+[2025-09-05T11:36:31.301+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='news_pipeline' AIRFLOW_CTX_TASK_ID='add_postgre' AIRFLOW_CTX_EXECUTION_DATE='2025-09-05T11:09:55.305363+00:00' AIRFLOW_CTX_TRY_NUMBER='7' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-09-05T11:09:55.305363+00:00'
+[2025-09-05T11:36:31.302+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-09-05T11:37:04.003+0000] {add_postgre.py:46} ERROR - ❌ Lỗi trong add_postgres: int() argument must be a string, a bytes-like object or a real number, not 'Tag'
+[2025-09-05T11:37:04.003+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-09-05T11:37:04.004+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/opt/airflow/dags/utils/new_pipeline/vietstock_ngay.py", line 67, in vietstock
+    button=driver.find_element(By.CSS_SELECTOR, 'li.pagination-page.next a')
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/remote/webdriver.py", line 922, in find_element
+    return self.execute(Command.FIND_ELEMENT, {"using": by, "value": value})["value"]
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/remote/webdriver.py", line 454, in execute
+    self.error_handler.check_response(response)
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/remote/errorhandler.py", line 232, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.WebDriverException: Message: tab crashed
+  (Session info: chrome=138.0.7204.183)
+Stacktrace:
+#0 0x5602389df7da <unknown>
+#1 0x560238484133 <unknown>
+#2 0x56023846d91e <unknown>
+#3 0x56023846ca4d <unknown>
+#4 0x56023846c49a <unknown>
+#5 0x56023846c175 <unknown>
+#6 0x560238469fd5 <unknown>
+#7 0x56023846a92f <unknown>
+#8 0x5602384793e3 <unknown>
+#9 0x56023849283e <unknown>
+#10 0x56023849907b <unknown>
+#11 0x56023846b070 <unknown>
+#12 0x560238491f83 <unknown>
+#13 0x5602385215f6 <unknown>
+#14 0x5602384fb683 <unknown>
+#15 0x5602384c7b5b <unknown>
+#16 0x5602384c8f31 <unknown>
+#17 0x5602389a472b <unknown>
+#18 0x5602389a8534 <unknown>
+#19 0x56023898b229 <unknown>
+#20 0x5602389a90d8 <unknown>
+#21 0x56023896f61f <unknown>
+#22 0x5602389ccdd8 <unknown>
+#23 0x5602389ccfb6 <unknown>
+#24 0x5602389deaf6 <unknown>
+#25 0x7f8eb3537134 <unknown>
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/baseoperator.py", line 400, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/utils/new_pipeline/add_postgre.py", line 11, in add_postgres
+    df=tintuc()
+  File "/opt/airflow/dags/utils/new_pipeline/merge.py", line 7, in tintuc
+    df1=vietstock()
+  File "/opt/airflow/dags/utils/new_pipeline/vietstock_ngay.py", line 73, in vietstock
+    print(f"Không thể nhấn nút 'Xem thêm' lần {int(i)+1}: {e}")
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'Tag'
+[2025-09-05T11:37:04.019+0000] {taskinstance.py:1206} INFO - Marking task as UP_FOR_RETRY. dag_id=news_pipeline, task_id=add_postgre, run_id=manual__2025-09-05T11:09:55.305363+00:00, execution_date=20250905T110955, start_date=20250905T113631, end_date=20250905T113704
+[2025-09-05T11:37:04.047+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 114574 for task add_postgre (int() argument must be a string, a bytes-like object or a real number, not 'Tag'; 3200663)
+[2025-09-05T11:37:04.087+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2025-09-05T11:37:04.121+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-09-05T11:37:04.122+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

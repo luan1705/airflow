@@ -1,0 +1,125 @@
+[2025-09-06T07:00:24.081+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-09-06T07:00:24.125+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: news_pipeline.add_postgre scheduled__2025-09-05T01:00:00+00:00 [queued]>
+[2025-09-06T07:00:24.142+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: news_pipeline.add_postgre scheduled__2025-09-05T01:00:00+00:00 [queued]>
+[2025-09-06T07:00:24.142+0000] {taskinstance.py:2306} INFO - Starting attempt 7 of 11
+[2025-09-06T07:00:24.161+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): add_postgre> on 2025-09-05 01:00:00+00:00
+[2025-09-06T07:00:24.172+0000] {standard_task_runner.py:63} INFO - Started process 138729 to run task
+[2025-09-06T07:00:24.177+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'news_pipeline', 'add_postgre', 'scheduled__2025-09-05T01:00:00+00:00', '--job-id', '127442', '--raw', '--subdir', 'DAGS_FOLDER/dag_news.py', '--cfg-path', '/tmp/tmpf8pk3ppn']
+[2025-09-06T07:00:24.181+0000] {standard_task_runner.py:91} INFO - Job 127442: Subtask add_postgre
+[2025-09-06T07:00:24.235+0000] {task_command.py:426} INFO - Running <TaskInstance: news_pipeline.add_postgre scheduled__2025-09-05T01:00:00+00:00 [running]> on host d4d2fe648a81
+[2025-09-06T07:00:24.324+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='news_pipeline' AIRFLOW_CTX_TASK_ID='add_postgre' AIRFLOW_CTX_EXECUTION_DATE='2025-09-05T01:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='7' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-09-05T01:00:00+00:00'
+[2025-09-06T07:00:24.325+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-09-06T07:00:24.339+0000] {logger.py:11} INFO - ====== WebDriver manager ======
+[2025-09-06T07:00:24.340+0000] {logger.py:11} INFO - ====== WebDriver manager ======
+[2025-09-06T07:00:24.341+0000] {logger.py:11} INFO - ====== WebDriver manager ======
+[2025-09-06T07:00:24.486+0000] {logger.py:11} INFO - Get LATEST chromedriver version for google-chrome
+[2025-09-06T07:00:24.493+0000] {logger.py:11} INFO - Get LATEST chromedriver version for google-chrome
+[2025-09-06T07:00:24.493+0000] {logger.py:11} INFO - Get LATEST chromedriver version for google-chrome
+[2025-09-06T07:00:24.772+0000] {logger.py:11} INFO - Get LATEST chromedriver version for google-chrome
+[2025-09-06T07:00:24.790+0000] {logger.py:11} INFO - Get LATEST chromedriver version for google-chrome
+[2025-09-06T07:00:24.817+0000] {logger.py:11} INFO - Get LATEST chromedriver version for google-chrome
+[2025-09-06T07:00:25.022+0000] {logger.py:11} INFO - Driver [/home/***/.wdm/drivers/chromedriver/linux64/140.0.7339.80/chromedriver-linux64/chromedriver] found in cache
+[2025-09-06T07:00:25.069+0000] {logger.py:11} INFO - Driver [/home/***/.wdm/drivers/chromedriver/linux64/140.0.7339.80/chromedriver-linux64/chromedriver] found in cache
+[2025-09-06T07:00:25.108+0000] {logger.py:11} INFO - Driver [/home/***/.wdm/drivers/chromedriver/linux64/140.0.7339.80/chromedriver-linux64/chromedriver] found in cache
+[2025-09-06T07:00:25.146+0000] {logging_mixin.py:188} INFO - Error in vietstock: Message: session not created
+from disconnected: unable to connect to renderer; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+#0 0x56143f35594a <unknown>
+#1 0x56143edca8a0 <unknown>
+#2 0x56143ee0ab8e <unknown>
+#3 0x56143ee06775 <unknown>
+#4 0x56143ee00288 <unknown>
+#5 0x56143ee50386 <unknown>
+#6 0x56143ee4fa56 <unknown>
+#7 0x56143ee41e03 <unknown>
+#8 0x56143ee0e968 <unknown>
+#9 0x56143ee0f5e1 <unknown>
+#10 0x56143f319548 <unknown>
+#11 0x56143f31d272 <unknown>
+#12 0x56143f300313 <unknown>
+#13 0x56143f31ddc5 <unknown>
+#14 0x56143f2e549f <unknown>
+#15 0x56143f342158 <unknown>
+#16 0x56143f342332 <unknown>
+#17 0x56143f354a53 <unknown>
+#18 0x7fb424539134 <unknown>
+[2025-09-06T07:00:25.147+0000] {logging_mixin.py:188} INFO - Error in tinnhanh: Message: session not created
+from disconnected: unable to connect to renderer; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+#0 0x55ba6ac8994a <unknown>
+#1 0x55ba6a6fe8a0 <unknown>
+#2 0x55ba6a73eb8e <unknown>
+#3 0x55ba6a73a775 <unknown>
+#4 0x55ba6a734288 <unknown>
+#5 0x55ba6a784386 <unknown>
+#6 0x55ba6a783a56 <unknown>
+#7 0x55ba6a775e03 <unknown>
+#8 0x55ba6a742968 <unknown>
+#9 0x55ba6a7435e1 <unknown>
+#10 0x55ba6ac4d548 <unknown>
+#11 0x55ba6ac51272 <unknown>
+#12 0x55ba6ac34313 <unknown>
+#13 0x55ba6ac51dc5 <unknown>
+#14 0x55ba6ac1949f <unknown>
+#15 0x55ba6ac76158 <unknown>
+#16 0x55ba6ac76332 <unknown>
+#17 0x55ba6ac88a53 <unknown>
+#18 0x7f8ad8036134 <unknown>
+[2025-09-06T07:00:25.147+0000] {logging_mixin.py:188} INFO - Error in cafef: Message: session not created
+from disconnected: unable to connect to renderer; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+#0 0x55f04586794a <unknown>
+#1 0x55f0452dc8a0 <unknown>
+#2 0x55f04531cb8e <unknown>
+#3 0x55f045318775 <unknown>
+#4 0x55f045312288 <unknown>
+#5 0x55f045362386 <unknown>
+#6 0x55f045361a56 <unknown>
+#7 0x55f045353e03 <unknown>
+#8 0x55f045320968 <unknown>
+#9 0x55f0453215e1 <unknown>
+#10 0x55f04582b548 <unknown>
+#11 0x55f04582f272 <unknown>
+#12 0x55f045812313 <unknown>
+#13 0x55f04582fdc5 <unknown>
+#14 0x55f0457f749f <unknown>
+#15 0x55f045854158 <unknown>
+#16 0x55f045854332 <unknown>
+#17 0x55f045866a53 <unknown>
+#18 0x7faf4e05a134 <unknown>
+[2025-09-06T07:00:25.148+0000] {add_postgre.py:48} ERROR - ❌ Lỗi trong add_postgres: No objects to concatenate
+[2025-09-06T07:00:25.148+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-09-06T07:00:25.149+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/baseoperator.py", line 400, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/utils/new_pipeline/add_postgre.py", line 15, in add_postgres
+    df=tintuc()
+  File "/opt/airflow/dags/utils/new_pipeline/merge.py", line 31, in tintuc
+    return asyncio.run(tintuc_async())
+  File "/usr/local/lib/python3.10/asyncio/runners.py", line 44, in run
+    return loop.run_until_complete(main)
+  File "/usr/local/lib/python3.10/asyncio/base_events.py", line 649, in run_until_complete
+    return future.result()
+  File "/opt/airflow/dags/utils/new_pipeline/merge.py", line 26, in tintuc_async
+    df_all = pd.concat(results, ignore_index=True)
+  File "/home/airflow/.local/lib/python3.10/site-packages/pandas/core/reshape/concat.py", line 380, in concat
+    op = _Concatenator(
+  File "/home/airflow/.local/lib/python3.10/site-packages/pandas/core/reshape/concat.py", line 443, in __init__
+    objs, keys = self._clean_keys_and_objs(objs, keys)
+  File "/home/airflow/.local/lib/python3.10/site-packages/pandas/core/reshape/concat.py", line 505, in _clean_keys_and_objs
+    raise ValueError("No objects to concatenate")
+ValueError: No objects to concatenate
+[2025-09-06T07:00:25.160+0000] {taskinstance.py:1206} INFO - Marking task as UP_FOR_RETRY. dag_id=news_pipeline, task_id=add_postgre, run_id=scheduled__2025-09-05T01:00:00+00:00, execution_date=20250905T010000, start_date=20250906T070024, end_date=20250906T070025
+[2025-09-06T07:00:25.173+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 127442 for task add_postgre (No objects to concatenate; 138729)
+[2025-09-06T07:00:25.192+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2025-09-06T07:00:25.228+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-09-06T07:00:25.229+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

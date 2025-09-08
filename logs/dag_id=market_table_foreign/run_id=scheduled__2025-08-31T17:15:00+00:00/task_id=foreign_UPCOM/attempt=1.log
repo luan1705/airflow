@@ -1,0 +1,38 @@
+[2025-09-01T10:26:13.270+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-09-01T10:26:13.299+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: market_table_foreign.foreign_UPCOM scheduled__2025-08-31T17:15:00+00:00 [queued]>
+[2025-09-01T10:26:13.309+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: market_table_foreign.foreign_UPCOM scheduled__2025-08-31T17:15:00+00:00 [queued]>
+[2025-09-01T10:26:13.309+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 11
+[2025-09-01T10:26:13.323+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): foreign_UPCOM> on 2025-08-31 17:15:00+00:00
+[2025-09-01T10:26:13.331+0000] {standard_task_runner.py:63} INFO - Started process 2318146 to run task
+[2025-09-01T10:26:13.335+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'market_table_foreign', 'foreign_UPCOM', 'scheduled__2025-08-31T17:15:00+00:00', '--job-id', '42180', '--raw', '--subdir', 'DAGS_FOLDER/dag_market_live.py', '--cfg-path', '/tmp/tmpgd1597aw']
+[2025-09-01T10:26:13.338+0000] {standard_task_runner.py:91} INFO - Job 42180: Subtask foreign_UPCOM
+[2025-09-01T10:26:13.393+0000] {task_command.py:426} INFO - Running <TaskInstance: market_table_foreign.foreign_UPCOM scheduled__2025-08-31T17:15:00+00:00 [running]> on host 1877907bc043
+[2025-09-01T10:26:13.508+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='market_table_foreign' AIRFLOW_CTX_TASK_ID='foreign_UPCOM' AIRFLOW_CTX_EXECUTION_DATE='2025-08-31T17:15:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-08-31T17:15:00+00:00'
+[2025-09-01T10:26:13.509+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-09-01T10:26:13.525+0000] {foreign_UPCOM.py:17} INFO - Kết nối DB
+[2025-09-01T10:26:13.811+0000] {foreign_UPCOM.py:42} INFO - Đã lưu foreign_UPCOM
+[2025-09-01T10:26:13.813+0000] {python.py:237} INFO - Done. Returned value was: None
+[2025-09-01T10:26:13.813+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-09-01T10:26:13.829+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=market_table_foreign, task_id=foreign_UPCOM, run_id=scheduled__2025-08-31T17:15:00+00:00, execution_date=20250831T171500, start_date=20250901T102613, end_date=20250901T102613
+[2025-09-01T10:26:13.868+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-09-01T10:26:13.887+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-09-01T10:26:13.888+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
+[2025-09-01T10:27:19.344+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-09-01T10:27:19.369+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: market_table_foreign.foreign_UPCOM scheduled__2025-08-31T17:15:00+00:00 [queued]>
+[2025-09-01T10:27:19.378+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: market_table_foreign.foreign_UPCOM scheduled__2025-08-31T17:15:00+00:00 [queued]>
+[2025-09-01T10:27:19.378+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 11
+[2025-09-01T10:27:19.390+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): foreign_UPCOM> on 2025-08-31 17:15:00+00:00
+[2025-09-01T10:27:19.399+0000] {standard_task_runner.py:63} INFO - Started process 2318934 to run task
+[2025-09-01T10:27:19.403+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'market_table_foreign', 'foreign_UPCOM', 'scheduled__2025-08-31T17:15:00+00:00', '--job-id', '42416', '--raw', '--subdir', 'DAGS_FOLDER/dag_market_live.py', '--cfg-path', '/tmp/tmpjr_q5vf4']
+[2025-09-01T10:27:19.406+0000] {standard_task_runner.py:91} INFO - Job 42416: Subtask foreign_UPCOM
+[2025-09-01T10:27:19.465+0000] {task_command.py:426} INFO - Running <TaskInstance: market_table_foreign.foreign_UPCOM scheduled__2025-08-31T17:15:00+00:00 [running]> on host 1877907bc043
+[2025-09-01T10:27:19.574+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='market_table_foreign' AIRFLOW_CTX_TASK_ID='foreign_UPCOM' AIRFLOW_CTX_EXECUTION_DATE='2025-08-31T17:15:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-08-31T17:15:00+00:00'
+[2025-09-01T10:27:19.576+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-09-01T10:27:19.598+0000] {foreign_UPCOM.py:17} INFO - Kết nối DB
+[2025-09-01T10:27:19.969+0000] {foreign_UPCOM.py:42} INFO - Đã lưu foreign_UPCOM
+[2025-09-01T10:27:19.970+0000] {python.py:237} INFO - Done. Returned value was: None
+[2025-09-01T10:27:19.971+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-09-01T10:27:19.986+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=market_table_foreign, task_id=foreign_UPCOM, run_id=scheduled__2025-08-31T17:15:00+00:00, execution_date=20250831T171500, start_date=20250901T102719, end_date=20250901T102719
+[2025-09-01T10:27:20.056+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-09-01T10:27:20.079+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-09-01T10:27:20.082+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

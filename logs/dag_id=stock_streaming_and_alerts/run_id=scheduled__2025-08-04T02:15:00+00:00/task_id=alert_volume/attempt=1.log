@@ -1,0 +1,17 @@
+[2025-08-04T02:20:00.930+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-08-04T02:20:00.956+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: stock_streaming_and_alerts.alert_volume scheduled__2025-08-04T02:15:00+00:00 [queued]>
+[2025-08-04T02:20:00.965+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: stock_streaming_and_alerts.alert_volume scheduled__2025-08-04T02:15:00+00:00 [queued]>
+[2025-08-04T02:20:00.965+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 2
+[2025-08-04T02:20:00.978+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): alert_volume> on 2025-08-04 02:15:00+00:00
+[2025-08-04T02:20:00.986+0000] {standard_task_runner.py:63} INFO - Started process 75607 to run task
+[2025-08-04T02:20:00.990+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'stock_streaming_and_alerts', 'alert_volume', 'scheduled__2025-08-04T02:15:00+00:00', '--job-id', '2193', '--raw', '--subdir', 'DAGS_FOLDER/dags_streamingstock/dags_streaming_stock.py', '--cfg-path', '/tmp/tmpot5x33sx']
+[2025-08-04T02:20:00.992+0000] {standard_task_runner.py:91} INFO - Job 2193: Subtask alert_volume
+[2025-08-04T02:20:01.046+0000] {task_command.py:426} INFO - Running <TaskInstance: stock_streaming_and_alerts.alert_volume scheduled__2025-08-04T02:15:00+00:00 [running]> on host 1877907bc043
+[2025-08-04T02:20:01.206+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='videv' AIRFLOW_CTX_DAG_ID='stock_streaming_and_alerts' AIRFLOW_CTX_TASK_ID='alert_volume' AIRFLOW_CTX_EXECUTION_DATE='2025-08-04T02:15:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-08-04T02:15:00+00:00'
+[2025-08-04T02:20:01.207+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-08-04T02:20:01.229+0000] {logging_mixin.py:188} INFO - ⏹️ Outside trading time. Skipping Alert_Volume.py...
+[2025-08-04T02:20:01.230+0000] {python.py:237} INFO - Done. Returned value was: None
+[2025-08-04T02:20:01.231+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-08-04T02:20:01.241+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=stock_streaming_and_alerts, task_id=alert_volume, run_id=scheduled__2025-08-04T02:15:00+00:00, execution_date=20250804T021500, start_date=20250804T022000, end_date=20250804T022001
+[2025-08-04T02:20:01.282+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-08-04T02:20:01.299+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

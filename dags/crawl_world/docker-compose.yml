@@ -1,0 +1,17 @@
+version: '3.9'
+
+services:
+  stream_polygon:
+    build: .
+    container_name: stream_polygon
+    restart: always
+    environment:
+      API_KEY: "YOUR_POLYGON_KEY"
+      KAFKA_BROKER: "172.20.0.2:9092"
+      KAFKA_TOPIC: "world_stock_index"
+    networks:
+      - kafka_default   # kết nối vào network đã có sẵn
+
+networks:
+  kafka_default:
+    external: true

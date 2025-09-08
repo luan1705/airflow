@@ -1,0 +1,45 @@
+[2025-09-07T03:02:01.392+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-09-07T03:02:01.614+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: liquidity.save_liquidity scheduled__2025-09-07T03:01:00+00:00 [queued]>
+[2025-09-07T03:02:01.623+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: liquidity.save_liquidity scheduled__2025-09-07T03:01:00+00:00 [queued]>
+[2025-09-07T03:02:01.623+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 11
+[2025-09-07T03:02:01.635+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): save_liquidity> on 2025-09-07 03:01:00+00:00
+[2025-09-07T03:02:01.643+0000] {standard_task_runner.py:63} INFO - Started process 130268 to run task
+[2025-09-07T03:02:01.648+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'liquidity', 'save_liquidity', 'scheduled__2025-09-07T03:01:00+00:00', '--job-id', '140699', '--raw', '--subdir', 'DAGS_FOLDER/dag_liquidity.py', '--cfg-path', '/tmp/tmpqwo0ury7']
+[2025-09-07T03:02:01.651+0000] {standard_task_runner.py:91} INFO - Job 140699: Subtask save_liquidity
+[2025-09-07T03:02:01.702+0000] {task_command.py:426} INFO - Running <TaskInstance: liquidity.save_liquidity scheduled__2025-09-07T03:01:00+00:00 [running]> on host 8d9cea3aac78
+[2025-09-07T03:02:01.798+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='liquidity' AIRFLOW_CTX_TASK_ID='save_liquidity' AIRFLOW_CTX_EXECUTION_DATE='2025-09-07T03:01:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-09-07T03:01:00+00:00'
+[2025-09-07T03:02:01.799+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-09-07T03:02:02.087+0000] {liquidity.py:95} ERROR - Lỗi lưu liquidity_ALL
+Traceback (most recent call last):
+  File "/opt/airflow/dags/utils/market_history/liquidity/liquidity.py", line 84, in save_liquidity
+    data=liquidity(realsymbol)
+  File "/opt/airflow/dags/utils/market_history/liquidity/liquidity.py", line 56, in liquidity
+    data = response.json()[0]
+IndexError: list index out of range
+[2025-09-07T03:02:02.362+0000] {liquidity.py:95} ERROR - Lỗi lưu liquidity_HOSE
+Traceback (most recent call last):
+  File "/opt/airflow/dags/utils/market_history/liquidity/liquidity.py", line 84, in save_liquidity
+    data=liquidity(realsymbol)
+  File "/opt/airflow/dags/utils/market_history/liquidity/liquidity.py", line 56, in liquidity
+    data = response.json()[0]
+IndexError: list index out of range
+[2025-09-07T03:02:02.596+0000] {liquidity.py:95} ERROR - Lỗi lưu liquidity_HNX
+Traceback (most recent call last):
+  File "/opt/airflow/dags/utils/market_history/liquidity/liquidity.py", line 84, in save_liquidity
+    data=liquidity(realsymbol)
+  File "/opt/airflow/dags/utils/market_history/liquidity/liquidity.py", line 56, in liquidity
+    data = response.json()[0]
+IndexError: list index out of range
+[2025-09-07T03:02:02.912+0000] {liquidity.py:95} ERROR - Lỗi lưu liquidity_UPCOM
+Traceback (most recent call last):
+  File "/opt/airflow/dags/utils/market_history/liquidity/liquidity.py", line 84, in save_liquidity
+    data=liquidity(realsymbol)
+  File "/opt/airflow/dags/utils/market_history/liquidity/liquidity.py", line 56, in liquidity
+    data = response.json()[0]
+IndexError: list index out of range
+[2025-09-07T03:02:02.915+0000] {python.py:237} INFO - Done. Returned value was: None
+[2025-09-07T03:02:02.916+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-09-07T03:02:02.931+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=liquidity, task_id=save_liquidity, run_id=scheduled__2025-09-07T03:01:00+00:00, execution_date=20250907T030100, start_date=20250907T030201, end_date=20250907T030202
+[2025-09-07T03:02:02.982+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-09-07T03:02:03.014+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-09-07T03:02:03.016+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

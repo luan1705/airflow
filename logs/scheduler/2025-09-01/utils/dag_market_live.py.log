@@ -1,0 +1,14 @@
+[2025-09-01T08:54:54.554+0000] {processor.py:161} INFO - Started process (PID=738676) to work on /opt/airflow/dags/utils/dag_market_live.py
+[2025-09-01T08:54:54.559+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/utils/dag_market_live.py for tasks to queue
+[2025-09-01T08:54:54.562+0000] {logging_mixin.py:188} INFO - [2025-09-01T08:54:54.561+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/utils/dag_market_live.py
+[2025-09-01T08:54:55.575+0000] {processor.py:840} INFO - DAG(s) 'saveeboardcq' retrieved from /opt/airflow/dags/utils/dag_market_live.py
+[2025-09-01T08:54:55.889+0000] {logging_mixin.py:188} INFO - [2025-09-01T08:54:55.888+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-09-01T08:54:55.955+0000] {logging_mixin.py:188} INFO - [2025-09-01T08:54:55.955+0000] {dag.py:3954} INFO - Setting next_dagrun for saveeboardcq to 2025-09-01 08:00:00+00:00, run_after=2025-09-01 09:00:00+00:00
+[2025-09-01T08:54:56.007+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/utils/dag_market_live.py took 1.490 seconds
+[2025-09-01T08:55:26.432+0000] {processor.py:161} INFO - Started process (PID=738713) to work on /opt/airflow/dags/utils/dag_market_live.py
+[2025-09-01T08:55:26.433+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/utils/dag_market_live.py for tasks to queue
+[2025-09-01T08:55:26.434+0000] {logging_mixin.py:188} INFO - [2025-09-01T08:55:26.434+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/utils/dag_market_live.py
+[2025-09-01T08:55:26.785+0000] {processor.py:840} INFO - DAG(s) 'saveeboardcq' retrieved from /opt/airflow/dags/utils/dag_market_live.py
+[2025-09-01T08:55:26.813+0000] {logging_mixin.py:188} INFO - [2025-09-01T08:55:26.813+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2025-09-01T08:55:26.839+0000] {logging_mixin.py:188} INFO - [2025-09-01T08:55:26.839+0000] {dag.py:3954} INFO - Setting next_dagrun for saveeboardcq to 2025-09-01 08:00:00+00:00, run_after=2025-09-01 09:00:00+00:00
+[2025-09-01T08:55:26.858+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/utils/dag_market_live.py took 0.436 seconds

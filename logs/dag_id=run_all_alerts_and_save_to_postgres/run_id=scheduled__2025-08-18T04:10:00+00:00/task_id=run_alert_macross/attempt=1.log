@@ -1,0 +1,35 @@
+[2025-08-18T04:15:00.847+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-08-18T04:15:00.880+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: run_all_alerts_and_save_to_postgres.run_alert_macross scheduled__2025-08-18T04:10:00+00:00 [queued]>
+[2025-08-18T04:15:00.891+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: run_all_alerts_and_save_to_postgres.run_alert_macross scheduled__2025-08-18T04:10:00+00:00 [queued]>
+[2025-08-18T04:15:00.892+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 2
+[2025-08-18T04:15:00.909+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): run_alert_macross> on 2025-08-18 04:10:00+00:00
+[2025-08-18T04:15:00.917+0000] {standard_task_runner.py:63} INFO - Started process 106057 to run task
+[2025-08-18T04:15:00.921+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'run_all_alerts_and_save_to_postgres', 'run_alert_macross', 'scheduled__2025-08-18T04:10:00+00:00', '--job-id', '8369', '--raw', '--subdir', 'DAGS_FOLDER/alert_***_project/dags/alert_functions_dag.py', '--cfg-path', '/tmp/tmpiertingn']
+[2025-08-18T04:15:00.922+0000] {standard_task_runner.py:91} INFO - Job 8369: Subtask run_alert_macross
+[2025-08-18T04:15:00.980+0000] {task_command.py:426} INFO - Running <TaskInstance: run_all_alerts_and_save_to_postgres.run_alert_macross scheduled__2025-08-18T04:10:00+00:00 [running]> on host 1877907bc043
+[2025-08-18T04:15:01.081+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='alert_system' AIRFLOW_CTX_DAG_ID='run_all_alerts_and_save_to_postgres' AIRFLOW_CTX_TASK_ID='run_alert_macross' AIRFLOW_CTX_EXECUTION_DATE='2025-08-18T04:10:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-08-18T04:10:00+00:00'
+[2025-08-18T04:15:01.082+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-08-18T04:15:01.097+0000] {logging_mixin.py:188} INFO - ⏹ Outside trading time: 2025-08-18 04:15:01.097134. Skipping Alert_MAcross.py...
+[2025-08-18T04:15:01.097+0000] {python.py:237} INFO - Done. Returned value was: None
+[2025-08-18T04:15:01.098+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-08-18T04:15:01.108+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=run_all_alerts_and_save_to_postgres, task_id=run_alert_macross, run_id=scheduled__2025-08-18T04:10:00+00:00, execution_date=20250818T041000, start_date=20250818T041500, end_date=20250818T041501
+[2025-08-18T04:15:01.134+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-08-18T04:15:01.155+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-08-18T04:15:01.156+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
+[2025-08-18T04:18:19.451+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-08-18T04:18:19.480+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: run_all_alerts_and_save_to_postgres.run_alert_macross scheduled__2025-08-18T04:10:00+00:00 [queued]>
+[2025-08-18T04:18:19.489+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: run_all_alerts_and_save_to_postgres.run_alert_macross scheduled__2025-08-18T04:10:00+00:00 [queued]>
+[2025-08-18T04:18:19.489+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 2
+[2025-08-18T04:18:19.502+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): run_alert_macross> on 2025-08-18 04:10:00+00:00
+[2025-08-18T04:18:19.508+0000] {standard_task_runner.py:63} INFO - Started process 106701 to run task
+[2025-08-18T04:18:19.512+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'run_all_alerts_and_save_to_postgres', 'run_alert_macross', 'scheduled__2025-08-18T04:10:00+00:00', '--job-id', '8381', '--raw', '--subdir', 'DAGS_FOLDER/alert_***_project/dags/alert_functions_dag.py', '--cfg-path', '/tmp/tmpiisbj594']
+[2025-08-18T04:18:19.514+0000] {standard_task_runner.py:91} INFO - Job 8381: Subtask run_alert_macross
+[2025-08-18T04:18:19.572+0000] {task_command.py:426} INFO - Running <TaskInstance: run_all_alerts_and_save_to_postgres.run_alert_macross scheduled__2025-08-18T04:10:00+00:00 [running]> on host 1877907bc043
+[2025-08-18T04:18:19.663+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='alert_system' AIRFLOW_CTX_DAG_ID='run_all_alerts_and_save_to_postgres' AIRFLOW_CTX_TASK_ID='run_alert_macross' AIRFLOW_CTX_EXECUTION_DATE='2025-08-18T04:10:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-08-18T04:10:00+00:00'
+[2025-08-18T04:18:19.664+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-08-18T04:18:19.679+0000] {logging_mixin.py:188} INFO - ⏹ Outside trading time: 2025-08-18 04:18:19.679066. Skipping Alert_MAcross.py...
+[2025-08-18T04:18:19.679+0000] {python.py:237} INFO - Done. Returned value was: None
+[2025-08-18T04:18:19.680+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-08-18T04:18:19.693+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=run_all_alerts_and_save_to_postgres, task_id=run_alert_macross, run_id=scheduled__2025-08-18T04:10:00+00:00, execution_date=20250818T041000, start_date=20250818T041819, end_date=20250818T041819
+[2025-08-18T04:18:19.724+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-08-18T04:18:19.736+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

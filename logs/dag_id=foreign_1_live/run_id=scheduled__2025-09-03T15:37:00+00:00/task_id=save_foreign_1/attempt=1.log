@@ -1,0 +1,25 @@
+[2025-09-03T15:38:01.589+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-09-03T15:38:01.614+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: foreign_1_live.save_foreign_1 scheduled__2025-09-03T15:37:00+00:00 [queued]>
+[2025-09-03T15:38:01.624+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: foreign_1_live.save_foreign_1 scheduled__2025-09-03T15:37:00+00:00 [queued]>
+[2025-09-03T15:38:01.624+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 11
+[2025-09-03T15:38:01.637+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): save_foreign_1> on 2025-09-03 15:37:00+00:00
+[2025-09-03T15:38:01.646+0000] {standard_task_runner.py:63} INFO - Started process 2783040 to run task
+[2025-09-03T15:38:01.650+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'foreign_1_live', 'save_foreign_1', 'scheduled__2025-09-03T15:37:00+00:00', '--job-id', '79368', '--raw', '--subdir', 'DAGS_FOLDER/dag_foreign_1_live.py', '--cfg-path', '/tmp/tmp61yljtqg']
+[2025-09-03T15:38:01.653+0000] {standard_task_runner.py:91} INFO - Job 79368: Subtask save_foreign_1
+[2025-09-03T15:38:01.702+0000] {task_command.py:426} INFO - Running <TaskInstance: foreign_1_live.save_foreign_1 scheduled__2025-09-03T15:37:00+00:00 [running]> on host 1877907bc043
+[2025-09-03T15:38:01.835+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='foreign_1_live' AIRFLOW_CTX_TASK_ID='save_foreign_1' AIRFLOW_CTX_EXECUTION_DATE='2025-09-03T15:37:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-09-03T15:37:00+00:00'
+[2025-09-03T15:38:01.837+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-09-03T15:38:01.860+0000] {foreign_1.py:18} INFO - Kết nối DB
+[2025-09-03T15:38:02.193+0000] {foreign_1.py:28} INFO - Đã lưu foreign_ALL
+[2025-09-03T15:38:02.195+0000] {foreign_1.py:18} INFO - Kết nối DB
+[2025-09-03T15:38:02.699+0000] {foreign_1.py:28} INFO - Đã lưu foreign_HOSE
+[2025-09-03T15:38:02.700+0000] {foreign_1.py:18} INFO - Kết nối DB
+[2025-09-03T15:38:03.114+0000] {foreign_1.py:28} INFO - Đã lưu foreign_HNX
+[2025-09-03T15:38:03.116+0000] {foreign_1.py:18} INFO - Kết nối DB
+[2025-09-03T15:38:03.464+0000] {foreign_1.py:28} INFO - Đã lưu foreign_UPCOM
+[2025-09-03T15:38:03.465+0000] {python.py:237} INFO - Done. Returned value was: None
+[2025-09-03T15:38:03.466+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-09-03T15:38:03.482+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=foreign_1_live, task_id=save_foreign_1, run_id=scheduled__2025-09-03T15:37:00+00:00, execution_date=20250903T153700, start_date=20250903T153801, end_date=20250903T153803
+[2025-09-03T15:38:03.548+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-09-03T15:38:03.588+0000] {taskinstance.py:3498} INFO - 4 downstream tasks scheduled from follow-on schedule check
+[2025-09-03T15:38:03.590+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

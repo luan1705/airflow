@@ -1,0 +1,116 @@
+[2025-09-06T08:28:50.841+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-09-06T08:28:50.862+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: news_pipeline.add_postgre scheduled__2025-09-05T01:00:00+00:00 [queued]>
+[2025-09-06T08:28:50.869+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: news_pipeline.add_postgre scheduled__2025-09-05T01:00:00+00:00 [queued]>
+[2025-09-06T08:28:50.869+0000] {taskinstance.py:2306} INFO - Starting attempt 15 of 25
+[2025-09-06T08:28:50.881+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): add_postgre> on 2025-09-05 01:00:00+00:00
+[2025-09-06T08:28:50.889+0000] {standard_task_runner.py:63} INFO - Started process 4537 to run task
+[2025-09-06T08:28:50.894+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'news_pipeline', 'add_postgre', 'scheduled__2025-09-05T01:00:00+00:00', '--job-id', '128423', '--raw', '--subdir', 'DAGS_FOLDER/dag_news.py', '--cfg-path', '/tmp/tmp540ukea_']
+[2025-09-06T08:28:50.897+0000] {standard_task_runner.py:91} INFO - Job 128423: Subtask add_postgre
+[2025-09-06T08:28:50.950+0000] {task_command.py:426} INFO - Running <TaskInstance: news_pipeline.add_postgre scheduled__2025-09-05T01:00:00+00:00 [running]> on host c941e39aca90
+[2025-09-06T08:28:51.065+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='news_pipeline' AIRFLOW_CTX_TASK_ID='add_postgre' AIRFLOW_CTX_EXECUTION_DATE='2025-09-05T01:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='15' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-09-05T01:00:00+00:00'
+[2025-09-06T08:28:51.066+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-09-06T08:28:51.137+0000] {logging_mixin.py:188} INFO - Error in vietstock: Message: session not created
+from disconnected: unable to connect to renderer; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+#0 0x5623f77280ee <unknown>
+#1 0x5623f7190ff1 <unknown>
+#2 0x5623f71ccbcf <unknown>
+#3 0x5623f71c8c0e <unknown>
+#4 0x5623f71c3fe6 <unknown>
+#5 0x5623f720dfff <unknown>
+#6 0x5623f71ff473 <unknown>
+#7 0x5623f71d0009 <unknown>
+#8 0x5623f71d0b71 <unknown>
+#9 0x5623f76f34fa <unknown>
+#10 0x5623f76f67c1 <unknown>
+#11 0x5623f76f6258 <unknown>
+#12 0x5623f76f6c65 <unknown>
+#13 0x5623f76dd0dc <unknown>
+#14 0x5623f76f6fd1 <unknown>
+#15 0x5623f76c625a <unknown>
+#16 0x5623f77154b5 <unknown>
+#17 0x5623f77156ae <unknown>
+#18 0x5623f7726c25 <unknown>
+#19 0x7fbb3ad6d134 <unknown>
+[2025-09-06T08:28:51.137+0000] {logging_mixin.py:188} INFO - Error in tinnhanh: Message: session not created
+from disconnected: unable to connect to renderer; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+#0 0x55890142b0ee <unknown>
+#1 0x558900e93ff1 <unknown>
+#2 0x558900ecfbcf <unknown>
+#3 0x558900ecbc0e <unknown>
+#4 0x558900ec6fe6 <unknown>
+#5 0x558900f10fff <unknown>
+#6 0x558900f02473 <unknown>
+#7 0x558900ed3009 <unknown>
+#8 0x558900ed3b71 <unknown>
+#9 0x5589013f64fa <unknown>
+#10 0x5589013f97c1 <unknown>
+#11 0x5589013f9258 <unknown>
+#12 0x5589013f9c65 <unknown>
+#13 0x5589013e00dc <unknown>
+#14 0x5589013f9fd1 <unknown>
+#15 0x5589013c925a <unknown>
+#16 0x5589014184b5 <unknown>
+#17 0x5589014186ae <unknown>
+#18 0x558901429c25 <unknown>
+#19 0x7f7cea75d134 <unknown>
+[2025-09-06T08:28:51.138+0000] {logging_mixin.py:188} INFO - Error in cafef: Message: session not created
+from disconnected: unable to connect to renderer; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+#0 0x55d291a160ee <unknown>
+#1 0x55d29147eff1 <unknown>
+#2 0x55d2914babcf <unknown>
+#3 0x55d2914b6c0e <unknown>
+#4 0x55d2914b1fe6 <unknown>
+#5 0x55d2914fbfff <unknown>
+#6 0x55d2914ed473 <unknown>
+#7 0x55d2914be009 <unknown>
+#8 0x55d2914beb71 <unknown>
+#9 0x55d2919e14fa <unknown>
+#10 0x55d2919e47c1 <unknown>
+#11 0x55d2919e4258 <unknown>
+#12 0x55d2919e4c65 <unknown>
+#13 0x55d2919cb0dc <unknown>
+#14 0x55d2919e4fd1 <unknown>
+#15 0x55d2919b425a <unknown>
+#16 0x55d291a034b5 <unknown>
+#17 0x55d291a036ae <unknown>
+#18 0x55d291a14c25 <unknown>
+#19 0x7f9446d06134 <unknown>
+[2025-09-06T08:28:51.139+0000] {add_postgre.py:48} ERROR - ❌ Lỗi trong add_postgres: No objects to concatenate
+[2025-09-06T08:28:51.139+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-09-06T08:28:51.139+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/baseoperator.py", line 400, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/utils/new_pipeline/add_postgre.py", line 15, in add_postgres
+    df=tintuc()
+  File "/opt/airflow/dags/utils/new_pipeline/merge.py", line 31, in tintuc
+    return asyncio.run(tintuc_async())
+  File "/usr/local/lib/python3.10/asyncio/runners.py", line 44, in run
+    return loop.run_until_complete(main)
+  File "/usr/local/lib/python3.10/asyncio/base_events.py", line 649, in run_until_complete
+    return future.result()
+  File "/opt/airflow/dags/utils/new_pipeline/merge.py", line 26, in tintuc_async
+    df_all = pd.concat(results, ignore_index=True)
+  File "/home/airflow/.local/lib/python3.10/site-packages/pandas/core/reshape/concat.py", line 380, in concat
+    op = _Concatenator(
+  File "/home/airflow/.local/lib/python3.10/site-packages/pandas/core/reshape/concat.py", line 443, in __init__
+    objs, keys = self._clean_keys_and_objs(objs, keys)
+  File "/home/airflow/.local/lib/python3.10/site-packages/pandas/core/reshape/concat.py", line 505, in _clean_keys_and_objs
+    raise ValueError("No objects to concatenate")
+ValueError: No objects to concatenate
+[2025-09-06T08:28:51.151+0000] {taskinstance.py:1206} INFO - Marking task as UP_FOR_RETRY. dag_id=news_pipeline, task_id=add_postgre, run_id=scheduled__2025-09-05T01:00:00+00:00, execution_date=20250905T010000, start_date=20250906T082850, end_date=20250906T082851
+[2025-09-06T08:28:51.164+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 128423 for task add_postgre (No objects to concatenate; 4537)
+[2025-09-06T08:28:51.185+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2025-09-06T08:28:51.214+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-09-06T08:28:51.215+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

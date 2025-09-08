@@ -1,0 +1,19 @@
+[2025-09-06T17:01:06.305+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-09-06T17:01:06.331+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: proprietary.proprietary_UPCOM scheduled__2025-09-05T17:01:00+00:00 [queued]>
+[2025-09-06T17:01:06.340+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: proprietary.proprietary_UPCOM scheduled__2025-09-05T17:01:00+00:00 [queued]>
+[2025-09-06T17:01:06.340+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 11
+[2025-09-06T17:01:06.351+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): proprietary_UPCOM> on 2025-09-05 17:01:00+00:00
+[2025-09-06T17:01:06.359+0000] {standard_task_runner.py:63} INFO - Started process 58284 to run task
+[2025-09-06T17:01:06.363+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'proprietary', 'proprietary_UPCOM', 'scheduled__2025-09-05T17:01:00+00:00', '--job-id', '134084', '--raw', '--subdir', 'DAGS_FOLDER/dag_proprietary.py', '--cfg-path', '/tmp/tmpuau844c8']
+[2025-09-06T17:01:06.367+0000] {standard_task_runner.py:91} INFO - Job 134084: Subtask proprietary_UPCOM
+[2025-09-06T17:01:06.423+0000] {task_command.py:426} INFO - Running <TaskInstance: proprietary.proprietary_UPCOM scheduled__2025-09-05T17:01:00+00:00 [running]> on host 8d9cea3aac78
+[2025-09-06T17:01:06.525+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='proprietary' AIRFLOW_CTX_TASK_ID='proprietary_UPCOM' AIRFLOW_CTX_EXECUTION_DATE='2025-09-05T17:01:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-09-05T17:01:00+00:00'
+[2025-09-06T17:01:06.527+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-09-06T17:01:06.544+0000] {proprietary_UPCOM.py:18} INFO - Kết nối DB
+[2025-09-06T17:01:06.732+0000] {proprietary_UPCOM.py:43} INFO - Đã lưu propietary_UPCOM
+[2025-09-06T17:01:06.733+0000] {python.py:237} INFO - Done. Returned value was: None
+[2025-09-06T17:01:06.734+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-09-06T17:01:06.746+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=proprietary, task_id=proprietary_UPCOM, run_id=scheduled__2025-09-05T17:01:00+00:00, execution_date=20250905T170100, start_date=20250906T170106, end_date=20250906T170106
+[2025-09-06T17:01:06.775+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-09-06T17:01:06.792+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-09-06T17:01:06.793+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

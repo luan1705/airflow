@@ -1,0 +1,253 @@
+[2025-07-22T12:39:00.654+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-07-22T12:39:00.681+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: news_pipeline.add_postgre scheduled__2025-07-21T03:00:00+00:00 [queued]>
+[2025-07-22T12:39:00.690+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: news_pipeline.add_postgre scheduled__2025-07-21T03:00:00+00:00 [queued]>
+[2025-07-22T12:39:00.691+0000] {taskinstance.py:2306} INFO - Starting attempt 2 of 12
+[2025-07-22T12:39:00.703+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): add_postgre> on 2025-07-21 03:00:00+00:00
+[2025-07-22T12:39:00.710+0000] {standard_task_runner.py:63} INFO - Started process 4012 to run task
+[2025-07-22T12:39:00.714+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'news_pipeline', 'add_postgre', 'scheduled__2025-07-21T03:00:00+00:00', '--job-id', '26', '--raw', '--subdir', 'DAGS_FOLDER/dag_news.py', '--cfg-path', '/tmp/tmpy6tbq_cc']
+[2025-07-22T12:39:00.716+0000] {standard_task_runner.py:91} INFO - Job 26: Subtask add_postgre
+[2025-07-22T12:39:00.767+0000] {task_command.py:426} INFO - Running <TaskInstance: news_pipeline.add_postgre scheduled__2025-07-21T03:00:00+00:00 [running]> on host 6b7e6caedd73
+[2025-07-22T12:39:00.846+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='news_pipeline' AIRFLOW_CTX_TASK_ID='add_postgre' AIRFLOW_CTX_EXECUTION_DATE='2025-07-21T03:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-07-21T03:00:00+00:00'
+[2025-07-22T12:39:00.847+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-07-22T12:39:01.312+0000] {add_postgre.py:13} INFO - ✅ Kết nối PostgreSQL thành công.
+[2025-07-22T12:39:01.452+0000] {logger.py:11} INFO - ====== WebDriver manager ======
+[2025-07-22T12:39:01.580+0000] {logger.py:11} INFO - Get LATEST chromedriver version for google-chrome
+[2025-07-22T12:39:01.807+0000] {logger.py:11} INFO - Get LATEST chromedriver version for google-chrome
+[2025-07-22T12:39:02.052+0000] {logger.py:11} INFO - Driver [/root/.wdm/drivers/chromedriver/linux64/138.0.7204.157/chromedriver] found in cache
+[2025-07-22T12:41:10.552+0000] {logger.py:11} INFO - ====== WebDriver manager ======
+[2025-07-22T12:41:10.693+0000] {logger.py:11} INFO - Get LATEST chromedriver version for google-chrome
+[2025-07-22T12:41:10.918+0000] {logger.py:11} INFO - Get LATEST chromedriver version for google-chrome
+[2025-07-22T12:41:11.162+0000] {logger.py:11} INFO - Driver [/root/.wdm/drivers/chromedriver/linux64/138.0.7204.157/chromedriver] found in cache
+[2025-07-22T12:41:41.099+0000] {logger.py:11} INFO - ====== WebDriver manager ======
+[2025-07-22T12:41:41.238+0000] {logger.py:11} INFO - Get LATEST chromedriver version for google-chrome
+[2025-07-22T12:41:41.456+0000] {logger.py:11} INFO - Get LATEST chromedriver version for google-chrome
+[2025-07-22T12:41:41.674+0000] {logger.py:11} INFO - Driver [/root/.wdm/drivers/chromedriver/linux64/138.0.7204.157/chromedriver] found in cache
+[2025-07-22T12:43:54.514+0000] {add_postgre.py:35} INFO - ✅ Đã thêm 83 bản ghi mới vào DB.
+[2025-07-22T12:46:05.055+0000] {add_postgre.py:45} ERROR - ❌ Lỗi trong add_postgres: (psycopg2.OperationalError) connection to server at "host.docker.internal" (125.235.4.59), port 5432 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+[2025-07-22T12:46:05.056+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-07-22T12:46:05.057+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3371, in _wrap_pool_connect
+    return fn()
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 327, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 894, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 493, in checkout
+    rec = pool._do_get()
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 145, in _do_get
+    with util.safe_reraise():
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 70, in __exit__
+    compat.raise_(
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 143, in _do_get
+    return self._create_connection()
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 273, in _create_connection
+    return _ConnectionRecord(self)
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 388, in __init__
+    self.__connect()
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 690, in __connect
+    with util.safe_reraise():
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 70, in __exit__
+    compat.raise_(
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 686, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/create.py", line 574, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 598, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/home/airflow/.local/lib/python3.10/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "host.docker.internal" (125.235.4.59), port 5432 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/baseoperator.py", line 400, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/utils/new_pipeline/add_postgre.py", line 38, in add_postgres
+    df_add.to_sql('News',enginelocal,if_exists='append',index=False)
+  File "/home/airflow/.local/lib/python3.10/site-packages/pandas/util/_decorators.py", line 333, in wrapper
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/pandas/core/generic.py", line 3008, in to_sql
+    return sql.to_sql(
+  File "/home/airflow/.local/lib/python3.10/site-packages/pandas/io/sql.py", line 787, in to_sql
+    with pandasSQL_builder(con, schema=schema, need_transaction=True) as pandas_sql:
+  File "/home/airflow/.local/lib/python3.10/site-packages/pandas/io/sql.py", line 851, in pandasSQL_builder
+    return SQLDatabase(con, schema, need_transaction)
+  File "/home/airflow/.local/lib/python3.10/site-packages/pandas/io/sql.py", line 1576, in __init__
+    con = self.exit_stack.enter_context(con.connect())
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3325, in connect
+    return self._connection_cls(self, close_with_result=close_with_result)
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 96, in __init__
+    else engine.raw_connection()
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3404, in raw_connection
+    return self._wrap_pool_connect(self.pool.connect, _connection)
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3374, in _wrap_pool_connect
+    Connection._handle_dbapi_exception_noconnection(
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2208, in _handle_dbapi_exception_noconnection
+    util.raise_(
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 3371, in _wrap_pool_connect
+    return fn()
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 327, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 894, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 493, in checkout
+    rec = pool._do_get()
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 145, in _do_get
+    with util.safe_reraise():
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 70, in __exit__
+    compat.raise_(
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/pool/impl.py", line 143, in _do_get
+    return self._create_connection()
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 273, in _create_connection
+    return _ConnectionRecord(self)
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 388, in __init__
+    self.__connect()
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 690, in __connect
+    with util.safe_reraise():
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/util/langhelpers.py", line 70, in __exit__
+    compat.raise_(
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/pool/base.py", line 686, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/create.py", line 574, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/home/airflow/.local/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 598, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/home/airflow/.local/lib/python3.10/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "host.docker.internal" (125.235.4.59), port 5432 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+(Background on this error at: https://sqlalche.me/e/14/e3q8)
+[2025-07-22T12:46:05.081+0000] {taskinstance.py:1206} INFO - Marking task as UP_FOR_RETRY. dag_id=news_pipeline, task_id=add_postgre, run_id=scheduled__2025-07-21T03:00:00+00:00, execution_date=20250721T030000, start_date=20250722T123900, end_date=20250722T124605
+[2025-07-22T12:46:05.096+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 26 for task add_postgre ((psycopg2.OperationalError) connection to server at "host.docker.internal" (125.235.4.59), port 5432 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+(Background on this error at: https://sqlalche.me/e/14/e3q8); 4012)
+[2025-07-22T12:46:05.134+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2025-07-22T12:46:05.204+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-07-22T12:46:05.208+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
+[2025-07-22T15:38:23.782+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-07-22T15:38:23.805+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: news_pipeline.add_postgre scheduled__2025-07-21T03:00:00+00:00 [queued]>
+[2025-07-22T15:38:23.813+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: news_pipeline.add_postgre scheduled__2025-07-21T03:00:00+00:00 [queued]>
+[2025-07-22T15:38:23.813+0000] {taskinstance.py:2306} INFO - Starting attempt 2 of 12
+[2025-07-22T15:38:23.825+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): add_postgre> on 2025-07-21 03:00:00+00:00
+[2025-07-22T15:38:23.832+0000] {standard_task_runner.py:63} INFO - Started process 1843 to run task
+[2025-07-22T15:38:23.837+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'news_pipeline', 'add_postgre', 'scheduled__2025-07-21T03:00:00+00:00', '--job-id', '7', '--raw', '--subdir', 'DAGS_FOLDER/dag_news.py', '--cfg-path', '/tmp/tmpu0rxhcl0']
+[2025-07-22T15:38:23.838+0000] {standard_task_runner.py:91} INFO - Job 7: Subtask add_postgre
+[2025-07-22T15:38:23.890+0000] {task_command.py:426} INFO - Running <TaskInstance: news_pipeline.add_postgre scheduled__2025-07-21T03:00:00+00:00 [running]> on host 0255908b9460
+[2025-07-22T15:38:23.975+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='news_pipeline' AIRFLOW_CTX_TASK_ID='add_postgre' AIRFLOW_CTX_EXECUTION_DATE='2025-07-21T03:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-07-21T03:00:00+00:00'
+[2025-07-22T15:38:23.976+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-07-22T15:38:24.510+0000] {add_postgre.py:13} INFO - ✅ Kết nối PostgreSQL thành công.
+[2025-07-22T15:43:06.178+0000] {add_postgre.py:26} INFO - 📭 Không có bản ghi mới để thêm vào bảng News.
+[2025-07-22T15:43:06.180+0000] {python.py:237} INFO - Done. Returned value was: Không có bản ghi mới
+[2025-07-22T15:43:06.180+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-07-22T15:43:06.218+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=news_pipeline, task_id=add_postgre, run_id=scheduled__2025-07-21T03:00:00+00:00, execution_date=20250721T030000, start_date=20250722T153823, end_date=20250722T154306
+[2025-07-22T15:43:06.306+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-07-22T15:43:06.340+0000] {taskinstance.py:3498} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-07-22T15:43:06.342+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
+[2025-07-22T17:08:12.828+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-07-22T17:08:12.848+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: news_pipeline.add_postgre scheduled__2025-07-21T03:00:00+00:00 [queued]>
+[2025-07-22T17:08:12.855+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: news_pipeline.add_postgre scheduled__2025-07-21T03:00:00+00:00 [queued]>
+[2025-07-22T17:08:12.855+0000] {taskinstance.py:2306} INFO - Starting attempt 2 of 11
+[2025-07-22T17:08:12.864+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): add_postgre> on 2025-07-21 03:00:00+00:00
+[2025-07-22T17:08:12.870+0000] {standard_task_runner.py:63} INFO - Started process 5911 to run task
+[2025-07-22T17:08:12.874+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'news_pipeline', 'add_postgre', 'scheduled__2025-07-21T03:00:00+00:00', '--job-id', '12', '--raw', '--subdir', 'DAGS_FOLDER/dag_news.py', '--cfg-path', '/tmp/tmprqieudxl']
+[2025-07-22T17:08:12.876+0000] {standard_task_runner.py:91} INFO - Job 12: Subtask add_postgre
+[2025-07-22T17:08:12.927+0000] {task_command.py:426} INFO - Running <TaskInstance: news_pipeline.add_postgre scheduled__2025-07-21T03:00:00+00:00 [running]> on host 0255908b9460
+[2025-07-22T17:08:13.014+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='news_pipeline' AIRFLOW_CTX_TASK_ID='add_postgre' AIRFLOW_CTX_EXECUTION_DATE='2025-07-21T03:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-07-21T03:00:00+00:00'
+[2025-07-22T17:08:13.015+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-07-22T17:08:13.620+0000] {add_postgre.py:13} INFO - ✅ Kết nối PostgreSQL thành công.
+[2025-07-22T17:12:22.299+0000] {add_postgre.py:45} ERROR - ❌ Lỗi trong add_postgres: HTTPConnectionPool(host='localhost', port=34001): Read timed out. (read timeout=120)
+[2025-07-22T17:12:22.301+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-07-22T17:12:22.302+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 534, in _make_request
+    response = conn.getresponse()
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/connection.py", line 565, in getresponse
+    httplib_response = super().getresponse()
+  File "/usr/local/lib/python3.10/http/client.py", line 1375, in getresponse
+    response.begin()
+  File "/usr/local/lib/python3.10/http/client.py", line 318, in begin
+    version, status, reason = self._read_status()
+  File "/usr/local/lib/python3.10/http/client.py", line 279, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+  File "/usr/local/lib/python3.10/socket.py", line 705, in readinto
+    return self._sock.recv_into(b)
+TimeoutError: timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/baseoperator.py", line 400, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/utils/new_pipeline/add_postgre.py", line 16, in add_postgres
+    df=tintuc()
+  File "/opt/airflow/dags/utils/new_pipeline/merge.py", line 10, in tintuc
+    df2=tinnhanh()
+  File "/opt/airflow/dags/utils/new_pipeline/tinnhanh_ngay.py", line 28, in tinnhanh
+    driver.get(url) #dùng driver mở link
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/remote/webdriver.py", line 479, in get
+    self.execute(Command.GET, {"url": url})
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/remote/webdriver.py", line 451, in execute
+    response = cast(RemoteConnection, self.command_executor).execute(driver_command, params)
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/remote/remote_connection.py", line 404, in execute
+    return self._request(command_info[0], url, body=data)
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/remote/remote_connection.py", line 428, in _request
+    response = self._conn.request(method, url, body=body, headers=headers, timeout=self._client_config.timeout)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/_request_methods.py", line 143, in request
+    return self.request_encode_body(
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/_request_methods.py", line 278, in request_encode_body
+    return self.urlopen(method, url, **extra_kw)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/poolmanager.py", line 459, in urlopen
+    response = conn.urlopen(method, u.request_uri, **kw)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/util/retry.py", line 474, in increment
+    raise reraise(type(error), error, _stacktrace)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/util/util.py", line 39, in reraise
+    raise value
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 536, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 367, in _raise_timeout
+    raise ReadTimeoutError(
+urllib3.exceptions.ReadTimeoutError: HTTPConnectionPool(host='localhost', port=34001): Read timed out. (read timeout=120)
+[2025-07-22T17:12:22.324+0000] {taskinstance.py:1206} INFO - Marking task as UP_FOR_RETRY. dag_id=news_pipeline, task_id=add_postgre, run_id=scheduled__2025-07-21T03:00:00+00:00, execution_date=20250721T030000, start_date=20250722T170812, end_date=20250722T171222
+[2025-07-22T17:12:22.345+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 12 for task add_postgre (HTTPConnectionPool(host='localhost', port=34001): Read timed out. (read timeout=120); 5911)
+[2025-07-22T17:12:22.387+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2025-07-22T17:12:22.427+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-07-22T17:12:22.428+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

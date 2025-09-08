@@ -1,0 +1,285 @@
+[2025-08-07T07:05:25.042+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-08-07T07:05:25.089+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: run_all_alerts_and_save_to_postgres.run_alert_macross scheduled__2025-08-06T14:50:00+00:00 [queued]>
+[2025-08-07T07:05:25.102+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: run_all_alerts_and_save_to_postgres.run_alert_macross scheduled__2025-08-06T14:50:00+00:00 [queued]>
+[2025-08-07T07:05:25.102+0000] {taskinstance.py:2306} INFO - Starting attempt 2 of 3
+[2025-08-07T07:05:25.120+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): run_alert_macross> on 2025-08-06 14:50:00+00:00
+[2025-08-07T07:05:25.129+0000] {standard_task_runner.py:63} INFO - Started process 136638 to run task
+[2025-08-07T07:05:25.132+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'run_all_alerts_and_save_to_postgres', 'run_alert_macross', 'scheduled__2025-08-06T14:50:00+00:00', '--job-id', '2679', '--raw', '--subdir', 'DAGS_FOLDER/alert to db/alert_all_to_postgres_dag.py', '--cfg-path', '/tmp/tmp_t74jb0y']
+[2025-08-07T07:05:25.134+0000] {standard_task_runner.py:91} INFO - Job 2679: Subtask run_alert_macross
+[2025-08-07T07:05:25.192+0000] {task_command.py:426} INFO - Running <TaskInstance: run_all_alerts_and_save_to_postgres.run_alert_macross scheduled__2025-08-06T14:50:00+00:00 [running]> on host 1877907bc043
+[2025-08-07T07:05:25.280+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='alert_system' AIRFLOW_CTX_DAG_ID='run_all_alerts_and_save_to_postgres' AIRFLOW_CTX_TASK_ID='run_alert_macross' AIRFLOW_CTX_EXECUTION_DATE='2025-08-06T14:50:00+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-08-06T14:50:00+00:00'
+[2025-08-07T07:05:25.281+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-08-07T07:05:25.384+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-08-07T07:05:25.385+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/baseoperator.py", line 400, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/alert to db/alert_all_to_postgres_dag.py", line 40, in run_alert_script
+    result = subprocess.run(['python', script_path], check=True, capture_output=True, text=True)
+  File "/usr/local/lib/python3.10/subprocess.py", line 526, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['python', '/opt/airflow/dags/alert_scripts/Alert_MAcross.py']' returned non-zero exit status 2.
+[2025-08-07T07:05:25.397+0000] {taskinstance.py:1206} INFO - Marking task as UP_FOR_RETRY. dag_id=run_all_alerts_and_save_to_postgres, task_id=run_alert_macross, run_id=scheduled__2025-08-06T14:50:00+00:00, execution_date=20250806T145000, start_date=20250807T070525, end_date=20250807T070525
+[2025-08-07T07:05:25.411+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 2679 for task run_alert_macross (Command '['python', '/opt/airflow/dags/alert_scripts/Alert_MAcross.py']' returned non-zero exit status 2.; 136638)
+[2025-08-07T07:05:25.425+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2025-08-07T07:05:25.455+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-08-07T07:05:25.456+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
+[2025-08-07T07:11:29.349+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-08-07T07:11:29.374+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: run_all_alerts_and_save_to_postgres.run_alert_macross scheduled__2025-08-06T14:50:00+00:00 [queued]>
+[2025-08-07T07:11:29.382+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: run_all_alerts_and_save_to_postgres.run_alert_macross scheduled__2025-08-06T14:50:00+00:00 [queued]>
+[2025-08-07T07:11:29.383+0000] {taskinstance.py:2306} INFO - Starting attempt 2 of 3
+[2025-08-07T07:11:29.395+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): run_alert_macross> on 2025-08-06 14:50:00+00:00
+[2025-08-07T07:11:29.402+0000] {standard_task_runner.py:63} INFO - Started process 136770 to run task
+[2025-08-07T07:11:29.406+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'run_all_alerts_and_save_to_postgres', 'run_alert_macross', 'scheduled__2025-08-06T14:50:00+00:00', '--job-id', '2698', '--raw', '--subdir', 'DAGS_FOLDER/alert to db/alert_all_to_postgres_dag.py', '--cfg-path', '/tmp/tmpiv_prj_7']
+[2025-08-07T07:11:29.408+0000] {standard_task_runner.py:91} INFO - Job 2698: Subtask run_alert_macross
+[2025-08-07T07:11:29.463+0000] {task_command.py:426} INFO - Running <TaskInstance: run_all_alerts_and_save_to_postgres.run_alert_macross scheduled__2025-08-06T14:50:00+00:00 [running]> on host 1877907bc043
+[2025-08-07T07:11:29.577+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='alert_system' AIRFLOW_CTX_DAG_ID='run_all_alerts_and_save_to_postgres' AIRFLOW_CTX_TASK_ID='run_alert_macross' AIRFLOW_CTX_EXECUTION_DATE='2025-08-06T14:50:00+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-08-06T14:50:00+00:00'
+[2025-08-07T07:11:29.579+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-08-07T07:11:29.704+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-08-07T07:11:29.705+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/baseoperator.py", line 400, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/alert to db/alert_all_to_postgres_dag.py", line 40, in run_alert_script
+    result = subprocess.run(['python', script_path], check=True, capture_output=True, text=True)
+  File "/usr/local/lib/python3.10/subprocess.py", line 526, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['python', '/opt/airflow/dags/alert_scripts/Alert_MAcross.py']' returned non-zero exit status 2.
+[2025-08-07T07:11:29.717+0000] {taskinstance.py:1206} INFO - Marking task as UP_FOR_RETRY. dag_id=run_all_alerts_and_save_to_postgres, task_id=run_alert_macross, run_id=scheduled__2025-08-06T14:50:00+00:00, execution_date=20250806T145000, start_date=20250807T071129, end_date=20250807T071129
+[2025-08-07T07:11:29.732+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 2698 for task run_alert_macross (Command '['python', '/opt/airflow/dags/alert_scripts/Alert_MAcross.py']' returned non-zero exit status 2.; 136770)
+[2025-08-07T07:11:29.778+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2025-08-07T07:11:29.807+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-08-07T07:11:29.808+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
+[2025-08-07T07:30:46.011+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-08-07T07:30:46.048+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: run_all_alerts_and_save_to_postgres.run_alert_macross scheduled__2025-08-06T14:50:00+00:00 [queued]>
+[2025-08-07T07:30:46.059+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: run_all_alerts_and_save_to_postgres.run_alert_macross scheduled__2025-08-06T14:50:00+00:00 [queued]>
+[2025-08-07T07:30:46.060+0000] {taskinstance.py:2306} INFO - Starting attempt 2 of 3
+[2025-08-07T07:30:46.076+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): run_alert_macross> on 2025-08-06 14:50:00+00:00
+[2025-08-07T07:30:46.082+0000] {standard_task_runner.py:63} INFO - Started process 137081 to run task
+[2025-08-07T07:30:46.086+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'run_all_alerts_and_save_to_postgres', 'run_alert_macross', 'scheduled__2025-08-06T14:50:00+00:00', '--job-id', '2722', '--raw', '--subdir', 'DAGS_FOLDER/alert to db/alert_all_to_postgres_dag.py', '--cfg-path', '/tmp/tmpkeprwqou']
+[2025-08-07T07:30:46.087+0000] {standard_task_runner.py:91} INFO - Job 2722: Subtask run_alert_macross
+[2025-08-07T07:30:46.146+0000] {task_command.py:426} INFO - Running <TaskInstance: run_all_alerts_and_save_to_postgres.run_alert_macross scheduled__2025-08-06T14:50:00+00:00 [running]> on host 1877907bc043
+[2025-08-07T07:30:46.231+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='alert_system' AIRFLOW_CTX_DAG_ID='run_all_alerts_and_save_to_postgres' AIRFLOW_CTX_TASK_ID='run_alert_macross' AIRFLOW_CTX_EXECUTION_DATE='2025-08-06T14:50:00+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-08-06T14:50:00+00:00'
+[2025-08-07T07:30:46.232+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-08-07T07:30:46.350+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-08-07T07:30:46.350+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/baseoperator.py", line 400, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/alert to db/alert_all_to_postgres_dag.py", line 40, in run_alert_script
+    result = subprocess.run(['python', script_path], check=True, capture_output=True, text=True)
+  File "/usr/local/lib/python3.10/subprocess.py", line 526, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['python', '/opt/airflow/dags/alert_scripts/Alert_MAcross.py']' returned non-zero exit status 2.
+[2025-08-07T07:30:46.363+0000] {taskinstance.py:1206} INFO - Marking task as UP_FOR_RETRY. dag_id=run_all_alerts_and_save_to_postgres, task_id=run_alert_macross, run_id=scheduled__2025-08-06T14:50:00+00:00, execution_date=20250806T145000, start_date=20250807T073046, end_date=20250807T073046
+[2025-08-07T07:30:46.380+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 2722 for task run_alert_macross (Command '['python', '/opt/airflow/dags/alert_scripts/Alert_MAcross.py']' returned non-zero exit status 2.; 137081)
+[2025-08-07T07:30:46.418+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2025-08-07T07:30:46.456+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-08-07T07:30:46.458+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
+[2025-08-07T07:42:01.439+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-08-07T07:42:01.465+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: run_all_alerts_and_save_to_postgres.run_alert_macross scheduled__2025-08-06T14:50:00+00:00 [queued]>
+[2025-08-07T07:42:01.472+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: run_all_alerts_and_save_to_postgres.run_alert_macross scheduled__2025-08-06T14:50:00+00:00 [queued]>
+[2025-08-07T07:42:01.473+0000] {taskinstance.py:2306} INFO - Starting attempt 2 of 3
+[2025-08-07T07:42:01.484+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): run_alert_macross> on 2025-08-06 14:50:00+00:00
+[2025-08-07T07:42:01.491+0000] {standard_task_runner.py:63} INFO - Started process 137284 to run task
+[2025-08-07T07:42:01.495+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'run_all_alerts_and_save_to_postgres', 'run_alert_macross', 'scheduled__2025-08-06T14:50:00+00:00', '--job-id', '2742', '--raw', '--subdir', 'DAGS_FOLDER/alert to db/alert_all_to_postgres_dag.py', '--cfg-path', '/tmp/tmpmlmxse9b']
+[2025-08-07T07:42:01.496+0000] {standard_task_runner.py:91} INFO - Job 2742: Subtask run_alert_macross
+[2025-08-07T07:42:01.573+0000] {task_command.py:426} INFO - Running <TaskInstance: run_all_alerts_and_save_to_postgres.run_alert_macross scheduled__2025-08-06T14:50:00+00:00 [running]> on host 1877907bc043
+[2025-08-07T07:42:01.684+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='alert_system' AIRFLOW_CTX_DAG_ID='run_all_alerts_and_save_to_postgres' AIRFLOW_CTX_TASK_ID='run_alert_macross' AIRFLOW_CTX_EXECUTION_DATE='2025-08-06T14:50:00+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-08-06T14:50:00+00:00'
+[2025-08-07T07:42:01.684+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-08-07T07:42:01.804+0000] {logging_mixin.py:188} INFO - [ERROR] Alert_MAcross.py failed:
+python: can't open file '/www/server/***/dags/alert to db/alert_scripts/Alert_MAcross.py': [Errno 2] No such file or directory
+[2025-08-07T07:42:01.804+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-08-07T07:42:01.805+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/baseoperator.py", line 400, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/alert to db/alert_all_to_postgres_dag.py", line 40, in run_alert_script
+    result = subprocess.run(['python', script_path], check=True, capture_output=True, text=True)
+  File "/usr/local/lib/python3.10/subprocess.py", line 526, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['python', '/www/server/airflow/dags/alert to db/alert_scripts/Alert_MAcross.py']' returned non-zero exit status 2.
+[2025-08-07T07:42:01.819+0000] {taskinstance.py:1206} INFO - Marking task as UP_FOR_RETRY. dag_id=run_all_alerts_and_save_to_postgres, task_id=run_alert_macross, run_id=scheduled__2025-08-06T14:50:00+00:00, execution_date=20250806T145000, start_date=20250807T074201, end_date=20250807T074201
+[2025-08-07T07:42:01.836+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 2742 for task run_alert_macross (Command '['python', '/www/server/airflow/dags/alert to db/alert_scripts/Alert_MAcross.py']' returned non-zero exit status 2.; 137284)
+[2025-08-07T07:42:01.867+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2025-08-07T07:42:01.888+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-08-07T07:42:01.889+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
+[2025-08-07T07:47:42.464+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-08-07T07:47:42.491+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: run_all_alerts_and_save_to_postgres.run_alert_macross scheduled__2025-08-06T14:50:00+00:00 [queued]>
+[2025-08-07T07:47:42.498+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: run_all_alerts_and_save_to_postgres.run_alert_macross scheduled__2025-08-06T14:50:00+00:00 [queued]>
+[2025-08-07T07:47:42.499+0000] {taskinstance.py:2306} INFO - Starting attempt 2 of 3
+[2025-08-07T07:47:42.511+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): run_alert_macross> on 2025-08-06 14:50:00+00:00
+[2025-08-07T07:47:42.518+0000] {standard_task_runner.py:63} INFO - Started process 137409 to run task
+[2025-08-07T07:47:42.524+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'run_all_alerts_and_save_to_postgres', 'run_alert_macross', 'scheduled__2025-08-06T14:50:00+00:00', '--job-id', '2759', '--raw', '--subdir', 'DAGS_FOLDER/alert to db/alert_all_to_postgres_dag.py', '--cfg-path', '/tmp/tmp4dfet1ph']
+[2025-08-07T07:47:42.525+0000] {standard_task_runner.py:91} INFO - Job 2759: Subtask run_alert_macross
+[2025-08-07T07:47:42.577+0000] {task_command.py:426} INFO - Running <TaskInstance: run_all_alerts_and_save_to_postgres.run_alert_macross scheduled__2025-08-06T14:50:00+00:00 [running]> on host 1877907bc043
+[2025-08-07T07:47:42.669+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='alert_system' AIRFLOW_CTX_DAG_ID='run_all_alerts_and_save_to_postgres' AIRFLOW_CTX_TASK_ID='run_alert_macross' AIRFLOW_CTX_EXECUTION_DATE='2025-08-06T14:50:00+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-08-06T14:50:00+00:00'
+[2025-08-07T07:47:42.670+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-08-07T07:47:42.684+0000] {logging_mixin.py:188} INFO - Running script: /www/server/***/dags/alert to db/alert_scripts/Alert_MAcross.py
+[2025-08-07T07:47:42.775+0000] {logging_mixin.py:188} INFO - [ERROR] Alert_MAcross.py failed with stderr:
+python: can't open file '/www/server/***/dags/alert to db/alert_scripts/Alert_MAcross.py': [Errno 2] No such file or directory
+[2025-08-07T07:47:42.775+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-08-07T07:47:42.776+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/baseoperator.py", line 400, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/alert to db/alert_all_to_postgres_dag.py", line 41, in run_alert_script
+    result = subprocess.run(
+  File "/usr/local/lib/python3.10/subprocess.py", line 526, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['python', '/www/server/airflow/dags/alert to db/alert_scripts/Alert_MAcross.py']' returned non-zero exit status 2.
+[2025-08-07T07:47:42.788+0000] {taskinstance.py:1206} INFO - Marking task as UP_FOR_RETRY. dag_id=run_all_alerts_and_save_to_postgres, task_id=run_alert_macross, run_id=scheduled__2025-08-06T14:50:00+00:00, execution_date=20250806T145000, start_date=20250807T074742, end_date=20250807T074742
+[2025-08-07T07:47:42.799+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 2759 for task run_alert_macross (Command '['python', '/www/server/airflow/dags/alert to db/alert_scripts/Alert_MAcross.py']' returned non-zero exit status 2.; 137409)
+[2025-08-07T07:47:42.814+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2025-08-07T07:47:42.833+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-08-07T07:47:42.834+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
+[2025-08-07T07:51:46.779+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-08-07T07:51:46.807+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: run_all_alerts_and_save_to_postgres.run_alert_macross scheduled__2025-08-06T14:50:00+00:00 [queued]>
+[2025-08-07T07:51:46.817+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: run_all_alerts_and_save_to_postgres.run_alert_macross scheduled__2025-08-06T14:50:00+00:00 [queued]>
+[2025-08-07T07:51:46.817+0000] {taskinstance.py:2306} INFO - Starting attempt 2 of 3
+[2025-08-07T07:51:46.830+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): run_alert_macross> on 2025-08-06 14:50:00+00:00
+[2025-08-07T07:51:46.836+0000] {standard_task_runner.py:63} INFO - Started process 137507 to run task
+[2025-08-07T07:51:46.840+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'run_all_alerts_and_save_to_postgres', 'run_alert_macross', 'scheduled__2025-08-06T14:50:00+00:00', '--job-id', '2775', '--raw', '--subdir', 'DAGS_FOLDER/alert to db/alert_scripts/alert_all_to_postgres_dag.py', '--cfg-path', '/tmp/tmpysjebbd_']
+[2025-08-07T07:51:46.841+0000] {standard_task_runner.py:91} INFO - Job 2775: Subtask run_alert_macross
+[2025-08-07T07:51:46.901+0000] {task_command.py:426} INFO - Running <TaskInstance: run_all_alerts_and_save_to_postgres.run_alert_macross scheduled__2025-08-06T14:50:00+00:00 [running]> on host 1877907bc043
+[2025-08-07T07:51:46.992+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='alert_system' AIRFLOW_CTX_DAG_ID='run_all_alerts_and_save_to_postgres' AIRFLOW_CTX_TASK_ID='run_alert_macross' AIRFLOW_CTX_EXECUTION_DATE='2025-08-06T14:50:00+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-08-06T14:50:00+00:00'
+[2025-08-07T07:51:46.992+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-08-07T07:51:47.005+0000] {logging_mixin.py:188} INFO - Running script: /www/server/***/dags/alert to db/alert_scripts/Alert_MAcross.py
+[2025-08-07T07:51:47.090+0000] {logging_mixin.py:188} INFO - [ERROR] Alert_MAcross.py failed with stderr:
+python: can't open file '/www/server/***/dags/alert to db/alert_scripts/Alert_MAcross.py': [Errno 2] No such file or directory
+[2025-08-07T07:51:47.091+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-08-07T07:51:47.091+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/baseoperator.py", line 400, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/alert to db/alert_scripts/alert_all_to_postgres_dag.py", line 41, in run_alert_script
+    result = subprocess.run(
+  File "/usr/local/lib/python3.10/subprocess.py", line 526, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['python', '/www/server/airflow/dags/alert to db/alert_scripts/Alert_MAcross.py']' returned non-zero exit status 2.
+[2025-08-07T07:51:47.101+0000] {taskinstance.py:1206} INFO - Marking task as UP_FOR_RETRY. dag_id=run_all_alerts_and_save_to_postgres, task_id=run_alert_macross, run_id=scheduled__2025-08-06T14:50:00+00:00, execution_date=20250806T145000, start_date=20250807T075146, end_date=20250807T075147
+[2025-08-07T07:51:47.112+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 2775 for task run_alert_macross (Command '['python', '/www/server/airflow/dags/alert to db/alert_scripts/Alert_MAcross.py']' returned non-zero exit status 2.; 137507)
+[2025-08-07T07:51:47.133+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2025-08-07T07:51:47.149+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
+[2025-08-07T08:16:45.591+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-08-07T08:16:45.627+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: run_all_alerts_and_save_to_postgres.run_alert_macross scheduled__2025-08-06T14:50:00+00:00 [queued]>
+[2025-08-07T08:16:45.638+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: run_all_alerts_and_save_to_postgres.run_alert_macross scheduled__2025-08-06T14:50:00+00:00 [queued]>
+[2025-08-07T08:16:45.639+0000] {taskinstance.py:2306} INFO - Starting attempt 2 of 3
+[2025-08-07T08:16:45.654+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): run_alert_macross> on 2025-08-06 14:50:00+00:00
+[2025-08-07T08:16:45.661+0000] {standard_task_runner.py:63} INFO - Started process 137906 to run task
+[2025-08-07T08:16:45.665+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'run_all_alerts_and_save_to_postgres', 'run_alert_macross', 'scheduled__2025-08-06T14:50:00+00:00', '--job-id', '2800', '--raw', '--subdir', 'DAGS_FOLDER/alert_to_db/alert_all_to_postgres_dag.py', '--cfg-path', '/tmp/tmpdq3a6bos']
+[2025-08-07T08:16:45.667+0000] {standard_task_runner.py:91} INFO - Job 2800: Subtask run_alert_macross
+[2025-08-07T08:16:45.759+0000] {task_command.py:426} INFO - Running <TaskInstance: run_all_alerts_and_save_to_postgres.run_alert_macross scheduled__2025-08-06T14:50:00+00:00 [running]> on host 1877907bc043
+[2025-08-07T08:16:45.879+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='alert_system' AIRFLOW_CTX_DAG_ID='run_all_alerts_and_save_to_postgres' AIRFLOW_CTX_TASK_ID='run_alert_macross' AIRFLOW_CTX_EXECUTION_DATE='2025-08-06T14:50:00+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-08-06T14:50:00+00:00'
+[2025-08-07T08:16:45.880+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-08-07T08:16:45.892+0000] {logging_mixin.py:188} INFO - Running script: /www/server/***/dags/alert to db/alert_scripts/Alert_MAcross.py
+[2025-08-07T08:16:46.041+0000] {logging_mixin.py:188} INFO - [ERROR] Alert_MAcross.py failed with stderr:
+python: can't open file '/www/server/***/dags/alert to db/alert_scripts/Alert_MAcross.py': [Errno 2] No such file or directory
+[2025-08-07T08:16:46.041+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-08-07T08:16:46.042+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/baseoperator.py", line 400, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/alert_to_db/alert_all_to_postgres_dag.py", line 41, in run_alert_script
+    result = subprocess.run(
+  File "/usr/local/lib/python3.10/subprocess.py", line 526, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['python', '/www/server/airflow/dags/alert to db/alert_scripts/Alert_MAcross.py']' returned non-zero exit status 2.
+[2025-08-07T08:16:46.053+0000] {taskinstance.py:1206} INFO - Marking task as UP_FOR_RETRY. dag_id=run_all_alerts_and_save_to_postgres, task_id=run_alert_macross, run_id=scheduled__2025-08-06T14:50:00+00:00, execution_date=20250806T145000, start_date=20250807T081645, end_date=20250807T081646
+[2025-08-07T08:16:46.064+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 2800 for task run_alert_macross (Command '['python', '/www/server/airflow/dags/alert to db/alert_scripts/Alert_MAcross.py']' returned non-zero exit status 2.; 137906)
+[2025-08-07T08:16:46.078+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2025-08-07T08:16:46.107+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-08-07T08:16:46.108+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
+[2025-08-07T08:59:35.678+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-08-07T08:59:35.705+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: run_all_alerts_and_save_to_postgres.run_alert_macross scheduled__2025-08-06T14:50:00+00:00 [queued]>
+[2025-08-07T08:59:35.713+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: run_all_alerts_and_save_to_postgres.run_alert_macross scheduled__2025-08-06T14:50:00+00:00 [queued]>
+[2025-08-07T08:59:35.713+0000] {taskinstance.py:2306} INFO - Starting attempt 2 of 3
+[2025-08-07T08:59:35.725+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): run_alert_macross> on 2025-08-06 14:50:00+00:00
+[2025-08-07T08:59:35.732+0000] {standard_task_runner.py:63} INFO - Started process 138533 to run task
+[2025-08-07T08:59:35.736+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'run_all_alerts_and_save_to_postgres', 'run_alert_macross', 'scheduled__2025-08-06T14:50:00+00:00', '--job-id', '2823', '--raw', '--subdir', 'DAGS_FOLDER/alert_to_db/alert_all_to_postgres_dag.py', '--cfg-path', '/tmp/tmpldlpfxzc']
+[2025-08-07T08:59:35.738+0000] {standard_task_runner.py:91} INFO - Job 2823: Subtask run_alert_macross
+[2025-08-07T08:59:35.791+0000] {task_command.py:426} INFO - Running <TaskInstance: run_all_alerts_and_save_to_postgres.run_alert_macross scheduled__2025-08-06T14:50:00+00:00 [running]> on host 1877907bc043
+[2025-08-07T08:59:35.876+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='alert_system' AIRFLOW_CTX_DAG_ID='run_all_alerts_and_save_to_postgres' AIRFLOW_CTX_TASK_ID='run_alert_macross' AIRFLOW_CTX_EXECUTION_DATE='2025-08-06T14:50:00+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-08-06T14:50:00+00:00'
+[2025-08-07T08:59:35.877+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-08-07T08:59:35.889+0000] {logging_mixin.py:188} INFO - Running script: /www/server/***/dags/alert_to_db/alert_scripts/Alert_MAcross.py
+[2025-08-07T08:59:35.973+0000] {logging_mixin.py:188} INFO - [ERROR] Alert_MAcross.py failed with stderr:
+python: can't open file '/www/server/***/dags/alert_to_db/alert_scripts/Alert_MAcross.py': [Errno 2] No such file or directory
+[2025-08-07T08:59:35.974+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-08-07T08:59:35.974+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/baseoperator.py", line 400, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/alert_to_db/alert_all_to_postgres_dag.py", line 41, in run_alert_script
+    result = subprocess.run(
+  File "/usr/local/lib/python3.10/subprocess.py", line 526, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['python', '/www/server/airflow/dags/alert_to_db/alert_scripts/Alert_MAcross.py']' returned non-zero exit status 2.
+[2025-08-07T08:59:35.985+0000] {taskinstance.py:1206} INFO - Marking task as UP_FOR_RETRY. dag_id=run_all_alerts_and_save_to_postgres, task_id=run_alert_macross, run_id=scheduled__2025-08-06T14:50:00+00:00, execution_date=20250806T145000, start_date=20250807T085935, end_date=20250807T085935
+[2025-08-07T08:59:35.997+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 2823 for task run_alert_macross (Command '['python', '/www/server/airflow/dags/alert_to_db/alert_scripts/Alert_MAcross.py']' returned non-zero exit status 2.; 138533)
+[2025-08-07T08:59:36.028+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2025-08-07T08:59:36.058+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-08-07T08:59:36.059+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

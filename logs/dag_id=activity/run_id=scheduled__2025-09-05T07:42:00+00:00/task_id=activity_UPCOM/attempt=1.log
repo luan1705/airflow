@@ -1,0 +1,22 @@
+[2025-09-05T07:43:02.248+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-09-05T07:43:02.280+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: activity.activity_UPCOM scheduled__2025-09-05T07:42:00+00:00 [queued]>
+[2025-09-05T07:43:02.290+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: activity.activity_UPCOM scheduled__2025-09-05T07:42:00+00:00 [queued]>
+[2025-09-05T07:43:02.290+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 11
+[2025-09-05T07:43:02.305+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): activity_UPCOM> on 2025-09-05 07:42:00+00:00
+[2025-09-05T07:43:02.319+0000] {standard_task_runner.py:63} INFO - Started process 3152390 to run task
+[2025-09-05T07:43:02.333+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'activity', 'activity_UPCOM', 'scheduled__2025-09-05T07:42:00+00:00', '--job-id', '111799', '--raw', '--subdir', 'DAGS_FOLDER/dag_activity.py', '--cfg-path', '/tmp/tmps4py7go4']
+[2025-09-05T07:43:02.339+0000] {standard_task_runner.py:91} INFO - Job 111799: Subtask activity_UPCOM
+[2025-09-05T07:43:02.434+0000] {task_command.py:426} INFO - Running <TaskInstance: activity.activity_UPCOM scheduled__2025-09-05T07:42:00+00:00 [running]> on host 1877907bc043
+[2025-09-05T07:43:02.531+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='activity' AIRFLOW_CTX_TASK_ID='activity_UPCOM' AIRFLOW_CTX_EXECUTION_DATE='2025-09-05T07:42:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-09-05T07:42:00+00:00'
+[2025-09-05T07:43:02.532+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-09-05T07:43:02.546+0000] {activity_UPCOM.py:17} INFO - Kết nối DB
+[2025-09-05T07:43:02.599+0000] {activity_UPCOM.py:55} ERROR - Lỗi lưu activity_UPCOM
+Traceback (most recent call last):
+  File "/opt/airflow/dags/utils/market_data/activity/activity_UPCOM.py", line 26, in activity_UPCOM
+    advancers_Val = upcom[upcom['matchChange'] > 0]['totalVal'].sum().astype(int)
+AttributeError: 'int' object has no attribute 'astype'
+[2025-09-05T07:43:02.600+0000] {python.py:237} INFO - Done. Returned value was: None
+[2025-09-05T07:43:02.600+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-09-05T07:43:02.611+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=activity, task_id=activity_UPCOM, run_id=scheduled__2025-09-05T07:42:00+00:00, execution_date=20250905T074200, start_date=20250905T074302, end_date=20250905T074302
+[2025-09-05T07:43:02.659+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-09-05T07:43:02.672+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

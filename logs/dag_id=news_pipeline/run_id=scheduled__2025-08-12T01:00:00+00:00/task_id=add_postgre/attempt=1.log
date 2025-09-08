@@ -1,0 +1,37 @@
+[2025-09-05T09:10:18.944+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-09-05T09:10:18.973+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: news_pipeline.add_postgre scheduled__2025-08-12T01:00:00+00:00 [queued]>
+[2025-09-05T09:10:18.986+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: news_pipeline.add_postgre scheduled__2025-08-12T01:00:00+00:00 [queued]>
+[2025-09-05T09:10:18.986+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 11
+[2025-09-05T09:10:19.006+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): add_postgre> on 2025-08-12 01:00:00+00:00
+[2025-09-05T09:10:19.036+0000] {standard_task_runner.py:63} INFO - Started process 3170990 to run task
+[2025-09-05T09:10:19.063+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'news_pipeline', 'add_postgre', 'scheduled__2025-08-12T01:00:00+00:00', '--job-id', '112946', '--raw', '--subdir', 'DAGS_FOLDER/dag_news.py', '--cfg-path', '/tmp/tmpsahr3ced']
+[2025-09-05T09:10:19.082+0000] {standard_task_runner.py:91} INFO - Job 112946: Subtask add_postgre
+[2025-09-05T09:10:19.253+0000] {task_command.py:426} INFO - Running <TaskInstance: news_pipeline.add_postgre scheduled__2025-08-12T01:00:00+00:00 [running]> on host 1877907bc043
+[2025-09-05T09:10:19.395+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='news_pipeline' AIRFLOW_CTX_TASK_ID='add_postgre' AIRFLOW_CTX_EXECUTION_DATE='2025-08-12T01:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-08-12T01:00:00+00:00'
+[2025-09-05T09:10:19.396+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-09-05T09:10:38.455+0000] {add_postgre.py:46} ERROR - ❌ Lỗi trong add_postgres: name 'log' is not defined
+[2025-09-05T09:10:38.501+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-09-05T09:10:38.537+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/baseoperator.py", line 400, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/utils/new_pipeline/add_postgre.py", line 11, in add_postgres
+    df=tintuc()
+  File "/opt/airflow/dags/utils/new_pipeline/merge.py", line 8, in tintuc
+    df2=tinnhanh()
+  File "/opt/airflow/dags/utils/new_pipeline/tinnhanh_ngay.py", line 39, in tinnhanh
+    log.info("Get link")
+NameError: name 'log' is not defined
+[2025-09-05T09:10:38.856+0000] {taskinstance.py:1206} INFO - Marking task as UP_FOR_RETRY. dag_id=news_pipeline, task_id=add_postgre, run_id=scheduled__2025-08-12T01:00:00+00:00, execution_date=20250812T010000, start_date=20250905T091018, end_date=20250905T091038
+[2025-09-05T09:10:39.048+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 112946 for task add_postgre (name 'log' is not defined; 3170990)
+[2025-09-05T09:10:39.102+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2025-09-05T09:10:39.222+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-09-05T09:10:39.223+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

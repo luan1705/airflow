@@ -1,0 +1,54 @@
+[2025-09-05T11:38:45.788+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-09-05T11:38:45.813+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: news_pipeline.add_postgre manual__2025-09-05T11:09:55.305363+00:00 [queued]>
+[2025-09-05T11:38:45.822+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: news_pipeline.add_postgre manual__2025-09-05T11:09:55.305363+00:00 [queued]>
+[2025-09-05T11:38:45.822+0000] {taskinstance.py:2306} INFO - Starting attempt 8 of 18
+[2025-09-05T11:38:45.835+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): add_postgre> on 2025-09-05 11:09:55.305363+00:00
+[2025-09-05T11:38:45.844+0000] {standard_task_runner.py:63} INFO - Started process 3201373 to run task
+[2025-09-05T11:38:45.849+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'news_pipeline', 'add_postgre', 'manual__2025-09-05T11:09:55.305363+00:00', '--job-id', '114597', '--raw', '--subdir', 'DAGS_FOLDER/dag_news.py', '--cfg-path', '/tmp/tmp6wxjajlr']
+[2025-09-05T11:38:45.852+0000] {standard_task_runner.py:91} INFO - Job 114597: Subtask add_postgre
+[2025-09-05T11:38:45.906+0000] {task_command.py:426} INFO - Running <TaskInstance: news_pipeline.add_postgre manual__2025-09-05T11:09:55.305363+00:00 [running]> on host 1877907bc043
+[2025-09-05T11:38:45.989+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='news_pipeline' AIRFLOW_CTX_TASK_ID='add_postgre' AIRFLOW_CTX_EXECUTION_DATE='2025-09-05T11:09:55.305363+00:00' AIRFLOW_CTX_TRY_NUMBER='8' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-09-05T11:09:55.305363+00:00'
+[2025-09-05T11:38:45.990+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-09-05T11:39:04.998+0000] {logging_mixin.py:188} INFO - Không thể nhấn nút 'Xem thêm' lần 2: Message: tab crashed
+  (Session info: chrome=138.0.7204.183)
+Stacktrace:
+#0 0x558b6010a7da <unknown>
+#1 0x558b5fbaf133 <unknown>
+#2 0x558b5fb9891e <unknown>
+#3 0x558b5fb97a4d <unknown>
+#4 0x558b5fb9749a <unknown>
+#5 0x558b5fb97175 <unknown>
+#6 0x558b5fb94fd5 <unknown>
+#7 0x558b5fb9592f <unknown>
+#8 0x558b5fba43e3 <unknown>
+#9 0x558b5fbbd83e <unknown>
+#10 0x558b5fbc407b <unknown>
+#11 0x558b5fb96070 <unknown>
+#12 0x558b5fbbcf83 <unknown>
+#13 0x558b5fc4c5f6 <unknown>
+#14 0x558b5fc26683 <unknown>
+#15 0x558b5fbf2b5b <unknown>
+#16 0x558b5fbf3f31 <unknown>
+#17 0x558b600cf72b <unknown>
+#18 0x558b600d3534 <unknown>
+#19 0x558b600b6229 <unknown>
+#20 0x558b600d40d8 <unknown>
+#21 0x558b6009a61f <unknown>
+#22 0x558b600f7dd8 <unknown>
+#23 0x558b600f7fb6 <unknown>
+#24 0x558b60109af6 <unknown>
+#25 0x7f27fce57134 <unknown>
+[2025-09-05T11:39:05.091+0000] {add_postgre.py:16} INFO - df info :
+[2025-09-05T11:39:05.092+0000] {add_postgre.py:17} INFO -                                                Titles  ...        Source
+16  Cổ phiếu nào trên HOSE tăng mạnh nhất trong th...  ...  vietstock.vn
+17  Thị trường chứng quyền ngày 05/09/2025: Khối n...  ...  vietstock.vn
+
+[2 rows x 4 columns]
+[2025-09-05T11:39:05.106+0000] {add_postgre.py:23} INFO - ✅ Kết nối PostgreSQL thành công.
+[2025-09-05T11:39:05.356+0000] {add_postgre.py:30} INFO - 📭 Không có bản ghi mới để thêm vào bảng News.
+[2025-09-05T11:39:05.357+0000] {python.py:237} INFO - Done. Returned value was: Không có bản ghi mới
+[2025-09-05T11:39:05.357+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-09-05T11:39:05.387+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=news_pipeline, task_id=add_postgre, run_id=manual__2025-09-05T11:09:55.305363+00:00, execution_date=20250905T110955, start_date=20250905T113845, end_date=20250905T113905
+[2025-09-05T11:39:05.458+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-09-05T11:39:05.491+0000] {taskinstance.py:3498} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-09-05T11:39:05.492+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

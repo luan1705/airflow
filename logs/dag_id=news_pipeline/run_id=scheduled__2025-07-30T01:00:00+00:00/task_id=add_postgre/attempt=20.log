@@ -1,0 +1,115 @@
+[2025-07-31T10:01:21.469+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-07-31T10:01:21.489+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: news_pipeline.add_postgre scheduled__2025-07-30T01:00:00+00:00 [queued]>
+[2025-07-31T10:01:21.497+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: news_pipeline.add_postgre scheduled__2025-07-30T01:00:00+00:00 [queued]>
+[2025-07-31T10:01:21.497+0000] {taskinstance.py:2306} INFO - Starting attempt 20 of 30
+[2025-07-31T10:01:21.510+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): add_postgre> on 2025-07-30 01:00:00+00:00
+[2025-07-31T10:01:21.519+0000] {standard_task_runner.py:63} INFO - Started process 3027 to run task
+[2025-07-31T10:01:21.522+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'news_pipeline', 'add_postgre', 'scheduled__2025-07-30T01:00:00+00:00', '--job-id', '1639', '--raw', '--subdir', 'DAGS_FOLDER/dag_news.py', '--cfg-path', '/tmp/tmpqj4r6geu']
+[2025-07-31T10:01:21.526+0000] {standard_task_runner.py:91} INFO - Job 1639: Subtask add_postgre
+[2025-07-31T10:01:21.576+0000] {task_command.py:426} INFO - Running <TaskInstance: news_pipeline.add_postgre scheduled__2025-07-30T01:00:00+00:00 [running]> on host 1877907bc043
+[2025-07-31T10:01:21.692+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='news_pipeline' AIRFLOW_CTX_TASK_ID='add_postgre' AIRFLOW_CTX_EXECUTION_DATE='2025-07-30T01:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='20' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-07-30T01:00:00+00:00'
+[2025-07-31T10:01:21.694+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-07-31T10:01:21.828+0000] {add_postgre.py:43} ERROR - ❌ Lỗi trong add_postgres: Message: session not created
+from disconnected: unable to connect to renderer; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+#0 0x55d98fb8b7da <unknown>
+#1 0x55d98f6302e0 <unknown>
+#2 0x55d98f6704b1 <unknown>
+#3 0x55d98f66c1c0 <unknown>
+#4 0x55d98f665ad7 <unknown>
+#5 0x55d98f6b5e9e <unknown>
+#6 0x55d98f6b5466 <unknown>
+#7 0x55d98f6a7683 <unknown>
+#8 0x55d98f673b5b <unknown>
+#9 0x55d98f674f31 <unknown>
+#10 0x55d98fb5072b <unknown>
+#11 0x55d98fb54534 <unknown>
+#12 0x55d98fb37229 <unknown>
+#13 0x55d98fb550d8 <unknown>
+#14 0x55d98fb1b61f <unknown>
+#15 0x55d98fb78dd8 <unknown>
+#16 0x55d98fb78fb6 <unknown>
+#17 0x55d98fb8aaf6 <unknown>
+#18 0x7f4522a63134 <unknown>
+
+[2025-07-31T10:01:21.829+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-07-31T10:01:21.829+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/baseoperator.py", line 400, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/utils/new_pipeline/add_postgre.py", line 11, in add_postgres
+    df=tintuc()
+  File "/opt/airflow/dags/utils/new_pipeline/merge.py", line 7, in tintuc
+    df1=vietstock()
+  File "/opt/airflow/dags/utils/new_pipeline/vietstock_ngay.py", line 28, in vietstock
+    driver=webdriver.Chrome(service=Service('/usr/bin/chromedriver'),options=Chrome_option)
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/chrome/webdriver.py", line 47, in __init__
+    super().__init__(
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/chromium/webdriver.py", line 69, in __init__
+    super().__init__(command_executor=executor, options=options)
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/remote/webdriver.py", line 261, in __init__
+    self.start_session(capabilities)
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/remote/webdriver.py", line 362, in start_session
+    response = self.execute(Command.NEW_SESSION, caps)["value"]
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/remote/webdriver.py", line 454, in execute
+    self.error_handler.check_response(response)
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/remote/errorhandler.py", line 232, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.SessionNotCreatedException: Message: session not created
+from disconnected: unable to connect to renderer; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+#0 0x55d98fb8b7da <unknown>
+#1 0x55d98f6302e0 <unknown>
+#2 0x55d98f6704b1 <unknown>
+#3 0x55d98f66c1c0 <unknown>
+#4 0x55d98f665ad7 <unknown>
+#5 0x55d98f6b5e9e <unknown>
+#6 0x55d98f6b5466 <unknown>
+#7 0x55d98f6a7683 <unknown>
+#8 0x55d98f673b5b <unknown>
+#9 0x55d98f674f31 <unknown>
+#10 0x55d98fb5072b <unknown>
+#11 0x55d98fb54534 <unknown>
+#12 0x55d98fb37229 <unknown>
+#13 0x55d98fb550d8 <unknown>
+#14 0x55d98fb1b61f <unknown>
+#15 0x55d98fb78dd8 <unknown>
+#16 0x55d98fb78fb6 <unknown>
+#17 0x55d98fb8aaf6 <unknown>
+#18 0x7f4522a63134 <unknown>
+
+[2025-07-31T10:01:21.844+0000] {taskinstance.py:1206} INFO - Marking task as UP_FOR_RETRY. dag_id=news_pipeline, task_id=add_postgre, run_id=scheduled__2025-07-30T01:00:00+00:00, execution_date=20250730T010000, start_date=20250731T100121, end_date=20250731T100121
+[2025-07-31T10:01:21.861+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 1639 for task add_postgre (Message: session not created
+from disconnected: unable to connect to renderer; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#sessionnotcreatedexception
+Stacktrace:
+#0 0x55d98fb8b7da <unknown>
+#1 0x55d98f6302e0 <unknown>
+#2 0x55d98f6704b1 <unknown>
+#3 0x55d98f66c1c0 <unknown>
+#4 0x55d98f665ad7 <unknown>
+#5 0x55d98f6b5e9e <unknown>
+#6 0x55d98f6b5466 <unknown>
+#7 0x55d98f6a7683 <unknown>
+#8 0x55d98f673b5b <unknown>
+#9 0x55d98f674f31 <unknown>
+#10 0x55d98fb5072b <unknown>
+#11 0x55d98fb54534 <unknown>
+#12 0x55d98fb37229 <unknown>
+#13 0x55d98fb550d8 <unknown>
+#14 0x55d98fb1b61f <unknown>
+#15 0x55d98fb78dd8 <unknown>
+#16 0x55d98fb78fb6 <unknown>
+#17 0x55d98fb8aaf6 <unknown>
+#18 0x7f4522a63134 <unknown>
+; 3027)
+[2025-07-31T10:01:21.895+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2025-07-31T10:01:21.941+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-07-31T10:01:21.943+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

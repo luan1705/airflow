@@ -1,0 +1,36 @@
+[2025-09-08T07:41:04.138+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-09-08T07:41:04.163+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: update_stock_history.run_get_py scheduled__2025-09-08T07:35:00+00:00 [queued]>
+[2025-09-08T07:41:04.171+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: update_stock_history.run_get_py scheduled__2025-09-08T07:35:00+00:00 [queued]>
+[2025-09-08T07:41:04.171+0000] {taskinstance.py:2306} INFO - Starting attempt 2 of 2
+[2025-09-08T07:41:04.182+0000] {taskinstance.py:2330} INFO - Executing <Task(BashOperator): run_get_py> on 2025-09-08 07:35:00+00:00
+[2025-09-08T07:41:04.189+0000] {standard_task_runner.py:63} INFO - Started process 339236 to run task
+[2025-09-08T07:41:04.193+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'update_stock_history', 'run_get_py', 'scheduled__2025-09-08T07:35:00+00:00', '--job-id', '160739', '--raw', '--subdir', 'DAGS_FOLDER/crawlchart/dags.py', '--cfg-path', '/tmp/tmpw0hq_0k4']
+[2025-09-08T07:41:04.194+0000] {standard_task_runner.py:91} INFO - Job 160739: Subtask run_get_py
+[2025-09-08T07:41:04.248+0000] {task_command.py:426} INFO - Running <TaskInstance: update_stock_history.run_get_py scheduled__2025-09-08T07:35:00+00:00 [running]> on host 8d9cea3aac78
+[2025-09-08T07:41:04.349+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='update_stock_history' AIRFLOW_CTX_TASK_ID='run_get_py' AIRFLOW_CTX_EXECUTION_DATE='2025-09-08T07:35:00+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-09-08T07:35:00+00:00'
+[2025-09-08T07:41:04.350+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-09-08T07:41:04.365+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-09-08T07:41:04.366+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', 'python3 /opt/***/dags/crawlchart/get.py']
+[2025-09-08T07:41:04.380+0000] {subprocess.py:86} INFO - Output:
+[2025-09-08T07:41:05.380+0000] {subprocess.py:93} INFO - Traceback (most recent call last):
+[2025-09-08T07:41:05.380+0000] {subprocess.py:93} INFO -   File "/opt/***/dags/crawlchart/get.py", line 2, in <module>
+[2025-09-08T07:41:05.381+0000] {subprocess.py:93} INFO -     from VNSFintech import *
+[2025-09-08T07:41:05.381+0000] {subprocess.py:93} INFO - ModuleNotFoundError: No module named 'VNSFintech'
+[2025-09-08T07:41:05.414+0000] {subprocess.py:97} INFO - Command exited with return code 1
+[2025-09-08T07:41:05.415+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-09-08T07:41:05.430+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/bash.py", line 243, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 1.
+[2025-09-08T07:41:05.434+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=update_stock_history, task_id=run_get_py, run_id=scheduled__2025-09-08T07:35:00+00:00, execution_date=20250908T073500, start_date=20250908T074104, end_date=20250908T074105
+[2025-09-08T07:41:05.548+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 160739 for task run_get_py (Bash command failed. The command returned a non-zero exit code 1.; 339236)
+[2025-09-08T07:41:05.569+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2025-09-08T07:41:05.597+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-09-08T07:41:05.599+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

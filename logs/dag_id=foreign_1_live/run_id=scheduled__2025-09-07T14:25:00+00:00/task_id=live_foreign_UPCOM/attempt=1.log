@@ -1,0 +1,18 @@
+[2025-09-07T14:26:04.764+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-09-07T14:26:04.792+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: foreign_1_live.live_foreign_UPCOM scheduled__2025-09-07T14:25:00+00:00 [queued]>
+[2025-09-07T14:26:04.802+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: foreign_1_live.live_foreign_UPCOM scheduled__2025-09-07T14:25:00+00:00 [queued]>
+[2025-09-07T14:26:04.802+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 11
+[2025-09-07T14:26:04.816+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): live_foreign_UPCOM> on 2025-09-07 14:25:00+00:00
+[2025-09-07T14:26:04.823+0000] {standard_task_runner.py:63} INFO - Started process 212396 to run task
+[2025-09-07T14:26:04.828+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'foreign_1_live', 'live_foreign_UPCOM', 'scheduled__2025-09-07T14:25:00+00:00', '--job-id', '148242', '--raw', '--subdir', 'DAGS_FOLDER/dag_foreign_1_live.py', '--cfg-path', '/tmp/tmp4jcscyww']
+[2025-09-07T14:26:04.831+0000] {standard_task_runner.py:91} INFO - Job 148242: Subtask live_foreign_UPCOM
+[2025-09-07T14:26:04.883+0000] {task_command.py:426} INFO - Running <TaskInstance: foreign_1_live.live_foreign_UPCOM scheduled__2025-09-07T14:25:00+00:00 [running]> on host 8d9cea3aac78
+[2025-09-07T14:26:04.980+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='foreign_1_live' AIRFLOW_CTX_TASK_ID='live_foreign_UPCOM' AIRFLOW_CTX_EXECUTION_DATE='2025-09-07T14:25:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-09-07T14:25:00+00:00'
+[2025-09-07T14:26:04.981+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-09-07T14:26:04.996+0000] {foreign_UPCOM.py:17} INFO - Kết nối DB
+[2025-09-07T14:26:05.200+0000] {foreign_UPCOM.py:38} INFO - Đã lưu foreign_UPCOM
+[2025-09-07T14:26:05.200+0000] {python.py:237} INFO - Done. Returned value was: None
+[2025-09-07T14:26:05.201+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-09-07T14:26:05.214+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=foreign_1_live, task_id=live_foreign_UPCOM, run_id=scheduled__2025-09-07T14:25:00+00:00, execution_date=20250907T142500, start_date=20250907T142604, end_date=20250907T142605
+[2025-09-07T14:26:05.240+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-09-07T14:26:05.256+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

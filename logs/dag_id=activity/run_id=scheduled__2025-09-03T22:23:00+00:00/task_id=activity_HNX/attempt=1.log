@@ -1,0 +1,19 @@
+[2025-09-03T22:24:01.540+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-09-03T22:24:01.568+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: activity.activity_HNX scheduled__2025-09-03T22:23:00+00:00 [queued]>
+[2025-09-03T22:24:01.577+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: activity.activity_HNX scheduled__2025-09-03T22:23:00+00:00 [queued]>
+[2025-09-03T22:24:01.578+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 11
+[2025-09-03T22:24:01.591+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): activity_HNX> on 2025-09-03 22:23:00+00:00
+[2025-09-03T22:24:01.600+0000] {standard_task_runner.py:63} INFO - Started process 2846818 to run task
+[2025-09-03T22:24:01.605+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'activity', 'activity_HNX', 'scheduled__2025-09-03T22:23:00+00:00', '--job-id', '88872', '--raw', '--subdir', 'DAGS_FOLDER/dag_activity.py', '--cfg-path', '/tmp/tmp5ane6yvd']
+[2025-09-03T22:24:01.608+0000] {standard_task_runner.py:91} INFO - Job 88872: Subtask activity_HNX
+[2025-09-03T22:24:01.663+0000] {task_command.py:426} INFO - Running <TaskInstance: activity.activity_HNX scheduled__2025-09-03T22:23:00+00:00 [running]> on host 1877907bc043
+[2025-09-03T22:24:01.797+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='activity' AIRFLOW_CTX_TASK_ID='activity_HNX' AIRFLOW_CTX_EXECUTION_DATE='2025-09-03T22:23:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-09-03T22:23:00+00:00'
+[2025-09-03T22:24:01.798+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-09-03T22:24:01.812+0000] {activity_HNX.py:17} INFO - Kết nối DB
+[2025-09-03T22:24:02.179+0000] {activity_HNX.py:53} INFO - Đã lưu activity_HNX
+[2025-09-03T22:24:02.180+0000] {python.py:237} INFO - Done. Returned value was: None
+[2025-09-03T22:24:02.181+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-09-03T22:24:02.194+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=activity, task_id=activity_HNX, run_id=scheduled__2025-09-03T22:23:00+00:00, execution_date=20250903T222300, start_date=20250903T222401, end_date=20250903T222402
+[2025-09-03T22:24:02.257+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-09-03T22:24:02.287+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-09-03T22:24:02.288+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
