@@ -42,13 +42,15 @@ def proprietary(symbol):
     data['netMatchVal'] = (data['totalBuyValue'] - data['totalSellValue']).astype('Int64')
     data['netDealVol']  = (data['totalDealBuyVolume'] - data['totalDealSellVolume']).astype('Int64')
     data['netDealVal']  = (data['totalDealBuyValue']  - data['totalDealSellValue']).astype('Int64')
+    data['netVal'] = data['netMatchVal'] + data['netDealVal']
+    data['netVol'] = data['netMatchVol'] + data['netDealVol']
     data = data.rename(columns={'tradingDate': 'time'})
     intcol=['totalBuyValue','totalSellValue','totalDealBuyValue','totalDealSellValue']
     data[intcol] = (data[intcol]
                    .apply(pd.to_numeric, errors='coerce')
                    .fillna(0)
                    .astype('Int64'))
-    cols=['time','totalBuyValue','totalSellValue','netMatchVal','totalBuyVolume','totalSellVolume','netMatchVol','totalDealBuyVolume','totalDealSellVolume','netDealVol','totalDealBuyValue','totalDealSellValue','netDealVal']
+    cols=['time','netVol', 'netVal', 'totalBuyValue','totalSellValue','netMatchVal','totalBuyVolume','totalSellVolume','netMatchVol','totalDealBuyVolume','totalDealSellVolume','netDealVol','totalDealBuyValue','totalDealSellValue','netDealVal']
     data=data[cols]
     return data
   except Exception as E:
