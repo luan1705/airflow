@@ -1629,3 +1629,218 @@
 [2025-08-06T08:40:48.042+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
 [2025-08-06T08:40:48.069+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
 [2025-08-06T08:40:48.071+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
+[2025-09-11T09:42:33.456+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-09-11T09:42:33.489+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: saveDatabase.save_database_1D scheduled__2025-08-05T08:15:00+00:00 [queued]>
+[2025-09-11T09:42:33.505+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: saveDatabase.save_database_1D scheduled__2025-08-05T08:15:00+00:00 [queued]>
+[2025-09-11T09:42:33.506+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 11
+[2025-09-11T09:42:33.529+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): save_database_1D> on 2025-08-05 08:15:00+00:00
+[2025-09-11T09:42:33.541+0000] {standard_task_runner.py:63} INFO - Started process 5303 to run task
+[2025-09-11T09:42:33.546+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'saveDatabase', 'save_database_1D', 'scheduled__2025-08-05T08:15:00+00:00', '--job-id', '1715', '--raw', '--subdir', 'DAGS_FOLDER/dag_saveDB_redis.py', '--cfg-path', '/tmp/tmpxdqetjyc']
+[2025-09-11T09:42:33.550+0000] {standard_task_runner.py:91} INFO - Job 1715: Subtask save_database_1D
+[2025-09-11T09:42:33.603+0000] {task_command.py:426} INFO - Running <TaskInstance: saveDatabase.save_database_1D scheduled__2025-08-05T08:15:00+00:00 [running]> on host 08233b9480d5
+[2025-09-11T09:42:34.326+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='saveDatabase' AIRFLOW_CTX_TASK_ID='save_database_1D' AIRFLOW_CTX_EXECUTION_DATE='2025-08-05T08:15:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-08-05T08:15:00+00:00'
+[2025-09-11T09:42:34.329+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-09-11T09:42:34.347+0000] {logging_mixin.py:188} INFO - 🚀 Bắt đầu cập nhật dữ liệu...
+[2025-09-11T09:42:37.202+0000] {History_Day.py:51} INFO - ✅ Đã lưu AAT
+[2025-09-11T09:42:42.954+0000] {History_Day.py:51} INFO - ✅ Đã lưu ABR
+[2025-09-11T09:42:45.677+0000] {History_Day.py:51} INFO - ✅ Đã lưu ABS
+[2025-09-11T09:43:18.798+0000] {History_Day.py:51} INFO - ✅ Đã lưu ABT
+[2025-09-11T09:43:21.842+0000] {History_Day.py:51} INFO - ✅ Đã lưu ACB
+[2025-09-11T09:43:24.817+0000] {History_Day.py:51} INFO - ✅ Đã lưu ACC
+[2025-09-11T09:43:27.474+0000] {History_Day.py:51} INFO - ✅ Đã lưu ACG
+[2025-09-11T09:43:30.528+0000] {History_Day.py:51} INFO - ✅ Đã lưu ACL
+[2025-09-11T09:43:33.241+0000] {History_Day.py:51} INFO - ✅ Đã lưu ADG
+[2025-09-11T09:43:36.272+0000] {History_Day.py:51} INFO - ✅ Đã lưu ADP
+[2025-09-11T09:43:39.186+0000] {History_Day.py:51} INFO - ✅ Đã lưu ADS
+[2025-09-11T09:43:42.136+0000] {History_Day.py:51} INFO - ✅ Đã lưu AGG
+[2025-09-11T09:43:42.649+0000] {History_Day.py:51} INFO - ✅ Đã lưu AAM
+[2025-09-11T09:43:42.679+0000] {History_Day.py:51} INFO - ✅ Đã lưu AAA
+[2025-09-11T09:43:45.308+0000] {History_Day.py:51} INFO - ✅ Đã lưu AGM
+[2025-09-11T09:43:46.198+0000] {History_Day.py:51} INFO - ✅ Đã lưu AGR
+[2025-09-11T09:43:46.234+0000] {History_Day.py:51} INFO - ✅ Đã lưu ANV
+[2025-09-11T09:43:48.367+0000] {History_Day.py:51} INFO - ✅ Đã lưu APG
+[2025-09-11T09:43:49.164+0000] {History_Day.py:51} INFO - ✅ Đã lưu APH
+[2025-09-11T09:43:49.216+0000] {History_Day.py:51} INFO - ✅ Đã lưu ASG
+[2025-09-11T09:43:51.859+0000] {History_Day.py:51} INFO - ✅ Đã lưu ASM
+[2025-09-11T09:43:52.700+0000] {History_Day.py:51} INFO - ✅ Đã lưu AST
+[2025-09-11T09:43:53.057+0000] {History_Day.py:51} INFO - ✅ Đã lưu ASP
+[2025-09-11T09:43:54.678+0000] {History_Day.py:51} INFO - ✅ Đã lưu BAF
+[2025-09-11T09:43:56.497+0000] {History_Day.py:51} INFO - ✅ Đã lưu BBC
+[2025-09-11T09:43:56.571+0000] {History_Day.py:51} INFO - ✅ Đã lưu BCE
+[2025-09-11T09:43:57.756+0000] {History_Day.py:51} INFO - ✅ Đã lưu BCG
+[2025-09-11T09:44:00.110+0000] {History_Day.py:51} INFO - ✅ Đã lưu BCM
+[2025-09-11T09:44:00.228+0000] {History_Day.py:51} INFO - ✅ Đã lưu BFC
+[2025-09-11T09:44:01.078+0000] {History_Day.py:51} INFO - ✅ Đã lưu BHN
+[2025-09-11T09:44:03.530+0000] {History_Day.py:51} INFO - ✅ Đã lưu BID
+[2025-09-11T09:44:03.579+0000] {History_Day.py:51} INFO - ✅ Đã lưu BIC
+[2025-09-11T09:44:04.134+0000] {History_Day.py:51} INFO - ✅ Đã lưu BKG
+[2025-09-11T09:44:06.984+0000] {History_Day.py:51} INFO - ✅ Đã lưu BMC
+[2025-09-11T09:44:07.279+0000] {History_Day.py:51} INFO - ✅ Đã lưu BMI
+[2025-09-11T09:44:07.549+0000] {History_Day.py:51} INFO - ✅ Đã lưu BMP
+[2025-09-11T09:44:10.346+0000] {History_Day.py:51} INFO - ✅ Đã lưu BRC
+[2025-09-11T09:44:10.802+0000] {History_Day.py:51} INFO - ✅ Đã lưu BSR
+[2025-09-11T09:44:10.865+0000] {History_Day.py:51} INFO - ✅ Đã lưu BSI
+[2025-09-11T09:44:13.727+0000] {History_Day.py:51} INFO - ✅ Đã lưu BTP
+[2025-09-11T09:44:14.259+0000] {History_Day.py:51} INFO - ✅ Đã lưu BTT
+[2025-09-11T09:44:14.457+0000] {History_Day.py:51} INFO - ✅ Đã lưu BVH
+[2025-09-11T09:44:17.251+0000] {History_Day.py:51} INFO - ✅ Đã lưu BWE
+[2025-09-11T09:44:18.214+0000] {History_Day.py:51} INFO - ✅ Đã lưu C32
+[2025-09-11T09:44:18.553+0000] {History_Day.py:51} INFO - ✅ Đã lưu C47
+[2025-09-11T09:44:20.402+0000] {History_Day.py:51} INFO - ✅ Đã lưu CCI
+[2025-09-11T09:44:21.601+0000] {History_Day.py:51} INFO - ✅ Đã lưu CCL
+[2025-09-11T09:44:22.079+0000] {History_Day.py:51} INFO - ✅ Đã lưu CDC
+[2025-09-11T09:44:23.684+0000] {History_Day.py:51} INFO - ✅ Đã lưu CHP
+[2025-09-11T09:44:24.880+0000] {History_Day.py:51} INFO - ✅ Đã lưu CIG
+[2025-09-11T09:44:25.843+0000] {History_Day.py:51} INFO - ✅ Đã lưu CII
+[2025-09-11T09:44:27.041+0000] {History_Day.py:51} INFO - ✅ Đã lưu CKG
+[2025-09-11T09:44:28.645+0000] {History_Day.py:51} INFO - ✅ Đã lưu CLC
+[2025-09-11T09:44:29.028+0000] {History_Day.py:51} INFO - ✅ Đã lưu CLL
+[2025-09-11T09:44:30.398+0000] {History_Day.py:51} INFO - ✅ Đã lưu CLW
+[2025-09-11T09:44:32.152+0000] {History_Day.py:51} INFO - ✅ Đã lưu CMG
+[2025-09-11T09:44:32.507+0000] {History_Day.py:51} INFO - ✅ Đã lưu CMV
+[2025-09-11T09:44:33.570+0000] {History_Day.py:51} INFO - ✅ Đã lưu CMX
+[2025-09-11T09:44:35.902+0000] {History_Day.py:51} INFO - ✅ Đã lưu CNG
+[2025-09-11T09:44:36.214+0000] {History_Day.py:51} INFO - ✅ Đã lưu COM
+[2025-09-11T09:44:36.998+0000] {History_Day.py:51} INFO - ✅ Đã lưu CRC
+[2025-09-11T09:44:39.209+0000] {History_Day.py:51} INFO - ✅ Đã lưu CRE
+[2025-09-11T09:44:40.003+0000] {History_Day.py:51} INFO - ✅ Đã lưu CSM
+[2025-09-11T09:44:40.327+0000] {History_Day.py:51} INFO - ✅ Đã lưu CSV
+[2025-09-11T09:44:42.750+0000] {History_Day.py:51} INFO - ✅ Đã lưu CTD
+[2025-09-11T09:44:43.587+0000] {History_Day.py:51} INFO - ✅ Đã lưu CTF
+[2025-09-11T09:44:44.159+0000] {History_Day.py:51} INFO - ✅ Đã lưu CTG
+[2025-09-11T09:44:45.860+0000] {History_Day.py:51} INFO - ✅ Đã lưu CTI
+[2025-09-11T09:44:46.923+0000] {History_Day.py:51} INFO - ✅ Đã lưu CTR
+[2025-09-11T09:44:47.446+0000] {History_Day.py:51} INFO - ✅ Đã lưu CTS
+[2025-09-11T09:44:48.862+0000] {History_Day.py:51} INFO - ✅ Đã lưu CVT
+[2025-09-11T09:44:52.551+0000] {History_Day.py:51} INFO - ✅ Đã lưu DAT
+[2025-09-11T09:44:53.201+0000] {History_Day.py:51} INFO - ✅ Đã lưu DAH
+[2025-09-11T09:44:55.870+0000] {History_Day.py:51} INFO - ✅ Đã lưu DBD
+[2025-09-11T09:44:56.461+0000] {History_Day.py:51} INFO - ✅ Đã lưu DBC
+[2025-09-11T09:45:01.771+0000] {History_Day.py:51} INFO - ✅ Đã lưu DBT
+[2025-09-11T09:45:02.308+0000] {History_Day.py:51} INFO - ✅ Đã lưu DC4
+[2025-09-11T09:45:04.997+0000] {History_Day.py:51} INFO - ✅ Đã lưu DCM
+[2025-09-11T09:45:07.661+0000] {History_Day.py:51} INFO - ✅ Đã lưu DCL
+[2025-09-11T09:45:13.408+0000] {History_Day.py:51} INFO - ✅ Đã lưu DGW
+[2025-09-11T09:45:14.997+0000] {History_Day.py:51} INFO - ✅ Đã lưu DGC
+[2025-09-11T09:45:16.244+0000] {History_Day.py:51} INFO - ✅ Đã lưu DHA
+[2025-09-11T09:45:19.060+0000] {History_Day.py:51} INFO - ✅ Đã lưu DHG
+[2025-09-11T09:45:24.821+0000] {History_Day.py:51} INFO - ✅ Đã lưu DHM
+[2025-09-11T09:45:28.590+0000] {History_Day.py:51} INFO - ✅ Đã lưu DIG
+[2025-09-11T09:45:34.645+0000] {History_Day.py:51} INFO - ✅ Đã lưu DLG
+[2025-09-11T09:45:37.799+0000] {History_Day.py:51} INFO - ✅ Đã lưu DMC
+[2025-09-11T09:45:40.848+0000] {History_Day.py:51} INFO - ✅ Đã lưu DPG
+[2025-09-11T09:46:00.121+0000] {History_Day.py:51} INFO - ✅ Đã lưu D2D
+[2025-09-11T09:46:10.231+0000] {History_Day.py:51} INFO - ✅ Đã lưu DPR
+[2025-09-11T09:46:13.254+0000] {History_Day.py:51} INFO - ✅ Đã lưu DQC
+[2025-09-11T09:46:16.332+0000] {History_Day.py:51} INFO - ✅ Đã lưu DRC
+[2025-09-11T09:46:19.251+0000] {History_Day.py:51} INFO - ✅ Đã lưu DPM
+[2025-09-11T09:46:19.698+0000] {History_Day.py:51} INFO - ✅ Đã lưu DRH
+[2025-09-11T09:46:22.527+0000] {History_Day.py:51} INFO - ✅ Đã lưu DRL
+[2025-09-11T09:46:22.790+0000] {History_Day.py:51} INFO - ✅ Đã lưu DSC
+[2025-09-11T09:46:25.557+0000] {History_Day.py:51} INFO - ✅ Đã lưu DSE
+[2025-09-11T09:46:26.356+0000] {History_Day.py:51} INFO - ✅ Đã lưu DSN
+[2025-09-11T09:46:28.533+0000] {History_Day.py:51} INFO - ✅ Đã lưu DHC
+[2025-09-11T09:46:29.039+0000] {History_Day.py:51} INFO - ✅ Đã lưu DTA
+[2025-09-11T09:46:29.772+0000] {History_Day.py:51} INFO - ✅ Đã lưu DTL
+[2025-09-11T09:46:32.368+0000] {History_Day.py:51} INFO - ✅ Đã lưu DTT
+[2025-09-11T09:46:32.898+0000] {History_Day.py:51} INFO - ✅ Đã lưu DVP
+[2025-09-11T09:46:33.379+0000] {History_Day.py:51} INFO - ✅ Đã lưu DXG
+[2025-09-11T09:46:35.458+0000] {History_Day.py:51} INFO - ✅ Đã lưu DXS
+[2025-09-11T09:46:36.232+0000] {History_Day.py:51} INFO - ✅ Đã lưu DXV
+[2025-09-11T09:46:36.605+0000] {History_Day.py:51} INFO - ✅ Đã lưu E1VFVN30
+[2025-09-11T09:46:39.036+0000] {History_Day.py:51} INFO - ✅ Đã lưu EIB
+[2025-09-11T09:46:39.890+0000] {History_Day.py:51} INFO - ✅ Đã lưu ELC
+[2025-09-11T09:46:40.587+0000] {History_Day.py:51} INFO - ✅ Đã lưu EVE
+[2025-09-11T09:46:42.578+0000] {History_Day.py:51} INFO - ✅ Đã lưu EVF
+[2025-09-11T09:46:43.335+0000] {History_Day.py:51} INFO - ✅ Đã lưu EVG
+[2025-09-11T09:46:44.266+0000] {History_Day.py:51} INFO - ✅ Đã lưu FCM
+[2025-09-11T09:46:45.848+0000] {History_Day.py:51} INFO - ✅ Đã lưu FCN
+[2025-09-11T09:46:46.469+0000] {History_Day.py:51} INFO - ✅ Đã lưu FDC
+[2025-09-11T09:46:47.210+0000] {History_Day.py:51} INFO - ✅ Đã lưu FIR
+[2025-09-11T09:46:49.241+0000] {History_Day.py:51} INFO - ✅ Đã lưu FIT
+[2025-09-11T09:46:50.323+0000] {History_Day.py:51} INFO - ✅ Đã lưu FMC
+[2025-09-11T09:46:51.032+0000] {History_Day.py:51} INFO - ✅ Đã lưu FPT
+[2025-09-11T09:46:52.278+0000] {History_Day.py:51} INFO - ✅ Đã lưu FRT
+[2025-09-11T09:46:53.507+0000] {History_Day.py:51} INFO - ✅ Đã lưu FTS
+[2025-09-11T09:46:53.845+0000] {History_Day.py:51} INFO - ✅ Đã lưu FUCTVGF3
+[2025-09-11T09:46:55.221+0000] {History_Day.py:51} INFO - ✅ Đã lưu FUCTVGF4
+[2025-09-11T09:46:56.154+0000] {History_Day.py:51} INFO - ✅ Đã lưu FUCTVGF5
+[2025-09-11T09:46:56.932+0000] {History_Day.py:51} INFO - ✅ Đã lưu FUCVREIT
+[2025-09-11T09:46:58.176+0000] {History_Day.py:51} INFO - ✅ Đã lưu FUEABVND
+[2025-09-11T09:46:58.912+0000] {History_Day.py:51} INFO - ✅ Đã lưu FUEBFVND
+[2025-09-11T09:46:59.905+0000] {History_Day.py:51} INFO - ✅ Đã lưu FUEDCMID
+[2025-09-11T09:47:01.089+0000] {History_Day.py:51} INFO - ✅ Đã lưu FUEFCV50
+[2025-09-11T09:47:01.863+0000] {History_Day.py:51} INFO - ✅ Đã lưu FUEIP100
+[2025-09-11T09:47:02.800+0000] {History_Day.py:51} INFO - ✅ Đã lưu FUEKIV30
+[2025-09-11T09:47:03.976+0000] {History_Day.py:51} INFO - ✅ Đã lưu FUEKIVFS
+[2025-09-11T09:47:04.678+0000] {History_Day.py:51} INFO - ✅ Đã lưu FUEKIVND
+[2025-09-11T09:47:05.771+0000] {History_Day.py:51} INFO - ✅ Đã lưu FUEMAV30
+[2025-09-11T09:47:06.936+0000] {History_Day.py:51} INFO - ✅ Đã lưu FUEMAVND
+[2025-09-11T09:47:07.616+0000] {History_Day.py:51} INFO - ✅ Đã lưu FUESSV30
+[2025-09-11T09:47:08.971+0000] {History_Day.py:51} INFO - ✅ Đã lưu FUESSV50
+[2025-09-11T09:47:10.129+0000] {History_Day.py:51} INFO - ✅ Đã lưu FUESSVFL
+[2025-09-11T09:47:10.798+0000] {History_Day.py:51} INFO - ✅ Đã lưu FUETCC50
+[2025-09-11T09:47:12.252+0000] {History_Day.py:51} INFO - ✅ Đã lưu FUEVFVND
+[2025-09-11T09:47:13.066+0000] {History_Day.py:51} INFO - ✅ Đã lưu FUEVN100
+[2025-09-11T09:47:14.584+0000] {History_Day.py:51} INFO - ✅ Đã lưu GAS
+[2025-09-11T09:47:15.659+0000] {History_Day.py:51} INFO - ✅ Đã lưu GDT
+[2025-09-11T09:47:15.992+0000] {History_Day.py:51} INFO - ✅ Đã lưu GEE
+[2025-09-11T09:47:18.111+0000] {History_Day.py:51} INFO - ✅ Đã lưu GEG
+[2025-09-11T09:47:19.117+0000] {History_Day.py:51} INFO - ✅ Đã lưu GEX
+[2025-09-11T09:47:20.043+0000] {History_Day.py:51} INFO - ✅ Đã lưu GIL
+[2025-09-11T09:47:22.108+0000] {History_Day.py:51} INFO - ✅ Đã lưu GMD
+[2025-09-11T09:47:22.440+0000] {History_Day.py:51} INFO - ✅ Đã lưu GMH
+[2025-09-11T09:47:23.420+0000] {History_Day.py:51} INFO - ✅ Đã lưu GSP
+[2025-09-11T09:47:26.388+0000] {History_Day.py:51} INFO - ✅ Đã lưu GTA
+[2025-09-11T09:47:26.454+0000] {History_Day.py:51} INFO - ✅ Đã lưu GVR
+[2025-09-11T09:47:27.749+0000] {History_Day.py:51} INFO - ✅ Đã lưu HAG
+[2025-09-11T09:47:29.817+0000] {History_Day.py:51} INFO - ✅ Đã lưu HAH
+[2025-09-11T09:47:30.413+0000] {History_Day.py:51} INFO - ✅ Đã lưu HAP
+[2025-09-11T09:47:31.384+0000] {History_Day.py:51} INFO - ✅ Đã lưu HAR
+[2025-09-11T09:47:33.713+0000] {History_Day.py:51} INFO - ✅ Đã lưu HAS
+[2025-09-11T09:47:34.510+0000] {History_Day.py:51} INFO - ✅ Đã lưu HAX
+[2025-09-11T09:47:34.835+0000] {History_Day.py:51} INFO - ✅ Đã lưu HCD
+[2025-09-11T09:47:37.229+0000] {History_Day.py:51} INFO - ✅ Đã lưu HCM
+[2025-09-11T09:47:37.933+0000] {History_Day.py:51} INFO - ✅ Đã lưu HDB
+[2025-09-11T09:47:38.536+0000] {History_Day.py:51} INFO - ✅ Đã lưu HDC
+[2025-09-11T09:47:40.707+0000] {History_Day.py:51} INFO - ✅ Đã lưu HDG
+[2025-09-11T09:47:41.249+0000] {History_Day.py:51} INFO - ✅ Đã lưu HHP
+[2025-09-11T09:47:42.077+0000] {History_Day.py:51} INFO - ✅ Đã lưu HHS
+[2025-09-11T09:47:44.341+0000] {History_Day.py:51} INFO - ✅ Đã lưu HHV
+[2025-09-11T09:47:44.664+0000] {History_Day.py:51} INFO - ✅ Đã lưu HID
+[2025-09-11T09:47:45.685+0000] {History_Day.py:51} INFO - ✅ Đã lưu HII
+[2025-09-11T09:47:48.332+0000] {History_Day.py:51} INFO - ✅ Đã lưu HNA
+[2025-09-11T09:47:48.526+0000] {History_Day.py:51} INFO - ✅ Đã lưu HMC
+[2025-09-11T09:47:49.464+0000] {History_Day.py:51} INFO - ✅ Đã lưu HPG
+[2025-09-11T09:47:51.358+0000] {History_Day.py:51} INFO - ✅ Đã lưu HPX
+[2025-09-11T09:47:52.492+0000] {History_Day.py:51} INFO - ✅ Đã lưu HRC
+[2025-09-11T09:47:55.422+0000] {History_Day.py:51} INFO - ✅ Đã lưu HSL
+[2025-09-11T09:48:01.759+0000] {History_Day.py:51} INFO - ✅ Đã lưu HSG
+[2025-09-11T09:48:07.727+0000] {History_Day.py:51} INFO - ✅ Đã lưu HTG
+[2025-09-11T09:48:10.761+0000] {History_Day.py:51} INFO - ✅ Đã lưu HTI
+[2025-09-11T09:48:14.106+0000] {History_Day.py:51} INFO - ✅ Đã lưu HTL
+[2025-09-11T09:48:14.148+0000] {History_Day.py:51} INFO - ✅ Đã lưu HT1
+[2025-09-11T09:48:16.933+0000] {History_Day.py:51} INFO - ✅ Đã lưu HTN
+[2025-09-11T09:48:17.000+0000] {local_task_job_runner.py:310} WARNING - State of this instance has been externally set to None. Terminating instance.
+[2025-09-11T09:48:17.034+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
+[2025-09-11T09:48:17.042+0000] {process_utils.py:132} INFO - Sending 15 to group 5303. PIDs of all processes in the group: [5303]
+[2025-09-11T09:48:17.044+0000] {process_utils.py:87} INFO - Sending the signal 15 to group 5303
+[2025-09-11T09:48:17.045+0000] {taskinstance.py:2611} ERROR - Received SIGTERM. Terminating subprocesses.
+[2025-09-11T09:48:20.274+0000] {History_Day.py:51} INFO - ✅ Đã lưu HTV
+[2025-09-11T09:48:20.945+0000] {History_Day.py:51} INFO - ✅ Đã lưu HU1
+[2025-09-11T09:48:22.679+0000] {History_Day.py:51} INFO - ✅ Đã lưu HQC
+[2025-09-11T09:48:25.610+0000] {History_Day.py:51} INFO - ✅ Đã lưu HVN
+[2025-09-11T09:48:26.145+0000] {History_Day.py:51} INFO - ✅ Đã lưu HUB
+[2025-09-11T09:48:28.577+0000] {History_Day.py:51} INFO - ✅ Đã lưu HVX
+[2025-09-11T09:48:28.943+0000] {History_Day.py:51} INFO - ✅ Đã lưu ICT
+[2025-09-11T09:48:32.583+0000] {History_Day.py:51} INFO - ✅ Đã lưu IDI
+[2025-09-11T09:48:35.343+0000] {History_Day.py:51} INFO - ✅ Đã lưu ILB
+[2025-09-11T09:48:53.766+0000] {History_Day.py:51} INFO - ✅ Đã lưu IMP
+[2025-09-11T09:48:57.729+0000] {History_Day.py:51} INFO - ✅ Đã lưu ITC
+[2025-09-11T09:49:01.928+0000] {History_Day.py:51} INFO - ✅ Đã lưu IJC
+[2025-09-11T09:49:05.952+0000] {History_Day.py:51} INFO - ✅ Đã lưu JVC
+[2025-09-11T09:49:15.863+0000] {History_Day.py:51} INFO - ✅ Đã lưu ITD
+[2025-09-11T09:49:17.071+0000] {process_utils.py:150} WARNING - process psutil.Process(pid=5303, name='airflow task ru', status='sleeping', started='09:42:33') did not respond to SIGTERM. Trying SIGKILL
+[2025-09-11T09:49:17.076+0000] {process_utils.py:87} INFO - Sending the signal 9 to group 5303
+[2025-09-11T09:49:17.104+0000] {process_utils.py:80} INFO - Process psutil.Process(pid=5303, name='airflow task ru', status='terminated', exitcode=<Negsignal.SIGKILL: -9>, started='09:42:33') (5303) terminated with exit code -9
+[2025-09-11T09:49:17.106+0000] {standard_task_runner.py:178} ERROR - Job 1715 was killed before it finished (likely due to running out of memory)

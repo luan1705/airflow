@@ -64,7 +64,7 @@ def liquidity(symbol, start=None):
   }
   symbolshow=mapping.get(symbol, 'ALL')
   data['symbol']=symbolshow
-  data['t'] = data['t'].astype(int).apply(lambda x: datetime.utcfromtimestamp(x) + timedelta(hours=7))
+  data['t'] = data['t'].astype(int).apply(lambda x: datetime.utcfromtimestamp(x))
   data.columns=['symbol','time','vol','val']
   return data
   

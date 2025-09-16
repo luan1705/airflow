@@ -13,9 +13,9 @@ default_args = {
 with DAG(
     dag_id="saveeboardcq",
     default_args=default_args,
-    start_date=datetime(2025,8,28,tzinfo=timezone("Asia/Ho_Chi_Minh")),
+    start_date=datetime(2025,9,11,tzinfo=timezone("Asia/Ho_Chi_Minh")),
     schedule="0 * * * *",
-    catchup= True,
+    catchup= False,
     tags=["DB", "eboard"]
 ) as dag:
 

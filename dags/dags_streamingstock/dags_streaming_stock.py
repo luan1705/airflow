@@ -17,7 +17,7 @@ with DAG(
     default_args=default_args,
     description='Run streaming_stock.py continuously from 9:00 to 15:00 Mon-Fri',
     schedule='0 9 * * 1-5',  # 9:00 AM Mon-Fri
-    start_date=datetime(2025, 7, 28),
+    start_date=datetime(2025, 9, 12),
     catchup=False,
     tags=['stock', 'kafka', 'streaming'],
 ) as dag:

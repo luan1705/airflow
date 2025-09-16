@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, text
 import pandas as pd
 import logging
 
@@ -36,6 +36,37 @@ def foreign_HNX():
                              index=False
                             )
         logging.info('Đã lưu foreign_HNX')
+        
+        df['time'] = pd.to_datetime(df['time'])
+        ngay_moi_nhat = df['time'].max().date()
+
+        row = {
+            "time": ngay_moi_nhat,
+            "buyVol": int(buy_Vol),
+            "sellVol": int(sell_Vol),
+            "netVol": int(net_Vol),
+            "buyVal": int(buy_Val),
+            "sellVal": int(sell_Val),
+            "netVal": int(net_Val)
+        }
+
+        # UPSERT vào bảng foreign_HNX_1D
+        with enginedb.begin() as conn:
+            conn.execute(text("""
+                INSERT INTO "market_history"."foreign_HNX_1D"
+                ("time", "buyVol", "sellVol", "netVol", "buyVal", "sellVal", "netVal")
+                VALUES (:time, :buyVol, :sellVol, :netVol, :buyVal, :sellVal, :netVal)
+                ON CONFLICT ("time") DO UPDATE SET
+                    "buyVol" = EXCLUDED."buyVol",
+                    "sellVol" = EXCLUDED."sellVol",
+                    "netVol" = EXCLUDED."netVol",
+                    "buyVal" = EXCLUDED."buyVal",
+                    "sellVal" = EXCLUDED."sellVal",
+                    "netVal" = EXCLUDED."netVal";
+            """), row)
+
+        logging.info(f'Đã upsert dữ liệu ngày {ngay_moi_nhat} vào foreign_HNX_1D')
+        
     except Exception as E:
         logging.exception('Lỗi lưu foreign_HNX')
 if __name__=='__main__':

@@ -16,7 +16,7 @@ with DAG(
     default_args=default_args,
     description="Crawl stock history and save to PostgreSQL",
     schedule_interval="*/1 9-15 * * 1-5",  # mỗi phút từ 9h-15h, thứ 2-6
-    start_date=datetime(2025, 8, 17),
+    start_date=datetime(2025, 9, 12),
     catchup=False,
     tags=["stock", "postgres", "crawl"],
 ) as dag:

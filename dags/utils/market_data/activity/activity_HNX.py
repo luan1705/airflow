@@ -42,7 +42,7 @@ def activity_HNX():
                                     ['decliners_Val',decliners_Val],
                                     ['totalVol',totalVol],
                                     ['totalVal',totalVal],
-                                    ['HNXINDEX',point],
+                                    ['point',point],
                                     ],columns=['key','value'])
         activity_HNX.to_sql(name='activity_HNX',
                              schema='market_data',

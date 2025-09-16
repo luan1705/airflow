@@ -48,7 +48,7 @@ RUN echo '#!/bin/bash\nXvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &\nexport
 USER airflow
 
 # Cài thêm Python packages sau khi chuyển user
-RUN pip install --no-cache-dir selenium==4.24.0 beautifulsoup4 pandas psycopg2-binary sqlalchemy
+RUN pip install --no-cache-dir selenium==4.24.0 beautifulsoup4 pandas psycopg2-binary sqlalchemy VNSFintech
 
 # Set environment variables
 ENV DISPLAY=:99

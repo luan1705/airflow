@@ -46,10 +46,10 @@ def foreign_history(symbol, start=None, end=None):
   response = requests.post(url, headers=headers, data=json.dumps(payload))
   data = response.json()
   data=json_normalize(data)
-  data=data.drop(columns=['group','dataType','timeFrame'])
+  data=data.drop(columns=['group','dataType','timeFrame'], errors='ignore')
   data.rename(columns={'foreignBuyVolume':'buyVol','foreignSellVolume':'sellVol','foreignBuyValue':'buyVal','foreignSellValue':'sellVal','truncTime':'time'},inplace=True)
   data['time']=data['time'].astype(float)
-  data['time'] = pd.to_datetime(data['time'], unit='s',utc=True).dt.tz_convert('Asia/Ho_Chi_Minh').dt.tz_localize(None)
+  data['time'] = pd.to_datetime(data['time'], unit='s', utc=True).dt.tz_localize(None)
   cols=['buyVol','sellVol','buyVal','sellVal']
   data[cols]=data[cols].apply(pd.to_numeric, errors='coerce').astype(int)
   data['netVol']=data['buyVol'].astype(int)-data['sellVol'].astype(int)

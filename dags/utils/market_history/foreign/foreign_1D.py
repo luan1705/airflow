@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine,text
 import pandas as pd
 import logging
 from .foreign_history_1D import foreign_history
@@ -19,10 +19,13 @@ def foreign(symbol):
 
         foreign=foreign_history(f"{symbol}","2025-01-01")
         
+        with enginedb.begin() as conn:
+            conn.execute(text(f'TRUNCATE TABLE "market_history"."foreign_{symbol}_1D";'))
+        
         foreign.to_sql(name=f'foreign_{symbol}_1D',
                              schema='market_history',
                              con=enginedb,
-                             if_exists='replace',
+                             if_exists='append',
                              index=False
                             )
         logging.info(f'Đã lưu foreign_{symbol}')

@@ -40,84 +40,56 @@ def impact():
         colsall=['symbol','impactAll']
         dataall=data[colsall].rename(columns={'impactAll':'impact'})
         dataallup=dataall.sort_values(by='impact',ascending=False).reset_index(drop=True)
-        dataallup.to_sql(name='impact_ALL_up',
+        dataallup.to_sql(name='impact_ALL',
                        schema='market_data',
                        con=enginedb,
                        if_exists='replace',
                        index=False
                        )
-        logging.info('Đã lưu impact_ALL_up')
-        dataalldown=dataall.sort_values(by='impact',ascending=True).reset_index(drop=True)
-        dataalldown.to_sql(name='impact_ALL_down',
-                       schema='market_data',
-                       con=enginedb,
-                       if_exists='replace',
-                       index=False
-                       )
-        logging.info('Đã lưu impact_ALL_down')
+        logging.info('Đã lưu impact_ALL')
+
 
         #bảng hose
         datahose=data[data['exchange']=='HOSE']
         colsexchange=['symbol','impactexchange']
         datahose=datahose[colsexchange].rename(columns={'impactexchange':'impact'})
         datahoseup=datahose.sort_values(by='impact',ascending=False).reset_index(drop=True)
-        datahoseup.to_sql(name='impact_HOSE_up',
+        datahoseup.to_sql(name='impact_HOSE',
                        schema='market_data',
                        con=enginedb,
                        if_exists='replace',
                        index=False
                        )
-        logging.info('Đã lưu impact_HOSE_up')
-        datahosedown=datahose.sort_values(by='impact',ascending=True).reset_index(drop=True)
-        datahosedown.to_sql(name='impact_HOSE_down',
-                       schema='market_data',
-                       con=enginedb,
-                       if_exists='replace',
-                       index=False
-                       )
-        logging.info('Đã lưu impact_HOSE_down')
+        logging.info('Đã lưu impact_HOSE')
+
 
         #bảng hnx
         datahnx=data[data['exchange']=='HNX']
         colsexchange=['symbol','impactexchange']
         datahnx=datahnx[colsexchange].rename(columns={'impactexchange':'impact'})
         datahnxup=datahnx.sort_values(by='impact',ascending=False).reset_index(drop=True)
-        datahnxup.to_sql(name='impact_HNX_up',
+        datahnxup.to_sql(name='impact_HNX',
                        schema='market_data',
                        con=enginedb,
                        if_exists='replace',
                        index=False
                        )
-        logging.info('Đã lưu impact_HNX_up')
-        datahnxdown=datahnx.sort_values(by='impact',ascending=True).reset_index(drop=True)
-        datahnxdown.to_sql(name='impact_HNX_down',
-                       schema='market_data',
-                       con=enginedb,
-                       if_exists='replace',
-                       index=False
-                       )
-        logging.info('Đã lưu impact_HNX_down')
+        logging.info('Đã lưu impact_HNX')
+
 
         #bảng upcom
         dataupcom=data[data['exchange']=='UPCOM']
         colsexchange=['symbol','impactexchange']
         dataupcom=dataupcom[colsexchange].rename(columns={'impactexchange':'impact'})
         dataupcomup=dataupcom.sort_values(by='impact',ascending=False).reset_index(drop=True)
-        dataupcomup.to_sql(name='impact_UPCOM_up',
+        dataupcomup.to_sql(name='impact_UPCOM',
                        schema='market_data',
                        con=enginedb,
                        if_exists='replace',
                        index=False
                        )
-        logging.info('Đã lưu impact_UPCOM_up')
-        dataupcomdown=dataupcom.sort_values(by='impact',ascending=True).reset_index(drop=True)
-        dataupcomdown.to_sql(name='impact_UPCOM_down',
-                       schema='market_data',
-                       con=enginedb,
-                       if_exists='replace',
-                       index=False
-                       )
-        logging.info('Đã lưu impact_UPCOM_down')
+        logging.info('Đã lưu impact_UPCOM')
+
         
         logging.info('Đã lưu hết impact')
     except Exception as E:

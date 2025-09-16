@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, text
 import pandas as pd
 import logging
 
@@ -22,20 +22,51 @@ def foreign_ALL():
         buy_Val = df['buyVal'].sum()
         sell_Val  = df['sellVal'].sum()
         net_Val = df['netVal'].sum()
-        foreign_ALL=pd.DataFrame([['buy_Vol',buy_Vol],
+        foreign_ALL_df=pd.DataFrame([['buy_Vol',buy_Vol],
                             ['sell_Vol',sell_Vol],
                             ['net_Vol',net_Vol],
                             ['buy_Val',buy_Val],
                             ['sell_Val',sell_Val],
                             ['net_Val',net_Val],
                             ],columns=['key','value'])
-        foreign_ALL.to_sql(name='foreign_ALL',
+        foreign_ALL_df.to_sql(name='foreign_ALL',
                              schema='market_data',
                              con=enginedb,
                              if_exists='replace',
                              index=False
                             )
         logging.info('Đã lưu foreign_ALL')
+        
+        df['time'] = pd.to_datetime(df['time'])
+        ngay_moi_nhat = df['time'].max().date()
+
+        row = {
+            "time": ngay_moi_nhat,
+            "buyVol": int(buy_Vol),
+            "sellVol": int(sell_Vol),
+            "netVol": int(net_Vol),
+            "buyVal": int(buy_Val),
+            "sellVal": int(sell_Val),
+            "netVal": int(net_Val)
+        }
+
+        # UPSERT vào bảng foreign_ALL_1D
+        with enginedb.begin() as conn:
+            conn.execute(text("""
+                INSERT INTO "market_history"."foreign_ALL_1D"
+                ("time", "buyVol", "sellVol", "netVol", "buyVal", "sellVal", "netVal")
+                VALUES (:time, :buyVol, :sellVol, :netVol, :buyVal, :sellVal, :netVal)
+                ON CONFLICT ("time") DO UPDATE SET
+                    "buyVol" = EXCLUDED."buyVol",
+                    "sellVol" = EXCLUDED."sellVol",
+                    "netVol" = EXCLUDED."netVol",
+                    "buyVal" = EXCLUDED."buyVal",
+                    "sellVal" = EXCLUDED."sellVal",
+                    "netVal" = EXCLUDED."netVal";
+            """), row)
+
+        logging.info(f'Đã upsert dữ liệu ngày {ngay_moi_nhat} vào foreign_ALL_1D')
+        
     except Exception as E:
         logging.exception('Lỗi lưu foreign_ALL')
 if __name__=='__main__':

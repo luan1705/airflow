@@ -42,7 +42,7 @@ def activity_ALL():
                                     ['decliners_Val',decliners_Val],
                                     ['totalVol',totalVol],
                                     ['totalVal',totalVal],
-                                    ['VNINDEX',point],
+                                    ['point',point],
                                     ],columns=['key','value'])
         activity_ALL.to_sql(name='activity_ALL',
                              schema='market_data',

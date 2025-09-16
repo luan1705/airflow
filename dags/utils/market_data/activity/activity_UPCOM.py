@@ -42,7 +42,7 @@ def activity_UPCOM():
                                     ['decliners_Val',decliners_Val],
                                     ['totalVol',totalVol],
                                     ['totalVal',totalVal],
-                                    ['UPCOMINDEX',point],
+                                    ['point',point],
                                     ],columns=['key','value'])
         activity_UPCOM.to_sql(name='activity_UPCOM',
                              schema='market_data',

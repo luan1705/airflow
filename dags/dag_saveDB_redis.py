@@ -13,9 +13,9 @@ default_args = {
 with DAG(
     dag_id="saveDatabase",
     default_args=default_args,
-    start_date=datetime(2025,7,23,tzinfo=timezone("Asia/Ho_Chi_Minh")),
+    start_date=datetime(2025,9,11,tzinfo=timezone("Asia/Ho_Chi_Minh")),
     schedule="15 15 * * 1-5",
-    catchup= True,
+    catchup= False,
     tags=["DB", "ETL"]
 ) as dag:
 

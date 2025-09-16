@@ -14,7 +14,7 @@ default_args = {
 with DAG(
     dag_id="foreign_1D",
     default_args=default_args,
-    start_date=datetime(2025,9,3,tzinfo=timezone("Asia/Ho_Chi_Minh")),
+    start_date=datetime(2025,9,11,tzinfo=timezone("Asia/Ho_Chi_Minh")),
     schedule="1 0 * * *",
     catchup= True,
     tags=["DB", "market_data"]

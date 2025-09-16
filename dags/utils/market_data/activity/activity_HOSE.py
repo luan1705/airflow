@@ -42,7 +42,7 @@ def activity_HOSE():
                                     ['decliners_Val',decliners_Val],
                                     ['totalVol',totalVol],
                                     ['totalVal',totalVal],
-                                    ['VNINDEX',point],
+                                    ['point',point],
                                     ],columns=['key','value'])
         activity_HOSE.to_sql(name='activity_HOSE',
                              schema='market_data',
