@@ -1,0 +1,28 @@
+from airflow import DAG
+from airflow.operators.python import PythonOperator
+from datetime import datetime, timedelta
+from pendulum import timezone
+from utils.refpoint import save_refpoint
+
+default_args = {
+    'retries': 10,
+    'retry_delay': timedelta(minutes=15),
+    # 'retry_exponential_backoff': True,  # tùy chọn nếu muốn delay tăng dần
+}
+
+with DAG(
+    dag_id="save_refpoint",
+    default_args=default_args,
+    start_date=datetime(2025,9,11,tzinfo=timezone("Asia/Ho_Chi_Minh")),
+    schedule="30 8 * * 1-5",
+    catchup= False,
+    tags=["dashboard", "indices", "refpoint"],
+    max_active_runs=1
+) as dag:
+
+    save_refpoint=PythonOperator(
+        task_id='save_refpoint',
+        python_callable=save_refpoint
+    )
+
+    save_refpoint

@@ -1,0 +1,36 @@
+from airflow import DAG
+from airflow.operators.python import PythonOperator
+from datetime import datetime, timedelta
+from pendulum import timezone
+from utils.adv_indices import adv_indice
+from airflow.operators.dagrun_operator import TriggerDagRunOperator
+
+default_args = {
+    'retries': 10,
+    'retry_delay': timedelta(minutes=15),
+    # 'retry_exponential_backoff': True,  # tùy chọn nếu muốn delay tăng dần
+}
+
+with DAG(
+    dag_id="adv_indice",
+    default_args=default_args,
+    start_date=datetime(2025,9,11,tzinfo=timezone("Asia/Ho_Chi_Minh")),
+    schedule=None,
+    catchup= False,
+    tags=["dashboard", "indices", "adv_indice"],
+    max_active_runs=1
+) as dag:
+
+    adv_indice=PythonOperator(
+        task_id='adv_indice',
+        python_callable=adv_indice
+    )
+    
+    trigger_next = TriggerDagRunOperator(
+        task_id="trigger_adv_indice",
+        trigger_dag_id="adv_indice",
+        wait_for_completion=False,   # không chờ run mới (tránh deadlock)
+        reset_dag_run=True,          # Airflow 2.9+: cho phép tái sử dụng run_id nếu cần
+    )
+
+    adv_indice >> trigger_next

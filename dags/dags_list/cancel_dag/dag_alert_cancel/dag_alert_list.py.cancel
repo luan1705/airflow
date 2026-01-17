@@ -1,0 +1,26 @@
+from airflow import DAG
+from airflow.operators.python import PythonOperator
+from datetime import datetime, timedelta
+from pendulum import timezone
+from utils.alert_function.List import generate_symbol_list
+
+default_args = {
+    'retries': 10,
+    'retry_delay': timedelta(minutes=15),
+    # 'retry_exponential_backoff': True,  # tùy chọn nếu muốn delay tăng dần
+}
+
+with DAG(
+    dag_id="alert_list",
+    default_args=default_args,
+    start_date=datetime(2025,9,11,tzinfo=timezone("Asia/Ho_Chi_Minh")),
+    schedule="55 8 * * 1-5",
+    catchup= False,
+    tags=["alert", "generate_list"],
+) as dag:
+    update_symbol_list=PythonOperator(
+        task_id='update_symbol_list',
+        python_callable=generate_symbol_list
+    )
+
+    update_symbol_list

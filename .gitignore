@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+.env
+logs/
+plugins/__pycache__/
+dags/__pycache__/
+*.log
+
+# Airflow local stuff
+airflow.cfg
+webserver_config.py
+
+# BigQuery keys / secrets
+bigquerrykey/
