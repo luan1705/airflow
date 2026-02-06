@@ -35,6 +35,8 @@ def live_foreign_exchange(exchange: str):
                   COALESCE(SUM("sellVal"), 0)::bigint  AS "sellVal",
                   COALESCE(SUM("netVal"),  0)::bigint  AS "netVal"
                 FROM {src}
+                WHERE "time" >= (CURRENT_DATE::timestamp AT TIME ZONE 'Asia/Ho_Chi_Minh')
+                  AND "time" <  ((CURRENT_DATE::timestamp + interval '1 day') AT TIME ZONE 'Asia/Ho_Chi_Minh')
             """)).mappings().one()
 
             # 2) lấy ngày mới nhất để ghi 1D

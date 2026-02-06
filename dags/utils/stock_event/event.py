@@ -40,3 +40,4 @@ def get_event(symbol):
     except Exception as e:
         # nếu có lỗi (API hỏng, symbol sai...) vẫn trả df rỗng
         return pd.DataFrame(columns=["symbol", "time", "event","label"])
+    

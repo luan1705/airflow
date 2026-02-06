@@ -26,11 +26,11 @@ enginedb=create_engine("postgresql+psycopg2://vnsfintech:Vns_123456@videv.cloud:
                         )
 
 def ensure_table(symbol):
-    """Tạo bảng symbol_foreign_history.{symbol}_1D nếu chưa tồn tại, và thêm PK trên cột time"""
+    """Tạo bảng asset_foreign_history.{symbol}_1D nếu chưa tồn tại, và thêm PK trên cột time"""
     try:
         with enginedb.begin() as cur:
             cur.execute(text(f"""
-                CREATE TABLE IF NOT EXISTS symbol_foreign_history."{symbol}_1D" (
+                CREATE TABLE IF NOT EXISTS asset_foreign_history."{symbol}_1D" (
                     "symbol" TEXT NOT NULL,
                     "time" DATE NOT NULL,
                     "netVol" DOUBLE PRECISION,
@@ -44,10 +44,10 @@ def ensure_table(symbol):
                     IF NOT EXISTS (
                         SELECT 1
                         FROM pg_constraint
-                        WHERE conrelid = 'symbol_foreign_history."{symbol}_1D"'::regclass
+                        WHERE conrelid = 'asset_foreign_history."{symbol}_1D"'::regclass
                           AND contype = 'p'
                     ) THEN
-                        ALTER TABLE symbol_foreign_history."{symbol}_1D"
+                        ALTER TABLE asset_foreign_history."{symbol}_1D"
                         ADD CONSTRAINT {symbol.lower()}_1d_pkey PRIMARY KEY ("time");
                     END IF;
                 END;
@@ -86,14 +86,14 @@ def get_foreign_symbol_today(symbol):
         
         with enginedb.begin() as cur:
             cur.execute(text(f"""
-                INSERT INTO symbol_foreign_history."{symbol}_1D"
+                INSERT INTO asset_foreign_history."{symbol}_1D"
                 ("symbol", "time", "netVol", "netVal")
                 VALUES (:symbol, :time, :netVol, :netVal)
                 ON CONFLICT ("time") DO UPDATE SET
                     "netVol" = EXCLUDED."netVol",
                     "netVal" = EXCLUDED."netVal";
             """), row)
-        msg = f"✅ Đã upsert dữ liệu {symbol} ngày {time} vào symbol_foreign_history.{symbol}_1D"
+        msg = f"✅ Đã upsert dữ liệu {symbol} ngày {time} vào asset_foreign_history.{symbol}_1D"
         logging.info(msg)
         return [msg]
     except Exception as e:

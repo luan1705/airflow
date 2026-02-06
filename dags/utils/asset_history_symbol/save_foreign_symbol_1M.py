@@ -26,11 +26,11 @@ enginedb=create_engine("postgresql+psycopg2://vnsfintech:Vns_123456@videv.cloud:
                         max_overflow=10 
                         )
 
-def get_foreign_symbol_1D(symbol):
+def get_foreign_symbol_1M(symbol):
     try:
         ketthuc=date.today()
-        batdau=ketthuc-timedelta(days=30)
-        data=foreign_history_1D(symbol,time='days',start=batdau.strftime('%Y-%m-%d'),end=ketthuc.strftime('%Y-%m-%d'))
+        batdau=ketthuc-timedelta(days=365)
+        data=foreign_history_1D(symbol,time='months',start=batdau.strftime('%Y-%m'),end=ketthuc.strftime('%Y-%m'))
         col=['Mã CP','Thời điểm GD','Tổng KLGD ròng', 'Tổng GTGD ròng']
         data=data[col]
         data.columns=['symbol','time','netVol','netVal']
@@ -43,21 +43,21 @@ def get_foreign_symbol_1D(symbol):
         
         with enginedb.begin() as conn:
             # Kiểm tra xem bảng có tồn tại không
-            check_sql = f"SELECT to_regclass('symbol_foreign_history.\"{symbol}_1D\"');"
+            check_sql = f"SELECT to_regclass('asset_foreign_history.\"{symbol}_1M\"');"
             exists = conn.execute(text(check_sql)).scalar()
 
             if exists:
-                conn.execute(text(f'TRUNCATE TABLE "symbol_foreign_history"."{symbol}_1D";'))
+                conn.execute(text(f'TRUNCATE TABLE "asset_foreign_history"."{symbol}_1M";'))
             else:
-                logging.warning(f"Bảng {symbol}_1D chưa tồn tại, sẽ tạo mới.")
+                logging.warning(f"Bảng {symbol}_1M chưa tồn tại, sẽ tạo mới.")
     
-            data.to_sql(name=f'{symbol}_1D',
-                        schema='symbol_foreign_history',
+            data.to_sql(name=f'{symbol}_1M',
+                        schema='asset_foreign_history',
                         con=conn,
                         if_exists='append',
                         index=False
                         )
-        msg = f"✅ Đã lưu {symbol}"
+        msg = f"✅ Đã lưu {symbol}_1M"
         logging.info(msg)
         return [msg]
     except Exception as e:
@@ -68,13 +68,13 @@ def get_foreign_symbol_1D(symbol):
 def update_all_stocks(symbol_list):
     messages = []
     with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
-        futures = [executor.submit(get_foreign_symbol_1D, symbol) for symbol in symbol_list]
+        futures = [executor.submit(get_foreign_symbol_1M, symbol) for symbol in symbol_list]
         for future in concurrent.futures.as_completed(futures):
             result = future.result() or []  # luôn là list
             messages.extend(result)
     return messages
 
-def save_all_foreign_1D():
+def save_all_foreign_1M():
     logging.info("🚀 Bắt đầu cập nhật dữ liệu...")
     result = []
     result += update_all_stocks(hose)

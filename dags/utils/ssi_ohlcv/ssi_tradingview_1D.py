@@ -63,7 +63,7 @@ def ssi_tradingview_1D(symbol):
     CONSUMER_ID = "3b312076e1ce40a6b886dce736bd3db5"
     CONSUMER_SECRET = "e213990f319243cf8ae029afb4a123bb"
     end=(datetime.now()-timedelta(days=0)).strftime("%d/%m/%Y")
-    start=(datetime.now()-timedelta(days=7)).strftime("%d/%m/%Y")
+    start=(datetime.now()-timedelta(days=4)).strftime("%d/%m/%Y")
     token = get_access_token(CONSUMER_ID, CONSUMER_SECRET, debug=True)
     rows  = fetch_daily_ohlc(token, symbol, start, end, page_index=1, page_size=9999)
     df = to_df(rows)

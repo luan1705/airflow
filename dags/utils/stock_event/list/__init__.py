@@ -1,5 +1,2 @@
-from .HOSE import *
-from .HNX import *
-from .UPCOM import *
-from .DEV import *
-from .CW import *
+from .symbol_list import *
+from .generate_symbol_list import main as generate_symbol_list

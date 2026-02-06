@@ -139,7 +139,13 @@ def get_stock(symbol):
             insert_sql = f"""
                 INSERT INTO {_quoted_ident(SCHEMA, table_name)} ({cols})
                 VALUES %s
-                ON CONFLICT (time) DO NOTHING;
+                ON CONFLICT (time) DO UPDATE SET
+                    symbol   = EXCLUDED.symbol,
+                    open     = EXCLUDED.open,
+                    close    = EXCLUDED.close,
+                    high     = EXCLUDED.high,
+                    low      = EXCLUDED.low,
+                    volume   = EXCLUDED.volume;
             """
             execute_values(conn.connection.cursor(), insert_sql, rows, page_size=1000)
     

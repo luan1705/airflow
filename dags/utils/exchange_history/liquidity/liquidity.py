@@ -5,7 +5,7 @@ import json
 from pandas import json_normalize
 from datetime import datetime,timezone,timedelta
 import logging
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, text
 import logging
 logging.basicConfig(
     level=logging.INFO,                 # cấp log: DEBUG / INFO / WARNING / ERROR
@@ -81,15 +81,46 @@ def save_liquidity(symbol,enginedb):
     data=liquidity(realsymbol)
     existing_dates = set(df_db["time"])
     new_data = data[~data["time"].isin(existing_dates)].copy()
-    new_data.to_sql(name=f'liquidity_{symbol}',
-                           schema='exchange_history',
-                           con=enginedb,
-                           if_exists='append',
-                           index=False
-                                )
-    logging.info(f'Đã lưu liquidity_{symbol}')
-  except Exception as E:
-    logging.exception(f'Lỗi lưu liquidity_{symbol}')
+    if not new_data.empty:
+      new_data.to_sql(
+        name=f'liquidity_{symbol}',
+        schema='exchange_history',
+        con=enginedb,
+        if_exists='append',
+        index=False
+      )
+      logging.info(f'Đã append {len(new_data)} rows liquidity_{symbol}')
+    else:
+      logging.info(f'Không có phút mới để append liquidity_{symbol}')
+
+    # (B) ✅ UPSERT đúng 1 dòng lúc 15:00 (giờ VN)
+    today_vn = pd.Timestamp.now(tz="Asia/Ho_Chi_Minh").normalize()
+    target_time = today_vn + pd.Timedelta(hours=15)  # 15:00:00+07
+
+    row_1500 = data[data["time"] == target_time]
+    if not row_1500.empty:
+      r = row_1500.iloc[0]
+      upsert_sql = text(f"""
+        INSERT INTO "exchange_history".{bang} ("symbol","time","vol","val")
+        VALUES (:symbol,:time,:vol,:val)
+        ON CONFLICT ("time")
+        DO UPDATE SET
+          "vol" = EXCLUDED."vol",
+          "val" = EXCLUDED."val",
+          "symbol" = EXCLUDED."symbol";
+      """)
+      with enginedb.begin() as conn:
+        conn.execute(upsert_sql, {
+          "symbol": r["symbol"],
+          "time":   r["time"].to_pydatetime(),
+          "vol":    int(r["vol"]) if pd.notna(r["vol"]) else None,
+          "val":    float(r["val"]) if pd.notna(r["val"]) else None,
+        })
+      logging.info(f"♻️ Upsert 15:00 OK for liquidity_{symbol}: {target_time}")
+    else:
+      logging.info(f"Chưa có dòng 15:00 trong API (liquidity_{symbol}) nên không upsert")
+  except Exception:
+    logging.exception(f"Lỗi lưu liquidity_{symbol}")
 symbols=['HOSE','HNX','UPCOM']
 def main():
     enginedb = create_engine("postgresql+psycopg2://vnsfintech:Vns_123456@videv.cloud:5433/vnsfintech")

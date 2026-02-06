@@ -18,7 +18,7 @@ symbols=['HOSE','HNX','UPCOM']
 def foreign(symbol,enginedb):
     try:
         logging.info('Kết nối DB')
-        start=(datetime.today()-timedelta(days=500)).strftime("%Y-%m-%d")
+        start=(datetime.today()-timedelta(days=3)).strftime("%Y-%m-%d")
         df=foreign_history(f"{symbol}",start)
 
         table_name = f"foreign_{symbol}_1D"
@@ -29,12 +29,12 @@ def foreign(symbol,enginedb):
             INSERT INTO "{SCHEMA}"."{table_name}" ({cols_quoted})
             VALUES %s
             ON CONFLICT ("time") DO UPDATE SET
-            "buy_vol"       = EXCLUDED."buy_vol",
-            "buy_val"       = EXCLUDED."buy_val",
-            "sell_vol"      = EXCLUDED."sell_vol",
-            "sell_val"      = EXCLUDED."sell_val",
-            "net_vol"       = EXCLUDED."net_vol",
-            "net_val"       = EXCLUDED."net_val";
+            "buyVol"       = EXCLUDED."buyVol",
+            "buyVal"       = EXCLUDED."buyVal",
+            "sellVol"      = EXCLUDED."sellVol",
+            "sellVal"      = EXCLUDED."sellVal",
+            "netVol"       = EXCLUDED."netVol",
+            "netVal"       = EXCLUDED."netVal";
         """
 
         with enginedb.begin() as conn:

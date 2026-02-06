@@ -9,7 +9,7 @@ def clear_eboard():
     conn = psycopg2.connect(CONN_STR)
     conn.autocommit = True
     cur = conn.cursor()
-    cur.execute("TRUNCATE TABLE details.asset;")
+    cur.execute("TRUNCATE TABLE details.asset, details.dnse_asset;")
     cur.close()
     conn.close()
 
