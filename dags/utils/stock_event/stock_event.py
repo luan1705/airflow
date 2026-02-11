@@ -47,11 +47,31 @@ def ensure_schema_and_table(symbol: str):
                 "label"  TEXT
             );
         '''))
-        # chống trùng khi chạy lại
-        conn.execute(text(f'''
-            CREATE UNIQUE INDEX IF NOT EXISTS "{sym}_uniq_time_event"
-            ON "{SCHEMA}"."{sym}" ("time", "event");
-        '''))
+
+        # thử tạo unique index
+        try:
+            conn.execute(text(f'''
+                CREATE UNIQUE INDEX IF NOT EXISTS "{sym}_uniq_time_event"
+                ON "{SCHEMA}"."{sym}" ("time", "event");
+            '''))
+        except Exception as e:
+            # nếu fail do duplicates -> dedupe rồi tạo lại
+            msg = str(e).lower()
+            if "duplicate" in msg or "could not create unique index" in msg:
+                conn.execute(text(f'''
+                    DELETE FROM "{SCHEMA}"."{sym}" a
+                    USING "{SCHEMA}"."{sym}" b
+                    WHERE a.ctid < b.ctid
+                      AND a."time" = b."time"
+                      AND a."event" = b."event";
+                '''))
+                conn.execute(text(f'''
+                    CREATE UNIQUE INDEX IF NOT EXISTS "{sym}_uniq_time_event"
+                    ON "{SCHEMA}"."{sym}" ("time", "event");
+                '''))
+            else:
+                raise
+
 
 def normalize_event_df(df: pd.DataFrame, symbol: str) -> pd.DataFrame:
     if df is None or df.empty:
@@ -73,8 +93,7 @@ def stock_event(symbol):
         sym = _safe_ident(symbol)
 
         # (1) check bảng -> (2) chưa có thì tạo
-        if not table_exists(sym):
-            ensure_schema_and_table(sym)
+        ensure_schema_and_table(sym)
 
         # (3) gọi API đúng 1 lần (không retry)
         try:

@@ -20,14 +20,14 @@ log=logging.getLogger(__name__)
 
 # Kết nối PostgreSQL
 engine = create_engine(
-    "postgresql+psycopg2://vnsfintech:%40Vns123456@videv.cloud:5432/vnsfintech",
+    "postgresql+psycopg2://vnsfintech:Vns_123456@videv.cloud:5433/vnsfintech",
     pool_size=10, max_overflow=20, pool_timeout=60,
     pool_pre_ping=True, pool_recycle=1800,
     connect_args={"keepalives":1, "keepalives_idle":30, "keepalives_interval":10, "keepalives_count":3},
 )
 
 metadata = MetaData()
-mi_table = Table("indices", metadata, schema="history_data", autoload_with=engine)
+mi_table = Table("vietnam", metadata, schema="indices", autoload_with=engine)
 
 def update_mi(row: dict) -> int:
     """Chỉ UPDATE các cột có trong row (trừ 'symbol'). Trả về số dòng ảnh hưởng."""
@@ -44,6 +44,8 @@ def update_mi(row: dict) -> int:
 
 # Hàm cập nhật dữ liệu cho một mã cổ phiếu
 def get_stock(symbol, max_retries=3, base_delay=2):
+    symbol = 'UPCOMINDEX' if symbol == 'HNXUpcomIndex' else symbol
+    symbol = 'HNXINDEX' if symbol == 'HNXIndex' else symbol
     attempt = 0
     while attempt < max_retries:
         try:
@@ -51,7 +53,7 @@ def get_stock(symbol, max_retries=3, base_delay=2):
             today = datetime.now().strftime('%Y-%m-%d')
 
             # Lấy dữ liệu lịch sử
-            stock = tradingview(symbol=symbol, start=today, end=today, time='days')
+            stock = tradingview(symbol=symbol)
 
             # Kiểm tra dữ liệu trả về
             if stock is None or stock.empty:
@@ -61,15 +63,12 @@ def get_stock(symbol, max_retries=3, base_delay=2):
 
             # Update vào PostgreSQL
             rec = stock.squeeze()  # DF 1 dòng -> Series
-            symbol = 'UPCOMINDEX' if symbol == 'HNXUpcomIndex' else symbol
-            symbol = 'HNXINDEX' if symbol == 'HNXIndex' else symbol
+
             row = {
                 "symbol": symbol,
                 "open":  float(rec.get("open"))  if rec.get("open")  is not None else None,
-                # "close": float(rec.get("close")) if rec.get("close") is not None else None,
                 "high":  float(rec.get("high"))  if rec.get("high")  is not None else None,
                 "low":   float(rec.get("low"))   if rec.get("low")   is not None else None,
-                "vol":   int(rec.get("volume"))  if rec.get("volume") is not None else None,
             }
 
             # Sau 15:00 (giờ VN) mới cập nhật close

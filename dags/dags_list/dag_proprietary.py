@@ -17,7 +17,7 @@ with DAG(
     default_args=default_args,
     start_date=datetime(2025,9,11,tzinfo=timezone("Asia/Ho_Chi_Minh")),
     schedule="1 0 * * 1-5",
-    catchup= True,
+    catchup= False,
     tags=["DB", "market_data"]
 ) as dag:
 

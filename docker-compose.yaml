@@ -56,8 +56,8 @@ x-airflow-common:
     AIRFLOW__CORE__EXECUTOR: CeleryExecutor
     AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
     AIRFLOW__CELERY__RESULT_BACKEND: db+postgresql://airflow:airflow@postgres/airflow
-    AIRFLOW__CELERY__BROKER_URL: redis://:@redis:6379/0
-    AIRFLOW__CORE__FERNET_KEY: ''
+    AIRFLOW__CELERY__BROKER_URL: redis://redis:6379/0
+    # AIRFLOW__CORE__FERNET_KEY: ''
     AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: 'true'
     AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
     AIRFLOW__CORE__DEFAULT_TIMEZONE: Asia/Ho_Chi_Minh
@@ -118,7 +118,7 @@ services:
       start_period: 30s
     restart: always
 
-  airflow-webserver:
+  webserver:
     <<: *airflow-common
     command: webserver
     ports:
@@ -132,10 +132,10 @@ services:
     restart: always
     depends_on:
       <<: *airflow-common-depends-on
-      airflow-init:
+      init:
         condition: service_completed_successfully
 
-  airflow-scheduler:
+  scheduler:
     <<: *airflow-common
     command: scheduler
     healthcheck:
@@ -147,10 +147,10 @@ services:
     restart: always
     depends_on:
       <<: *airflow-common-depends-on
-      airflow-init:
+      init:
         condition: service_completed_successfully
 
-  airflow-worker:
+  worker:
     <<: *airflow-common
     command: celery worker
     healthcheck:
@@ -170,10 +170,10 @@ services:
     restart: always
     depends_on:
       <<: *airflow-common-depends-on
-      airflow-init:
+      init:
         condition: service_completed_successfully
 
-  airflow-triggerer:
+  triggerer:
     <<: *airflow-common
     command: triggerer
     healthcheck:
@@ -185,10 +185,10 @@ services:
     restart: always
     depends_on:
       <<: *airflow-common-depends-on
-      airflow-init:
+      init:
         condition: service_completed_successfully
 
-  airflow-init:
+  init:
     <<: *airflow-common
     entrypoint: /bin/bash
     # yamllint disable rule:line-length
@@ -246,7 +246,7 @@ services:
       _AIRFLOW_DB_MIGRATE: 'true'
       _AIRFLOW_WWW_USER_CREATE: 'true'
       _AIRFLOW_WWW_USER_USERNAME: ${_AIRFLOW_WWW_USER_USERNAME:-airflow}
-      _AIRFLOW_WWW_USER_PASSWORD: ${_AIRFLOW_WWW_USER_PASSWORD:-airflow}
+      _AIRFLOW_WWW_USER_PASSWORD: ${_AIRFLOW_WWW_USER_PASSWORD:-airflow_vnsfintech}
       _PIP_ADDITIONAL_REQUIREMENTS: ''
     user: "0:0"
     volumes:
@@ -284,7 +284,7 @@ services:
     restart: always
     depends_on:
       <<: *airflow-common-depends-on
-      airflow-init:
+      init:
         condition: service_completed_successfully
 
 volumes:

@@ -41,3 +41,7 @@ def get_event(symbol):
         # nếu có lỗi (API hỏng, symbol sai...) vẫn trả df rỗng
         return pd.DataFrame(columns=["symbol", "time", "event","label"])
     
+if __name__ == "__main__":
+    # test
+    df = get_event("ACB")
+    print(df)

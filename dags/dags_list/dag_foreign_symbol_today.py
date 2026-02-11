@@ -51,7 +51,6 @@ with DAG(
         task_id="trigger_next_run",
         trigger_dag_id="save_foreign_asset_today",
         wait_for_completion=False,
-        reset_dag_run=True,
     )
 
     foreign_asset_today >> gate_continue >> trigger_next

@@ -1,23 +1,36 @@
 from airflow import DAG
-from airflow.operators.python import PythonOperator
-from datetime import datetime, timedelta
-from pendulum import timezone
+from airflow.operators.python import PythonOperator, ShortCircuitOperator
+from airflow.operators.trigger_dagrun import TriggerDagRunOperator
+from datetime import datetime, timedelta, time as dtime
+from pendulum import timezone, now
 from utils.exchange_history.foreign import main_1
 from utils.details.foreign import foreign_HOSE, foreign_HNX, foreign_UPCOM 
-from airflow.operators.dagrun_operator import TriggerDagRunOperator
 
+VN_TZ = timezone("Asia/Ho_Chi_Minh")
 default_args = {
     'retries': 10,
     'retry_delay': timedelta(minutes=15),
     # 'retry_exponential_backoff': True,  # tùy chọn nếu muốn delay tăng dần
 }
 
+def should_continue() -> bool:
+    """
+    Chỉ cho phép tiếp tục (tức trigger vòng mới)
+    trong khung 09:00–15:00, Thứ 2–Thứ 6 theo giờ VN.
+    """
+    cur = now(VN_TZ)
+    if cur.isoweekday() > 5:  # 1..5 = Mon..Fri
+        return False
+    t = cur.time()
+    return dtime(9, 0) <= t <= dtime(15, 0)
+
 with DAG(
     dag_id="foreign_exchange_1_live",
     default_args=default_args,
     start_date=datetime(2025,12,16,tzinfo=timezone("Asia/Ho_Chi_Minh")),
-    schedule="* 9-15 * * 1-5",
+    schedule="0 9 * * 1-5",
     catchup= False,
+    max_active_runs=1,
     tags=["DB", "market_data"]
 ) as dag:
 
@@ -42,5 +55,17 @@ with DAG(
         python_callable=foreign_UPCOM
     )
     
+    # Kiểm tra khung thời gian hợp lệ
+    gate_continue = ShortCircuitOperator(
+        task_id="in_live_hours",
+        python_callable=should_continue,
+    )
+
+    # Tự trigger lại chính DAG nếu trong khung giờ
+    trigger_next = TriggerDagRunOperator(
+        task_id="trigger_next_run",
+        trigger_dag_id="foreign_exchange_1_live",
+        wait_for_completion=False,
+    )
     
-    save_foreign_exchange_1 >> [live_foreign_HNX,live_foreign_HOSE,live_foreign_UPCOM]
+    save_foreign_exchange_1 >> [live_foreign_HNX,live_foreign_HOSE,live_foreign_UPCOM] >> gate_continue >> trigger_next
