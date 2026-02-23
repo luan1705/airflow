@@ -60,4 +60,4 @@ def foreign_history(symbol, start=None, end=None):
   return data
   
 # if __name__=='__main__':
-#      foreign_history(symbol='VCB', start=None, end='2025-10-10')
+#      print(foreign_history(symbol='HOSE'))

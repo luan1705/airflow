@@ -57,3 +57,10 @@ def foreign_history(symbol, start, end=None, window_start_utc=2, window_end_utc=
   data=data[['time','buyVol','sellVol','netVol','buyVal','sellVal','netVal']]
   
   return data
+
+# if __name__ == "__main__":
+#   symbol = "HOSE"
+#   start = "2026-02-12"
+#   end = "2026-02-25"
+#   df = foreign_history(symbol, start, end)
+#   print(df)

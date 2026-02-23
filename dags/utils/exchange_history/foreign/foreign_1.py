@@ -27,7 +27,13 @@ def foreign(symbol, enginedb):
         insert_sql = f"""
             INSERT INTO "{SCHEMA}"."{table_name}" ({cols_quoted})
             VALUES %s
-            ON CONFLICT ("time") DO NOTHING;
+            ON CONFLICT ("time") DO UPDATE SET
+            "buyVol"       = EXCLUDED."buyVol",
+            "buyVal"       = EXCLUDED."buyVal",
+            "sellVol"      = EXCLUDED."sellVol",
+            "sellVal"      = EXCLUDED."sellVal",
+            "netVol"       = EXCLUDED."netVol",
+            "netVal"       = EXCLUDED."netVal";
         """
 
         with enginedb.begin() as conn:
