@@ -55,7 +55,6 @@ def _ensure_table_with_pk(conn, schema: str, table: str):
             high     DOUBLE PRECISION,
             low      DOUBLE PRECISION,
             volume   DOUBLE PRECISION,
-            exchange TEXT,
             CONSTRAINT {_qi(pk_name)} PRIMARY KEY (time)
         );
     """))
@@ -76,7 +75,7 @@ def _ensure_table_with_pk(conn, schema: str, table: str):
     if not pk_cols:
         try:
             conn.execute(text(f'ALTER TABLE {fqtn} ADD CONSTRAINT {_qi(pk_name)} PRIMARY KEY (time);'))
-        except Exception:
+        except Exception as e:
             # Có thể đã có PK tên khác / dữ liệu trùng -> log để biết
             log.warning(f"Không thể ADD PRIMARY KEY cho {schema}.{table}: {e}")
     elif pk_cols != {"time"}:

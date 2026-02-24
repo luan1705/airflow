@@ -6,8 +6,8 @@ from utils.vietcap_ohlcv import save_DB_1D,save_DB_1
 from utils.vietcap_ohlcv.List import generate_symbol_list
 
 default_args = {
-    'retries': 10,
-    'retry_delay': timedelta(minutes=15),
+    'retries': 1,
+    'retry_delay': timedelta(minutes=5),
     # 'retry_exponential_backoff': True,  # tùy chọn nếu muốn delay tăng dần
 }
 

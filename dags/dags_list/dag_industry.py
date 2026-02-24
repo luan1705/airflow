@@ -5,8 +5,11 @@ from pendulum import timezone
 from utils.industry import industry
 
 default_args = {
-    'retries': 10,
-    'retry_delay': timedelta(minutes=15),
+    "retries": 50,
+    "retry_delay": timedelta(seconds=10),
+    "retry_exponential_backoff": True,
+    "max_retry_delay": timedelta(minutes=5),
+    "depends_on_past": False,
 }
 
 with DAG(
@@ -20,5 +23,5 @@ with DAG(
 
     save_industry = PythonOperator(
         task_id='save_industry',
-        python_callable=industry
+        python_callable=industry,
     )

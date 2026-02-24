@@ -10,8 +10,10 @@ from utils.details.volatility import volatility_HOSE, volatility_HNX, volatility
 VN_TZ = timezone("Asia/Ho_Chi_Minh")
 
 default_args = {
-    "retries": 10,
-    "retry_delay": timedelta(seconds=2),
+    "retries": 50,                        # tăng mạnh để sống sót khi DB lỗi
+    "retry_delay": timedelta(seconds=10), # retry chậm lại để bớt spam DB
+    "retry_exponential_backoff": True,
+    "max_retry_delay": timedelta(minutes=5),
     "depends_on_past": False,
 }
 
@@ -35,9 +37,9 @@ with DAG(
     max_active_runs=1,        # tránh chồng run
 ) as dag:
 
-    t_hose = PythonOperator(task_id="volatility_HOSE", python_callable=volatility_HOSE)
-    t_hnx  = PythonOperator(task_id="volatility_HNX",  python_callable=volatility_HNX)
-    t_upc  = PythonOperator(task_id="volatility_UPCOM",python_callable=volatility_UPCOM)
+    t_hose = PythonOperator(task_id="volatility_HOSE", python_callable=volatility_HOSE, )
+    t_hnx  = PythonOperator(task_id="volatility_HNX",  python_callable=volatility_HNX, )
+    t_upc  = PythonOperator(task_id="volatility_UPCOM",python_callable=volatility_UPCOM, )
 
     gate_continue = ShortCircuitOperator(
         task_id="in_live_hours",

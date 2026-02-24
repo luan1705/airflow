@@ -3,7 +3,7 @@ import pandas as pd
 import concurrent.futures
 from datetime import datetime
 from .tradingview import tradingview
-from .List.symbol_list import HOSE, HNX, UPCOM, DERIVATIVES, CW, HNXBOND, ETFHOSE, indices
+from .List.symbol_list import HOSE, HNX, UPCOM, DERIVATIVES, CW, HNXBOND, ETFHOSE, indices, addition
 import time
 import logging
 import re
@@ -54,7 +54,6 @@ def _ensure_table_with_pk(conn, schema: str, table: str):
             high     DOUBLE PRECISION,
             low      DOUBLE PRECISION,
             volume   BIGINT,
-            exchange TEXT,
             CONSTRAINT {_qi(pk_name)} PRIMARY KEY (time)
         );
     """))
@@ -167,14 +166,15 @@ def update_all_stocks(symbol_list):
 def save_DB_1D():
     print("🚀 Bắt đầu cập nhật dữ liệu...")
     result = []
-    result += update_all_stocks(HOSE)
-    result += update_all_stocks(HNX)
-    result += update_all_stocks(UPCOM)
-    result += update_all_stocks(DERIVATIVES)
-    result += update_all_stocks(CW)
-    result += update_all_stocks(HNXBOND)
-    result += update_all_stocks(ETFHOSE)
-    result += update_all_stocks(indices)
+    # result += update_all_stocks(HOSE)
+    # result += update_all_stocks(HNX)
+    # result += update_all_stocks(UPCOM)
+    # result += update_all_stocks(DERIVATIVES)
+    # result += update_all_stocks(CW)
+    # result += update_all_stocks(HNXBOND)
+    # result += update_all_stocks(ETFHOSE)
+    # result += update_all_stocks(indices)
+    result += update_all_stocks(addition)
 
     errors = [msg for msg in result if msg.startswith("❌") or msg.startswith("⚠️")]
 
