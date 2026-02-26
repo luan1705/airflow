@@ -2,7 +2,7 @@ from sqlalchemy import create_engine, text
 import concurrent.futures
 import pandas as pd
 import logging
-from .List.symbol_list import total_list
+from utils.create_list.symbol_list import total_list
 
 logging.basicConfig(
     level=logging.INFO,                 # cấp log: DEBUG / INFO / WARNING / ERROR
@@ -12,15 +12,15 @@ logging.basicConfig(
         # có thể thêm FileHandler nếu muốn ghi log ra file
     ]
 )
-enginedb=create_engine('postgresql://vnsfintech:%40Vns123456@videv.cloud:5432/vnsfintech')
+# enginedb=create_engine('postgresql://vnsfintech:%40Vns123456@videv.cloud:5432/vnsfintech')
 enginedbnews=create_engine("postgresql+psycopg2://vnsfintech:Vns_123456@videv.cloud:5433/vnsfintech")
 
 
 def break_out_break_down(symbol):
     try:
-        with enginedb.begin() as conn:
+        with enginedbnews.begin() as conn:
             # Đọc dữ liệu
-            dffull = pd.read_sql(f'SELECT * FROM "history_tradingview"."{symbol}_1D"', con=conn)
+            dffull = pd.read_sql(f'SELECT * FROM "ohlcv"."{symbol}_1D"', con=conn)
             today=pd.Timestamp.today().normalize()
             row_now = dffull[dffull['time'] == today]
             if not row_now.empty:

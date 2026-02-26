@@ -6,7 +6,8 @@ from pathlib import Path
 from typing import Optional, Iterable, List
 
 # ====== CẤU HÌNH CHUNG ======
-TARGET_FILE = Path("exchange_list.py")   # file .py đích
+BASE_DIR = Path(__file__).resolve().parent
+TARGET_FILE = BASE_DIR / "indices_map.py"   # file .py đích
 SORT_DEDUP = True                   # True: loại trùng + sort để ổn định giữa các lần chạy
 
 # Mỗi nguồn: 

@@ -2,26 +2,27 @@ from airflow import DAG
 from airflow.operators.python import PythonOperator
 from datetime import datetime, timedelta
 from pytz import timezone
-from utils.break_out_break_down import break_all
+from utils.active_asset import active_asset
+# from utils.active_asset.list import generate_symbol_list
 
 default_args = {
     'retries': 10,
-    'retry_delay': timedelta(minutes=15),
+    'retry_delay': timedelta(minutes=1),
     # 'retry_exponential_backoff': True,  # tùy chọn nếu muốn delay tăng dần
 }
 
 with DAG(
-    dag_id="break_dag",
+    dag_id="active_asset",
     default_args=default_args,
     start_date=datetime(2025,12,2,tzinfo=timezone("Asia/Ho_Chi_Minh")),
-    schedule="15 15 * * 1-5",
+    schedule="0 9 * * 1-5",
     catchup= False,
     tags=["DB", "ETL"]
 ) as dag:
 
-    break_all_symbol=PythonOperator(
-        task_id='tradingview_1D',
-        python_callable=break_all
+    active_asset_task=PythonOperator(
+        task_id='active_asset',
+        python_callable=active_asset
     )
 
-    break_all_symbol
+    active_asset_task

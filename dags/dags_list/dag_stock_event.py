@@ -3,7 +3,6 @@ from airflow.operators.python import PythonOperator
 from datetime import datetime, timedelta
 from pendulum import timezone
 from utils.stock_event import save_stock_event
-from utils.stock_event.list import generate_symbol_list
 
 default_args = {
     'retries': 10,
@@ -19,10 +18,6 @@ with DAG(
     catchup= False,
     tags=["DB", "stock_event"]
 ) as dag:
-    update_symbol_list=PythonOperator(
-    task_id='update_symbol_list',
-    python_callable=generate_symbol_list
-    )
 
     stock_event=PythonOperator(
         task_id='save_stock_event',
@@ -30,4 +25,4 @@ with DAG(
     )
 
 
-    update_symbol_list >> stock_event
+    stock_event

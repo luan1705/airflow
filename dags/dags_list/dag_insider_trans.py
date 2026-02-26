@@ -3,7 +3,6 @@ from airflow.operators.python import PythonOperator
 from datetime import datetime, timedelta
 from pendulum import timezone
 from utils.insider_tranansaction import save_all_pg
-from utils.insider_tranansaction.List import generate_symbol_list
 
 default_args = {
     'retries': 10,
@@ -19,15 +18,10 @@ with DAG(
     catchup= False,
     tags=["DB", "ETL"]
 ) as dag:
-    update_symbol_list=PythonOperator(
-        task_id='update_symbol_list',
-        python_callable=generate_symbol_list
-    )
 
     save_insider_transaction=PythonOperator(
         task_id='save_insider_transaction',
         python_callable=save_all_pg
     )
 
-
-    update_symbol_list >> save_insider_transaction
+    save_insider_transaction

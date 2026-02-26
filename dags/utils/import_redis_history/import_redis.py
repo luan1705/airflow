@@ -1,3 +1,5 @@
+from zoneinfo import ZoneInfo
+
 import redis
 import pandas as pd
 import json
@@ -7,7 +9,7 @@ import sys
 import os
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from .List.symbol_list import total_list
+from utils.create_list.symbol_list import total_list
 
 # Kết nối DB
 engine = create_engine("postgresql+psycopg2://vnsfintech:Vns_123456@videv.cloud:5433/vnsfintech")
@@ -29,6 +31,19 @@ r = redis.Redis(connection_pool=POOL)
 symbol_list = total_list
 SCHEMA = "ohlcv"
 
+VN_TZ = ZoneInfo("Asia/Ho_Chi_Minh")
+
+def _to_vn_time(ts):
+    """
+    ts có thể:
+    - timezone-aware (có tzinfo) -> tz_convert sang VN
+    - naive (không tzinfo) -> giả sử là UTC rồi convert sang VN
+    """
+    ts = pd.Timestamp(ts)
+    if ts.tzinfo is None:
+        ts = ts.tz_localize("UTC")
+    return ts.tz_convert(VN_TZ)
+
 # Hàm lấy dữ liệu từ PostgreSQL và lưu vào Redis
 def get_data_and_cache(symbol):
     query = text(f"""
@@ -42,9 +57,10 @@ def get_data_and_cache(symbol):
         df = pd.read_sql(query, con=engine)
         if not df.empty:
             df = df.sort_values('time', ascending=True).reset_index(drop=True)
+            df["time_vn"] = df["time"].apply(_to_vn_time)
             redis_list = [
                 json.dumps({
-                    "time": row["time"].strftime("%Y-%m-%d %H:%M:%S"),
+                    "time": row["time_vn"].date().isoformat(),
                     "symbol": row["symbol"],
                     "open": row["open"],
                     "high": row["high"],

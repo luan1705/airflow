@@ -6,7 +6,8 @@ import pandas as pd
 from pathlib import Path
 from typing import Optional, List, Dict
 
-TARGET_FILE = Path("indices_map.py")
+BASE_DIR = Path(__file__).resolve().parent
+TARGET_FILE = BASE_DIR / "symbol_list.py"
 SORT_DEDUP = True
 
 HEADERS = {

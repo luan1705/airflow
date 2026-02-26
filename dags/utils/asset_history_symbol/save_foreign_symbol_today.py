@@ -4,11 +4,7 @@ import logging
 from datetime import date,timedelta
 import numpy as np
 import concurrent.futures
-from .list.HOSE import hose
-from .list.HNX import hnx
-from .list.UPCOM import upcom
-from .list.DEV import derivative
-from .list.CW  import warrant
+from utils.create_list.symbol_list import HOSE, HNX, UPCOM, DERIVATIVES, CW
 
 logging.basicConfig(
     level=logging.INFO,                 # cấp log: DEBUG / INFO / WARNING / ERROR
@@ -113,11 +109,11 @@ def update_all_stocks(symbol_list):
 def save_all_foreign_today():
     logging.info("🚀 Bắt đầu cập nhật dữ liệu...")
     result = []
-    result += update_all_stocks(hose)
-    result += update_all_stocks(hnx)
-    result += update_all_stocks(upcom)
-    result += update_all_stocks(derivative)
-    result += update_all_stocks(warrant)
+    result += update_all_stocks(HOSE)
+    result += update_all_stocks(HNX)
+    result += update_all_stocks(UPCOM)
+    result += update_all_stocks(DERIVATIVES)
+    result += update_all_stocks(CW)
 
     errors = [msg for msg in result if msg.startswith("❌")]
     warnings = [msg for msg in result if msg.startswith("⚠️")]

@@ -4,7 +4,7 @@ import pandas as pd
 from sqlalchemy import create_engine,text
 from psycopg2.extras import execute_values
 import concurrent.futures
-from .List.symbol_list import HOSE, HNX, UPCOM, DERIVATIVES, CW, HNXBOND, ETFHOSE, indices, addition
+from utils.create_list.symbol_list import HOSE, HNX, UPCOM, DERIVATIVES, CW, HNXBOND, ETFHOSE, indices, addition
 import logging
 
 # Thiết lập logging 

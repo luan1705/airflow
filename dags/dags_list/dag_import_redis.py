@@ -3,7 +3,6 @@ from airflow.operators.python import PythonOperator
 from datetime import datetime, timedelta
 from pytz import timezone
 from utils.import_redis_history import run_multithreaded_cache
-from utils.import_redis_history.List import generate_symbol_list
 
 default_args = {
     "retries": 20,
@@ -22,14 +21,9 @@ with DAG(
     tags=["redis", "ohlcv"],
 ) as dag:
 
-    update_symbol_list = PythonOperator(
-        task_id='update_symbol_list',
-        python_callable=generate_symbol_list,
-    )
-
     import_redis = PythonOperator(
         task_id='import_redis',
         python_callable=run_multithreaded_cache,
     )
 
-    update_symbol_list >> import_redis
+    import_redis

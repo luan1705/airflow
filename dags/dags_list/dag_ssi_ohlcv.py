@@ -3,7 +3,6 @@ from airflow.operators.python import PythonOperator
 from datetime import datetime, timedelta
 from pendulum import timezone
 from utils.ssi_ohlcv import tradingview_1D,tradingview_1
-from utils.ssi_ohlcv.List import generate_symbol_list
 
 default_args = {
     'retries': 10,
@@ -19,10 +18,6 @@ with DAG(
     catchup= False,
     tags=["DB", "ETL"]
 ) as dag:
-    update_symbol_list=PythonOperator(
-        task_id='update_symbol_list',
-        python_callable=generate_symbol_list
-    )
 
     tradingview_1D=PythonOperator(
         task_id='tradingview_1D',
@@ -34,4 +29,4 @@ with DAG(
         python_callable=tradingview_1
     )
 
-    update_symbol_list >> (tradingview_1D,tradingview_1)
+    (tradingview_1D,tradingview_1)

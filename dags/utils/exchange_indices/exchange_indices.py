@@ -4,8 +4,8 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from sqlalchemy import create_engine, MetaData, Table
 from sqlalchemy.dialects.postgresql import insert as pg_insert
 
-from .List.exchange_list import total_list, EXCHANGE_LISTS
-from .List.indices_map import indices_map
+from utils.create_list.symbol_list import total_list, EXCHANGE_LISTS
+from utils.create_list.indices_map import indices_map
 
 # ---------- LOG ----------
 logger = logging.getLogger(__name__)

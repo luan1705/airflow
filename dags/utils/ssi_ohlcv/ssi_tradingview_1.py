@@ -2,7 +2,7 @@
 import requests
 from datetime import datetime, timedelta, timezone
 import pandas as pd
-from .List.symbol_list import indices, DERIVATIVES
+from utils.create_list.symbol_list import indices, DERIVATIVES
 
 def ssi_tradingview_1(symbol):
     BASE = "https://fc-data.ssi.com.vn/api/v2/Market"

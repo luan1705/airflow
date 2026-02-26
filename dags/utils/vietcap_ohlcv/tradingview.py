@@ -5,7 +5,7 @@ from pandas import json_normalize
 from datetime import datetime, timedelta
 from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type
 from requests.exceptions import ReadTimeout, ConnectionError, RequestException, HTTPError, ConnectTimeout
-from .List.symbol_list  import indices,DERIVATIVES
+from utils.create_list.symbol_list import indices,DERIVATIVES
 
 @retry(
     stop=stop_after_attempt(3),

@@ -2,7 +2,7 @@ from sqlalchemy import create_engine , MetaData, Table
 import concurrent.futures
 from datetime import datetime, time as dtime
 from zoneinfo import ZoneInfo
-from .list.indice import indice
+from utils.create_list.symbol_list import indices
 import time
 import logging
 from .tradingview import tradingview
@@ -111,7 +111,7 @@ def update_all_stocks(symbol_list):
 def save_olch():
     print("🚀 Bắt đầu cập nhật dữ liệu...")
     result = []
-    result += update_all_stocks(indice)
+    result += update_all_stocks(indices)
 
     errors = [msg for msg in result if msg.startswith("❌") or msg.startswith("⚠️")]
 

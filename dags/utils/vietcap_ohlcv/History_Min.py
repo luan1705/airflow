@@ -3,7 +3,7 @@ import pandas as pd
 import concurrent.futures
 from datetime import datetime
 from .tradingview import tradingview
-from .List.symbol_list import HOSE, HNX, UPCOM, DERIVATIVES, CW, HNXBOND, ETFHOSE, indices, addition
+from utils.create_list.symbol_list import HOSE, HNX, UPCOM, DERIVATIVES, CW, HNXBOND, ETFHOSE, indices, addition
 import time
 import logging
 import re

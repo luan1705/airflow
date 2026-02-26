@@ -5,7 +5,7 @@ import concurrent.futures
 import re
 
 from .event import get_event
-from .list import total_list
+from utils.create_list.symbol_list import total_list
 
 logging.basicConfig(
     level=logging.INFO,

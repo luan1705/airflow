@@ -1,2 +1,0 @@
-from .symbol_list import *
-from .generate_symbol_list import main as generate_symbol_list

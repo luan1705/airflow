@@ -3,7 +3,6 @@ from airflow.operators.python import PythonOperator
 from datetime import datetime, timedelta
 from pytz import timezone
 from utils.exchange_indices import upsert_ex_in
-from utils.exchange_indices.List import generate_exchange_list, generate_indice_map
 
 default_args = {
     'retries': 10,
@@ -19,18 +18,10 @@ with DAG(
     catchup= False,
     tags=["DB", "ETL"]
 ) as dag:
-    update_exchange_list=PythonOperator(
-        task_id='update_exchange_list',
-        python_callable=generate_exchange_list
-    )
-    update_indice_map=PythonOperator(
-        task_id='update_indice_map',
-        python_callable=generate_indice_map
-    )
 
     get_ex_in=PythonOperator(
         task_id='get_ex_in',
         python_callable=upsert_ex_in
     )
 
-    [update_exchange_list >> update_indice_map] >> get_ex_in
+    get_ex_in
