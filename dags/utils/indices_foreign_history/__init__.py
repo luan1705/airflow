@@ -1,0 +1,1 @@
+from .indices_foreign_history import run_all_indices
