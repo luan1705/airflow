@@ -49,7 +49,7 @@ def proprietary_history(symbol,time,start=None,end=None):
             "timeFrame": time_dict[time] ,
             "fromDate": start_date,
             "toDate": end_date,
-            "size": 50000
+            "size": 10
         }
         url=f'https://iq.vietcap.com.vn/api/iq-insight-service/v1/company/{symbol.upper()}/proprietary-history'
         response=requests.get(url,headers=headers,params=params)

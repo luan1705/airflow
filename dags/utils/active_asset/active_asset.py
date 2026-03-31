@@ -1,14 +1,15 @@
 from sqlalchemy import create_engine, text
-from utils.create_list.symbol_list import total_list as keep
 
 def active_asset():
-    engine = create_engine("postgresql+psycopg2://vnsfintech:Vns_123456@videv.cloud:5433/vnsfintech")
-    sql = text("""
-    UPDATE details.asset
-    SET active = COALESCE(symbol = ANY(CAST(:keep AS text[])), FALSE)
-    """)
+    engine = create_engine(
+        "postgresql+psycopg2://vnsfintech:Vns_123456@videv.cloud:5433/vnsfintech"
+    )
+
     try:
         with engine.begin() as conn:
-            conn.execute(sql, {"keep": keep})
+            conn.execute(text("""
+                UPDATE info.asset
+                SET active = FALSE;
+            """))
     finally:
-        engine.dispose()  # đóng pool, trả hết connections
+        engine.dispose()

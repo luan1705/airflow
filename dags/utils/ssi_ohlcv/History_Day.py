@@ -2,7 +2,7 @@ from sqlalchemy import create_engine, text
 import pandas as pd
 import concurrent.futures
 from datetime import datetime
-from .ssi_tradingview_1D import ssi_tradingview_1D
+from .ssi_tradingview_1D import ssi_tradingview_1D,get_access_token
 from utils.create_list.symbol_list import HOSE, HNX, UPCOM, DERIVATIVES, CW, HNXBOND, ETFHOSE, indices
 import time
 import logging
@@ -85,13 +85,13 @@ def _ensure_table_with_pk(conn, schema: str, table: str):
 
 
 # Hàm cập nhật dữ liệu cho một mã cổ phiếu
-def get_stock(symbol):
+def get_stock(symbol,token):
     try:
         time.sleep(1)
         today = datetime.now().strftime('%Y-%m-%d')
 
         # Lấy dữ liệu lịch sử
-        stock = ssi_tradingview_1D(symbol=symbol)
+        stock = ssi_tradingview_1D(symbol=symbol, token=token)
         # Chuẩn hóa exchange
         # exch = (
         #     'HOSE' if symbol in HOSE else
@@ -121,7 +121,7 @@ def get_stock(symbol):
         stock['symbol'] = _sanitize_symbol_for_table(symbol)
 
         # Chỉ giữ các cột phù hợp schema đã khai báo (thêm/bớt theo thực tế DataFrame bạn trả về)
-        keep_cols = [c for c in ['symbol','time','open','close','high','low','volume','exchange'] if c in stock.columns]
+        keep_cols = [c for c in ['symbol','time','open','close','high','low','volume'] if c in stock.columns]
         stock = stock[keep_cols].drop_duplicates(subset=['time'])
 
         # Tên bảng
@@ -158,10 +158,10 @@ def get_stock(symbol):
         return msg
 
 # Cập nhật toàn bộ danh sách mã cho một sàn
-def update_all_stocks(symbol_list):
+def update_all_stocks(symbol_list,token):
     messages = []
-    with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
-        futures = [executor.submit(get_stock, symbol) for symbol in symbol_list]
+    with concurrent.futures.ThreadPoolExecutor(max_workers=1) as executor:
+        futures = [executor.submit(get_stock, symbol, token) for symbol in symbol_list]
         for future in concurrent.futures.as_completed(futures):
             messages.append(future.result())
     return messages
@@ -170,15 +170,16 @@ def update_all_stocks(symbol_list):
 # Hàm tổng cho tất cả sàn — để DAG gọi
 def tradingview_1D():
     print("🚀 Bắt đầu cập nhật dữ liệu...")
+    token = get_access_token()
     result = []
-    result += update_all_stocks(HOSE)
-    result += update_all_stocks(HNX)
-    result += update_all_stocks(UPCOM)
-    result += update_all_stocks(DERIVATIVES)
-    result += update_all_stocks(CW)
-    result += update_all_stocks(HNXBOND)
-    result += update_all_stocks(ETFHOSE)
-    result += update_all_stocks(indices)
+    result += update_all_stocks(HOSE, token)
+    result += update_all_stocks(HNX, token)
+    result += update_all_stocks(UPCOM, token)
+    result += update_all_stocks(DERIVATIVES, token)
+    result += update_all_stocks(CW, token)
+    result += update_all_stocks(HNXBOND, token)
+    result += update_all_stocks(ETFHOSE, token)
+    result += update_all_stocks(indices, token)
 
     errors = [msg for msg in result if msg.startswith("❌") or msg.startswith("⚠️")]
 

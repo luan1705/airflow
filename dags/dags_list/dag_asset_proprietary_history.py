@@ -11,7 +11,7 @@ default_args = {
 }
 
 with DAG(
-    dag_id="save_proprietary_symbol_1D",
+    dag_id="asset_proprietary_history",
     default_args=default_args,
     start_date=datetime(2025,9,18,tzinfo=timezone("Asia/Ho_Chi_Minh")),
     schedule="0 1 * * 1-5",
@@ -19,10 +19,10 @@ with DAG(
     tags=["DB", "proprietary_symbol"]
 ) as dag:
 
-    proprietary_symbol_1D=PythonOperator(
-        task_id='proprietary_history_1D',
+    asset_proprietary_history=PythonOperator(
+        task_id='asset_proprietary_history',
         python_callable=save_proprietary_history
     )
 
 
-    proprietary_symbol_1D
+    asset_proprietary_history

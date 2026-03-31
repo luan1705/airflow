@@ -1,6 +1,7 @@
 import psycopg2
 from psycopg2.extras import execute_values
 from utils.create_list.indices_map import indices_map
+from datetime import timedelta
 
 DB_URL = "postgresql://vnsfintech:Vns_123456@videv.cloud:5433/vnsfintech"
 
@@ -40,16 +41,19 @@ def ensure_target_table(cur, target_table: str):
     )
 
 
-def get_last_time(cur, target_table: str):
+def get_refresh_from_time(cur, target_table: str):
     cur.execute(f'SELECT max("time") FROM {TARGET_SCHEMA}."{target_table}"')
-    return cur.fetchone()[0]
+    last_time = cur.fetchone()[0]
+    if last_time is None:
+        return None
+    return last_time - timedelta(days=7)
 
 
-def build_agg_sql(existing_tables: list[str], last_time):
+def build_agg_sql(existing_tables: list[str], refresh_from_time):
     parts = []
     for t in existing_tables:
         sym = t.rsplit("_", 1)[0]
-        if last_time:
+        if refresh_from_time:
             parts.append(
                 f"""SELECT '{sym}'::text AS src_symbol, "time","netVol","netVal"
                     FROM {SRC_SCHEMA}."{t}"
@@ -114,11 +118,11 @@ def aggregate_one_index(cur, index_name: str, symbols: list[str]):
         print(f"[{index_name}] no source tables found -> skip")
         return
 
-    last_time = get_last_time(cur, target_table)
-    agg_sql = build_agg_sql(existing_tables, last_time)
+    refresh_from_time = get_refresh_from_time(cur, target_table)
+    agg_sql = build_agg_sql(existing_tables, refresh_from_time)
 
-    if last_time:
-        cur.execute(agg_sql, (last_time,) * len(existing_tables))
+    if refresh_from_time:
+        cur.execute(agg_sql, (refresh_from_time,) * len(existing_tables))
     else:
         cur.execute(agg_sql)
 
@@ -128,7 +132,7 @@ def aggregate_one_index(cur, index_name: str, symbols: list[str]):
 
     upsert(cur, target_table, rows)
 
-    print(f"[{index_name}] rows={len(rows)} last_time={last_time}")
+    print(f"[{index_name}] rows={len(rows)} refresh_from={refresh_from_time}")
 
 
 def run_all_indices():

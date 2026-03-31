@@ -29,7 +29,7 @@ EX_CFG = {
 }
 
 IDX_SQL = text("""
-    SELECT "point","advancers","noChanges","decliners","totalVal","totalVol"
+    SELECT "point","advancers","noChanges","decliners","totalVal","totalVol","advancersVal", "noChangesVal", "declinersVal"
     FROM indices.vietnam
     WHERE symbol = :symbol
     LIMIT 1
@@ -57,45 +57,36 @@ UPSERT_SQL = text("""
 """)
 
 
-def _get_stock_exchange_type(conn) -> str:
-    """
-    Trả về data_type của cột info.asset.exchange trong information_schema.
-    Ví dụ: 'text', 'character varying', 'bigint', 'integer', ...
-    """
-    t = conn.execute(text("""
-        SELECT data_type
-        FROM information_schema.columns
-        WHERE table_schema = 'info'
-          AND table_name   = 'asset'
-          AND column_name  = 'exchange'
-        LIMIT 1
-    """)).scalar()
+# def _get_stock_exchange_type(conn) -> str:
+#     """
+#     Trả về data_type của cột info.asset.exchange trong information_schema.
+#     Ví dụ: 'text', 'character varying', 'bigint', 'integer', ...
+#     """
+#     t = conn.execute(text("""
+#         SELECT data_type
+#         FROM information_schema.columns
+#         WHERE table_schema = 'info'
+#           AND table_name   = 'asset'
+#           AND column_name  = 'exchange'
+#         LIMIT 1
+#     """)).scalar()
 
-    return (t or "").lower().strip()
+#     return (t or "").lower().strip()
 
 
-def _build_val_sql(stock_exchange_type: str):
-    """
-    Nếu exchange là số: dùng s.exchange = :exchange_id
-    Nếu exchange là text: dùng s.exchange = :exchange (HOSE/HNX/UPCOM)
-    """
-    if stock_exchange_type in ("smallint", "integer", "bigint", "numeric", "decimal"):
-        where_clause = "s.exchange = :exchange_id"
-    else:
-        # text / varchar / ...
-        where_clause = "s.exchange = :exchange"
-
-    return text(f"""
-        SELECT
-          COALESCE(SUM(CASE WHEN e."matchChange" > 0 THEN e."totalVal" ELSE 0 END), 0) AS "advancersVal",
-          COALESCE(SUM(CASE WHEN e."matchChange" = 0 THEN e."totalVal" ELSE 0 END), 0) AS "noChangesVal",
-          COALESCE(SUM(CASE WHEN e."matchChange" < 0 THEN e."totalVal" ELSE 0 END), 0) AS "declinersVal"
-        FROM details.asset e
-        LEFT JOIN info.asset s
-          ON s.symbol = e.symbol
-        WHERE {where_clause}
-          AND e."matchRatioChange" <> -100
-    """)
+# def _build_val_sql():
+#     return text("""
+#         SELECT
+#           COALESCE(SUM(CASE WHEN e."matchChange" > 0 THEN e."totalVal" ELSE 0 END), 0) AS "advancersVal",
+#           COALESCE(SUM(CASE WHEN e."matchChange" = 0 THEN e."totalVal" ELSE 0 END), 0) AS "noChangesVal",
+#           COALESCE(SUM(CASE WHEN e."matchChange" < 0 THEN e."totalVal" ELSE 0 END), 0) AS "declinersVal"
+#         FROM details.asset e
+#         JOIN info.asset s
+#           ON s.symbol = e.symbol
+#         WHERE s.indices LIKE '%' || :index_symbol || '%'
+#           AND s.available = TRUE
+#           AND s.active = TRUE
+#     """)
 
 
 def upsert_exchange_volatility(exchange: str):
@@ -113,13 +104,12 @@ def upsert_exchange_volatility(exchange: str):
     try:
         with engine.begin() as conn:
             # 0) Detect kiểu cột info.stock.exchange để tránh lỗi text = integer
-            stock_exchange_type = _get_stock_exchange_type(conn)
-            val_sql = _build_val_sql(stock_exchange_type)
+            # val_sql = _build_val_sql()
 
-            params = {"exchange": exchange, "exchange_id": exchange_id}
+            # params = {"index_symbol": index_symbol}
 
-            # 1) Tính advancersVal/noChangesVal/declinersVal
-            val = pd.read_sql(val_sql, con=conn, params=params).iloc[0].to_dict()
+            # # 1) Tính advancersVal/noChangesVal/declinersVal
+            # val = pd.read_sql(val_sql, con=conn, params=params).iloc[0].to_dict()
 
             # 2) Lấy dữ liệu index
             idx = pd.read_sql(IDX_SQL, con=conn, params={"symbol": index_symbol})
@@ -137,9 +127,9 @@ def upsert_exchange_volatility(exchange: str):
                 "decliners": int(i["decliners"] or 0),
                 "totalVal": float(i["totalVal"] or 0),
                 "totalVol": float(i["totalVol"] or 0),
-                "advancersVal": float(val.get("advancersVal") or 0),
-                "noChangesVal": float(val.get("noChangesVal") or 0),
-                "declinersVal": float(val.get("declinersVal") or 0),
+                "advancersVal": float(i["advancersVal"] or 0),
+                "noChangesVal": float(i["noChangesVal"] or 0),
+                "declinersVal": float(i["declinersVal"] or 0),
             }
 
             # 3) Upsert

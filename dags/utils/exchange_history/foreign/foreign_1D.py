@@ -18,7 +18,7 @@ symbols=['HOSE','HNX','UPCOM']
 def foreign(symbol,enginedb):
     try:
         logging.info('Kết nối DB')
-        start=(datetime.today()-timedelta(days=3)).strftime("%Y-%m-%d")
+        start=(datetime.today()-timedelta(days=15)).strftime("%Y-%m-%d")
         df=foreign_history(f"{symbol}",start)
 
         table_name = f"foreign_{symbol}_1D"

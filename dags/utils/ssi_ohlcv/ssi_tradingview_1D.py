@@ -4,28 +4,23 @@ from datetime import datetime, timedelta, timezone
 import pandas as pd
 from utils.create_list.symbol_list import indices, DERIVATIVES
 
-def ssi_tradingview_1D(symbol):
-    BASE = "https://fc-data.ssi.com.vn/api/v2/Market"
+BASE = "https://fc-data.ssi.com.vn/api/v2/Market"
+def get_access_token():
+    url = f"{BASE}/AccessToken"
+    r = requests.post(
+        url,
+        json={
+            "consumerID": "3b312076e1ce40a6b886dce736bd3db5",
+            "consumerSecret": "e213990f319243cf8ae029afb4a123bb"
+        },
+        headers={"Accept":"application/json","Content-Type":"application/json"},
+        timeout=15
+    )
+    r.raise_for_status()
+    js = r.json()
+    return (js.get("data") or {}).get("accessToken")
 
-    def get_access_token(consumer_id: str, consumer_secret: str, debug: bool=False) -> str:
-        url = f"{BASE}/AccessToken"
-        r = requests.post(
-            url,
-            json={"consumerID": consumer_id, "consumerSecret": consumer_secret},
-            headers={"Accept":"application/json","Content-Type":"application/json"},
-            timeout=15
-        )
-        # if debug:
-            # print("TOKEN CODE:", r.status_code)
-            # print("TOKEN BODY:", r.text[:600])
-        r.raise_for_status()
-        js = r.json() or {}
-        # đọc cả 2 format: data.accessToken hoặc accessToken ở top-level
-        token = (js.get("data") or {}).get("accessToken") or js.get("accessToken")
-        if not token:
-            raise RuntimeError(f"Không thấy accessToken trong phản hồi: {js}")
-        return token
-
+def ssi_tradingview_1D(symbol,token):
     def fetch_daily_ohlc(token: str, symbol: str, from_ddmmyyyy: str, to_ddmmyyyy: str,
                         page_index: int = 1, page_size: int = 1000):
         headers = {"Authorization": f"Bearer {token}"}
@@ -59,16 +54,20 @@ def ssi_tradingview_1D(symbol):
         return df
 
     # ==== Điền ID/SECRET của bạn rồi chạy ====
-    CONSUMER_ID = "3b312076e1ce40a6b886dce736bd3db5"
-    CONSUMER_SECRET = "e213990f319243cf8ae029afb4a123bb"
+    # CONSUMER_ID = "3b312076e1ce40a6b886dce736bd3db5"
+    # CONSUMER_SECRET = "e213990f319243cf8ae029afb4a123bb"
     end=(datetime.now()-timedelta(days=0)).strftime("%d/%m/%Y")
-    start=(datetime.now()-timedelta(days=4)).strftime("%d/%m/%Y")
-    token = get_access_token(CONSUMER_ID, CONSUMER_SECRET, debug=True)
-    rows  = fetch_daily_ohlc(token, symbol, start, end, page_index=1, page_size=9999)
+    start=(datetime.now()-timedelta(days=7)).strftime("%d/%m/%Y")
+    # TOKEN = get_access_token()
+    rows  = fetch_daily_ohlc(token, symbol, start, end, page_index=1, page_size=1000)
     df = to_df(rows)
     return df
 
+# #------------------------------test------------------------------
+# indices = ["VNINDEX","HNXINDEX","UPCOMINDEX","VN30","HNX30"]
+# DERIVATIVES = ["FUTURES1M","FUTURES2M","FUTURES3M","FUTURES6M"]
 # if __name__ == "__main__":
-#     symbol = "ACB"
-#     df = ssi_tradingview_1D(symbol)
+#     symbol = "ABS"
+#     token = get_access_token()
+#     df = ssi_tradingview_1D(symbol, token)
 #     print(df)

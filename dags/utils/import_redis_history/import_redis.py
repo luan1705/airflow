@@ -47,10 +47,10 @@ def _to_vn_time(ts):
 # Hàm lấy dữ liệu từ PostgreSQL và lưu vào Redis
 def get_data_and_cache(symbol):
     query = text(f"""
-        SELECT "time", "symbol", "open", "high", "low", "close", "volume"
-        FROM "{SCHEMA}"."{symbol}_1D"
-        WHERE "time"::date != CURRENT_DATE
-        ORDER BY time DESC
+        SELECT o."time", o."symbol", o."open", o."high", o."low", o."close", o."volume",a.exchange,a.indices
+        FROM "{SCHEMA}"."{symbol}_1D" o left join info.asset a on o.symbol = a.symbol
+        WHERE o."time"::date != CURRENT_DATE
+        ORDER BY o."time" DESC
         LIMIT 200
     """)
     try:
@@ -66,7 +66,9 @@ def get_data_and_cache(symbol):
                     "high": row["high"],
                     "low": row["low"],
                     "close": row["close"],
-                    "volume": row["volume"]
+                    "volume": row["volume"],
+                    "exchange": row["exchange"],
+                    "indices": row["indices"]
                 }) for _, row in df.iterrows()
             ]
             redis_key = f"{SCHEMA}:{symbol}"

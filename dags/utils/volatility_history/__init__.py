@@ -1,0 +1,1 @@
+from .volatility_history import upsert_volatility_history

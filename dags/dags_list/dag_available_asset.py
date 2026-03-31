@@ -2,8 +2,8 @@ from airflow import DAG
 from airflow.operators.python import PythonOperator
 from datetime import datetime, timedelta
 from pytz import timezone
-from utils.active_asset import active_asset
-# from utils.active_asset.list import generate_symbol_list
+from utils.available_asset import available_asset
+# from utils.available_asset.list import generate_symbol_list
 
 default_args = {
     'retries': 10,
@@ -12,17 +12,17 @@ default_args = {
 }
 
 with DAG(
-    dag_id="active_asset",
+    dag_id="available_asset",
     default_args=default_args,
     start_date=datetime(2025,12,2,tzinfo=timezone("Asia/Ho_Chi_Minh")),
-    schedule="59 8 * * 1-5",
+    schedule="0 9 * * 1-5",
     catchup= False,
     tags=["DB", "ETL"]
 ) as dag:
 
-    active_asset_task=PythonOperator(
-        task_id='active_asset',
-        python_callable=active_asset
+    available_asset_task=PythonOperator(
+        task_id='available_asset',
+        python_callable=available_asset
     )
 
-    active_asset_task
+    available_asset_task
