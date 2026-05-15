@@ -51,7 +51,7 @@ def get_data_and_cache(symbol):
         FROM "{SCHEMA}"."{symbol}_1D" o left join info.asset a on o.symbol = a.symbol
         WHERE o."time"::date != CURRENT_DATE
         ORDER BY o."time" DESC
-        LIMIT 200
+        LIMIT 300
     """)
     try:
         df = pd.read_sql(query, con=engine)

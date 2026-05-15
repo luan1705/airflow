@@ -1,0 +1,1 @@
+from .asset_proprietary_history_1D import save_proprietary_history

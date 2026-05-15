@@ -16,7 +16,7 @@ with DAG(
     dag_id="exchange_proprietary_history",
     default_args=default_args,
     start_date=datetime(2025,9,11,tzinfo=timezone("Asia/Ho_Chi_Minh")),
-    schedule="1 0 * * 1-5",
+    schedule="30 20 * * 1-5",
     catchup= False,
     tags=["DB", "market_data"]
 ) as dag:

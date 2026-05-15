@@ -134,35 +134,39 @@ def insider_trans(symbol):
 def save_pg(symbol):
     try:
         symbol = symbol.upper()
+        create_schema_sql = 'CREATE SCHEMA IF NOT EXISTS insider_transaction;'
+        create_table_sql = f"""
+            CREATE TABLE IF NOT EXISTS insider_transaction."{symbol}" (
+                "symbol" TEXT,
+                "transactionType" TEXT,
+                "trader" TEXT,
+                "position" TEXT,
+                "buySellType" TEXT,
+                "status" TEXT,
+                "shareRegister" DOUBLE PRECISION,
+                "shareBeforeTrade" DOUBLE PRECISION,
+                "shareAcquire" DOUBLE PRECISION,
+                "shareAfterTrade" DOUBLE PRECISION,
+                "ownershipAfterTradePct" DOUBLE PRECISION,
+                "startDate" DATE,
+                "endDate" DATE,
+                "publicDate" DATE,
+                "relatedPerson" TEXT,
+                "relatedPersonPosition" TEXT,
+                "relationship" TEXT
+            );
+        """
+
+        with engine.begin() as conn:
+            conn.execute(text(create_schema_sql))
+            conn.execute(text(create_table_sql))
+
         df = insider_trans(symbol)
 
         if df.empty:
             return f"⚠ Không có dữ liệu insider {symbol}"
 
-        create_table_sql = f"""
-            CREATE TABLE IF NOT EXISTS insider_transaction."{symbol}" (
-                symbol TEXT,
-                transactionType TEXT,
-                trader TEXT,
-                position TEXT,
-                buySellType TEXT,
-                status TEXT,
-                shareRegister DOUBLE PRECISION,
-                shareBeforeTrade DOUBLE PRECISION,
-                shareAcquire DOUBLE PRECISION,
-                shareAfterTrade DOUBLE PRECISION,
-                ownershipAfterTradePct DOUBLE PRECISION,
-                startDate DATE,
-                endDate DATE,
-                publicDate DATE,
-                relatedPerson TEXT,
-                relatedPersonPosition TEXT,
-                relationship TEXT
-            );
-        """
-
         with engine.begin() as conn:
-            conn.execute(text(create_table_sql))
 
             df.to_sql(
                 name=f'{symbol}',

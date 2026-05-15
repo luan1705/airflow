@@ -2,7 +2,7 @@ from airflow import DAG
 from airflow.operators.python import PythonOperator
 from datetime import datetime, timedelta
 from pendulum import timezone
-from utils.d_trading_signals import save_all_pg
+from utils.signals import save_all_d_trading_pg
 
 default_args = {
     'retries': 10,
@@ -21,7 +21,7 @@ with DAG(
 
     save_d_trading_signals=PythonOperator(
         task_id='save_d_trading_signals',
-        python_callable=save_all_pg
+        python_callable=save_all_d_trading_pg
     )
 
     save_d_trading_signals

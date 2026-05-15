@@ -10,8 +10,8 @@ def get_access_token():
     r = requests.post(
         url,
         json={
-            "consumerID": "3b312076e1ce40a6b886dce736bd3db5",
-            "consumerSecret": "e213990f319243cf8ae029afb4a123bb"
+            "consumerID": "14d9af7cd5c447f0a26c2c43218ed464",
+            "consumerSecret": "940870b0e2134685a2b344fa33339842"
         },
         headers={"Accept":"application/json","Content-Type":"application/json"},
         timeout=15
@@ -57,7 +57,7 @@ def ssi_tradingview_1D(symbol,token):
     # CONSUMER_ID = "3b312076e1ce40a6b886dce736bd3db5"
     # CONSUMER_SECRET = "e213990f319243cf8ae029afb4a123bb"
     end=(datetime.now()-timedelta(days=0)).strftime("%d/%m/%Y")
-    start=(datetime.now()-timedelta(days=7)).strftime("%d/%m/%Y")
+    start=(datetime.now()-timedelta(days=0)).strftime("%d/%m/%Y")
     # TOKEN = get_access_token()
     rows  = fetch_daily_ohlc(token, symbol, start, end, page_index=1, page_size=1000)
     df = to_df(rows)

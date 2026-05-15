@@ -20,15 +20,17 @@ def break_out_break_down(symbol):
     try:
         with enginedbnews.begin() as conn:
             # Đọc dữ liệu
-            dffull = pd.read_sql(f'SELECT * FROM "ohlcv"."{symbol}_1D"', con=conn)
-            today=pd.Timestamp.today().normalize()
+            dffull = pd.read_sql(f'SELECT * FROM "ohlcv"."{symbol}_1D" ORDER BY time ASC', con=conn)
+            dffull["time"] = pd.to_datetime(dffull["time"], utc=True)
+            dffull["time"] = dffull["time"].dt.tz_convert("Asia/Ho_Chi_Minh")
+            today = pd.Timestamp.now(tz="Asia/Ho_Chi_Minh").normalize()
             row_now = dffull[dffull['time'] == today]
             if not row_now.empty:
                 # price_now = row_now['close'].iloc[0]
                 df_caculated = dffull[dffull['time'] < today]
             else:
                 # price_now = dffull['close'].iloc[-1]
-                df_caculated = dffull.iloc[:-2]
+                df_caculated = dffull.iloc[:-1]
             
             price_topfull=df_caculated["close"].max()
             price_bottomfull=df_caculated["close"].min()

@@ -2,7 +2,7 @@ from airflow import DAG
 from airflow.operators.python import PythonOperator
 from datetime import datetime, timedelta
 from pendulum import timezone
-from utils.proprietary_history_symbol import save_proprietary_history
+from utils.asset_proprietary_history import save_proprietary_history
 
 default_args = {
     'retries': 10,
@@ -14,7 +14,7 @@ with DAG(
     dag_id="asset_proprietary_history",
     default_args=default_args,
     start_date=datetime(2025,9,18,tzinfo=timezone("Asia/Ho_Chi_Minh")),
-    schedule="0 1 * * 1-5",
+    schedule="0 9 * * 1-5",
     catchup= False,
     tags=["DB", "proprietary_symbol"]
 ) as dag:

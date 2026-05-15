@@ -11,9 +11,9 @@ default_args = {
 }
 
 with DAG(
-    dag_id="break_dag",
+    dag_id="break_out_down",
     default_args=default_args,
-    start_date=datetime(2025,12,2,tzinfo=timezone("Asia/Ho_Chi_Minh")),
+    start_date=datetime(2026,5,7,tzinfo=timezone("Asia/Ho_Chi_Minh")),
     schedule="15 15 * * 1-5",
     catchup= False,
     tags=["DB", "ETL"]

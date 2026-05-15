@@ -54,10 +54,10 @@ def tradingview(symbol, start, end, time="days"):
         'hours': 'ONE_HOUR'
     }
     countback_dict = {
-        "days": 200000,
-        "months": 200000,
-        "minutes": 1000000,
-        "hours": 1000000
+        "days": 2000000,
+        "months": 2000000,
+        "minutes": 10000000,
+        "hours": 10000000
     }
 
     payload = {

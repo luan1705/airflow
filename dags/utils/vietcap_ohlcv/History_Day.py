@@ -74,7 +74,7 @@ def _ensure_table_with_pk(conn, schema: str, table: str):
     if not pk_cols:
         try:
             conn.execute(text(f'ALTER TABLE {fqtn} ADD CONSTRAINT {_qi(pk_name)} PRIMARY KEY (time);'))
-        except Exception:
+        except Exception as e:
             # Có thể đã có PK tên khác / dữ liệu trùng -> log để biết
             log.warning(f"Không thể ADD PRIMARY KEY cho {schema}.{table}: {e}")
     elif pk_cols != {"time"}:
@@ -107,6 +107,13 @@ def get_stock(symbol):
             msg = f"⚠️ Không có dữ liệu cho {symbol}"
             log.warning(msg)
             return msg
+        
+        stock = stock[stock["volume"] != 0].copy()
+
+        if stock.empty:
+            msg = f"⚠️ Sau khi lọc volume=0 thì không còn dữ liệu cho {symbol}"
+            log.warning(msg)
+            return msg
 
         symbol = 'UPCOMINDEX' if symbol == 'HNXUpcomIndex' else symbol
         symbol = 'HNXINDEX' if symbol == 'HNXIndex' else symbol
@@ -117,6 +124,7 @@ def get_stock(symbol):
         stock = stock.copy()
         # stock['exchange'] = exch
         stock['symbol'] = _sanitize_symbol_for_table(symbol)
+        stock['time'] = (pd.to_datetime(stock['time']) + pd.Timedelta(hours=15)).dt.floor('s')
 
         # Chỉ giữ các cột phù hợp schema đã khai báo (thêm/bớt theo thực tế DataFrame bạn trả về)
         keep_cols = [c for c in ['symbol','time','open','close','high','low','volume','exchange'] if c in stock.columns]

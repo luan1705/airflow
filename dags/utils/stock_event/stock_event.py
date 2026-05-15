@@ -47,6 +47,13 @@ def ensure_schema_and_table(symbol: str):
                 "label"  TEXT
             );
         '''))
+        conn.execute(text(f'''
+            ALTER TABLE "{SCHEMA}"."{sym}"
+            ADD COLUMN IF NOT EXISTS "symbol" TEXT,
+            ADD COLUMN IF NOT EXISTS "time" DATE,
+            ADD COLUMN IF NOT EXISTS "event" TEXT,
+            ADD COLUMN IF NOT EXISTS "label" TEXT;
+        '''))
 
         # thử tạo unique index
         try:

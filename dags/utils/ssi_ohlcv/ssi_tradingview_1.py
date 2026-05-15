@@ -63,8 +63,8 @@ def ssi_tradingview_1(symbol):
         return df
 
     # ==== Điền ID/SECRET của bạn rồi chạy ====
-    CONSUMER_ID = "3b312076e1ce40a6b886dce736bd3db5"
-    CONSUMER_SECRET = "e213990f319243cf8ae029afb4a123bb"
+    CONSUMER_ID = "14d9af7cd5c447f0a26c2c43218ed464"
+    CONSUMER_SECRET = "940870b0e2134685a2b344fa33339842"
     end=(datetime.now()-timedelta(days=0)).strftime("%d/%m/%Y")
     start=(datetime.now()-timedelta(days=7)).strftime("%d/%m/%Y")
     token = get_access_token(CONSUMER_ID, CONSUMER_SECRET, debug=True)

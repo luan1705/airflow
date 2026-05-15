@@ -120,6 +120,7 @@ def get_stock(symbol):
         stock = stock.copy()
         # stock['exchange'] = exch
         stock['symbol'] = _sanitize_symbol_for_table(symbol)
+        # stock['time'] = (pd.to_datetime(stock['time'])+ pd.Timedelta(hours=15)).dt.floor('s')
 
         # Chỉ giữ các cột phù hợp schema đã khai báo (thêm/bớt theo thực tế DataFrame bạn trả về)
         keep_cols = [c for c in ['symbol','time','open','close','high','low','volume','exchange'] if c in stock.columns]

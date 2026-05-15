@@ -49,7 +49,7 @@ def _ensure_table_with_pk(conn, schema: str, table: str):
     conn.execute(text(f"""
         CREATE TABLE IF NOT EXISTS {fqtn} (
             symbol   TEXT,
-            time     TIMESTAMP          NOT NULL,
+            time     TIMESTAMPTZ          NOT NULL,
             open     DOUBLE PRECISION,
             close    DOUBLE PRECISION,
             high     DOUBLE PRECISION,
@@ -119,6 +119,7 @@ def get_stock(symbol,token):
         stock = stock.copy()
         # stock['exchange'] = exch
         stock['symbol'] = _sanitize_symbol_for_table(symbol)
+        stock['time'] = (pd.to_datetime(stock['time'])+ pd.Timedelta(hours=15)).dt.floor('s')
 
         # Chỉ giữ các cột phù hợp schema đã khai báo (thêm/bớt theo thực tế DataFrame bạn trả về)
         keep_cols = [c for c in ['symbol','time','open','close','high','low','volume'] if c in stock.columns]
@@ -195,4 +196,4 @@ def tradingview_1D():
     #     raise Exception("Task thất bại vì có lỗi:\n" + "\n".join(errors))
 
     log.info("🎉 Hoàn thành cập nhật tất cả mã.")
-    return result
+    return errors if errors else "không có lỗi"

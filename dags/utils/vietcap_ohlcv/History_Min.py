@@ -107,6 +107,13 @@ def get_stock(symbol):
             msg = f"⚠️ Không có dữ liệu cho {symbol}"
             log.warning(msg)
             return msg
+        
+        stock = stock[stock["volume"] != 0].copy()
+
+        if stock.empty:
+            msg = f"⚠️ Sau khi lọc volume=0 thì không còn dữ liệu cho {symbol}"
+            log.warning(msg)
+            return msg
 
         symbol = 'UPCOMINDEX' if symbol == 'HNXUpcomIndex' else symbol
         symbol = 'HNXINDEX' if symbol == 'HNXIndex' else symbol
@@ -161,15 +168,15 @@ def update_all_stocks(symbol_list):
 def save_DB_1():
     print("🚀 Bắt đầu cập nhật dữ liệu...")
     result = []
-    # result += update_all_stocks(HOSE)
-    # result += update_all_stocks(HNX)
-    # result += update_all_stocks(UPCOM)
-    # result += update_all_stocks(DERIVATIVES)
-    # result += update_all_stocks(CW)
-    # result += update_all_stocks(HNXBOND)
-    # result += update_all_stocks(ETFHOSE)
-    # result += update_all_stocks(indices)
-    result += update_all_stocks(addition)
+    result += update_all_stocks(HOSE)
+    result += update_all_stocks(HNX)
+    result += update_all_stocks(UPCOM)
+    result += update_all_stocks(DERIVATIVES)
+    result += update_all_stocks(CW)
+    result += update_all_stocks(HNXBOND)
+    result += update_all_stocks(ETFHOSE)
+    result += update_all_stocks(indices)
+    # result += update_all_stocks(addition)
 
     errors = [msg for msg in result if msg.startswith("❌") or msg.startswith("⚠️")]
 

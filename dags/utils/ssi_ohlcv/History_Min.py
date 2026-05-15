@@ -129,7 +129,16 @@ def get_stock(symbol):
             insert_sql = f"""
                 INSERT INTO {_quoted(SCHEMA, table_name)} ({cols})
                 VALUES %s
-                ON CONFLICT (time) DO NOTHING;
+                ON CONFLICT (time) 
+                -- DO NOTHING
+                DO UPDATE SET
+                    symbol   = EXCLUDED.symbol,
+                    open     = EXCLUDED.open,
+                    close    = EXCLUDED.close,
+                    high     = EXCLUDED.high,
+                    low      = EXCLUDED.low,
+                    volume   = EXCLUDED.volume
+                ;
             """
             execute_values(conn.connection.cursor(), insert_sql, rows, page_size=1000)
     
@@ -180,4 +189,4 @@ def tradingview_1():
     #     raise Exception("Task thất bại vì có lỗi:\n" + "\n".join(errors))
 
     log.info("🎉 Hoàn thành cập nhật tất cả mã.")
-    return result
+    return errors if errors else "không có lỗi"
