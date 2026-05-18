@@ -171,9 +171,9 @@ def bb_trading_signals(
     for _, row in after_buy.iterrows():
 
         # nếu giá thấp nhất <= stoploss
-        if row["low"] <= stop_price:
+        if row["close"] <= stop_price:
             sell_date = row["time"]
-            sell_price = stop_price
+            sell_price = row["close"]
             break
     
     trade = {

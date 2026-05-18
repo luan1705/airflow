@@ -81,6 +81,8 @@ def pre_break_ignition_signals(symbol, lookback=10, tightLimit=10.0, volBurst=1.
     entry = np.nan
     reached10 = False
 
+    STOP_LOSS = 0.08  # 8%
+
     for i in range(len(df)):
         c = C.iat[i]
         v = V.iat[i]
@@ -90,19 +92,21 @@ def pre_break_ignition_signals(symbol, lookback=10, tightLimit=10.0, volBurst=1.
             entry = c
             reached10 = False
 
-        if in_pos and np.isfinite(entry) and entry > 0 and np.isfinite(c):
+        
+
+        elif in_pos and np.isfinite(entry) and entry > 0 and np.isfinite(c):  # ← elif fix bug cùng candle
             if c >= entry * 1.1:
                 reached10 = True
 
-        stoploss = in_pos and np.isfinite(entry) and entry > 0 and np.isfinite(c) and (c <= entry * 0.9)
-        sell_basebreak_vol = in_pos and bool(BaseBreakCrossDown.iat[i]) and np.isfinite(v) and np.isfinite(AvgVol20.iat[i]) and (v > AvgVol20.iat[i] * 1.5)
-        sell_ma50_after10 = in_pos and reached10 and bool(CrossDown_MA50.iat[i]) and np.isfinite(v) and np.isfinite(AvgVol20.iat[i]) and (v > AvgVol20.iat[i])
+            stoploss = c <= entry * (1 - STOP_LOSS)  # ← 8%
+            sell_basebreak_vol = bool(BaseBreakCrossDown.iat[i]) and np.isfinite(v) and np.isfinite(AvgVol20.iat[i]) and (v > AvgVol20.iat[i] * 1.5)
+            sell_ma50_after10 = reached10 and bool(CrossDown_MA50.iat[i]) and np.isfinite(v) and np.isfinite(AvgVol20.iat[i]) and (v > AvgVol20.iat[i])
 
-        if stoploss or sell_basebreak_vol or sell_ma50_after10:
-            Sell.iat[i] = True
-            in_pos = False
-            entry = np.nan
-            reached10 = False
+            if stoploss or sell_basebreak_vol or sell_ma50_after10:
+                Sell.iat[i] = True
+                in_pos = False
+                entry = np.nan
+                reached10 = False
 
     out = df[["symbol", "time", "open", "high", "low", "close", "volume"]].copy()
     out["signal"] = np.where(Buy, "BUY", np.where(Sell, "SELL", ""))

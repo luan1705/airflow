@@ -77,15 +77,28 @@ def d_trading_signals(symbol,swing=5):
     Sell = pd.Series(False, index=df.index)
     long_state = False
 
+    STOP_LOSS = 0.08  # 8%
+    buy_price = None  # track giá mua
+
+
     for i in range(len(df)):
         if pd.isna(C.iat[i]) or pd.isna(pivotLine.iat[i]) or pd.isna(prevClose.iat[i]) or pd.isna(prevPivotLine.iat[i]):
             continue
         if buyCross.iat[i] and (not long_state) and (v20.iat[i] > 1_000_000) and (C.iat[i] >= 10):
             Buy.iat[i] = True
             long_state = True
-        elif sellCross.iat[i] and long_state and (C.iat[i] >= 10):
-            Sell.iat[i] = True
-            long_state = False
+            buy_price = C.iat[i]  # lưu giá mua
+
+        elif long_state and buy_price is not None:
+            # Cắt lỗ 8%
+            stop_hit = C.iat[i] <= buy_price * (1 - STOP_LOSS)
+            # Hoặc TSL signal bình thường
+            tsl_hit = sellCross.iat[i] and (C.iat[i] >= 10)
+
+            if stop_hit or tsl_hit:
+                Sell.iat[i] = True
+                long_state = False
+                buy_price = None
 
     
     df["tsl"] = tsl

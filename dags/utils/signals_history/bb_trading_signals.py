@@ -142,12 +142,10 @@ def bb_trading_signals(
     df["buyShape"] = buyShape
     df["bgVal"] = bgVal
 
+    df_original = df.copy()  # ← lưu lại trước khi filter
     df = df[df["signal"] == "BUY"].copy()
     if df.empty:
         return df
-
-    # latest_date = df["time"].dt.date.max()
-    # df = df[df["time"].dt.date == latest_date].copy()
 
     if df.empty:
         return pd.DataFrame()
@@ -166,15 +164,32 @@ def bb_trading_signals(
 
     df = df.sort_values("time")
 
+    STOP_LOSS = 0.08
+
     trades = []
 
     for _, row in df.iterrows():
+        buy_date = row["time"]
+        buy_price = float(row["close"])
+        stop_price = buy_price * (1 - STOP_LOSS)
+
+        sell_date = None
+        sell_price = None
+
+        after_buy = df_original[df_original["time"] > buy_date].copy()
+
+        for _, r in after_buy.iterrows():
+            if r["close"] <= stop_price:
+                sell_date = r["time"]
+                sell_price = r["close"]
+                break
+
         trades.append({
             "symbol": symbol,
-            "buy_date": row["time"],
-            "buy_price": row["close"],
-            "sell_date": None,
-            "sell_price": None
+            "buy_date": buy_date,
+            "buy_price": buy_price,
+            "sell_date": sell_date,
+            "sell_price": sell_price
         })
 
     return pd.DataFrame(trades)
