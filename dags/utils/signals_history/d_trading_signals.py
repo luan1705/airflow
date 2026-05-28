@@ -6,6 +6,7 @@ from sqlalchemy import create_engine,text
 from psycopg2.extras import execute_values
 import concurrent.futures
 import logging
+import math
 from utils.create_list.symbol_list import HOSE, HNX, UPCOM, DERIVATIVES, CW, HNXBOND, ETFHOSE, indices, addition
 
 logging.basicConfig(
@@ -79,6 +80,7 @@ def d_trading_signals(symbol,swing=5):
 
     STOP_LOSS = 0.08  # 8%
     buy_price = None  # track giá mua
+    sell_price_actual = pd.Series(np.nan, index=df.index)
 
 
     for i in range(len(df)):
@@ -93,11 +95,12 @@ def d_trading_signals(symbol,swing=5):
             # Cắt lỗ 8%
             stop_hit = C.iat[i] <= buy_price * (1 - STOP_LOSS)
             # Hoặc TSL signal bình thường
-            tsl_hit = sellCross.iat[i] and (C.iat[i] >= 10)
+            tsl_hit = sellCross.iat[i] and (C.iat[i] >= 10) 
 
             if stop_hit or tsl_hit:
                 Sell.iat[i] = True
                 long_state = False
+                sell_price_actual.iat[i] = math.ceil(buy_price * (1 - STOP_LOSS) * 100) / 100 if stop_hit else C.iat[i]  # ✅
                 buy_price = None
 
     
@@ -105,6 +108,7 @@ def d_trading_signals(symbol,swing=5):
     df["pivotLine"] = pivotLine
     df["buy"] = Buy
     df["sell"] = Sell
+    df["sell_price_actual"] = sell_price_actual
     df = df[df["buy"] | df["sell"]].copy()
     df["signal"] = np.where(df["buy"], "BUY", "SELL")
 
@@ -136,7 +140,7 @@ def d_trading_signals(symbol,swing=5):
 
         elif row["sell"] and current_buy is not None:
             current_buy["sell_date"] = row["time"]
-            current_buy["sell_price"] = row["close"]
+            current_buy["sell_price"] = row["sell_price_actual"] 
 
             if current_buy["buy_date"] >= start_month:
                 trades.append(current_buy)

@@ -1,11 +1,12 @@
 import numpy as np
 import pandas as pd
-from VNSFintech import *
+# from VNSFintech import *
 from datetime import datetime, timedelta
 from sqlalchemy import create_engine,text
 from psycopg2.extras import execute_values
 import concurrent.futures
 import logging
+import math
 from utils.create_list.symbol_list import HOSE, HNX, UPCOM, DERIVATIVES, CW, HNXBOND, ETFHOSE, indices, addition
 
 logging.basicConfig(
@@ -28,7 +29,7 @@ def d_trading_signals(symbol,swing=5):
     SELECT *
     FROM ohlcv."{symbol}_1D"
     ORDER BY time desc
-    LIMIT 100
+    LIMIT 200
     """
 
     try:
@@ -79,7 +80,7 @@ def d_trading_signals(symbol,swing=5):
 
     STOP_LOSS = 0.08  # 8%
     buy_price = None  # track giá mua
-
+    sell_price_actual = pd.Series(np.nan, index=df.index)
 
     for i in range(len(df)):
         if pd.isna(C.iat[i]) or pd.isna(pivotLine.iat[i]) or pd.isna(prevClose.iat[i]) or pd.isna(prevPivotLine.iat[i]):
@@ -98,6 +99,7 @@ def d_trading_signals(symbol,swing=5):
             if stop_hit or tsl_hit:
                 Sell.iat[i] = True
                 long_state = False
+                sell_price_actual.iat[i] = math.ceil(buy_price * (1 - STOP_LOSS) * 100) / 100 if stop_hit else C.iat[i]
                 buy_price = None
 
     
@@ -105,6 +107,7 @@ def d_trading_signals(symbol,swing=5):
     df["pivotLine"] = pivotLine
     df["buy"] = Buy
     df["sell"] = Sell
+    df["sell_price_actual"] = sell_price_actual
     df = df[df["buy"] | df["sell"]].copy()
     df["signal"] = np.where(df["buy"], "BUY", "SELL")
 
@@ -141,7 +144,7 @@ def d_trading_signals(symbol,swing=5):
             "buy_date": last_buy["time"],
             "buy_price": last_buy["close"],
             "sell_date": last_row["time"],
-            "sell_price": last_row["close"]
+            "sell_price": last_row["sell_price_actual"]
         }
 
     return pd.DataFrame([trade])
@@ -205,7 +208,7 @@ def save_all_pg():
     # result += update_all_symbol(indices)
     # result += update_all_symbol(addition)
     
-    errors = [msg for msg in result if msg.startswith("❌") or msg.startswith("⚠️")]
+    errors = [msg for msg in result if msg.startswith("❌") or msg.startswith("⚠️") or msg.startswith("⚠")]
 
     log.info(f"✅ Tổng số mã xử lý: {len(result)}")
     log.info(f"❌ Tổng số lỗi: {len(errors)}")
@@ -219,4 +222,4 @@ def save_all_pg():
     #     raise Exception("Task thất bại vì có lỗi:\n" + "\n".join(errors))
 
     log.info("🎉 Hoàn thành cập nhật tất cả mã.")
-    return result
+    return errors if errors else ["Không có lỗi."]

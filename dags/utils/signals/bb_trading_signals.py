@@ -5,6 +5,7 @@ from sqlalchemy import create_engine, text
 from psycopg2.extras import execute_values
 import concurrent.futures
 import logging
+import math
 from utils.create_list.symbol_list import HOSE, HNX, UPCOM, DERIVATIVES, CW, HNXBOND, ETFHOSE, indices, addition
 
 logging.basicConfig(
@@ -160,7 +161,7 @@ def bb_trading_signals(
     buy_price = float(last_row["close"])
 
     # ===== STOPLOSS 8% =====
-    stop_price = buy_price * 0.92
+    stop_price = math.ceil(buy_price * 0.92 * 100) / 100 
 
     sell_date = None
     sell_price = None
@@ -173,7 +174,7 @@ def bb_trading_signals(
         # nếu giá thấp nhất <= stoploss
         if row["close"] <= stop_price:
             sell_date = row["time"]
-            sell_price = row["close"]
+            sell_price = stop_price  
             break
     
     trade = {

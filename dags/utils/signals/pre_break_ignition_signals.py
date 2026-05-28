@@ -6,6 +6,7 @@ from sqlalchemy import create_engine, text
 from psycopg2.extras import execute_values
 import concurrent.futures
 import logging
+import math
 from utils.create_list.symbol_list import HOSE, HNX, UPCOM, DERIVATIVES, CW, HNXBOND, ETFHOSE, indices, addition
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
@@ -24,7 +25,7 @@ def pre_break_ignition_signals(symbol, lookback=10, tightLimit=10.0, volBurst=1.
     SELECT *
     FROM ohlcv."{symbol}_1D"
     ORDER BY time desc
-    LIMIT 100
+    LIMIT 200
     """
 
     try:
@@ -82,6 +83,7 @@ def pre_break_ignition_signals(symbol, lookback=10, tightLimit=10.0, volBurst=1.
     reached10 = False
 
     STOP_LOSS = 0.08  # 8%
+    sell_price_actual = {}
 
     for i in range(len(df)):
         c = C.iat[i]
@@ -105,6 +107,7 @@ def pre_break_ignition_signals(symbol, lookback=10, tightLimit=10.0, volBurst=1.
             if stoploss or sell_basebreak_vol or sell_ma50_after10:
                 Sell.iat[i] = True
                 in_pos = False
+                sell_price_actual[i] = math.ceil(entry * (1 - STOP_LOSS) * 100) / 100 if stoploss else c
                 entry = np.nan
                 reached10 = False
 
@@ -141,13 +144,14 @@ def pre_break_ignition_signals(symbol, lookback=10, tightLimit=10.0, volBurst=1.
             return pd.DataFrame()
 
         last_buy = prev_buys.iloc[-1]
+        last_idx = last_row.name 
 
         trade = {
             "symbol": symbol,
             "buy_date": last_buy["time"],
             "buy_price": last_buy["close"],
             "sell_date": last_row["time"],
-            "sell_price": last_row["close"]
+            "sell_price": sell_price_actual.get(last_idx, last_row["close"])
         }
 
     return pd.DataFrame([trade])
@@ -211,7 +215,7 @@ def save_all_pg():
     # result += update_all_symbol(indices)
     # result += update_all_symbol(addition)
     
-    errors = [msg for msg in result if msg.startswith("❌") or msg.startswith("⚠️")]
+    errors = [msg for msg in result if msg.startswith("❌") or msg.startswith("⚠️") or msg.startswith("⚠")]
 
     log.info(f"✅ Tổng số mã xử lý: {len(result)}")
     log.info(f"❌ Tổng số lỗi: {len(errors)}")

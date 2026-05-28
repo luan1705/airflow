@@ -6,6 +6,7 @@ from sqlalchemy import create_engine, text
 from psycopg2.extras import execute_values
 import concurrent.futures
 import logging
+import math
 from utils.create_list.symbol_list import HOSE, HNX, UPCOM, DERIVATIVES, CW, HNXBOND, ETFHOSE, indices, addition
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
@@ -82,6 +83,7 @@ def pre_break_ignition_signals(symbol, lookback=10, tightLimit=10.0, volBurst=1.
     reached10 = False
 
     STOP_LOSS = 0.08  # 8%
+    sell_price_actual = {}
 
     for i in range(len(df)):
         c = C.iat[i]
@@ -105,11 +107,13 @@ def pre_break_ignition_signals(symbol, lookback=10, tightLimit=10.0, volBurst=1.
             if stoploss or sell_basebreak_vol or sell_ma50_after10:
                 Sell.iat[i] = True
                 in_pos = False
+                sell_price_actual[i] = math.ceil(entry * (1 - STOP_LOSS) * 100) / 100 if stoploss else c 
                 entry = np.nan
                 reached10 = False
 
     out = df[["symbol", "time", "open", "high", "low", "close", "volume"]].copy()
     out["signal"] = np.where(Buy, "BUY", np.where(Sell, "SELL", ""))
+    out["sell_price_actual"] = pd.Series(sell_price_actual)
     out = out[out["signal"] != ""]
     # latest_date = out["time"].dt.date.max()
     # out = out[out["time"].dt.date == latest_date]
@@ -142,7 +146,7 @@ def pre_break_ignition_signals(symbol, lookback=10, tightLimit=10.0, volBurst=1.
 
         elif row["signal"] == "SELL" and current_buy is not None:
             current_buy["sell_date"] = row["time"]
-            current_buy["sell_price"] = row["close"]
+            current_buy["sell_price"] = row["sell_price_actual"] 
 
             if current_buy["buy_date"] >= start_month:
                 trades.append(current_buy)
