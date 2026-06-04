@@ -4,7 +4,7 @@ from airflow.operators.trigger_dagrun import TriggerDagRunOperator
 from airflow.sensors.time_delta import TimeDeltaSensor
 from datetime import datetime, timedelta, time as dtime
 from pendulum import timezone, now
-from utils.relative_strength import etl_rs_today
+from utils.relative_strength.sector import rs_rank_sector_today
 
 VN_TZ = timezone("Asia/Ho_Chi_Minh")
 
@@ -24,7 +24,7 @@ def should_continue() -> bool:
     return dtime(9, 0) <= t <= dtime(15, 0)
 
 with DAG(
-    dag_id="rs_today",
+    dag_id="rs_sector_today",
     default_args=default_args,
     start_date=datetime(2026, 5, 27, tzinfo=VN_TZ),
     schedule="0 9 * * 1-5",
@@ -33,9 +33,22 @@ with DAG(
     max_active_runs=1,
 ) as dag:
 
-    calc_rs_today = PythonOperator(
-        task_id="calc_rs_today",
-        python_callable=etl_rs_today,
+    hose = PythonOperator(
+        task_id="rs_sector_HOSE_today",
+        python_callable=rs_rank_sector_today,
+        op_kwargs={"exchange": "HOSE", "benchmark": "VNINDEX_1D"},
+    )
+
+    hnx = PythonOperator(
+        task_id="rs_sector_HNX_today",
+        python_callable=rs_rank_sector_today,
+        op_kwargs={"exchange": "HNX", "benchmark": "HNXINDEX_1D"},
+    )
+
+    upcom = PythonOperator(
+        task_id="rs_sector_UPCOM_today",
+        python_callable=rs_rank_sector_today,
+        op_kwargs={"exchange": "UPCOM", "benchmark": "UPCOMINDEX_1D"},
     )
 
     gate_continue = ShortCircuitOperator(
@@ -44,14 +57,14 @@ with DAG(
     )
 
     wait = TimeDeltaSensor(
-        task_id="wait_60s",
-        delta=timedelta(seconds=60),
+        task_id="wait_10s",
+        delta=timedelta(seconds=10),
     )
 
     trigger_next = TriggerDagRunOperator(
         task_id="trigger_next_run",
-        trigger_dag_id="rs_today",
+        trigger_dag_id="rs_sector_today",
         wait_for_completion=False,
     )
 
-    calc_rs_today >> gate_continue >> wait >> trigger_next
+    [hose, hnx, upcom] >> gate_continue >> wait >> trigger_next

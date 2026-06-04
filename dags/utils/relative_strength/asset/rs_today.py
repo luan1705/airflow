@@ -155,7 +155,7 @@ def rs_rank_today(today):
     return errors if errors else [f"✅ rs_rank ngày {today}"]
 
 
-def etl_rs_today():
+def etl_rs_rs_rank_today():
     today = get_today()
     log.info(f"🚀 Bắt đầu ETL realtime ngày {today}...")
 

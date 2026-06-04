@@ -2,6 +2,7 @@ from sqlalchemy import create_engine
 import pandas as pd
 import logging
 import numpy as np
+from psycopg2.extras import execute_values
 
 logging.basicConfig(
     level=logging.INFO,
@@ -11,7 +12,7 @@ logging.basicConfig(
 
 DB_URL = "postgresql+psycopg2://vnsfintech:Vns_123456@videv.cloud:5433/vnsfintech"
 
-def industry():
+def sector():
     enginedb = None
     try:
         enginedb = create_engine(DB_URL, pool_pre_ping=True)
@@ -34,21 +35,21 @@ def industry():
         # =========================
         # A) TREND COUNT (tách riêng, chỉ dropna cho trend)
         # =========================
-        df_trend = df0.dropna(subset=["open", "refPrice", "close", "industry"]).copy()
+        df_trend = df0.dropna(subset=["open", "refPrice", "close", "sector"]).copy()
 
         df_trend["advancers"] = (df_trend["close"] > df_trend["refPrice"]).astype(np.int32)
         df_trend["decliners"] = (df_trend["close"] < df_trend["refPrice"]).astype(np.int32)
         df_trend["noChanges"] = (df_trend["close"] == df_trend["refPrice"]).astype(np.int32)
 
         trend_count = (
-            df_trend.groupby("industry", as_index=False)[["advancers","decliners","noChanges"]]
+            df_trend.groupby("sector", as_index=False)[["advancers","decliners","noChanges"]]
             .sum()
         )
 
         # =========================
         # B) CHỈ SỐ NGÀNH (KHÔNG drop theo open/refPrice để khỏi mất marketCap)
         # =========================
-        df = df0.dropna(subset=["industry"]).copy()
+        df = df0.dropna(subset=["sector"]).copy()
 
         df["foreignNetVal"] = df["foreignBuyVal"].fillna(0) - df["foreignSellVal"].fillna(0)
 
@@ -61,8 +62,8 @@ def industry():
         df["equity"] = np.where(pb > 0, mcap / pb, np.nan)
 
         # marketcap weigh theo ngành (tránh chia 0)
-        df["totalMarketCap_industry"] = df.groupby("industry")["marketCap"].transform("sum").fillna(0)
-        df["marketCapweigh"] = np.where(df["totalMarketCap_industry"] > 0, mcap / df["totalMarketCap_industry"], 0.0)
+        df["totalMarketCap_sector"] = df.groupby("sector")["marketCap"].transform("sum").fillna(0)
+        df["marketCapweigh"] = np.where(df["totalMarketCap_sector"] > 0, mcap / df["totalMarketCap_sector"], 0.0)
 
         # weighted matchRatioChange
         df["matchRatioChange_w"] = df["matchRatioChange"].fillna(0) * df["marketCapweigh"]
@@ -72,7 +73,7 @@ def industry():
 
         # group ngành (tính luôn profit/equity trong agg để tránh lỗi ndim=2 do trùng tên cột)
         df_clean = (
-            df.groupby("industry", as_index=False)
+            df.groupby("sector", as_index=False)
               .agg(
                   totalVal=("totalVal", "sum"),
                   foreignNetVal=("foreignNetVal", "sum"),
@@ -94,12 +95,12 @@ def industry():
         # =========================
         # C) MERGE + ORDER CỘT như bạn gửi
         # =========================
-        df_final = df_clean.merge(trend_count, on="industry", how="left").fillna(0)
+        df_final = df_clean.merge(trend_count, on="sector", how="left").fillna(0)
 
         df_final[["advancers","decliners","noChanges"]] = df_final[["advancers","decliners","noChanges"]].astype(np.int32)
 
         cols_order = [
-            "industry",
+            "sector",
             "totalVal",
             "foreignNetVal",
             "marketCap",
@@ -114,18 +115,28 @@ def industry():
         df_final = df_final.reindex(columns=cols_order)
 
         # === Ghi DB ===
-        df_final.to_sql(
-            name="industry",
-            schema="details",
-            con=enginedb,
-            if_exists="replace",
-            index=False,
-        )
+        cols = cols_order
+        col_list = ', '.join(f'"{c}"' for c in cols)
+        update_set = ', '.join(f'"{c}" = EXCLUDED."{c}"' for c in cols if c != 'sector')
+        rows_data = [tuple(r) for r in df_final.itertuples(index=False)]
 
-        logging.info("Đã lưu industry với trend count và weight")
+        with enginedb.begin() as conn:
+            with conn.connection.cursor() as cur:
+                execute_values(
+                    cur,
+                    f"""
+                        INSERT INTO details.sector ({col_list})
+                        VALUES %s
+                        ON CONFLICT ("sector") DO UPDATE SET {update_set}
+                    """,
+                    rows_data,
+                    page_size=1000
+                )
+
+        logging.info("Đã lưu sector với trend count và weight")
 
     except Exception:
-        logging.exception("Lỗi lưu industry")
+        logging.exception("Lỗi lưu sector")
         raise
     finally:
         if enginedb is not None:

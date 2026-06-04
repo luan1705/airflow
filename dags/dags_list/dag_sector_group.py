@@ -2,7 +2,7 @@ from airflow import DAG
 from airflow.operators.python import PythonOperator
 from datetime import datetime, timedelta
 from pendulum import timezone
-from utils.industry import industry
+from utils.sector_group import sector_group
 
 default_args = {
     "retries": 50,
@@ -13,7 +13,7 @@ default_args = {
 }
 
 with DAG(
-    dag_id="industry",
+    dag_id="sector_group",
     default_args=default_args,
     start_date=datetime(2025, 10, 20, tzinfo=timezone("Asia/Ho_Chi_Minh")),
     schedule_interval="* 9-15 * * 1-5",   # chạy mỗi phút
@@ -21,7 +21,7 @@ with DAG(
     tags=["DB", "details"]
 ) as dag:
 
-    save_industry = PythonOperator(
-        task_id='save_industry',
-        python_callable=industry,
+    save_sector_group = PythonOperator(
+        task_id='save_sector_group',
+        python_callable=sector_group,
     )

@@ -2,7 +2,7 @@ from airflow import DAG
 from airflow.operators.python import PythonOperator
 from datetime import datetime, timedelta
 from pendulum import timezone
-from utils.relative_strength import rs_rank
+from utils.free_float import free_float
 
 default_args = {
     'retries': 1,
@@ -10,7 +10,7 @@ default_args = {
 }
 
 with DAG(
-    dag_id="rs_rank",
+    dag_id="free_float",
     default_args=default_args,
     start_date=datetime(2026, 5, 25, tzinfo=timezone("Asia/Ho_Chi_Minh")),
     schedule=None,
@@ -18,7 +18,7 @@ with DAG(
     tags=["DB", "ETL"]
 ) as dag:
 
-    rs_rank_task = PythonOperator(
-    task_id='calc_rs_rank',
-    python_callable=rs_rank
-)
+    get_free_float = PythonOperator(
+        task_id='free_float',
+        python_callable=free_float
+    )
