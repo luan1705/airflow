@@ -6,6 +6,7 @@ from pandas import json_normalize
 from datetime import datetime
 import logging
 from sqlalchemy import create_engine, text
+from psycopg2.extras import execute_values
 
 logging.basicConfig(
     level=logging.INFO,                 # cấp log: DEBUG / INFO / WARNING / ERROR
@@ -65,30 +66,41 @@ def proprietary(symbol):
   except Exception as E:
     logging.exception(f'Lỗi api propietary_{symbol}_1D')
 
-def save_proprietary(symbol,enginedb):
-  try:
-    mapping={
-       'HSX':'HOSE',
-       'HNX':'HNX',
-       'UPCOM':'UPCOM'
-    }
-    showsymbol = mapping.get(symbol, symbol) 
-    bang=f'"proprietary_{showsymbol}_1D"'
-    df_db=pd.read_sql(f'SELECT "time" FROM "exchange_history".{bang}',enginedb)
-    data=proprietary(symbol)
-    df_db["time"] = pd.to_datetime(df_db["time"]).dt.date
-    data["time"]  = pd.to_datetime(data["time"]).dt.date
-    existing_dates = set(df_db["time"])
-    new_data = data[~data["time"].isin(existing_dates)].copy()
-    new_data.to_sql(name=f'proprietary_{showsymbol}_1D',
-                         schema='exchange_history',
-                         con=enginedb,
-                         if_exists='append',
-                         index=False
-                              )
-    logging.info(f'Đã lưu propietary_{symbol}_1D')
-  except Exception as E:
-    logging.exception(f'Lỗi lưu propietary_{symbol}_1D')
+def save_proprietary(symbol, enginedb, n_last=3):
+    try:
+        mapping = {'HSX': 'HOSE', 'HNX': 'HNX', 'UPCOM': 'UPCOM'}
+        showsymbol = mapping.get(symbol, symbol)
+        table = f'"proprietary_{showsymbol}_1D"'
+
+        data = proprietary(symbol)
+        if data is None or data.empty:
+            logging.warning(f'Không có dữ liệu proprietary_{symbol}_1D, bỏ qua')
+            return
+
+        data["time"] = pd.to_datetime(data["time"]).dt.date
+        data = data.sort_values("time").tail(n_last)   # chỉ 3 ngày mới nhất
+
+        cols = data.columns.tolist()
+        col_list = ', '.join(f'"{c}"' for c in cols)
+        update_set = ', '.join(f'"{c}" = EXCLUDED."{c}"' for c in cols if c != 'time')
+
+        def to_py(v):
+            return None if pd.isna(v) else (v.item() if hasattr(v, "item") else v)
+
+        rows_data = [tuple(to_py(v) for v in r)
+                     for r in data.itertuples(index=False, name=None)]
+
+        with enginedb.begin() as conn:
+            with conn.connection.cursor() as cur:
+                execute_values(cur, f"""
+                    INSERT INTO exchange_history.{table} ({col_list})
+                    VALUES %s
+                    ON CONFLICT (time) DO UPDATE SET {update_set}
+                """, rows_data, page_size=1000)
+
+        logging.info(f'Đã upsert proprietary_{symbol}_1D ({len(data)} dòng mới nhất)')
+    except Exception as E:
+        logging.exception(f'Lỗi lưu proprietary_{symbol}_1D')
 
 symbols=['HSX','HNX','UPCOM']
 def main():

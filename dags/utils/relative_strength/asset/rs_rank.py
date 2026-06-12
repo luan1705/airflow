@@ -50,23 +50,23 @@ def rs_rank():
     
     all_rs = pd.concat(all_rs, ignore_index=True)
 
-    all_rs["rs_rank"] = (
+    all_rs["rsRank"] = (
         all_rs.groupby(["time", "exchange"])["rs"]
         .rank(pct=True) * 100
-    ).round(2)
+    ).round(0)
 
     errors = []
     for symbol, grp in all_rs.groupby("symbol"):
         try:
-            rows = [(row.rs_rank, row.time) for row in grp.itertuples()]
+            rows = [(row.rsRank, row.time) for row in grp.itertuples()]
             with engine.begin() as conn:
                 with conn.connection.cursor() as cur:
                     execute_values(
                         cur,
                         f"""
                             UPDATE indicator."{symbol}_1D"
-                            SET rs_rank = data.rs_rank
-                            FROM (VALUES %s) AS data(rs_rank, time)
+                            SET "rsRank" = data.rsRank
+                            FROM (VALUES %s) AS data(rsRank, time)
                             WHERE "{symbol}_1D".time = data.time
                         """,
                         rows,

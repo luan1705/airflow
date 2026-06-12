@@ -23,8 +23,8 @@ for exchange in PRIORITY:
 def create_indicator_tables(symbols: list) -> None:
     """
     Tạo bảng indicator cho TẤT CẢ các mã (kể cả index).
-    Bảng gồm 4 cột: symbol, time, rs, rs_rank.
-    rs_rank để NULL, sẽ được script khác ghi sau.
+    Bảng gồm 4 cột: symbol, time, rs, rsRank.
+    rsRank để NULL, sẽ được script khác ghi sau.
     """
     def _create(symbol):
         try:
@@ -34,7 +34,7 @@ def create_indicator_tables(symbols: list) -> None:
                         symbol   text        NOT NULL,
                         time     timestamptz PRIMARY KEY,
                         rs       double precision,
-                        rs_rank  double precision
+                        "rsRank"  double precision
                     )
                 ''')
         except Exception as e:
@@ -77,7 +77,7 @@ def calc_rs(symbol: str) -> str:
                 (df["e_close"] - e_open_n) / e_open_n * 100
             )
 
-        df["rs"] = df["rs_1m"] * 0.2 + df["rs_3m"] * 0.3 + df["rs_6m"] * 0.5
+        df["rs"] = df["rs_1m"] * 0.5 + df["rs_3m"] * 0.3 + df["rs_6m"] * 0.2
         df = df[["time", "rs"]].dropna(subset=["rs"])
 
         if df.empty:

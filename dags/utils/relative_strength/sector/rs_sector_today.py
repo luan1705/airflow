@@ -1,116 +1,106 @@
 import numpy as np
 import pandas as pd
-from sqlalchemy import create_engine, text
-from sqlalchemy.sql.expression import quoted_name
+from sqlalchemy import create_engine
 from psycopg2.extras import execute_values
 from datetime import date, timedelta
 
-engine = create_engine(
-    "postgresql+psycopg2://vnsfintech:Vns_123456@videv.cloud:5433/vnsfintech"
-)
+WINDOW = 180
+BASE = 100.0
+engine = create_engine("postgresql+psycopg2://vnsfintech:Vns_123456@videv.cloud:5433/vnsfintech")
 
-def rs_rank_sector_today(exchange, benchmark):
-    today = date.today()
-    lookback = (today - timedelta(days=200)).strftime('%Y-%m-%d')
-    base_date = '2024-01-01'
-
+def rs_rank_sector_today(exchange, benchmark, n_upsert=1):
+    # 1) meta: LỌC GIỐNG HỆT bản full
     with engine.begin() as conn:
-        symbols = pd.read_sql(
-            f"SELECT symbol FROM info.asset WHERE exchange = '{exchange}'", conn
-        )['symbol'].tolist()
+        meta = pd.read_sql(f"""
+            SELECT a.symbol, a."sharesOutstanding", a."freeFloatPct", a.sector,
+                   c."listingDate"
+            FROM info.asset a
+            JOIN info.company c ON c.symbol = a.symbol
+            WHERE a.exchange = '{exchange}'
+              AND a.sector IS NOT NULL AND a.sector <> ''
+              AND a."sharesOutstanding" IS NOT NULL
+              AND a."freeFloatPct" IS NOT NULL
+        """, conn)
+    meta['weight'] = meta['sharesOutstanding'] * meta['freeFloatPct']
+    meta = meta[meta['weight'] > 0].copy()
+    meta['listingDate'] = pd.to_datetime(meta['listingDate'])
+    meta = meta.set_index('symbol')
+    symbols = meta.index.tolist()
 
-    rows_base = []
-    rows_recent = []
+    # 2) đọc DƯ phiên để roc120 ở dòng cuối còn đủ neo (~400 ngày lịch ≈ 270 phiên)
+    lookback = (date.today() - timedelta(days=400)).strftime('%Y-%m-%d')
     with engine.begin() as conn:
-        for sym in symbols:
-            try:
-                df_base = pd.read_sql(f"""
-                    SELECT o.symbol, o.time::date as date, o.close,
-                           i."sharesOutstanding", i."freeFloatPct", i."sector"
-                    FROM ohlcv."{sym}_1D" o
-                    JOIN info."asset" i ON i.symbol = '{sym}'
-                    WHERE o.time::date = '{base_date}'
-                """, conn)
-                rows_base.append(df_base)
-
-                df_recent = pd.read_sql(f"""
-                    SELECT o.symbol, o.time::date as date, o.close,
-                           i."sharesOutstanding", i."freeFloatPct", i."sector"
-                    FROM ohlcv."{sym}_1D" o
-                    JOIN info."asset" i ON i.symbol = '{sym}'
-                    WHERE o.time >= '{lookback}'
-                """, conn)
-                rows_recent.append(df_recent)
-            except:
-                pass
-
-    rows_base = [df for df in rows_base if not df.empty]
-    rows_recent = [df for df in rows_recent if not df.empty]
-    if not rows_base or not rows_recent:
-        print(f"⚠️ {exchange}: không có dữ liệu")
-        return
-
-    df_base = pd.concat(rows_base, ignore_index=True)
-    df_base['weight'] = df_base['sharesOutstanding'] * df_base['freeFloatPct']
-    df_base['mcap'] = df_base['close'] * df_base['weight']
-    bmv = df_base.groupby('sector')['mcap'].sum().rename('bmv')
-
-    df = pd.concat(rows_recent, ignore_index=True)
-    df['weight'] = df['sharesOutstanding'] * df['freeFloatPct']
-    df['mcap'] = df['close'] * df['weight']
-
-    cmv = df.groupby(['date', 'sector'])['mcap'].sum().reset_index()
-    cmv.columns = ['date', 'sector', 'cmv']
-    cmv = cmv.join(bmv, on='sector')
-    cmv['index'] = (cmv['cmv'] / cmv['bmv']) * 100
-    sector_index = cmv.pivot(index='date', columns='sector', values='index')
-
-    with engine.begin() as conn:
-        bm = pd.read_sql(f"""
-            SELECT time::date as date, close FROM ohlcv."{benchmark}"
+        bm_raw = pd.read_sql(f"""
+            SELECT time::date AS date, close FROM ohlcv."{benchmark}"
             WHERE time >= '{lookback}' ORDER BY time
         """, conn).set_index('date')['close']
+        bm_raw.index = pd.to_datetime(bm_raw.index)
 
-    bm = bm.reindex(sector_index.index).ffill()
+        rows = []
+        for sym in symbols:
+            try:
+                df = pd.read_sql(f"""
+                    SELECT time::date AS date, close
+                    FROM ohlcv."{sym}_1D"
+                    WHERE time >= '{lookback}' ORDER BY time
+                """, conn)
+                df['symbol'] = sym
+                rows.append(df)
+            except Exception as e:
+                print(f"⚠️ {sym}: {e}")
+
+    prices_raw = pd.concat(rows, ignore_index=True)
+    prices_raw['date'] = pd.to_datetime(prices_raw['date'])
+
+    # 3) pivot + reindex theo lịch benchmark + ffill TỪNG MÃ (mấu chốt)
+    calendar = bm_raw.index
+    prices = (prices_raw.pivot(index='date', columns='symbol', values='close')
+                        .reindex(calendar).ffill())
+
+    win = prices.iloc[-(WINDOW + 1):]
+    base_date = win.index[0]
+
+    # 4) sector index với rổ CỐ ĐỊNH (eligible: listingDate <= base_date)
+    sector_indices = {}
+    for sector, grp in meta.groupby('sector'):
+        eligible = [t for t in grp.index
+                    if t in win.columns and meta.loc[t, 'listingDate'] <= base_date]
+        if not eligible:
+            continue
+        cmv = win[eligible].bfill().mul(meta.loc[eligible, 'weight'], axis=1).sum(axis=1)
+        if cmv.iloc[0] == 0:
+            continue
+        sector_indices[sector] = cmv / cmv.iloc[0] * BASE
+
+    sector_index = pd.DataFrame(sector_indices).sort_index()
+    sector_index.index.name = 'date'
+    bm = bm_raw.reindex(sector_index.index).ffill()
 
     def roc(s, n): return (s / s.shift(n) - 1) * 100
-
-    composite = (0.3 * sector_index.apply(lambda s: roc(s, 20) - roc(bm, 20)) +
-                 0.5 * sector_index.apply(lambda s: roc(s, 60) - roc(bm, 60)) +
+    composite = (0.5 * sector_index.apply(lambda s: roc(s, 20) - roc(bm, 20)) +
+                 0.3 * sector_index.apply(lambda s: roc(s, 60) - roc(bm, 60)) +
                  0.2 * sector_index.apply(lambda s: roc(s, 120) - roc(bm, 120)))
 
     rs_pct = composite.rank(axis=1, method='average', pct=True).multiply(100).round(0)
     rs_pct.index.name = 'date'
     rs_pct = rs_pct.reset_index()
 
-    today_row = rs_pct[rs_pct['date'] == today]
-    if today_row.empty:
-        print(f"⚠️ {exchange}: chưa có dữ liệu ngày {today}")
-        return
+    # 5) chỉ ghi n dòng cuối (mặc định = phiên mới nhất)
+    rs_pct = rs_pct.tail(n_upsert)
 
     table_name = f'"rs_sector_{exchange}"'
-    cols = today_row.columns.tolist()
+    cols = rs_pct.columns.tolist()
     col_list = ', '.join(f'"{c}"' for c in cols)
     update_set = ', '.join(f'"{c}" = EXCLUDED."{c}"' for c in cols if c != 'date')
-    rows_data = [tuple(r) for r in today_row.itertuples(index=False)]
+    rows_data = [tuple(None if (isinstance(v, float) and np.isnan(v)) else v for v in r)
+                 for r in rs_pct.itertuples(index=False)]
 
     with engine.begin() as conn:
         with conn.connection.cursor() as cur:
-            execute_values(
-                cur,
-                f"""
-                    INSERT INTO ranking.{table_name} ({col_list})
-                    VALUES %s
-                    ON CONFLICT (date) DO UPDATE SET {update_set}
-                """,
-                rows_data,
-                page_size=1000
-            )
+            execute_values(cur, f"""
+                INSERT INTO ranking.{table_name} ({col_list})
+                VALUES %s
+                ON CONFLICT (date) DO UPDATE SET {update_set}
+            """, rows_data, page_size=1000)
 
-    print(f"✅ {exchange}: đã upsert ngày {today}")
-
-
-# def update_all():
-#     rs_rank_sector_today('HOSE', 'VNINDEX_1D')
-#     rs_rank_sector_today('HNX', 'HNXINDEX_1D')
-#     rs_rank_sector_today('UPCOM', 'UPCOMINDEX_1D')
+    print(f"✅ {exchange}: upsert {len(rs_pct)} dòng (đến {rs_pct['date'].max().date()})")

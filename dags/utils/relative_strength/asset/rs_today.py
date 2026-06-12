@@ -58,7 +58,7 @@ def calc_rs_today(symbol: str, today) -> str:
                 (df["e_close"] - e_open_n) / e_open_n * 100
             )
 
-        df["rs"] = df["rs_1m"] * 0.2 + df["rs_3m"] * 0.3 + df["rs_6m"] * 0.5
+        df["rs"] = df["rs_1m"] * 0.5 + df["rs_3m"] * 0.3 + df["rs_6m"] * 0.2
         df = df[["time", "rs"]].dropna(subset=["rs"])
 
         # Chỉ lấy dòng hôm nay
@@ -73,7 +73,7 @@ def calc_rs_today(symbol: str, today) -> str:
                     symbol   text        NOT NULL,
                     time     timestamptz PRIMARY KEY,
                     rs       double precision,
-                    rs_rank  double precision
+                    "rsRank"  double precision
                 )
             ''')
             with conn.connection.cursor() as cur:
@@ -123,23 +123,23 @@ def rs_rank_today(today):
         return ["⚠️ Không có dữ liệu."]
 
     df_all = pd.concat(today_rs, ignore_index=True)
-    df_all["rs_rank"] = (
+    df_all["rsRank"] = (
         df_all.groupby(["time", "exchange"])["rs"]
         .rank(pct=True) * 100
-    ).round(2)
+    ).round(0)
 
     errors = []
     for symbol, grp in df_all.groupby("symbol"):
         try:
-            rows = [(row.rs_rank, row.time) for row in grp.itertuples()]
+            rows = [(row.rsRank, row.time) for row in grp.itertuples()]
             with engine.begin() as conn:
                 with conn.connection.cursor() as cur:
                     execute_values(
                         cur,
                         f"""
                             UPDATE indicator."{symbol}_1D"
-                            SET rs_rank = data.rs_rank
-                            FROM (VALUES %s) AS data(rs_rank, time)
+                            SET "rsRank" = data.rsRank
+                            FROM (VALUES %s) AS data(rsRank, time)
                             WHERE "{symbol}_1D".time = data.time
                         """,
                         rows,
@@ -151,7 +151,7 @@ def rs_rank_today(today):
             log.error(msg)
             errors.append(msg)
 
-    log.info(f"🎉 Hoàn thành rs_rank ngày {today}.")
+    log.info(f"🎉 Hoàn thành rsRank ngày {today}.")
     return errors if errors else [f"✅ rs_rank ngày {today}"]
 
 

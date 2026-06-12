@@ -3,9 +3,6 @@ import pandas as pd
 from sqlalchemy import create_engine, text
 from psycopg2.extras import execute_values
 
-SECTOR_WINDOW = 180
-BASE = 100.0
-
 engine = create_engine(
     "postgresql+psycopg2://vnsfintech:Vns_123456@videv.cloud:5433/vnsfintech"
 )
@@ -46,71 +43,46 @@ def ensure_table_schema(table_name, all_sectors):
 def rs_rank_sector(exchange, benchmark):
     all_sectors = get_all_sectors()
     with engine.begin() as conn:
-        meta = pd.read_sql(f"""
-            SELECT a.symbol, a."sharesOutstanding", a."freeFloatPct", a.sector,
-                c."listingDate"
-            FROM info.asset a
-            JOIN info.company c ON c.symbol = a.symbol
-            WHERE a.exchange = '{exchange}'
-            AND a.sector IS NOT NULL AND a.sector <> ''
-            AND a."sharesOutstanding" IS NOT NULL
-            AND a."freeFloatPct" IS NOT NULL
-        """, conn)
-        meta['weight'] = meta['sharesOutstanding'] * meta['freeFloatPct']
-        meta = meta[meta['weight'] > 0].copy()
-        meta['listingDate'] = pd.to_datetime(meta['listingDate'])
-        meta = meta.set_index('symbol')
-        symbols = meta.index.tolist()
+        symbols = pd.read_sql(
+            f"SELECT symbol FROM info.asset WHERE exchange = '{exchange}'", conn
+        )['symbol'].tolist()
 
     rows = []
     with engine.begin() as conn:
-        bm_raw = pd.read_sql(f"""
-            SELECT time::date AS date, close FROM ohlcv."{benchmark}"
-            ORDER BY time
-        """, conn).set_index('date')['close']
-        bm_raw.index = pd.to_datetime(bm_raw.index)
-
         for sym in symbols:
             try:
                 df = pd.read_sql(f"""
-                    SELECT time::date AS date, close
-                    FROM ohlcv."{sym}_1D"
-                    ORDER BY time
+                    SELECT o.symbol, o.time::date as date, o.close,
+                           i."sharesOutstanding", i."freeFloatPct", i."sector"
+                    FROM ohlcv."{sym}_1D" o
+                    JOIN info."asset" i ON i.symbol = '{sym}'
+                    WHERE o.time >= '2024-01-01'
                 """, conn)
-                df['symbol'] = sym
                 rows.append(df)
             except Exception as e:
                 print(f"⚠️ {sym}: {e}")
 
-    prices_raw = pd.concat(rows, ignore_index=True)
-    prices_raw['date'] = pd.to_datetime(prices_raw['date'])
+    rows = [df for df in rows if not df.empty]
+    df = pd.concat(rows, ignore_index=True)
 
-    calendar = bm_raw.index
-    prices = (prices_raw.pivot(index='date', columns='symbol', values='close')
-                        .reindex(calendar)
-                        .ffill())
+    df['weight'] = df['sharesOutstanding'] * df['freeFloatPct']
+    df['mcap'] = df['close'] * df['weight']
 
-    # Tính sector index: CMV/BMV × 100, base = ngày đầu CMV > 0
-    sector_indices = {}
-    win = prices.iloc[-(SECTOR_WINDOW + 1):]
-    base_date = win.index[0]
+    cmv = df.groupby(['date', 'sector'])['mcap'].sum().reset_index()
+    cmv.columns = ['date', 'sector', 'cmv']
+    bmv = cmv.groupby('sector')['cmv'].first().rename('bmv')
+    cmv = cmv.join(bmv, on='sector')
+    cmv['index'] = (cmv['cmv'] / cmv['bmv']) * 100
+    sector_index = cmv.pivot(index='date', columns='sector', values='index')
+    sector_index = sector_index.ffill()
 
-    for sector, grp in meta.groupby('sector'):
-        eligible = [
-            t for t in grp.index
-            if t in win.columns and meta.loc[t, 'listingDate'] <= base_date
-        ]
-        if not eligible:
-            continue
-        cmv = win[eligible].bfill().mul(meta.loc[eligible, 'weight'], axis=1).sum(axis=1)
-        if cmv.iloc[0] == 0:
-            continue
-        sector_indices[sector] = cmv / cmv.iloc[0] * BASE
+    with engine.begin() as conn:
+        bm = pd.read_sql(f"""
+            SELECT time::date as date, close FROM ohlcv."{benchmark}"
+            WHERE time >= '2024-01-01' ORDER BY time
+        """, conn).set_index('date')['close']
 
-    sector_index = pd.DataFrame(sector_indices).sort_index()
-    sector_index.index.name = 'date'
-
-    bm = bm_raw.reindex(sector_index.index).ffill()
+    bm = bm.reindex(sector_index.index).ffill()
 
     def roc(s, n): return (s / s.shift(n) - 1) * 100
 
@@ -121,15 +93,12 @@ def rs_rank_sector(exchange, benchmark):
     rs_pct = composite.rank(axis=1, method='average', pct=True).multiply(100).round(0)
     rs_pct.index.name = 'date'
     rs_pct = rs_pct.reset_index()
-
+    rs_pct = rs_pct.iloc[120:].reset_index(drop=True)
 
     # Bổ sung column ngành chưa có trong rs_pct (exchange này không có stock của ngành đó) → NaN
     for s in all_sectors:
         if s not in rs_pct.columns:
             rs_pct[s] = np.nan
-    
-    sector_cols = [c for c in rs_pct.columns if c != 'date']
-    rs_pct = rs_pct.dropna(how='all', subset=sector_cols).reset_index(drop=True)
 
     rs_pct = rs_pct[['date'] + all_sectors]
 
