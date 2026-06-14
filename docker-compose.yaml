@@ -74,7 +74,7 @@ x-airflow-common:
     # If you want to use it, outcomment it and replace airflow.cfg with the name of your config file
     # AIRFLOW_CONFIG: '/opt/airflow/config/airflow.cfg'
     # AIRFLOW__WEBSERVER__ENABLE_PROXY_FIX: "true"
-    # AIRFLOW__WEBSERVER__BASE_URL: "https://airflow.videv.cloud"
+    # AIRFLOW__WEBSERVER__BASE_URL: "https://airflow.tanhungsoft.com"
     # AIRFLOW__WEBSERVER__FORWARDED_ALLOW_IPS: "*"
     # AIRFLOW__WEBSERVER__SESSION_BACKEND: "database"
     # AIRFLOW__WEBSERVER__SECRET_KEY: "30302cfa08eb39f25d459a784f66dfdd0a8dd5c0e5d32060844c496b1978655e"
