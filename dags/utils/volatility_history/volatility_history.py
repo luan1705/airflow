@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine, text
 import pandas as pd
 
-DB_URL = "postgresql+psycopg2://vnsfintech:Vns_123456@videv.cloud:5433/vnsfintech"
+DB_URL = "postgresql+psycopg2://vnsfintech:Vns_123456@tanhungsoft.com:5433/vnsfintech"
 
 
 def upsert_volatility_history():

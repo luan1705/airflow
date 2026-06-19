@@ -4,14 +4,14 @@ import pandas as pd
 from sqlalchemy import create_engine,text
 from psycopg2.extras import execute_values
 import concurrent.futures
-from utils.create_list.symbol_list import HOSE, HNX, UPCOM, addition
+from utils.create_list.symbol_list import HOSE, HNX, UPCOM, custom_list
 import logging
 
 logging.basicConfig(level=logging.INFO)
 log = logging.getLogger(__name__)
 
 engine = create_engine(
-    "postgresql+psycopg2://vnsfintech:Vns_123456@videv.cloud:5433/vnsfintech"
+    "postgresql+psycopg2://vnsfintech:Vns_123456@tanhungsoft.com:5433/vnsfintech"
 )
 
 def free_float(symbol):
@@ -79,7 +79,7 @@ def save_all_pg():
     result += update_all_symbol(HNX)
     result += update_all_symbol(UPCOM)
 
-    # result += update_all_symbol(addition)
+    # result += update_all_symbol(custom_list)
     
     errors = [msg for msg in result if msg.startswith("❌") or msg.startswith("⚠️")]
 

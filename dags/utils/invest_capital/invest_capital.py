@@ -38,9 +38,11 @@ def invest_capital(n_days=3):
     value_cols = ['netProprietary', 'netDomesticIndividual', 'netDomesticInstitution',
                   'netForeignIndividual', 'netForeignInstitution']
     table[value_cols] = (table[value_cols] * 1_000_000_000).round(0)
+    table['totalIndividual'] = table['netDomesticIndividual'] + table['netForeignIndividual']
+    table['totalInstitution'] = table['netDomesticInstitution'] + table['netForeignInstitution']
 
     # DB
-    engine = create_engine("postgresql+psycopg2://vnsfintech:Vns_123456@videv.cloud:5433/vnsfintech")
+    engine = create_engine("postgresql+psycopg2://vnsfintech:Vns_123456@tanhungsoft.com:5433/vnsfintech")
 
     with engine.begin() as con:
         con.execute(text("CREATE SCHEMA IF NOT EXISTS exchange_history"))
@@ -52,7 +54,9 @@ def invest_capital(n_days=3):
                 "netDomesticIndividual" double precision,
                 "netDomesticInstitution" double precision,
                 "netForeignIndividual" double precision,
-                "netForeignInstitution" double precision
+                "netForeignInstitution" double precision,
+                "totalIndividual" double precision,
+                "totalInstitution" double precision
             )
         '''))
 

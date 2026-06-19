@@ -3,7 +3,7 @@ from psycopg2.extras import execute_values
 from utils.create_list.indices_map import indices_map
 from datetime import timedelta
 
-DB_URL = "postgresql://vnsfintech:Vns_123456@videv.cloud:5433/vnsfintech"
+DB_URL = "postgresql://vnsfintech:Vns_123456@tanhungsoft.com:5433/vnsfintech"
 
 SRC_SCHEMA = "asset_foreign_history"
 TARGET_SCHEMA = "indices_foreign_history"   # 👈 schema mới

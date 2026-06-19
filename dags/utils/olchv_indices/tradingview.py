@@ -11,7 +11,7 @@ logging.basicConfig(
     ]
 )
 
-enginedb=create_engine("postgresql+psycopg2://vnsfintech:Vns_123456@videv.cloud:5433/vnsfintech")
+enginedb=create_engine("postgresql+psycopg2://vnsfintech:Vns_123456@tanhungsoft.com:5433/vnsfintech")
 
 def tradingview(symbol):
     try:    

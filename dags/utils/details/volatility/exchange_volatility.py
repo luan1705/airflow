@@ -9,7 +9,7 @@ logging.basicConfig(
     handlers=[logging.StreamHandler()],
 )
 
-DB_URL = "postgresql+psycopg2://vnsfintech:Vns_123456@videv.cloud:5433/vnsfintech"
+DB_URL = "postgresql+psycopg2://vnsfintech:Vns_123456@tanhungsoft.com:5433/vnsfintech"
 
 
 # ✅ Nếu DB hay báo "too many clients already" thì NullPool là an toàn nhất trong Airflow

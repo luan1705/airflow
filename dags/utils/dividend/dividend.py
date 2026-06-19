@@ -4,7 +4,7 @@ import pandas as pd
 from sqlalchemy import create_engine,text
 from psycopg2.extras import execute_values
 import concurrent.futures
-from utils.create_list.symbol_list import HOSE, HNX, UPCOM, DERIVATIVES, CW, HNXBOND, ETFHOSE, indices, addition
+from utils.create_list.symbol_list import HOSE, HNX, UPCOM, DERIVATIVES, CW, HNXBOND, ETFHOSE, indices, custom_list
 import logging
 from datetime import datetime, timedelta
 import numpy as np
@@ -14,7 +14,7 @@ from pandas import json_normalize
 log=logging.getLogger(__name__)
 
 engine = create_engine(
-    "postgresql+psycopg2://vnsfintech:Vns_123456@videv.cloud:5433/vnsfintech"
+    "postgresql+psycopg2://vnsfintech:Vns_123456@tanhungsoft.com:5433/vnsfintech"
 )
 create_table_sql = """
     CREATE TABLE IF NOT EXISTS dividend.dividend (
@@ -148,7 +148,7 @@ def save_all_pg():
     # result += update_all_symbol(HNXBOND)
     # result += update_all_symbol(ETFHOSE)
     # result += update_all_symbol(indices)
-    # result += update_all_symbol(addition)
+    # result += update_all_symbol(custom_list)
     
     errors = [msg for msg in result if msg.startswith("❌") or msg.startswith("⚠️")]
 

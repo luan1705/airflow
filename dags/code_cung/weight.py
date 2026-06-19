@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine, text
 
-DB_URL = "postgresql://vnsfintech:Vns_123456@videv.cloud:5433/vnsfintech"
+DB_URL = "postgresql://vnsfintech:Vns_123456@tanhungsoft.com:5433/vnsfintech"
 
 engine = create_engine(DB_URL, pool_pre_ping=True)
 

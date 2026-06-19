@@ -29,7 +29,7 @@ def get_indices(sym: str):
 
 # ---------- DB engine ----------
 engine = create_engine(
-    "postgresql+psycopg2://vnsfintech:Vns_123456@videv.cloud:5433/vnsfintech",
+    "postgresql+psycopg2://vnsfintech:Vns_123456@tanhungsoft.com:5433/vnsfintech",
     pool_pre_ping=True,
     pool_size=10,
     max_overflow=20,

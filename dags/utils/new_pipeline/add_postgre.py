@@ -17,7 +17,7 @@ def create_db_connection(max_retries=3):
     """
     Tạo kết nối database với retry logic
     """
-    connection_string = 'postgresql://vnsfintech:%40Vns123456@videv.cloud:5432/vnsfintech'
+    connection_string = 'postgresql://vnsfintech:%40Vns123456@tanhungsoft.com:5432/vnsfintech'
     
     for attempt in range(max_retries):
         try:

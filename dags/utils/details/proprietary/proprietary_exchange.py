@@ -7,7 +7,7 @@ logging.basicConfig(
     handlers=[logging.StreamHandler()],
 )
 
-DB_URL = "postgresql+psycopg2://vnsfintech:Vns_123456@videv.cloud:5433/vnsfintech"
+DB_URL = "postgresql+psycopg2://vnsfintech:Vns_123456@tanhungsoft.com:5433/vnsfintech"
 
 # dùng 1 engine chung (đỡ tạo nhiều connection)
 engine = create_engine(

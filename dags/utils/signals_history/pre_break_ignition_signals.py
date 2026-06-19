@@ -7,7 +7,7 @@ from psycopg2.extras import execute_values
 import concurrent.futures
 import logging
 import math
-from utils.create_list.symbol_list import HOSE, HNX, UPCOM, DERIVATIVES, CW, HNXBOND, ETFHOSE, indices, addition
+from utils.create_list.symbol_list import HOSE, HNX, UPCOM, DERIVATIVES, CW, HNXBOND, ETFHOSE, indices, custom_list
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 log = logging.getLogger(__name__)
@@ -16,7 +16,7 @@ today = datetime.now().date()
 batdau = today - timedelta(days=50)
 
 engine = create_engine(
-    "postgresql+psycopg2://vnsfintech:Vns_123456@videv.cloud:5433/vnsfintech"
+    "postgresql+psycopg2://vnsfintech:Vns_123456@tanhungsoft.com:5433/vnsfintech"
 )
 
 # ================== Tính tín hiệu ==================
@@ -243,7 +243,7 @@ def save_all_pg():
     # result += update_all_symbol(HNXBOND)
     # result += update_all_symbol(ETFHOSE)
     # result += update_all_symbol(indices)
-    # result += update_all_symbol(addition)
+    # result += update_all_symbol(custom_list)
     
     errors = [msg for msg in result if msg.startswith("❌") or msg.startswith("⚠")]
     

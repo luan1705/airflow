@@ -7,7 +7,7 @@ SECTOR_WINDOW = 180
 BASE = 100.0
 
 engine = create_engine(
-    "postgresql+psycopg2://vnsfintech:Vns_123456@videv.cloud:5433/vnsfintech"
+    "postgresql+psycopg2://vnsfintech:Vns_123456@tanhungsoft.com:5433/vnsfintech"
 )
 
 def get_all_sectors():

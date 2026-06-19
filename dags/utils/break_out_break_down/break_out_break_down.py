@@ -12,8 +12,8 @@ logging.basicConfig(
         # có thể thêm FileHandler nếu muốn ghi log ra file
     ]
 )
-# enginedb=create_engine('postgresql://vnsfintech:%40Vns123456@videv.cloud:5432/vnsfintech')
-enginedbnews=create_engine("postgresql+psycopg2://vnsfintech:Vns_123456@videv.cloud:5433/vnsfintech")
+# enginedb=create_engine('postgresql://vnsfintech:%40Vns123456@tanhungsoft.com:5432/vnsfintech')
+enginedbnews=create_engine("postgresql+psycopg2://vnsfintech:Vns_123456@tanhungsoft.com:5433/vnsfintech")
 
 
 def break_out_break_down(symbol):

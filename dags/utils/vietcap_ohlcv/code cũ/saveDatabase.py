@@ -12,7 +12,7 @@ log = logging.getLogger(__name__)
 
 # Kết nối PostgreSQL
 engine = create_engine(
-    'postgresql://testtest:testtest@videv.cloud:5432/testtest',
+    'postgresql://testtest:testtest@tanhungsoft.com:5432/testtest',
     pool_size=20,
     max_overflow=30,
     pool_timeout=60

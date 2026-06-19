@@ -15,7 +15,7 @@ default_args = {
 
 def sync_vntv_price():
     source_engine = create_engine(
-        "postgresql+psycopg2://vnsfintech:Vns_123456@videv.cloud:5433/vnsfintech"
+        "postgresql+psycopg2://vnsfintech:Vns_123456@tanhungsoft.com:5433/vnsfintech"
     )
     target_engine = create_engine("postgresql+psycopg2://vntv:123456@aapanel.vntvcapital.com:5436/vntv")
 

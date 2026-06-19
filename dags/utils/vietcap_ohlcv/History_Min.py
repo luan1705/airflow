@@ -3,7 +3,7 @@ import pandas as pd
 import concurrent.futures
 from datetime import datetime
 from .tradingview import tradingview
-from utils.create_list.symbol_list import HOSE, HNX, UPCOM, DERIVATIVES, CW, HNXBOND, ETFHOSE, indices, addition
+from utils.create_list.symbol_list import HOSE, HNX, UPCOM, DERIVATIVES, CW, HNXBOND, ETFHOSE, indices, custom_list
 import time
 import logging
 import re
@@ -14,7 +14,7 @@ log=logging.getLogger(__name__)
 # Kết nối PostgreSQL
 engine = create_engine(
     # method://user:pass@host:port/dbName
-    "postgresql+psycopg2://vnsfintech:Vns_123456@videv.cloud:5433/vnsfintech",
+    "postgresql+psycopg2://vnsfintech:Vns_123456@tanhungsoft.com:5433/vnsfintech",
     pool_size=20,
     max_overflow=30,
     pool_timeout=6000
@@ -176,7 +176,7 @@ def save_DB_1():
     result += update_all_stocks(HNXBOND)
     result += update_all_stocks(ETFHOSE)
     result += update_all_stocks(indices)
-    # result += update_all_stocks(addition)
+    # result += update_all_stocks(custom_list)
 
     errors = [msg for msg in result if msg.startswith("❌") or msg.startswith("⚠️")]
 

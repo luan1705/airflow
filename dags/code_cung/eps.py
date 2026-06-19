@@ -26,7 +26,7 @@ BASE_HEADERS = {
 
 # ================== CONFIG ================== #
 BASE_URL = "https://iq.vietcap.com.vn/api/iq-insight-service/v1"
-DB_URL = "postgresql://vnsfintech:Vns_123456@videv.cloud:5433/vnsfintech"
+DB_URL = "postgresql://vnsfintech:Vns_123456@tanhungsoft.com:5433/vnsfintech"
 
 HOSE = [
     "AAA",	"AAM",	"AAT",	"ABR",	"ABS",	"ABT",	"ACB",	"ACC",	"ACG",	"ACL",

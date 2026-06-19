@@ -8,7 +8,7 @@ def add_bigquery():
 
     try:
         # Kết nối PostgreSQL
-        engine = create_engine('postgresql://vnsfintech:%40Vns123456@videv.cloud:5432/vnsfintech')
+        engine = create_engine('postgresql://vnsfintech:%40Vns123456@tanhungsoft.com:5432/vnsfintech')
         log.info("✅ Kết nối PostgreSQL thành công.")
 
         # Đọc dữ liệu từ bảng News

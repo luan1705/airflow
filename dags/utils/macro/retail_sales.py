@@ -64,7 +64,7 @@ def retail_sales():
     # DB CONNECT
     # =========================
     conn = psycopg2.connect(
-        host="videv.cloud",
+        host="tanhungsoft.com",
         database="vnsfintech",
         user="vnsfintech",
         password="Vns_123456",

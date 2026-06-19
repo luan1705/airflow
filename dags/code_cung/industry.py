@@ -4,7 +4,7 @@ from sqlalchemy import create_engine, text
 
 # ===================== CONFIG =====================
 
-DB_URL = "postgresql://vnsfintech:Vns_123456@videv.cloud:5433/vnsfintech"
+DB_URL = "postgresql://vnsfintech:Vns_123456@tanhungsoft.com:5433/vnsfintech"
 
 VIETCAP_IQ_HEADERS = {
     "accept": "application/json",

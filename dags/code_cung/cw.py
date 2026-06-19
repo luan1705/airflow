@@ -5,7 +5,7 @@ import time
 import re
 
 # ===================== CONFIG ===================== #
-DB_URL = "postgresql://vnsfintech:Vns_123456@videv.cloud:5433/vnsfintech"
+DB_URL = "postgresql://vnsfintech:Vns_123456@tanhungsoft.com:5433/vnsfintech"
 engine = create_engine(DB_URL)
 
 STOCK_SCHEMA = "info"
