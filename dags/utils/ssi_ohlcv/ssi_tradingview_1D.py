@@ -45,8 +45,8 @@ def ssi_tradingview_1D(symbol,token):
         if "TradingDate" in df.columns:
             df["TradingDate"] = pd.to_datetime(df["TradingDate"], format="%d/%m/%Y", dayfirst=True, errors="coerce")
             df = df.sort_values(by=["TradingDate"],ascending=False).reset_index(drop=True)
-            df=df[["Symbol","TradingDate","Open","Close","High","Low","Volume"]]
-            df.columns = ["symbol","time","open","close","high","low","volume"]
+            df=df[["Symbol","TradingDate","Open","Close","High","Low","Volume","Value"]]
+            df.columns = ["symbol","time","open","close","high","low","volume","value"]
         for col in ["open","close","high","low"]:
             df[col] = pd.to_numeric(df[col], errors="coerce")
             if symbol not in indices and symbol not in DERIVATIVES:
@@ -57,7 +57,7 @@ def ssi_tradingview_1D(symbol,token):
     # CONSUMER_ID = "3b312076e1ce40a6b886dce736bd3db5"
     # CONSUMER_SECRET = "e213990f319243cf8ae029afb4a123bb"
     end=(datetime.now()-timedelta(days=0)).strftime("%d/%m/%Y")
-    start=(datetime.now()-timedelta(days=0)).strftime("%d/%m/%Y")
+    start=(datetime.now()-timedelta(days=5)).strftime("%d/%m/%Y")
     # TOKEN = get_access_token()
     rows  = fetch_daily_ohlc(token, symbol, start, end, page_index=1, page_size=1000)
     df = to_df(rows)

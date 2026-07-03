@@ -19,66 +19,69 @@ enginedbnews=create_engine("postgresql+psycopg2://vnsfintech:Vns_123456@tanhungs
 def break_out_break_down(symbol):
     try:
         with enginedbnews.begin() as conn:
-            # Đọc dữ liệu
             dffull = pd.read_sql(f'SELECT * FROM "ohlcv"."{symbol}_1D" ORDER BY time ASC', con=conn)
             dffull["time"] = pd.to_datetime(dffull["time"], utc=True)
             dffull["time"] = dffull["time"].dt.tz_convert("Asia/Ho_Chi_Minh")
             today = pd.Timestamp.now(tz="Asia/Ho_Chi_Minh").normalize()
             row_now = dffull[dffull['time'] == today]
             if not row_now.empty:
-                # price_now = row_now['close'].iloc[0]
-                df_caculated = dffull[dffull['time'] < today]
+                df_calc = dffull[dffull['time'] < today]
             else:
-                # price_now = dffull['close'].iloc[-1]
-                df_caculated = dffull.iloc[:-1]
-            
-            price_topfull=df_caculated["close"].max()
-            price_bottomfull=df_caculated["close"].min()
+                df_calc = dffull.iloc[:-1]
 
-            # break_out_full = price_now > price_topfull
-            # break_down_full = price_now < price_bottomfull
+            def top_bottom(df):
+                return float(df["close"].max()), float(df["close"].min())
 
-            df52w = df_caculated.tail(252)
-            price_top52w = df52w["close"].max()
-            price_bottom52w = df52w["close"].min()
-
-            # break_out_52w = price_now > price_top52w
-            # break_down_52w = price_now < price_bottom52w
+            top_all,    bot_all    = top_bottom(df_calc)
+            top_3y,     bot_3y     = top_bottom(df_calc.tail(252 * 3))
+            top_1y,     bot_1y     = top_bottom(df_calc.tail(252))
+            top_1m,     bot_1m     = top_bottom(df_calc.tail(21))
+            top_1w,     bot_1w     = top_bottom(df_calc.tail(5))
 
             result = {
-                'symbol': symbol,
-                # 'price_now': float(price_now),
-                'price_topfull': float(price_topfull),
-                'price_bottomfull': float(price_bottomfull),
-                # 'break_out_full': bool(break_out_full),
-                # 'break_down_full': bool(break_down_full),
-                'price_top52w': float(price_top52w),
-                'price_bottom52w': float(price_bottom52w),
-                # 'break_out_52w': bool(break_out_52w),
-                # 'break_down_52w': bool(break_down_52w)
+                'symbol':       symbol,
+                'price_top_all': top_all,  'price_bot_all': bot_all,
+                'price_top_3y':  top_3y,   'price_bot_3y':  bot_3y,
+                'price_top_1y':  top_1y,   'price_bot_1y':  bot_1y,
+                'price_top_1m':  top_1m,   'price_bot_1m':  bot_1m,
+                'price_top_1w':  top_1w,   'price_bot_1w':  bot_1w,
             }
 
             try:
                 with enginedbnews.begin() as connew:
                     connew.execute(text("""
                         INSERT INTO "status"."break"
-                        ("symbol",  
-                         "price_topfull", "price_bottomfull",
-                         "price_top52w", "price_bottom52w")
-                        VALUES (:symbol, :price_topfull, :price_bottomfull,
-                                :price_top52w, :price_bottom52w)
+                        ("symbol",
+                         "price_top_all", "price_bot_all",
+                         "price_top_3y",  "price_bot_3y",
+                         "price_top_1y",  "price_bot_1y",
+                         "price_top_1m",  "price_bot_1m",
+                         "price_top_1w",  "price_bot_1w")
+                        VALUES
+                        (:symbol,
+                         :price_top_all, :price_bot_all,
+                         :price_top_3y,  :price_bot_3y,
+                         :price_top_1y,  :price_bot_1y,
+                         :price_top_1m,  :price_bot_1m,
+                         :price_top_1w,  :price_bot_1w)
                         ON CONFLICT ("symbol") DO UPDATE SET
-                                     "price_topfull"    = EXCLUDED."price_topfull",
-                                     "price_bottomfull" = EXCLUDED."price_bottomfull",
-                                     "price_top52w"     = EXCLUDED."price_top52w",
-                                     "price_bottom52w"  = EXCLUDED."price_bottom52w";
-                        """), result)
+                            "price_top_all" = EXCLUDED."price_top_all",
+                            "price_bot_all" = EXCLUDED."price_bot_all",
+                            "price_top_3y"  = EXCLUDED."price_top_3y",
+                            "price_bot_3y"  = EXCLUDED."price_bot_3y",
+                            "price_top_1y"  = EXCLUDED."price_top_1y",
+                            "price_bot_1y"  = EXCLUDED."price_bot_1y",
+                            "price_top_1m"  = EXCLUDED."price_top_1m",
+                            "price_bot_1m"  = EXCLUDED."price_bot_1m",
+                            "price_top_1w"  = EXCLUDED."price_top_1w",
+                            "price_bot_1w"  = EXCLUDED."price_bot_1w";
+                    """), result)
             except Exception as e:
-                logging.error(f"Upsert break_out_break_down lỗi {symbol}: {e}")
+                logging.error(f"Upsert break lỗi {symbol}: {e}")
 
     except Exception as e:
-        logging.error(f'Lỗi khi kết nối DB hoặc đọc dữ liệu {symbol} : {e}')
-    return
+        logging.error(f'Lỗi khi kết nối DB hoặc đọc dữ liệu {symbol}: {e}')
+
 
 def break_all_symbol(symbol_list):
     messages = []

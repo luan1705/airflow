@@ -46,21 +46,39 @@ def adv_dec_indicators_today():
         gain  = delta.clip(lower=0).ewm(span=14, adjust=False).mean()
         loss  = (-delta.clip(upper=0)).ewm(span=14, adjust=False).mean()
         rsi   = 100 - (100 / (1 + gain / loss))
-        macd  = close.ewm(span=13, adjust=False).mean() - close.ewm(span=26, adjust=False).mean()
-        high_52w = close.shift(1).rolling(252).max()
-        low_52w  = close.shift(1).rolling(252).min()
+        macd50  = close.ewm(span=50,  adjust=False).mean() - close.ewm(span=100, adjust=False).mean()
+        macd100 = close.ewm(span=100, adjust=False).mean() - close.ewm(span=200, adjust=False).mean()
+        high_1w = close.shift(1).rolling(5).max()
+        low_1w  = close.shift(1).rolling(5).min()
+        high_1m = close.shift(1).rolling(21).max()
+        low_1m  = close.shift(1).rolling(21).min()
+        high_6m = close.shift(1).rolling(126).max()
+        low_6m  = close.shift(1).rolling(126).min()
+        high_1y = close.shift(1).rolling(252).max()
+        low_1y  = close.shift(1).rolling(252).min()
+        high_3y = close.shift(1).rolling(252 * 3).max()
+        low_3y  = close.shift(1).rolling(252 * 3).min()
 
         ind = pd.DataFrame({
             'aboveEma20Pct':   ((close > close.ewm(span=20,  adjust=False).mean()).sum(axis=1) / den * 100).round(2),
             'aboveEma50Pct':   ((close > close.ewm(span=50,  adjust=False).mean()).sum(axis=1) / den * 100).round(2),
             'aboveEma100Pct':  ((close > close.ewm(span=100, adjust=False).mean()).sum(axis=1) / den * 100).round(2),
             'aboveEma200Pct':  ((close > close.ewm(span=200, adjust=False).mean()).sum(axis=1) / den * 100).round(2),
-            'aboveRsi50Pct':   ((rsi > 50).sum(axis=1) / den * 100).round(2),
-            'aboveRsi70Pct':   ((rsi > 70).sum(axis=1) / den * 100).round(2),
-            'belowRsi30Pct':   ((rsi < 30).sum(axis=1) / den * 100).round(2),
-            'positiveMacdPct': ((macd > 0).sum(axis=1) / den * 100).round(2),
-            'above52WHighPct': ((close > high_52w).sum(axis=1) / den * 100).round(2),
-            'below52WLowPct':  ((close < low_52w).sum(axis=1)  / den * 100).round(2),
+            'above50Rsi14Pct':    ((rsi > 50).sum(axis=1) / den * 100).round(2),
+            'above70Rsi14Pct':    ((rsi > 70).sum(axis=1) / den * 100).round(2),
+            'below30Rsi14Pct':    ((rsi < 30).sum(axis=1) / den * 100).round(2),
+            'positiveMacd50Pct':  ((macd50  > 0).sum(axis=1) / den * 100).round(2),
+            'positiveMacd100Pct': ((macd100 > 0).sum(axis=1) / den * 100).round(2),
+            'above1WHighPct':     ((close > high_1w).sum(axis=1) / den * 100).round(2),
+            'below1WLowPct':      ((close < low_1w).sum(axis=1)  / den * 100).round(2),
+            'above1MHighPct':     ((close > high_1m).sum(axis=1) / den * 100).round(2),
+            'below1MLowPct':      ((close < low_1m).sum(axis=1)  / den * 100).round(2),
+            'above6MHighPct':     ((close > high_6m).sum(axis=1) / den * 100).round(2),
+            'below6MLowPct':      ((close < low_6m).sum(axis=1)  / den * 100).round(2),
+            'above1YHighPct':     ((close > high_1y).sum(axis=1) / den * 100).round(2),
+            'below1YLowPct':      ((close < low_1y).sum(axis=1)  / den * 100).round(2),
+            'above3YHighPct':     ((close > high_3y).sum(axis=1) / den * 100).round(2),
+            'below3YLowPct':      ((close < low_3y).sum(axis=1)  / den * 100).round(2),
         }, index=close.index).reset_index()
         ind = ind[ind['time'] == today]
 
@@ -79,13 +97,17 @@ def adv_dec_indicators_today():
                     INSERT INTO exchange_history."{table}"
                         (time, "advancersPct", "noChangesPct", "declinersPct",
                         "aboveEma20Pct", "aboveEma50Pct", "aboveEma100Pct", "aboveEma200Pct",
-                        "aboveRsi50Pct", "aboveRsi70Pct", "belowRsi30Pct", "positiveMacdPct",
-                        "above52WHighPct", "below52WLowPct")
+                        "above50Rsi14Pct", "above70Rsi14Pct", "below30Rsi14Pct", "positiveMacd50Pct", "positiveMacd100Pct",
+                        "above1WHighPct", "below1WLowPct", "above1MHighPct", "below1MLowPct",
+                        "above6MHighPct", "below6MLowPct", "above1YHighPct", "below1YLowPct",
+                        "above3YHighPct", "below3YLowPct")
                     VALUES
                         (:time, :advancersPct, :noChangesPct, :declinersPct,
                         :aboveEma20Pct, :aboveEma50Pct, :aboveEma100Pct, :aboveEma200Pct,
-                        :aboveRsi50Pct, :aboveRsi70Pct, :belowRsi30Pct, :positiveMacdPct,
-                        :above52WHighPct, :below52WLowPct)
+                        :above50Rsi14Pct, :above70Rsi14Pct, :below30Rsi14Pct, :positiveMacd50Pct, :positiveMacd100Pct,
+                        :above1WHighPct, :below1WLowPct, :above1MHighPct, :below1MLowPct,
+                        :above6MHighPct, :below6MLowPct, :above1YHighPct, :below1YLowPct,
+                        :above3YHighPct, :below3YLowPct)
                     ON CONFLICT (time) DO UPDATE SET
                         "advancersPct"    = EXCLUDED."advancersPct",
                         "noChangesPct"    = EXCLUDED."noChangesPct",
@@ -94,12 +116,21 @@ def adv_dec_indicators_today():
                         "aboveEma50Pct"   = EXCLUDED."aboveEma50Pct",
                         "aboveEma100Pct"  = EXCLUDED."aboveEma100Pct",
                         "aboveEma200Pct"  = EXCLUDED."aboveEma200Pct",
-                        "aboveRsi50Pct"   = EXCLUDED."aboveRsi50Pct",
-                        "aboveRsi70Pct"   = EXCLUDED."aboveRsi70Pct",
-                        "belowRsi30Pct"   = EXCLUDED."belowRsi30Pct",
-                        "positiveMacdPct" = EXCLUDED."positiveMacdPct",
-                        "above52WHighPct" = EXCLUDED."above52WHighPct",
-                        "below52WLowPct"  = EXCLUDED."below52WLowPct"
+                        "above50Rsi14Pct"    = EXCLUDED."above50Rsi14Pct",
+                        "above70Rsi14Pct"    = EXCLUDED."above70Rsi14Pct",
+                        "below30Rsi14Pct"    = EXCLUDED."below30Rsi14Pct",
+                        "positiveMacd50Pct"  = EXCLUDED."positiveMacd50Pct",
+                        "positiveMacd100Pct" = EXCLUDED."positiveMacd100Pct",
+                        "above1WHighPct"     = EXCLUDED."above1WHighPct",
+                        "below1WLowPct"      = EXCLUDED."below1WLowPct",
+                        "above1MHighPct"     = EXCLUDED."above1MHighPct",
+                        "below1MLowPct"      = EXCLUDED."below1MLowPct",
+                        "above6MHighPct"     = EXCLUDED."above6MHighPct",
+                        "below6MLowPct"      = EXCLUDED."below6MLowPct",
+                        "above1YHighPct"     = EXCLUDED."above1YHighPct",
+                        "below1YLowPct"      = EXCLUDED."below1YLowPct",
+                        "above3YHighPct"     = EXCLUDED."above3YHighPct",
+                        "below3YLowPct"      = EXCLUDED."below3YLowPct"
                 """), row.to_dict())
         print(f"Đã upsert {len(final)} dòng vào exchange_history.{table}")
 

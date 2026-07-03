@@ -81,7 +81,7 @@ def upsert_result(df, index_name):
 
 
 def ma5_adv_dec():
-    for index_name in ['VN30', 'VNMID', 'VNSMALL']:
+    for index_name in ['VN30', 'VNMID', 'VNSMALL','VN100']:
         result = calc_breadth_ma5(index_name)
         if result is not None:
             upsert_result(result, index_name)

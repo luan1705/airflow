@@ -74,15 +74,29 @@ def calc_pepb_today(symbol: str):
 
         pe = round((close_val * 1000) / eps_ttm, 2) if eps_ttm else None
         pb = round((close_val * 1000) / bvps,    2) if bvps    else None
+        bvps_rounded = round(bvps, 2) if bvps else None
 
         with engine.begin() as conn:
             conn.execute(text(f"""
-                INSERT INTO asset_pepb_history."{symbol}" (symbol, time, pe, pb)
-                VALUES (:symbol, :date, :pe, :pb)
+                INSERT INTO asset_pepb_history."{symbol}"
+                    (symbol, time, pe, pb, bvps, "calYear", "calQuarter")
+                VALUES
+                    (:symbol, :date, :pe, :pb, :bvps, :calYear, :calQuarter)
                 ON CONFLICT (time) DO UPDATE SET
-                    pe = EXCLUDED.pe,
-                    pb = EXCLUDED.pb
-            """), {'symbol': symbol, 'date': date_val, 'pe': pe, 'pb': pb})
+                    pe           = EXCLUDED.pe,
+                    pb           = EXCLUDED.pb,
+                    bvps         = EXCLUDED.bvps,
+                    "calYear"    = EXCLUDED."calYear",
+                    "calQuarter" = EXCLUDED."calQuarter"
+            """), {
+                'symbol':     symbol,
+                'date':       date_val,
+                'pe':         pe,
+                'pb':         pb,
+                'bvps':       bvps_rounded,
+                'calYear':    float(target_year),
+                'calQuarter': float(target_quarter),
+            })
 
         log.info(f"✅ {symbol}: pe={pe}, pb={pb}")
 

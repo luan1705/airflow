@@ -11,7 +11,11 @@ logging.basicConfig(
     ]
 )
 
-enginedb=create_engine("postgresql+psycopg2://vnsfintech:Vns_123456@tanhungsoft.com:5433/vnsfintech")
+enginedb = create_engine(
+    "postgresql+psycopg2://vnsfintech:Vns_123456@tanhungsoft.com:5433/vnsfintech",
+    pool_size=10, max_overflow=20, pool_timeout=60,
+    pool_pre_ping=True, pool_recycle=1800,
+)
 
 def tradingview(symbol):
     try:    
@@ -21,9 +25,7 @@ def tradingview(symbol):
         return df
     except Exception as E:
         logging.exception('Lỗi lấy dữ liệu từ DB')
-    finally:
-        enginedb.dispose()
-        logging.info("🔒 Đã đóng kết nối DB")
+        return pd.DataFrame()
 
 # if __name__ == "__main__":
 #     symbol = 'HNX30'

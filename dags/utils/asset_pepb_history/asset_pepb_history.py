@@ -81,8 +81,10 @@ def calc_pepb(symbol: str):
 
         df['pe'] = ((df['close'] * 1000) / df['eps_ttm']).round(2)
         df['pb'] = ((df['close'] * 1000) / df['bvps']).round(2)
+        df['bvps'] = df['bvps'].round(2)
         df['symbol'] = symbol
-        df = df[['symbol', 'date', 'pe', 'pb']]
+        df = df.rename(columns={'yearReport': 'calYear', 'lengthReport': 'calQuarter'})
+        df = df[['symbol', 'date', 'pe', 'pb', 'bvps', 'calYear', 'calQuarter']]
 
         if df.empty:
             log.warning(f"⚠️ {symbol}: không tính được pe/pb")
@@ -91,20 +93,27 @@ def calc_pepb(symbol: str):
         with engine.begin() as conn:
             conn.execute(text(f"""
                 CREATE TABLE IF NOT EXISTS asset_pepb_history."{symbol}" (
-                    symbol  TEXT,
-                    time    DATE PRIMARY KEY,
-                    pe      DOUBLE PRECISION,
-                    pb      DOUBLE PRECISION
+                    symbol          TEXT,
+                    time            DATE PRIMARY KEY,
+                    pe              DOUBLE PRECISION,
+                    pb              DOUBLE PRECISION,
+                    bvps            DOUBLE PRECISION,
+                    "calYear"       DOUBLE PRECISION,
+                    "calQuarter"    DOUBLE PRECISION
                 )
             """))
             for _, row in df.iterrows():
+                row_dict = {k: (None if pd.isna(v) else v) for k, v in row.to_dict().items()}
                 conn.execute(text(f"""
-                    INSERT INTO asset_pepb_history."{symbol}" (symbol, time, pe, pb)
-                    VALUES (:symbol, :date, :pe, :pb)
+                    INSERT INTO asset_pepb_history."{symbol}" (symbol, time, pe, pb, bvps, "calYear", "calQuarter")
+                    VALUES (:symbol, :date, :pe, :pb, :bvps,  :calYear, :calQuarter)
                     ON CONFLICT (time) DO UPDATE SET
                         pe = EXCLUDED.pe,
-                        pb = EXCLUDED.pb
-                """), row.to_dict())
+                        pb = EXCLUDED.pb,
+                        bvps = EXCLUDED.bvps,
+                        "calYear"    = EXCLUDED."calYear",
+                        "calQuarter" = EXCLUDED."calQuarter"
+                """), row_dict)
 
         print(f"✅ {symbol}: {len(df)} dòng")
 

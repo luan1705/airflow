@@ -35,12 +35,21 @@ def pepb_breadth_today():
         pe = df_ex.pivot(index='time', columns='symbol', values='pe').sort_index()
         pb = df_ex.pivot(index='time', columns='symbol', values='pb').sort_index()
 
-        WINDOW = 1260
-        pe_tail    = pe.tail(WINDOW)
-        pb_tail    = pb.tail(WINDOW)
-        pe_mean_5y = pe_tail.mean()
-        pe_std_5y  = pe_tail.std()
-        pb_mean_5y = pb_tail.mean()
+        WINDOW_1Y = 252
+        WINDOW_3Y = 756
+        WINDOW_5Y = 1260
+
+        pe_mean_1y = pe.tail(WINDOW_1Y).mean()
+        pe_std_1y  = pe.tail(WINDOW_1Y).std()
+        pb_mean_1y = pb.tail(WINDOW_1Y).mean()
+
+        pe_mean_3y = pe.tail(WINDOW_3Y).mean()
+        pe_std_3y  = pe.tail(WINDOW_3Y).std()
+        pb_mean_3y = pb.tail(WINDOW_3Y).mean()
+
+        pe_mean_5y = pe.tail(WINDOW_5Y).mean()
+        pe_std_5y  = pe.tail(WINDOW_5Y).std()
+        pb_mean_5y = pb.tail(WINDOW_5Y).mean()
 
         pe_today = pe.iloc[-1]
         pb_today = pb.iloc[-1]
@@ -53,24 +62,46 @@ def pepb_breadth_today():
             print(f"Không có dữ liệu hôm nay cho {exchange}")
             continue
 
+        def pct(condition, valid):
+            return round(condition[valid].sum() / valid.sum() * 100, 2) if valid.any() else None
+
+
         row = {
-            'time':            today,
-            'peBelowAvg5YPct': round((pe_today[valid_pe] < pe_mean_5y[valid_pe]).sum() / valid_pe.sum() * 100, 2),
-            'pbBelowAvg5YPct': round((pb_today[valid_pb] < pb_mean_5y[valid_pb]).sum() / valid_pb.sum() * 100, 2),
-            'peAbove1StdPct':  round((pe_today[valid_pe_std] > (pe_mean_5y + pe_std_5y)[valid_pe_std]).sum() / valid_pe_std.sum() * 100, 2),
+            'time':             today,
+            'peBelowAvg1YPct':  pct(pe_today < pe_mean_1y, valid_pe & pe_mean_1y.notna()),
+            'pbBelowAvg1YPct':  pct(pb_today < pb_mean_1y, valid_pb & pb_mean_1y.notna()),
+            'peAbove1Std1YPct': pct(pe_today > (pe_mean_1y + pe_std_1y), valid_pe & pe_mean_1y.notna() & pe_std_1y.notna()),
+            'peBelowAvg3YPct':  pct(pe_today < pe_mean_3y, valid_pe & pe_mean_3y.notna()),
+            'pbBelowAvg3YPct':  pct(pb_today < pb_mean_3y, valid_pb & pb_mean_3y.notna()),
+            'peAbove1Std3YPct': pct(pe_today > (pe_mean_3y + pe_std_3y), valid_pe & pe_mean_3y.notna() & pe_std_3y.notna()),
+            'peBelowAvg5YPct':  pct(pe_today < pe_mean_5y, valid_pe & pe_mean_5y.notna()),
+            'pbBelowAvg5YPct':  pct(pb_today < pb_mean_5y, valid_pb & pb_mean_5y.notna()),
+            'peAbove1Std5YPct': pct(pe_today > (pe_mean_5y + pe_std_5y), valid_pe & pe_mean_5y.notna() & pe_std_5y.notna()),
         }
 
         table = f'breadth_{exchange}'
         with engine.begin() as conn:
             conn.execute(text(f"""
                 INSERT INTO exchange_history."{table}"
-                    (time, "peBelowAvg5YPct", "pbBelowAvg5YPct", "peAbove1StdPct")
+                    (time,
+                     "peBelowAvg1YPct", "pbBelowAvg1YPct", "peAbove1Std1YPct",
+                     "peBelowAvg3YPct", "pbBelowAvg3YPct", "peAbove1Std3YPct",
+                     "peBelowAvg5YPct", "pbBelowAvg5YPct", "peAbove1Std5YPct")
                 VALUES
-                    (:time, :peBelowAvg5YPct, :pbBelowAvg5YPct, :peAbove1StdPct)
+                    (:time,
+                     :peBelowAvg1YPct, :pbBelowAvg1YPct, :peAbove1Std1YPct,
+                     :peBelowAvg3YPct, :pbBelowAvg3YPct, :peAbove1Std3YPct,
+                     :peBelowAvg5YPct, :pbBelowAvg5YPct, :peAbove1Std5YPct)
                 ON CONFLICT (time) DO UPDATE SET
-                    "peBelowAvg5YPct" = EXCLUDED."peBelowAvg5YPct",
-                    "pbBelowAvg5YPct" = EXCLUDED."pbBelowAvg5YPct",
-                    "peAbove1StdPct"  = EXCLUDED."peAbove1StdPct"
+                    "peBelowAvg1YPct"  = EXCLUDED."peBelowAvg1YPct",
+                    "pbBelowAvg1YPct"  = EXCLUDED."pbBelowAvg1YPct",
+                    "peAbove1Std1YPct" = EXCLUDED."peAbove1Std1YPct",
+                    "peBelowAvg3YPct"  = EXCLUDED."peBelowAvg3YPct",
+                    "pbBelowAvg3YPct"  = EXCLUDED."pbBelowAvg3YPct",
+                    "peAbove1Std3YPct" = EXCLUDED."peAbove1Std3YPct",
+                    "peBelowAvg5YPct"  = EXCLUDED."peBelowAvg5YPct",
+                    "pbBelowAvg5YPct"  = EXCLUDED."pbBelowAvg5YPct",
+                    "peAbove1Std5YPct" = EXCLUDED."peAbove1Std5YPct"
             """), row)
 
         print(f"✅ {exchange}: {row}")

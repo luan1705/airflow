@@ -3,7 +3,7 @@ import pandas as pd
 import concurrent.futures
 from datetime import datetime
 from .tradingview import tradingview
-from utils.create_list.symbol_list import HOSE, HNX, UPCOM, DERIVATIVES, CW, HNXBOND, ETFHOSE, indices, custom_list
+from utils.create_list.symbol_list import HOSE, HNX, UPCOM, DERIVATIVES, CW, HNXBOND, ETFHOSE, indices, custom_list,total_list
 import time
 import logging
 import re
@@ -53,7 +53,8 @@ def _ensure_table_with_pk(conn, schema: str, table: str):
             close    DOUBLE PRECISION,
             high     DOUBLE PRECISION,
             low      DOUBLE PRECISION,
-            volume   BIGINT,
+            volume   DOUBLE PRECISION,
+            value    DOUBLE PRECISION,
             CONSTRAINT {_qi(pk_name)} PRIMARY KEY (time)
         );
     """))
@@ -127,7 +128,7 @@ def get_stock(symbol):
         stock['time'] = (pd.to_datetime(stock['time']) + pd.Timedelta(hours=15)).dt.floor('s')
 
         # Chỉ giữ các cột phù hợp schema đã khai báo (thêm/bớt theo thực tế DataFrame bạn trả về)
-        keep_cols = [c for c in ['symbol','time','open','close','high','low','volume','exchange'] if c in stock.columns]
+        keep_cols = [c for c in ['symbol','time','open','close','high','low','volume','value','exchange'] if c in stock.columns]
         stock = stock[keep_cols].drop_duplicates(subset=['time'])
 
         # Tên bảng
@@ -182,8 +183,8 @@ def save_DB_1D(symbol_list=None):
     # result += update_all_stocks(HNXBOND)
     # result += update_all_stocks(ETFHOSE)
     # result += update_all_stocks(indices)
-    # result += update_all_stocks(custom_list)
-    result = update_all_stocks(symbol_list)
+    result += update_all_stocks(custom_list)
+    # result = update_all_stocks(total_list)
 
     errors = [msg for msg in result if msg.startswith("❌") or msg.startswith("⚠️")]
 

@@ -55,6 +55,7 @@ def _ensure_table_with_pk(conn, schema: str, table: str):
             high     DOUBLE PRECISION,
             low      DOUBLE PRECISION,
             volume   DOUBLE PRECISION,
+            value    DOUBLE PRECISION,
             CONSTRAINT {_qi(pk_name)} PRIMARY KEY (time)
         );
     """))
@@ -122,7 +123,7 @@ def get_stock(symbol,token):
         stock['time'] = (pd.to_datetime(stock['time'])+ pd.Timedelta(hours=15)).dt.floor('s')
 
         # Chỉ giữ các cột phù hợp schema đã khai báo (thêm/bớt theo thực tế DataFrame bạn trả về)
-        keep_cols = [c for c in ['symbol','time','open','close','high','low','volume'] if c in stock.columns]
+        keep_cols = [c for c in ['symbol','time','open','close','high','low','volume','value'] if c in stock.columns]
         stock = stock[keep_cols].drop_duplicates(subset=['time'])
 
         # Tên bảng
@@ -145,7 +146,8 @@ def get_stock(symbol,token):
                     close    = EXCLUDED.close,
                     high     = EXCLUDED.high,
                     low      = EXCLUDED.low,
-                    volume   = EXCLUDED.volume;
+                    volume   = EXCLUDED.volume,
+                    value    = EXCLUDED.value;
             """
             execute_values(conn.connection.cursor(), insert_sql, rows, page_size=1000)
     

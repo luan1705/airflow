@@ -46,11 +46,12 @@ with DAG(
     wait = TimeDeltaSensor(
         task_id="wait_10s",
         delta=timedelta(seconds=10),
+        mode='reschedule',
     )
 
     trigger_next = TriggerDagRunOperator(
         task_id="trigger_next_run",
-        trigger_dag_id="pepb_today_task",
+        trigger_dag_id="breadth_pepb_today",
         wait_for_completion=False,
     )
 

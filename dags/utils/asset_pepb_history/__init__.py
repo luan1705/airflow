@@ -1,2 +1,3 @@
 from .asset_pepb_history import asset_pepb_history
 from .asset_pepb_history_today import asset_pepb_history_today
+from .asset_pepb_history_update import asset_pepb_history_update

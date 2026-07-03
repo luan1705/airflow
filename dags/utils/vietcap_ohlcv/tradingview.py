@@ -90,10 +90,11 @@ def tradingview(symbol, start, end, time="days"):
         return pd.DataFrame()
 
     df = pd.DataFrame(data)
-    df = df[["symbol", "t", "o", "c", "h", "l", "v"]]
+    df = df[["symbol", "t", "o", "c", "h", "l", "v", "accumulatedValue"]]
     df["symbol"] = df["symbol"].astype(str).map(_display_symbol)
     df["t"] = pd.to_numeric(df['t'], errors='coerce')
     df["t"] = df['t'].apply(lambda x: datetime.fromtimestamp(x))
+    df["accumulatedValue"] = df["accumulatedValue"] * 1_000_000
     if symbol in indices or symbol in DERIVATIVES:
         df[["o", "h", "l", "c"]] = df[["o", "h", "l", "c"]].apply(lambda x: round(x, 2))
     else:
@@ -111,7 +112,8 @@ def tradingview(symbol, start, end, time="days"):
         "l": "low",
         "c": "close",
         "t": "time",
-        "v": "volume"
+        "v": "volume",
+        "accumulatedValue":"value"
     }, inplace=True)
 
     return df[df["time"] >= start]
