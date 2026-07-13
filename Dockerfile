@@ -23,3 +23,4 @@ USER airflow
 RUN pip install selenium
 RUN pip install webdriver-manager
 RUN pip install VNSFintech
+RUN pip install openpyxl

@@ -1,47 +1,66 @@
 import requests
 import pandas as pd
-import json
-from pandas import json_normalize
-from datetime import datetime, timedelta
-import pytz
-from bs4 import BeautifulSoup
+from datetime import datetime
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from datetime import datetime, timedelta
+
 
 def get_event(symbol):
     headers = {
-        'authority': 'api.finpath.vn',
-        'accept': 'application/json, text/plain, */*',
-        'accept-encoding': 'gzip, deflate, br, zstd',
-        'accept-language': 'en-US,en;q=0.9',
+        'authority': 'wlgw-technical.fiintrade.vn',
         'content-type': 'application/json',
-        'origin': 'https://finpath.vn',
-        'referer': 'https://finpath.vn/',
+        'origin': 'https://fx.kafi.vn',
+        'referer': 'https://fx.kafi.vn/',
         'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36'
     }
-    now=int(datetime.today().timestamp()*1000)
 
-    url = f'https://api.finpath.vn/api/tradingview/events/{symbol.upper()}?start=0&end={now}&resolution=1d'
+    from_date = "2000-01-01T00:00:00.000Z"
+    to_date = datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%S.000Z')
+    # from_date = (datetime.utcnow() - timedelta(days=3)).strftime('%Y-%m-%dT%H:%M:%S.000Z')
+
+    params = {
+        'language': 'vi',
+        'OrganCode': symbol.upper(),
+        'From': from_date,
+        'To': to_date,
+    }
+
+    url = 'https://wlgw-technical.fiintrade.vn/TradingView/GetStockEvents'
+
     try:
-        response = requests.get(url, headers=headers)
+        response = requests.get(url, headers=headers, params=params)
         response.raise_for_status()
-        events = response.json().get('data', {}).get('events', [])
-        if not events:
-            return pd.DataFrame(columns=["symbol", "time", "event","label"])
+        items = response.json().get('items', [])
 
-        data=pd.json_normalize(events)
-        data[["symbol", "event"]] = data["text"].str.split("-", n=1, expand=True)
-        data["symbol"] = data["symbol"].str.strip()
-        data["event"] = data["event"].str.strip()
-        data["event"]=data["event"].fillna(data["symbol"])
-        data["symbol"] = symbol
-        data['time']=pd.to_datetime(data['time']).dt.date
-        return data[["symbol", "time", "event","label"]]
+        if not items:
+            return pd.DataFrame(columns=['symbol', 'time', 'label', 'valuePerShare', 'exerciseRate', 'issueVolume', 'exerciseRatio', 'revenue', 'profit', 'lengthReport', 'yearReport'])
+
+        data = pd.json_normalize(items)
+        data['exrightDate'] = pd.to_datetime(data.get('exrightDate'), format='mixed', errors='coerce').dt.date if 'exrightDate' in data.columns else None
+        data['publicDate']  = pd.to_datetime(data['publicDate'], format='mixed', errors='coerce').dt.date
+        data['time']        = data['exrightDate'].fillna(data['publicDate']) if 'exrightDate' in data.columns else data['publicDate']
+        data['symbol']      = symbol
+
+        data = data[data['type'].isin(['Dividend', 'Earning', 'ShareIssuance'])]
+        data['label'] = data['type'].map({
+            'Earning':       'F',
+            'Dividend':      'D',
+            'ShareIssuance': 'S',
+        })
+
+        columns = ['symbol', 'time', 'label', 'valuePershare', 'exerciseRate', 'issueVolumn', 'exerciseRatio', 'revenue', 'profit', 'lengthReport', 'yearReport']
+        data = data.reindex(columns=columns)
+        data = data.rename(columns={'issueVolumn': 'issueVolume', 'valuePershare': 'valuePerShare'})
+
+        int_cols = ['revenue', 'profit', 'issueVolume', 'valuePerShare', 'lengthReport', 'yearReport']
+        data[int_cols] = data[int_cols].apply(pd.to_numeric, errors='coerce').astype('Int64')
+
+        return data
 
     except Exception as e:
-        # nếu có lỗi (API hỏng, symbol sai...) vẫn trả df rỗng
-        return pd.DataFrame(columns=["symbol", "time", "event","label"])
-    
+        return pd.DataFrame(columns=['symbol', 'time', 'label', 'valuePerShare', 'exerciseRate', 'issueVolume', 'exerciseRatio', 'revenue', 'profit', 'lengthReport', 'yearReport'])
+
+
 if __name__ == "__main__":
-    # test
     df = get_event("ACB")
     print(df)

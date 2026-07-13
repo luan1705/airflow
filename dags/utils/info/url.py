@@ -17,11 +17,16 @@ engine = create_engine(
 def normalize_url(raw_url):
     if not raw_url or not str(raw_url).strip():
         return None
-    u = str(raw_url).strip().lower()
-    u = re.sub(r'^https?://', '', u)
-    u = re.sub(r'^www\.', '', u)
-    u = u.split('/')[0].strip()
-    return f"https://{u}" if u else None
+    u = str(raw_url).strip()
+    # Bỏ path, chỉ lấy scheme + domain
+    if '://' in u:
+        parts = u.split('://')
+        scheme = parts[0]
+        domain = parts[1].split('/')[0]
+        return f"{scheme}://{domain}"
+    else:
+        domain = u.split('/')[0]
+        return f"https://{domain}"
 
 def fetch_and_upsert(symbol):
     try:

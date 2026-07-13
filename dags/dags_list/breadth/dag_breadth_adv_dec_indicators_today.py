@@ -10,9 +10,9 @@ VN_TZ = timezone("Asia/Ho_Chi_Minh")
 
 default_args = {
     "retries": 10,
-    "retry_delay": timedelta(seconds=3),
+    "retry_delay": timedelta(minutes=1),
     "retry_exponential_backoff": True,
-    "max_retry_delay": timedelta(minutes=5),
+    "max_retry_delay": timedelta(hours=2),
     "depends_on_past": False,
 }
 

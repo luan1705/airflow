@@ -23,50 +23,46 @@ enginedb = create_engine(
 
 SCHEMA = "stock_event"
 
-
+# ---------- helpers ----------
 def _safe_ident(name: str) -> str:
     if not re.match(r"^[A-Za-z0-9_]+$", name):
         raise ValueError(f"Invalid symbol for table name: {name}")
     return name
 
-def ensure_schema():
-    with enginedb.begin() as conn:
-        conn.execute(text(f'CREATE SCHEMA IF NOT EXISTS "{SCHEMA}";'))
-
+def table_exists(symbol: str) -> bool:
+    sym = _safe_ident(symbol)
+    full_name = f'{SCHEMA}."{sym}"'
+    with enginedb.connect() as conn:
+        return conn.execute(text("SELECT to_regclass(:n)"), {"n": full_name}).scalar() is not None
 
 def ensure_schema_and_table(symbol: str):
     sym = _safe_ident(symbol)
     with enginedb.begin() as conn:
+        conn.execute(text(f'CREATE SCHEMA IF NOT EXISTS "{SCHEMA}";'))
         conn.execute(text(f'''
             CREATE TABLE IF NOT EXISTS "{SCHEMA}"."{sym}" (
-                "symbol"        TEXT,
-                "time"          DATE,
-                "label"         TEXT,
-                "valuePerShare" DOUBLE PRECISION,
-                "exerciseRate"  DOUBLE PRECISION,
-                "issueVolume"   DOUBLE PRECISION,
-                "exerciseRatio" DOUBLE PRECISION,
-                "revenue"       DOUBLE PRECISION,
-                "profit"        DOUBLE PRECISION,
-                "lengthReport"  DOUBLE PRECISION,
-                "yearReport"    DOUBLE PRECISION
+                "symbol" TEXT,
+                "time"   DATE,
+                "event"  TEXT,
+                "label"  TEXT
             );
         '''))
-        for col, dtype in [
-            ("symbol", "TEXT"), ("time", "DATE"), ("label", "TEXT"),
-            ("valuePerShare", "DOUBLE PRECISION"), ("exerciseRate", "DOUBLE PRECISION"),
-            ("issueVolume", "DOUBLE PRECISION"), ("exerciseRatio", "DOUBLE PRECISION"),
-            ("revenue", "DOUBLE PRECISION"), ("profit", "DOUBLE PRECISION"),
-            ("lengthReport", "DOUBLE PRECISION"), ("yearReport", "DOUBLE PRECISION"),
-        ]:
-            conn.execute(text(f'ALTER TABLE "{SCHEMA}"."{sym}" ADD COLUMN IF NOT EXISTS "{col}" {dtype};'))
+        conn.execute(text(f'''
+            ALTER TABLE "{SCHEMA}"."{sym}"
+            ADD COLUMN IF NOT EXISTS "symbol" TEXT,
+            ADD COLUMN IF NOT EXISTS "time" DATE,
+            ADD COLUMN IF NOT EXISTS "event" TEXT,
+            ADD COLUMN IF NOT EXISTS "label" TEXT;
+        '''))
 
+        # thử tạo unique index
         try:
             conn.execute(text(f'''
-                CREATE UNIQUE INDEX IF NOT EXISTS "{sym}_uniq_time_label"
-                ON "{SCHEMA}"."{sym}" ("time", "label");
+                CREATE UNIQUE INDEX IF NOT EXISTS "{sym}_uniq_time_event"
+                ON "{SCHEMA}"."{sym}" ("time", "event");
             '''))
         except Exception as e:
+            # nếu fail do duplicates -> dedupe rồi tạo lại
             msg = str(e).lower()
             if "duplicate" in msg or "could not create unique index" in msg:
                 conn.execute(text(f'''
@@ -74,11 +70,11 @@ def ensure_schema_and_table(symbol: str):
                     USING "{SCHEMA}"."{sym}" b
                     WHERE a.ctid < b.ctid
                       AND a."time" = b."time"
-                      AND a."label" = b."label"
+                      AND a."event" = b."event";
                 '''))
                 conn.execute(text(f'''
-                    CREATE UNIQUE INDEX IF NOT EXISTS "{sym}_uniq_time_label"
-                    ON "{SCHEMA}"."{sym}" ("time", "label");
+                    CREATE UNIQUE INDEX IF NOT EXISTS "{sym}_uniq_time_event"
+                    ON "{SCHEMA}"."{sym}" ("time", "event");
                 '''))
             else:
                 raise
@@ -86,25 +82,27 @@ def ensure_schema_and_table(symbol: str):
 
 def normalize_event_df(df: pd.DataFrame, symbol: str) -> pd.DataFrame:
     if df is None or df.empty:
-        return pd.DataFrame(columns=['symbol', 'time', 'label', 'valuePerShare', 'exerciseRate', 'issueVolume', 'exerciseRatio', 'revenue', 'profit', 'lengthReport', 'yearReport'])
+        return pd.DataFrame(columns=["symbol", "time", "event", "label"])
 
-    cols = ['symbol', 'time', 'label', 'valuePerShare', 'exerciseRate', 'issueVolume', 'exerciseRatio', 'revenue', 'profit', 'lengthReport', 'yearReport']
-    for c in cols:
+    for c in ["symbol", "time", "event", "label"]:
         if c not in df.columns:
             df[c] = None
 
-    df = df[cols].copy()
-    df['symbol'] = symbol
-    df['time'] = pd.to_datetime(df['time'], errors='coerce').dt.date
-    df = df.dropna(subset=['time'])
+    df = df[["symbol", "time", "event", "label"]].copy()
+    df["symbol"] = symbol
+    df["time"] = pd.to_datetime(df["time"], errors="coerce").dt.date
+    df = df.dropna(subset=["time"])
     return df
 
-
+# ---------- main worker ----------
 def stock_event(symbol):
     try:
         sym = _safe_ident(symbol)
+
+        # (1) check bảng -> (2) chưa có thì tạo
         ensure_schema_and_table(sym)
 
+        # (3) gọi API đúng 1 lần (không retry)
         try:
             data = get_event(sym)
         except Exception as e:
@@ -114,33 +112,23 @@ def stock_event(symbol):
 
         data = normalize_event_df(data, sym)
 
+        # (5) không có data -> thôi
         if data.empty:
             msg = f"⚠️ {sym}: API không có dữ liệu, không add gì."
             log.info(msg)
             return msg
 
-        rows = data.to_dict('records')
-        for row in rows:
-            for k, v in row.items():
-                try:
-                    if pd.isna(v):
-                        row[k] = None
-                except Exception:
-                    pass
-                if hasattr(v, 'item'):
-                    row[k] = v.item()
-
+        # (4) có data -> ADD (append) vào bảng, trùng thì bỏ qua
+        rows = data.to_dict("records")
         insert_sql = text(f'''
-            INSERT INTO "{SCHEMA}"."{sym}"
-                ("symbol","time","label","valuePerShare","exerciseRate","issueVolume","exerciseRatio","revenue","profit","lengthReport","yearReport")
-            VALUES
-                (:symbol,:time,:label,:valuePerShare,:exerciseRate,:issueVolume,:exerciseRatio,:revenue,:profit,:lengthReport,:yearReport)
-            ON CONFLICT ("time","label") DO NOTHING;
+            INSERT INTO "{SCHEMA}"."{sym}" ("symbol","time","event","label")
+            VALUES (:symbol,:time,:event,:label)
+            ON CONFLICT ("time","event") DO NOTHING;
         ''')
         with enginedb.begin() as conn:
             conn.execute(insert_sql, rows)
 
-        msg = f"✅ {sym}: add {len(rows)} rows."
+        msg = f"✅ {sym}: add {len(rows)} rows (trùng sẽ bỏ qua)."
         log.info(msg)
         return msg
 
@@ -149,10 +137,9 @@ def stock_event(symbol):
         log.error(msg, exc_info=True)
         return msg
 
-
 def update_all_stocks(symbol_list):
     messages = []
-    with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=3) as executor:
         futures = {executor.submit(stock_event, sym): sym for sym in symbol_list}
         for future in concurrent.futures.as_completed(futures):
             sym = futures[future]
@@ -166,9 +153,7 @@ def update_all_stocks(symbol_list):
                 messages.append(err_msg)
     return messages
 
-
 def save_stock_event():
-    ensure_schema()
     log.info("🚀 Bắt đầu cập nhật dữ liệu...")
     result = update_all_stocks(total_list)
 
@@ -186,4 +171,4 @@ def save_stock_event():
 
     log.info("🎉 Hoàn thành cập nhật tất cả mã.")
     enginedb.dispose()
-    return errors
+    return result

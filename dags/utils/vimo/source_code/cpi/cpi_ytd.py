@@ -1,0 +1,249 @@
+import pandas as pd
+import re
+import os
+import glob
+from datetime import date
+from sqlalchemy import create_engine, text
+import openpyxl
+
+DB_URL = "postgresql+psycopg2://vnsfintech:Vns_123456@tanhungsoft.com:5433/vnsfintech"
+engine = create_engine(DB_URL)
+
+SCHEMA = "macro"
+TABLE  = "cpi_ytd"
+
+COMPONENTS = {
+    "CHỈ SỐ GIÁ TIÊU DÙNG":                    "cpi",
+    "Hàng ăn và dịch vụ ăn uống":               "food_beverage",
+    "Lương thực":                                "food_staple",
+    "Thực phẩm":                                 "food",
+    "Ăn uống ngoài gia đình":                    "eating_out",
+    "Đồ uống và thuốc lá":                       "drink_tobacco",
+    "May mặc, giày dép và mũ nón":              "clothing",
+    "May mặc, mũ nón và giày dép":              "clothing",
+    "May mặc, mũ nón và giày dép ":             "clothing",
+    "Nhà ở, điện nước, chất đốt và VLXD(*)":   "housing",
+    "Nhà ở, điện nước, chất đốt và VLXD (*)":  "housing",
+    "Nhà ở và vật liệu xây dựng":               "housing",
+    "Nhà ở và vật liệu xây dựng(*)":            "housing",
+    "Thiết bị và đồ dùng gia đình":             "household",
+    "Thuốc và dịch vụ y tế":                    "healthcare",
+    "Dịch vụ y tế":                              "medical_service",
+    "Giao thông":                                "transport",
+    "Bưu chính viễn thông":                      "telecom",
+    "Thông tin và truyền thông":                 "telecom",
+    "Giáo dục":                                  "education",
+    "Dịch vụ giáo dục":                          "education_service",
+    "Văn hoá, giải trí và du lịch":             "culture_entertainment",
+    "Đồ dùng và dịch vụ khác":                  "other",
+    "Hàng hóa và dịch vụ khác":                 "other",
+    "CHỈ SỐ GIÁ VÀNG":                          "gold",
+    "CHỈ SỐ GIÁ ĐÔ LA MỸ":                     "usd",
+    "LẠM PHÁT CƠ BẢN":                          "core_inflation",
+}
+
+NO_INDEX = {"core_inflation"}
+
+
+def parse_time_from_filename(file_path: str) -> date:
+    name = file_path.split("/")[-1].split("\\")[-1]
+    match = re.search(r'(\d{4})_(\d{2})', name)
+    if not match:
+        raise ValueError(f"Không parse được tháng/năm từ tên file: {name}")
+    return date(int(match.group(1)), int(match.group(2)), 1)
+
+
+def get_sheet_name(file_path: str) -> str:
+    xl = pd.ExcelFile(file_path)
+    for sheet in xl.sheet_names:
+        if 'cpi' in sheet.lower().replace(' ', '').replace('.', ''):
+            return sheet
+    raise ValueError(f"Không tìm thấy sheet CPI trong {file_path}")
+
+
+def to_float(val):
+    try:
+        return float(val)
+    except (TypeError, ValueError):
+        return None
+
+
+def get_ytd_col(ws) -> int:
+    """Detect động cột YTD từ header — không hardcode vì layout thay đổi theo năm.
+    Ưu tiên:
+      1. Bình quân N tháng (T2-T11 trừ cuối quý có cột quý riêng)
+      2. Cả năm so với (T12)
+      3. Bình quân quý / Quý I/II/III/IV (T3,T6,T9)
+    """
+    col_texts = {}
+    for i, row in enumerate(ws.iter_rows(values_only=True)):
+        if any(v is not None for v in row):
+            for ci, val in enumerate(row):
+                if val is not None and not isinstance(val, float):
+                    col_texts[ci] = col_texts.get(ci, '') + ' ' + str(val).strip().lower()
+        if i > 10:
+            break
+
+    ytd_candidates = {}
+    for ci, text in col_texts.items():
+        if ci <= 2:
+            continue
+        if 'kỳ gốc' in text:
+            continue
+        if 'bình quân' in text and 'tháng' in text and 'quý' not in text:
+            ytd_candidates[ci] = 1
+        elif ('năm 20' in text or 'năm  20' in text) and ('so với' in text or 'so  với' in text) and 'quý' not in text:
+            ytd_candidates[ci] = 2
+        elif ('bình quân' in text and 'quý' in text) or ('quý' in text and 'năm 20' in text and 'so với' in text):
+            ytd_candidates[ci] = 3
+
+    if not ytd_candidates:
+        return None
+    return min(ytd_candidates, key=lambda c: ytd_candidates[c])
+
+def get_yoy_col(ws) -> int:
+    """Cột đầu tiên có 'tháng' trong header = YoY. Dùng fallback cho T1."""
+    col_texts = {}
+    for i, row in enumerate(ws.iter_rows(values_only=True)):
+        if any(v is not None for v in row):
+            for ci, val in enumerate(row):
+                if val is not None and not isinstance(val, float):
+                    col_texts[ci] = col_texts.get(ci, '') + ' ' + str(val).strip().lower()
+        if i > 10:
+            break
+
+    for ci, text in sorted(col_texts.items()):
+        if ci <= 1:
+            continue
+        if 'kỳ gốc' in text:
+            continue
+        if 'bình quân' in text or ('năm 20' in text and 'tháng' not in text):
+            continue
+        if 'tháng' in text and 'quý' not in text:
+            return ci
+    return None
+
+def parse_cpi_ytd(file_path: str) -> pd.DataFrame:
+    time   = parse_time_from_filename(file_path)
+    month  = time.month
+    sheet  = get_sheet_name(file_path)
+
+    wb      = openpyxl.load_workbook(file_path, read_only=True)
+    ws      = wb[sheet]
+    ytd_col = get_ytd_col(ws)
+
+    unique_cols = list(dict.fromkeys(COMPONENTS.values()))
+    result = {"time": time}
+    for col in unique_cols:
+        result[col] = None
+
+    if ytd_col is None:
+        ytd_col = get_yoy_col(ws)
+
+    for row in ws.iter_rows(values_only=True):
+        # Detect tên cấu phần: thử tất cả col A, B, C
+        name = None
+        for ci in [2, 1, 0]:
+            if len(row) > ci and row[ci] and str(row[ci]).strip():
+                candidate = str(row[ci]).strip()
+                if "Trong đó" not in candidate and candidate in COMPONENTS:
+                    name = candidate
+                    break
+
+        if name not in COMPONENTS:
+            continue
+
+        col = COMPONENTS[name]
+        if result[col] is not None:
+            continue
+
+        val = to_float(row[ytd_col] if len(row) > ytd_col else None)
+
+        if col in NO_INDEX:
+            result[col] = round(val, 2) if val is not None else None
+        else:
+            result[col] = round(val - 100, 2) if val is not None else None
+
+    wb.close()
+    return pd.DataFrame([result])
+
+
+def upsert_cpi_ytd(df: pd.DataFrame):
+    cols = list(dict.fromkeys(COMPONENTS.values()))
+
+    with engine.begin() as conn:
+        conn.execute(text(f'CREATE SCHEMA IF NOT EXISTS "{SCHEMA}"'))
+        col_defs  = "\n".join([f"    {c} DOUBLE PRECISION," for c in cols[:-1]])
+        col_defs += f"\n    {cols[-1]} DOUBLE PRECISION"
+        conn.execute(text(f"""
+            CREATE TABLE IF NOT EXISTS {SCHEMA}.{TABLE} (
+                time DATE PRIMARY KEY,
+{col_defs}
+            )
+        """))
+        for col in cols:
+            conn.execute(text(f"""
+                ALTER TABLE {SCHEMA}.{TABLE}
+                ADD COLUMN IF NOT EXISTS {col} DOUBLE PRECISION
+            """))
+
+        set_clause  = ",\n".join([f"    {c} = EXCLUDED.{c}" for c in cols])
+        insert_cols = ", ".join(cols)
+        insert_vals = ", ".join([f":{c}" for c in cols])
+        conn.execute(text(f"""
+            INSERT INTO {SCHEMA}.{TABLE} (time, {insert_cols})
+            VALUES (:time, {insert_vals})
+            ON CONFLICT (time) DO UPDATE SET
+{set_clause}
+        """), df.replace({float('nan'): None}).to_dict(orient="records"))
+
+    print(f"✅ Upsert {len(df)} rows vào {SCHEMA}.{TABLE}")
+
+
+def save_cpi_ytd(file_path: str):
+    df = parse_cpi_ytd(file_path)
+    print(df.T.to_string())
+    upsert_cpi_ytd(df)
+
+
+def _sort_key(f):
+    match = re.search(r'(\d{4})_(\d{2})', os.path.basename(f))
+    return (int(match.group(1)), int(match.group(2))) if match else (0, 0)
+
+
+def get_latest_file(data_dir: str) -> str:
+    files = glob.glob(os.path.join(data_dir, "*.xlsx"))
+    if not files:
+        raise FileNotFoundError(f"Không tìm thấy file xlsx trong {data_dir}")
+    return sorted(files, key=_sort_key)[-1]
+
+
+#=======================Chạy file chỉ định trực tiếp trong terminal=====================
+# def cpi_ytd(**context):
+#     save_cpi_ytd("../../data/2023_12.xlsx")
+
+#=======================Chạy file chỉ định airflow=====================
+# def cpi_ytd(**context):
+#     save_cpi_ytd("/opt/airflow/dags/utils/vimo/data/2026_01.xlsx")
+
+# =====================Chạy file mới nhất=====================
+# def cpi_ytd(**context):
+#     data_dir  = os.path.join(os.path.dirname(__file__), "../../data")
+#     file_path = get_latest_file(data_dir)
+#     print(f"📂 File mới nhất: {file_path}")
+#     save_cpi_ytd(file_path)
+
+# =====================Chạy tất cả file=====================
+def cpi_ytd(**context):
+    data_dir = os.path.join(os.path.dirname(__file__), "../../data")
+    files    = glob.glob(os.path.join(data_dir, "*.xlsx"))
+    if not files:
+        raise FileNotFoundError(f"Không tìm thấy file xlsx trong {data_dir}")
+    for file_path in sorted(files, key=_sort_key):
+        print(f"📂 Đang chạy: {file_path}")
+        save_cpi_ytd(file_path)
+
+#===============================================================
+
+if __name__ == "__main__":
+    cpi_ytd()

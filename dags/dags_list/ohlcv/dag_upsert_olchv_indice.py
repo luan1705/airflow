@@ -5,12 +5,23 @@ from airflow.sensors.time_delta import TimeDeltaSensor
 from datetime import datetime, timedelta, time as dtime
 from pendulum import timezone, now
 from utils.olchv_indices import save_olch
+from airflow.api.common.trigger_dag import trigger_dag
 
 VN_TZ = timezone("Asia/Ho_Chi_Minh")
 
+def on_task_failure(context):
+    trigger_dag(
+        dag_id="upsert_olchv_indices",
+        run_id=f"retry_after_kill_{context['ts_nodash']}",
+        replace_microseconds=False,
+    )
+
 default_args = {
     "retries": 10,
-    "retry_delay": timedelta(seconds=10)
+    "retry_delay": timedelta(seconds=10),
+    "retry_exponential_backoff": True,
+    "max_retry_delay": timedelta(minutes=5),
+    "on_failure_callback": on_task_failure,
 }
 
 def should_continue() -> bool:

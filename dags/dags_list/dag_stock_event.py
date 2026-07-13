@@ -11,7 +11,7 @@ default_args = {
 }
 
 with DAG(
-    dag_id="save_stock_event",
+    dag_id="stock_event",
     default_args=default_args,
     start_date=datetime(2025,9,11,tzinfo=timezone("Asia/Ho_Chi_Minh")),
     schedule="0 1 * * 1-5",
@@ -19,10 +19,10 @@ with DAG(
     tags=["DB", "stock_event"]
 ) as dag:
 
-    stock_event=PythonOperator(
+    save_stock_event=PythonOperator(
         task_id='save_stock_event',
         python_callable=save_stock_event
     )
 
 
-    stock_event
+    save_stock_event
