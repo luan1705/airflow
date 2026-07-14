@@ -132,9 +132,9 @@ def parse_cpi_mom(file_path: str) -> pd.DataFrame:
         val = to_float(row[mom_col] if len(row) > mom_col else None)
 
         if col in NO_INDEX:
-            result[col] = round(val, 2) if val is not None else None
+            result[col] = round(val/100, 6) if val is not None else None
         else:
-            result[col] = round(val - 100, 2) if val is not None else None
+            result[col] = round((val - 100) / 100, 6) if val is not None else None
 
     wb.close()
     return pd.DataFrame([result])

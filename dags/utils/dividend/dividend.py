@@ -62,8 +62,21 @@ def dividend(symbol):
             'exrightDate': 'date'
         }
         data=data.rename(columns=rename_dict)
-        cash_mask  = data['eventName'] == 'Trả cổ tức bằng tiền mặt'
-        stock_mask = data['eventTitle'].str.contains('Trả Cổ tức bằng Cổ phiếu', na=False)
+        cash_mask = data['eventName'].eq('Trả cổ tức bằng tiền mặt')
+
+        stock_mask = (
+            data['eventTitle'].str.contains(
+                r'Trả.*cổ tức.*cổ phiếu|Cổ phiếu thưởng',
+                case=False,
+                na=False
+            )
+            |
+            data['eventName'].str.contains(
+                r'phát hành.*cổ phiếu',
+                case=False,
+                na=False
+            )
+        )
         data = data[cash_mask | stock_mask].copy()
         data = data.dropna(subset=['date'])
 

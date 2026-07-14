@@ -174,17 +174,20 @@ def update_all_stocks(symbol_list):
 # Hàm tổng cho tất cả sàn — để DAG gọi
 def save_DB_1D(symbol_list=None):
     print("🚀 Bắt đầu cập nhật dữ liệu...")
-    result = []
-    # result += update_all_stocks(HOSE)
-    # result += update_all_stocks(HNX)
-    # result += update_all_stocks(UPCOM)
-    # result += update_all_stocks(DERIVATIVES)
-    # result += update_all_stocks(CW)
-    # result += update_all_stocks(HNXBOND)
-    # result += update_all_stocks(ETFHOSE)
-    # result += update_all_stocks(indices)
-    result += update_all_stocks(custom_list)
-    # result = update_all_stocks(total_list)
+    if symbol_list is not None:
+        result = update_all_stocks(symbol_list)
+    else:
+        result = []
+        # result += update_all_stocks(HOSE)
+        # result += update_all_stocks(HNX)
+        # result += update_all_stocks(UPCOM)
+        # result += update_all_stocks(DERIVATIVES)
+        # result += update_all_stocks(CW)
+        # result += update_all_stocks(HNXBOND)
+        # result += update_all_stocks(ETFHOSE)
+        # result += update_all_stocks(indices)
+        result += update_all_stocks(custom_list)
+        # result = update_all_stocks(total_list)
 
     errors = [msg for msg in result if msg.startswith("❌") or msg.startswith("⚠️")]
 

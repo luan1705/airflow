@@ -28,16 +28,14 @@ WEIGHTS = {
 
 
 def cpi_weight(**context):
-    """Upsert quyền số rổ CPI vào DB (chạy 1 lần hoặc khi GSO cập nhật quyền số)."""
     with engine.begin() as conn:
         conn.execute(text(f'CREATE SCHEMA IF NOT EXISTS "{SCHEMA}"'))
-        col_defs = "\n".join([f"    {c} DOUBLE PRECISION," for c in WEIGHTS])
+        col_defs  = "\n".join([f"    {c} DOUBLE PRECISION," for c in list(WEIGHTS.keys())[:-1]])
+        col_defs += f"\n    {list(WEIGHTS.keys())[-1]} DOUBLE PRECISION"
         conn.execute(text(f"""
             CREATE TABLE IF NOT EXISTS {SCHEMA}.{TABLE} (
                 id SERIAL PRIMARY KEY,
-                effective_date DATE NOT NULL,
 {col_defs}
-                updated_at TIMESTAMPTZ DEFAULT NOW()
             )
         """))
         for col in WEIGHTS:
@@ -47,15 +45,15 @@ def cpi_weight(**context):
             """))
 
         cols        = list(WEIGHTS.keys())
-        set_clause  = ",\n".join([f"    {c} = EXCLUDED.{c}" for c in cols])
         insert_cols = ", ".join(cols)
         insert_vals = ", ".join([f":{c}" for c in cols])
 
-        row = {"effective_date": "2020-01-01", **WEIGHTS}
+        row = {k: round(v/100, 6) for k, v in WEIGHTS.items()}
         conn.execute(text(f"""
-            INSERT INTO {SCHEMA}.{TABLE} (effective_date, {insert_cols})
-            VALUES (:effective_date, {insert_vals})
-            ON CONFLICT DO NOTHING
+            INSERT INTO {SCHEMA}.{TABLE} (id, {insert_cols})
+            VALUES (1, {insert_vals})
+            ON CONFLICT (id) DO UPDATE SET
+                {", ".join([f"{c} = EXCLUDED.{c}" for c in cols])}
         """), row)
 
     print(f"✅ Upsert quyền số vào {SCHEMA}.{TABLE}")

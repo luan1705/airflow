@@ -9,11 +9,11 @@ TABLE  = "cpi_contribution"
 
 
 def cpi_contribution(**context):
-    """Tính contribution = (ytd * weight) / 10000.
+    """Tính contribution = (ytd * weight).
     Weight lấy từ bảng cpi_weight, YTD lấy từ bảng cpi_ytd.
     """
     # Lấy weight mới nhất
-    df_weight = pd.read_sql(text(f"SELECT * FROM {SCHEMA}.cpi_weight ORDER BY effective_date DESC LIMIT 1"), engine)
+    df_weight = pd.read_sql(text(f"SELECT * FROM {SCHEMA}.cpi_weight LIMIT 1"), engine)
     if df_weight.empty:
         raise ValueError("Không có dữ liệu trong bảng cpi_weight")
 
@@ -27,7 +27,7 @@ def cpi_contribution(**context):
     # Tính contribution
     for col, weight in weights.items():
         if col in df_ytd.columns:
-            df_ytd[col] = (df_ytd[col] * weight / 10000).round(4)
+            df_ytd[col] = (df_ytd[col] * weight).round(6)
 
     cols = list(weights.keys())
     df_result = df_ytd[["time"] + [c for c in cols if c in df_ytd.columns]]
