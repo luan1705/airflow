@@ -35,12 +35,12 @@ HOSE = [
     "TCT",	"TCX",	"TDC",	"TDG",	"TDH",	"TDM",	"TDP",	"TDW",	"TEG",	"THG",
     "TIP",	"TIX",	"TLD",	"TLG",	"TLH",	"TMP",	"TMS",	"TMT",	"TN1",	"TNC",
     "TNH",	"TNI",	"TNT",	"TPB",	"TPC",	"TRA",	"TRC",	"TSA",	"TSC",	"TTA",
-    "TTE",	"TTF",	"TV2",	"TVB",	"TVS",	"TVT",	"TYA",	"UIC",	"VAB",	"VCA",
-    "VCB",	"VCF",	"VCG",	"VCI",	"VCK",	"VDP",	"VDS",	"VFG",	"VGC",	"VHC",
-    "VHM",	"VIB",	"VIC",	"VID",	"VIP",	"VIX",	"VJC",	"VMD",	"VND",	"VNG",
-    "VNL",	"VNM",	"VNS",	"VOS",	"VPB",	"VPD",	"VPG",	"VPH",	"VPI",	"VPL",
-    "VPS",	"VPX",	"VRC",	"VRE",	"VSC",	"VSH",	"VSI",	"VTB",	"VTO",	"VTP",
-    "VVS",	"YBM",	"YEG",
+    "TTE",	"TTF",	"TV2",	"TVB",	"TVS",	"TVT",	"TYA",	"UIC",	"VAB",	"VBB",
+    "VCA",	"VCB",	"VCF",	"VCG",	"VCI",	"VCK",	"VDP",	"VDS",	"VFG",	"VGC",
+    "VHC",	"VHM",	"VIB",	"VIC",	"VID",	"VIP",	"VIX",	"VJC",	"VMD",	"VND",
+    "VNG",	"VNL",	"VNM",	"VNS",	"VOS",	"VPB",	"VPD",	"VPG",	"VPH",	"VPI",
+    "VPL",	"VPS",	"VPX",	"VRC",	"VRE",	"VSC",	"VSH",	"VSI",	"VTB",	"VTO",
+    "VTP",	"VVS",	"YBM",	"YEG",
 ]
 # <HOSE END>
 
@@ -240,11 +240,8 @@ custom_list = [
 # <price_diff START>
 
 price_diff = [
-    "BTT",  "CCI",  "CTR",  "DCM",  "HAH",  "PET",  "PVD",  "TLG",
-    "TMP",  "TVT",  "VCG",  "VTP",  "KSV",  "SDC",  "TA9",  "VBC",
-    "ABB",  "BDG",  "BWS",  "CH5",  "DCG",  "DCV",  "DMN",  "EMG",
-    "FHS",  "FRM",  "GVT",  "HPI",  "NNT",  "SGI",  "TVH",  "UDL",
-    "VDN",
+    "CCI",  "TDM",  "HVT",  "SDC",  "VBC",  "BTU",  "DCG",  "GVT",
+    "HPI",  "UDL",
 ]
 
 # <price_diff END>
@@ -252,7 +249,7 @@ price_diff = [
 # <dividend_date START>
 
 dividend_date = [
-    "VCG",  "KSV",  "VTP",
+    "TDM",  "NHA",
 ]
 
 # <dividend_date END>
