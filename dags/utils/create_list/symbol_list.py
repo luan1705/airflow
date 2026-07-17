@@ -242,8 +242,8 @@ custom_list = [
 # <price_diff START>
 
 price_diff = [
-    "BTT",  "CCI",  "HCM",  "HTG",  "PPY",  "SDC",  "SGH",  "VBC",
-    "A32",  "DCG",  "DOP",  "EMG",  "GVT",  "HPI",  "UDL",  "VLB",
+    "BTT",  "CCI",  "SDC",  "VBC",  "DOP",  "EMG",  "GVT",  "HPI",
+    "ISH",  "QNW",  "TID",  "UDL",  "XLV",
 ]
 
 # <price_diff END>
@@ -251,7 +251,6 @@ price_diff = [
 # <dividend_date START>
 
 dividend_date = [
-    "HTG",  "HCM",  "PPY",
 ]
 
 # <dividend_date END>
