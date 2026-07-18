@@ -10,7 +10,7 @@ from sqlalchemy import create_engine, text
 
 log = logging.getLogger(__name__)
 
-DB_URL = "postgresql://vnsfintech:Vns_123456@tanhungsoft.com:5433/vnsfintech"
+DB_URL = "postgresql+psycopg2://root:Dnl_123456@tanhungsoft.com:5432/dnl"
 engine = create_engine(DB_URL)
 
 BASE_URL = "https://iq.vietcap.com.vn/api/iq-insight-service/v1/company/{symbol}/statistics-financial"

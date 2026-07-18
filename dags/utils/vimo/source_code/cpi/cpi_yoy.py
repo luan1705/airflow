@@ -6,7 +6,7 @@ from datetime import date
 from sqlalchemy import create_engine, text
 import openpyxl
 
-DB_URL = "postgresql+psycopg2://vnsfintech:Vns_123456@tanhungsoft.com:5433/vnsfintech"
+DB_URL = "postgresql+psycopg2://root:Dnl_123456@tanhungsoft.com:5432/dnl"
 engine = create_engine(DB_URL)
 
 SCHEMA = "macro"

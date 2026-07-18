@@ -4,7 +4,7 @@ from sqlalchemy import create_engine, text
 from psycopg2.extras import execute_values
 
 engine = create_engine(
-    "postgresql+psycopg2://vnsfintech:Vns_123456@tanhungsoft.com:5433/vnsfintech"
+    "postgresql+psycopg2://root:Dnl_123456@tanhungsoft.com:5432/dnl"
 )
 
 def get_all_sectors():

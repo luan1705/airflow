@@ -16,7 +16,7 @@ logging.basicConfig(
 log = logging.getLogger(__name__)
 
 enginedb = create_engine(
-    "postgresql+psycopg2://vnsfintech:Vns_123456@tanhungsoft.com:5433/vnsfintech",
+    "postgresql+psycopg2://root:Dnl_123456@tanhungsoft.com:5432/dnl",
     pool_pre_ping=True,
     pool_size=5,
     max_overflow=10

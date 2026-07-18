@@ -123,7 +123,7 @@ def save_liquidity(symbol,enginedb):
     logging.exception(f"Lỗi lưu liquidity_{symbol}")
 symbols=['HOSE','HNX','UPCOM']
 def main():
-    enginedb = create_engine("postgresql+psycopg2://vnsfintech:Vns_123456@tanhungsoft.com:5433/vnsfintech")
+    enginedb = create_engine("postgresql+psycopg2://root:Dnl_123456@tanhungsoft.com:5432/dnl")
     try:
         for sym in symbols:
             save_liquidity(sym,enginedb)

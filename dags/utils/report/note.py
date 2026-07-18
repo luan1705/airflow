@@ -9,7 +9,7 @@ import logging
 
 log = logging.getLogger(__name__)
 
-DB_URL = "postgresql+psycopg2://vnsfintech:Vns_123456@tanhungsoft.com:5433/vnsfintech"
+DB_URL = "postgresql+psycopg2://root:Dnl_123456@tanhungsoft.com:5432/dnl"
 SCHEMA = "note"
 engine = create_engine(DB_URL)
 

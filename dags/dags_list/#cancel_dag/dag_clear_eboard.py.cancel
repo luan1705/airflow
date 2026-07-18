@@ -7,7 +7,7 @@ import psycopg2
 VN_TZ = timezone("Asia/Ho_Chi_Minh")
 
 # Kết nối DB (đổi nếu cần)
-CONN_STR = "postgresql://vnsfintech:Vns_123456@tanhungsoft.com:5433/vnsfintech"
+CONN_STR = "postgresql+psycopg2://root:Dnl_123456@tanhungsoft.com:5432/dnl"
 
 default_args = {
     "retries": 10,

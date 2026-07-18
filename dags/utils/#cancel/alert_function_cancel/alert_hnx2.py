@@ -8,7 +8,7 @@ import numpy as np
 import redis
 
 # ================ CONFIG ================
-REDIS_URL = os.getenv("REDIS_URL", "redis://default:%40Vns123456@tanhungsoft.com:6379/1")
+REDIS_URL = os.getenv("REDIS_URL", "redis://root:Dnl_123456@tanhungsoft.com:6379")
 CHANNEL   = "alert_function"
 
 POOL = redis.BlockingConnectionPool.from_url(

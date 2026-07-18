@@ -18,7 +18,7 @@ logging.basicConfig(
     ]
 )
 
-enginedb=create_engine("postgresql+psycopg2://vnsfintech:Vns_123456@tanhungsoft.com:5433/vnsfintech",
+enginedb=create_engine("postgresql+psycopg2://root:Dnl_123456@tanhungsoft.com:5432/dnl",
                         pool_pre_ping=True,       # kiểm tra kết nối trước khi dùng lại
                         pool_size=5,              # số connection giữ trong pool
                         max_overflow=10 

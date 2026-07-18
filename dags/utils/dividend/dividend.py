@@ -14,7 +14,7 @@ from pandas import json_normalize
 log=logging.getLogger(__name__)
 
 engine = create_engine(
-    "postgresql+psycopg2://vnsfintech:Vns_123456@tanhungsoft.com:5433/vnsfintech"
+    "postgresql+psycopg2://root:Dnl_123456@tanhungsoft.com:5432/dnl"
 )
 create_table_sql = """
     CREATE TABLE IF NOT EXISTS dividend.dividend (

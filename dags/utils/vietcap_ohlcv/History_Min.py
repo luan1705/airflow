@@ -14,7 +14,7 @@ log=logging.getLogger(__name__)
 # Kết nối PostgreSQL
 engine = create_engine(
     # method://user:pass@host:port/dbName
-    "postgresql+psycopg2://vnsfintech:Vns_123456@tanhungsoft.com:5433/vnsfintech",
+    "postgresql+psycopg2://root:Dnl_123456@tanhungsoft.com:5432/dnl",
     pool_size=20,
     max_overflow=30,
     pool_timeout=6000

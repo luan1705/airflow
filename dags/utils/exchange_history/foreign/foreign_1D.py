@@ -49,7 +49,7 @@ def foreign(symbol,enginedb):
         logging.exception(f'Lỗi lưu foreign_{symbol}')
         
 def main():
-    enginedb = create_engine("postgresql+psycopg2://vnsfintech:Vns_123456@tanhungsoft.com:5433/vnsfintech")
+    enginedb = create_engine("postgresql+psycopg2://root:Dnl_123456@tanhungsoft.com:5432/dnl")
     try:
         logging.info("Kết nối DB thành công")
         for sym in symbols:

@@ -28,7 +28,7 @@ _TYPE = {
 
 # ---------- DB ----------
 engine = create_engine(
-    "postgresql+psycopg2://vnsfintech:Vns_123456@tanhungsoft.com:5433/vnsfintech",
+    "postgresql+psycopg2://root:Dnl_123456@tanhungsoft.com:5432/dnl",
     pool_pre_ping=True, pool_size=10, max_overflow=20,
 )
 _table = Table("asset", MetaData(), schema="info", autoload_with=engine)

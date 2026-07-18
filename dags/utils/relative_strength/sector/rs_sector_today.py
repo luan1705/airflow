@@ -6,7 +6,7 @@ from datetime import date, timedelta
 
 WINDOW = 180
 BASE = 100.0
-engine = create_engine("postgresql+psycopg2://vnsfintech:Vns_123456@tanhungsoft.com:5433/vnsfintech")
+engine = create_engine("postgresql+psycopg2://root:Dnl_123456@tanhungsoft.com:5432/dnl")
 
 def rs_rank_sector_today(exchange, benchmark, n_upsert=1):
     # 1) meta: LỌC GIỐNG HỆT bản full

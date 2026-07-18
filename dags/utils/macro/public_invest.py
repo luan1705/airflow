@@ -64,13 +64,7 @@ def public_invest():
     # =========================
     # DB CONNECT
     # =========================
-    conn = psycopg2.connect(
-        host="tanhungsoft.com",
-        database="vnsfintech",
-        user="vnsfintech",
-        password="Vns_123456",
-        port=5433
-    )
+    conn = psycopg2.connect("postgresql://root:Dnl_123456@tanhungsoft.com:5432/dnl")
     cursor = conn.cursor()
 
     try:

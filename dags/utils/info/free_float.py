@@ -11,7 +11,7 @@ logging.basicConfig(level=logging.INFO)
 log = logging.getLogger(__name__)
 
 engine = create_engine(
-    "postgresql+psycopg2://vnsfintech:Vns_123456@tanhungsoft.com:5433/vnsfintech"
+    "postgresql+psycopg2://root:Dnl_123456@tanhungsoft.com:5432/dnl"
 )
 
 def free_float(symbol):

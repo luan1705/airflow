@@ -42,7 +42,7 @@ def invest_capital(n_days=3):
     table['totalInstitution'] = table['netDomesticInstitution'] + table['netForeignInstitution']
 
     # DB
-    engine = create_engine("postgresql+psycopg2://vnsfintech:Vns_123456@tanhungsoft.com:5433/vnsfintech")
+    engine = create_engine("postgresql+psycopg2://root:Dnl_123456@tanhungsoft.com:5432/dnl")
 
     with engine.begin() as con:
         con.execute(text("CREATE SCHEMA IF NOT EXISTS exchange_history"))

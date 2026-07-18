@@ -20,7 +20,7 @@ today = datetime.now().date()
 batdau=today-timedelta(days=50)
 
 engine = create_engine(
-    "postgresql+psycopg2://vnsfintech:Vns_123456@tanhungsoft.com:5433/vnsfintech"
+    "postgresql+psycopg2://root:Dnl_123456@tanhungsoft.com:5432/dnl"
 )
 
 def d_trading_signals(symbol,swing=5):
