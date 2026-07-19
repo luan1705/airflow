@@ -3,7 +3,7 @@ from psycopg2.extras import execute_values
 from utils.create_list.indices_map import indices_map
 from datetime import timedelta
 
-DB_URL = "postgresql+psycopg2://root:Dnl_123456@tanhungsoft.com:5432/dnl"
+DB_URL = "postgresql://root:Dnl_123456@tanhungsoft.com:5432/dnl"
 
 SRC_SCHEMA = "asset_foreign_history"
 TARGET_SCHEMA = "indices_foreign_history"   # 👈 schema mới
@@ -139,23 +139,28 @@ def run_all_indices():
     conn = psycopg2.connect(DB_URL)
     conn.autocommit = False
 
-    with conn.cursor() as cur:
-        ensure_schema(cur)  # 👈 đảm bảo schema tồn tại
+    try:
+        with conn.cursor() as cur:
+            ensure_schema(cur)
 
-        for index_name, symbols in indices_map.items():
-            if not isinstance(symbols, list) or not symbols:
-                continue
-            if is_derivative_group(index_name):
-                continue
+            for index_name, symbols in indices_map.items():
+                if not isinstance(symbols, list) or not symbols:
+                    continue
 
-            try:
-                aggregate_one_index(cur, index_name, symbols)
-                conn.commit()
-            except Exception as e:
-                conn.rollback()
-                print(f"[{index_name}] FAIL -> {e}")
+                if is_derivative_group(index_name):
+                    continue
 
-    conn.close()
+                try:
+                    aggregate_one_index(cur, index_name, symbols)
+                    conn.commit()
+
+                except Exception as e:
+                    conn.rollback()
+                    print(f"[{index_name}] FAIL -> {e}")
+
+    finally:
+        conn.close()
+
     print("DONE.")
 
 
