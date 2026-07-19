@@ -12,3 +12,8 @@ webserver_config.py
 
 # BigQuery keys / secrets
 bigquerrykey/
+
+# Data files
+dags/utils/vimo/data/*.xlsx
+dags/utils/vimo/data/*.xls
+dags/utils/vimo/data/*.csv
