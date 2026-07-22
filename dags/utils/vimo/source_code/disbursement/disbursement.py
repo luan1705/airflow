@@ -10,23 +10,14 @@ DB_URL = "postgresql+psycopg2://root:Dnl_123456@tanhungsoft.com:5432/dnl"
 engine = create_engine(DB_URL)
 
 SCHEMA = "macro"
-TABLE  = "business"
+TABLE  = "disbursement"
 
 COLS = [
-    "newBusiness",
-    "returnBusiness",
-    "exitBusiness",
-    "newBusiness_yoy",   # script cal tính sau
-    "exitBusiness_yoy",  # script cal tính sau
+    "disbursementValue",
+    "disbursementYtd",
+    "disbursementPlan",
+    "disbursementPlanRatio",  # disbursementCal.py tính sau
 ]
-
-ROWS = {
-    "Doanh nghiệp đăng ký thành lập mới":     "newBusiness",
-    "Doanh nghiệp quay trở lại hoạt động":    "returnBusiness",
-    "Doanh nghiệp tạm ngừng kinh doanh":      "exit_1",
-    "Doanh nghiệp tạm ngừng hoạt động":       "exit_2",
-    "Doanh nghiệp hoàn tất thủ tục giải thể": "exit_3",
-}
 
 
 def parse_time_from_filename(file_path: str) -> date:
@@ -37,20 +28,18 @@ def parse_time_from_filename(file_path: str) -> date:
     return date(int(match.group(1)), int(match.group(2)), 1)
 
 
-def get_sheet_name(file_path: str) -> str:
+def get_sheet_name(file_path: str, month: int) -> str:
     xl = pd.ExcelFile(file_path)
     for sheet in xl.sheet_names:
-        s = sheet.lower().replace(' ', '').replace('.', '')
-        if ('chitieu' in s or 'chỉtieudn' in s or 'chỉtiêudn' in s) and 'dn' in s:
-            return sheet
-    for sheet in xl.sheet_names:
+        if 'quy' in sheet.lower() or 'quý' in sheet.lower():
+            continue
         wb = openpyxl.load_workbook(file_path, read_only=True, data_only=True)
         ws = wb[sheet]
-        content = ' '.join([str(v) for row in ws.iter_rows(max_row=5, values_only=True) for v in row if v])
+        content = ' '.join([str(v) for row in ws.iter_rows(max_row=1, values_only=True) for v in row if v]).lower()
         wb.close()
-        if 'chỉ tiêu' in content.lower() and 'doanh nghiệp' in content.lower():
+        if 'ngân sách nhà nước' in content and 'vốn đầu tư' in content and 'toàn xã hội' not in content:
             return sheet
-    raise ValueError(f"Không tìm thấy sheet Chi tieu DN trong {file_path}")
+    raise ValueError(f"Không tìm thấy sheet VĐT NSNN trong {file_path}")
 
 
 def to_float(val):
@@ -60,70 +49,67 @@ def to_float(val):
         return None
 
 
-def get_value_col(ws, year: int):
+def detect_cols(ws, year: int):
     col_texts = {}
     for i, row in enumerate(ws.iter_rows(values_only=True)):
         if any(v is not None for v in row):
             for ci, val in enumerate(row):
                 if val is not None:
                     col_texts[ci] = col_texts.get(ci, '') + ' ' + str(val).strip().lower()
-        if i > 10:
+        if i > 8:
             break
 
-    month_cols = []
+    plan_col = value_col = ytd_col = ratio_col = None
+
     for ci, text in sorted(col_texts.items()):
         if ci <= 0:
             continue
-        if str(year) in text and 'tháng' in text and 'so với' not in text and '%' not in text:
-            if not re.search(r'[0-9]+ tháng', text):
-                month_cols.append(ci)
+        if 'kế hoạch' in text and 'so với' not in text and '%' not in text and plan_col is None:
+            plan_col = ci
+        if ('cộng dồn' in text or ('ước tính' in text and ('quý' in text or 'quy' in text or 'qu' in text)) or ('năm' in text and 'so với' not in text and 'kế hoạch' not in text and 'ước tính' not in text and 'thực hiện' not in text)) and str(year) in text and 'so với' not in text and '%' not in text and ytd_col is None:
+            ytd_col = ci
+        if 'ước tính' in text and 'tháng' in text and str(year) in text and 'qu' not in text and value_col is None:
+            value_col = ci
+        if 'kế hoạch' in text and ('so với' in text or '%' in text) and ratio_col is None:
+            ratio_col = ci
 
-    return month_cols[-1] if month_cols else None
+    return plan_col, value_col, ytd_col, ratio_col
 
 
-def parse_business(file_path: str) -> pd.DataFrame:
+def parse_disbursement(file_path: str) -> pd.DataFrame:
     time  = parse_time_from_filename(file_path)
     year  = time.year
-    sheet = get_sheet_name(file_path)
+    month = time.month
+    sheet = get_sheet_name(file_path, month)
 
-    wb      = openpyxl.load_workbook(file_path, read_only=True, data_only=True)
-    ws      = wb[sheet]
-    val_col = get_value_col(ws, year)
+    wb = openpyxl.load_workbook(file_path, read_only=True, data_only=True)
+    ws = wb[sheet]
 
-    raw = {}
+    plan_col, value_col, ytd_col, ratio_col = detect_cols(ws, year)
+
+    result = {"time": time}
+    for col in COLS:
+        result[col] = None
+
     for row in ws.iter_rows(values_only=True):
-        if not row[0]:
-            continue
-        name      = str(row[0]).strip().replace('\n', ' ')
-        name_norm = ' '.join(name.split())
-        for key in ROWS:
-            if name_norm.startswith(key):
-                col_key = ROWS[key]
-                if col_key not in raw:
-                    raw[col_key] = to_float(row[val_col] if val_col and len(row) > val_col else None)
-                break
+        if row[0] and 'TỔNG SỐ' in str(row[0]):
+            result['disbursementPlan']      = to_float(row[plan_col]  if plan_col  and len(row) > plan_col  else None)
+            result['disbursementValue']     = to_float(row[value_col] if value_col and len(row) > value_col else None)
+            ytd = to_float(row[ytd_col] if ytd_col and len(row) > ytd_col else None)
+            result['disbursementYtd']       = ytd if ytd is not None else result['disbursementValue']
+            result['disbursementPlanRatio'] = None  # disbursementCal.py tính sau
+
+            # Đưa về đơn vị đồng (file GSO đơn vị tỷ đồng)
+            for col in ['disbursementValue', 'disbursementYtd', 'disbursementPlan']:
+                if result[col] is not None:
+                    result[col] = round(result[col] * 1_000_000_000)
+            break
 
     wb.close()
-
-    exit_vals  = [raw.get(f'exit_{i}') for i in [1, 2, 3]]
-    exit_total = sum(v for v in exit_vals if v is not None) if any(v is not None for v in exit_vals) else None
-
-    result = {
-        "time":              time,
-        "newBusiness":       raw.get("newBusiness"),
-        "returnBusiness":    raw.get("returnBusiness"),
-        "exitBusiness":      exit_total,
-        "newBusiness_yoy":   None,
-        "exitBusiness_yoy":  None,
-    }
-
     return pd.DataFrame([result])
 
 
-def upsert_business(df: pd.DataFrame):
-    # Chỉ upsert các cột không phải yoy — script cal tính sau
-    upsert_cols = [c for c in COLS if '_yoy' not in c]
-
+def upsert_disbursement(df: pd.DataFrame):
     with engine.begin() as conn:
         conn.execute(text(f'CREATE SCHEMA IF NOT EXISTS "{SCHEMA}"'))
         col_defs  = "\n".join([f'    "{c}" DOUBLE PRECISION,' for c in COLS[:-1]])
@@ -140,6 +126,7 @@ def upsert_business(df: pd.DataFrame):
                 ADD COLUMN IF NOT EXISTS "{col}" DOUBLE PRECISION
             """))
 
+        upsert_cols = [c for c in COLS if c != 'disbursementPlanRatio']
         set_clause  = ",\n".join([f'    "{c}" = EXCLUDED."{c}"' for c in upsert_cols])
         insert_cols = ", ".join([f'"{c}"' for c in upsert_cols])
         insert_vals = ", ".join([f":{c}" for c in upsert_cols])
@@ -154,10 +141,10 @@ def upsert_business(df: pd.DataFrame):
     print(f"✅ Upsert {len(df)} rows vào {SCHEMA}.{TABLE}")
 
 
-def save_business(file_path: str):
-    df = parse_business(file_path)
+def save_disbursement(file_path: str):
+    df = parse_disbursement(file_path)
     print(df.T.to_string())
-    upsert_business(df)
+    upsert_disbursement(df)
 
 
 def _sort_key(f):
@@ -172,23 +159,23 @@ def get_latest_file(data_dir: str) -> str:
     return sorted(files, key=_sort_key)[-1]
 
 
-#=======================Chạy file chỉ định trực tiếp trong terminal=====================
-# def business(**context):
-#     save_business("../../data/2026_01.xlsx")
+##=======================Chạy file chỉ định trực tiếp trong terminal=====================
+# def disbursement(**context):
+#     save_disbursement("../../data/2023_01.xlsx")
 
-#=======================Chạy file chỉ định airflow=====================
-# def business(**context):
-#     save_business("/opt/airflow/dags/utils/vimo/data/2026_01.xlsx")
+# ##=======================Chạy file chỉ định airflow=====================
+# def disbursement(**context):
+#     save_disbursement("/opt/airflow/dags/utils/vimo/data/2026_06.xlsx")
 
-# =====================Chạy file mới nhất=====================
-# def business(**context):
+##=====================Chạy file mới nhất=====================
+# def disbursement(**context):
 #     data_dir  = os.path.join(os.path.dirname(__file__), "../../data")
 #     file_path = get_latest_file(data_dir)
 #     print(f"📂 File mới nhất: {file_path}")
-#     save_business(file_path)
+#     save_disbursement(file_path)
 
-# =====================Chạy tất cả file=====================
-def business(**context):
+#=====================Chạy tất cả file=====================
+def disbursement(**context):
     data_dir = os.path.join(os.path.dirname(__file__), "../../data")
     files    = glob.glob(os.path.join(data_dir, "*.xlsx"))
     if not files:
@@ -196,17 +183,18 @@ def business(**context):
     for file_path in sorted(files, key=_sort_key):
         print(f"📂 Đang chạy: {file_path}")
         try:
-            save_business(file_path)
+            save_disbursement(file_path)
         except Exception as e:
             print(f"⚠️ Lỗi {file_path}: {e} — upsert null")
             try:
                 time = parse_time_from_filename(file_path)
                 df = pd.DataFrame([{"time": time}])
-                upsert_business(df)
+                upsert_disbursement(df)
             except Exception as e2:
                 print(f"⚠️ Bỏ qua {file_path}: {e2}")
+        
 
-#===============================================================
+##===============================================================
 
-if __name__ == "__main__":
-    business()
+# if __name__ == "__main__":
+#     disbursement()

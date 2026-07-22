@@ -206,7 +206,7 @@ def parse_transport_tourism(file_path: str) -> pd.DataFrame:
         val_col, ytd_col, yoy_col = detect_kqt_cols(ws, year)
 
         for row in ws.iter_rows(values_only=True):
-            if row[0] and 'TỔNG SỐ' in str(row[0]):
+            if any(row[ci] and 'TỔNG SỐ' in str(row[ci]) for ci in range(min(3, len(row)))):
                 result['tourism_value'] = to_float(row[val_col] if val_col is not None and len(row) > val_col else None)
                 result['tourism_ytd']   = to_float(row[ytd_col] if ytd_col is not None and len(row) > ytd_col else None)
                 v_yoy = to_float(row[yoy_col] if yoy_col is not None and len(row) > yoy_col else None)
@@ -295,7 +295,16 @@ def transport_tourism(**context):
         raise FileNotFoundError(f"Không tìm thấy file xlsx trong {data_dir}")
     for file_path in sorted(files, key=_sort_key):
         print(f"📂 Đang chạy: {file_path}")
-        save_transport_tourism(file_path)
+        try:
+            save_transport_tourism(file_path)
+        except Exception as e:
+            print(f"⚠️ Lỗi {file_path}: {e} — upsert null")
+            try:
+                time = parse_time_from_filename(file_path)
+                df = pd.DataFrame([{"time": time}])
+                upsert_transport_tourism(df)
+            except Exception as e2:
+                print(f"⚠️ Bỏ qua {file_path}: {e2}")
 
 #===============================================================
 

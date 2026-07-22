@@ -269,7 +269,16 @@ def trade(**context):
         raise FileNotFoundError(f"Không tìm thấy file xlsx trong {data_dir}")
     for file_path in sorted(files, key=_sort_key):
         print(f"📂 Đang chạy: {file_path}")
-        save_trade(file_path)
+        try:
+            save_trade(file_path)
+        except Exception as e:
+            print(f"⚠️ Lỗi {file_path}: {e} — upsert null")
+            try:
+                time = parse_time_from_filename(file_path)
+                df = pd.DataFrame([{"time": time}])
+                upsert_trade(df)
+            except Exception as e2:
+                print(f"⚠️ Bỏ qua {file_path}: {e2}")
 
 #===============================================================
 

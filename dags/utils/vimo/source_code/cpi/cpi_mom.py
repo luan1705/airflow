@@ -212,8 +212,17 @@ def cpi_mom(**context):
     if not files:
         raise FileNotFoundError(f"Không tìm thấy file xlsx trong {data_dir}")
     for file_path in sorted(files, key=_sort_key):
-        print(f"📂 Đang chạy: {file_path}")
-        save_cpi_mom(file_path)
+    print(f"📂 Đang chạy: {file_path}")
+        try:
+            save_cpi_mom(file_path)
+        except Exception as e:
+            print(f"⚠️ Lỗi {file_path}: {e} — upsert null")
+            try:
+                time = parse_time_from_filename(file_path)
+                df = pd.DataFrame([{"time": time}])
+                upsert_cpi_mom(df)
+            except Exception as e2:
+                print(f"⚠️ Bỏ qua {file_path}: {e2}")
 
 #===============================================================
 
