@@ -24,9 +24,17 @@ def calc_pepb_today(symbol: str):
         if lnst.empty:
             return
 
+        lnst['isa20'] = pd.to_numeric(lnst['isa20'], errors='coerce')
+        lnst['yearReport'] = pd.to_numeric(lnst['yearReport'], errors='coerce')
+        lnst['lengthReport'] = pd.to_numeric(lnst['lengthReport'], errors='coerce')
+
+        lnst = lnst.dropna(subset=['isa20', 'yearReport', 'lengthReport'])
+
         lnst = lnst.sort_values(['yearReport', 'lengthReport'])
         lnst['lnst_ttm'] = lnst['isa20'].rolling(4).sum()
         lnst = lnst.dropna(subset=['lnst_ttm'])
+        if lnst.empty:
+            return
 
         # Lấy quý mới nhất có dữ liệu trong DB
         target_year    = lnst.iloc[-1]['yearReport']
@@ -52,9 +60,27 @@ def calc_pepb_today(symbol: str):
         if idx.empty or bs.empty:
             return
 
-        lnst_ttm = lnst.iloc[-1]['lnst_ttm']
-        shares   = idx.iloc[0]['numberOfSharesMktCap']
-        bsa78    = bs.iloc[0]['bsa78']
+        lnst_ttm = pd.to_numeric(
+            lnst.iloc[-1]['lnst_ttm'],
+            errors='coerce'
+        )
+
+        shares = pd.to_numeric(
+            idx.iloc[0]['numberOfSharesMktCap'],
+            errors='coerce'
+        )
+
+        bsa78 = pd.to_numeric(
+            bs.iloc[0]['bsa78'],
+            errors='coerce'
+        )
+
+        if pd.isna(lnst_ttm) or pd.isna(shares) or pd.isna(bsa78) or shares == 0:
+            log.warning(
+                f"⚠️ {symbol}: dữ liệu không hợp lệ "
+                f"lnst_ttm={lnst_ttm}, shares={shares}, bsa78={bsa78}"
+            )
+            return
 
         eps_ttm = lnst_ttm / shares
         bvps    = bsa78    / shares
@@ -69,7 +95,14 @@ def calc_pepb_today(symbol: str):
         if close.empty:
             return
 
-        close_val = close.iloc[0]['close']
+        close_val = pd.to_numeric(
+            close.iloc[0]['close'],
+            errors='coerce'
+        )
+
+        if pd.isna(close_val):
+            log.warning(f"⚠️ {symbol}: close không hợp lệ")
+            return
         date_val  = pd.to_datetime(close.iloc[0]['date']).normalize()
 
         pe = round((close_val * 1000) / eps_ttm, 2) if eps_ttm else None
@@ -100,8 +133,8 @@ def calc_pepb_today(symbol: str):
 
         log.info(f"✅ {symbol}: pe={pe}, pb={pb}")
 
-    except Exception as e:
-        log.error(f"❌ {symbol}: {e}")
+    except Exception:
+        log.exception(f"❌ {symbol}")
 
 
 def asset_pepb_history_today():
