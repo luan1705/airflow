@@ -37,7 +37,7 @@ with DAG(
     dag_id="reset_ohlcv",
     default_args=default_args,
     start_date=datetime(2026, 5, 5, tzinfo=timezone("Asia/Ho_Chi_Minh")),
-    schedule="30 8 * * *",
+    schedule="2 9 * * *",
     catchup=False,
     tags=["ohlcv_check", "reset_ohlcv"],
 ) as dag:

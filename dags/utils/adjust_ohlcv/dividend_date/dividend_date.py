@@ -46,7 +46,7 @@ def save_dividend_date_to_symbol_list(symbols: list[str]):
 def save_dividend_date():
     symbols = pd.read_sql(text("""
         SELECT symbol FROM dividend.dividend 
-        WHERE "payType" = 'stock' AND date = CURRENT_DATE
+        WHERE date = CURRENT_DATE
     """), engine)['symbol'].tolist()
 
     log.info(f"✅ Có {len(symbols)} mã dividend_date: {symbols}")

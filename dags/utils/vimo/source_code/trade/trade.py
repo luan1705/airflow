@@ -248,37 +248,37 @@ def get_latest_file(data_dir: str) -> str:
 
 #=======================Chạy file chỉ định trực tiếp trong terminal=====================
 # def trade(**context):
-#     save_trade("../../data/2026_01.xlsx")
+#     save_trade("../../data/excel/2026_01.xlsx")
 
 #=======================Chạy file chỉ định airflow=====================
 # def trade(**context):
-#     save_trade("/opt/airflow/dags/utils/vimo/data/2026_01.xlsx")
+#     save_trade("/opt/airflow/dags/utils/vimo/data/excel/2026_01.xlsx")
 
 # =====================Chạy file mới nhất=====================
-# def trade(**context):
-#     data_dir  = os.path.join(os.path.dirname(__file__), "../../data")
-#     file_path = get_latest_file(data_dir)
-#     print(f"📂 File mới nhất: {file_path}")
-#     save_trade(file_path)
-
-# =====================Chạy tất cả file=====================
 def trade(**context):
-    data_dir = os.path.join(os.path.dirname(__file__), "../../data")
-    files    = glob.glob(os.path.join(data_dir, "*.xlsx"))
-    if not files:
-        raise FileNotFoundError(f"Không tìm thấy file xlsx trong {data_dir}")
-    for file_path in sorted(files, key=_sort_key):
-        print(f"📂 Đang chạy: {file_path}")
-        try:
-            save_trade(file_path)
-        except Exception as e:
-            print(f"⚠️ Lỗi {file_path}: {e} — upsert null")
-            try:
-                time = parse_time_from_filename(file_path)
-                df = pd.DataFrame([{"time": time}])
-                upsert_trade(df)
-            except Exception as e2:
-                print(f"⚠️ Bỏ qua {file_path}: {e2}")
+    data_dir  = os.path.join(os.path.dirname(__file__), "../../data/excel")
+    file_path = get_latest_file(data_dir)
+    print(f"📂 File mới nhất: {file_path}")
+    save_trade(file_path)
+
+# # =====================Chạy tất cả file=====================
+# def trade(**context):
+#     data_dir = os.path.join(os.path.dirname(__file__), "../../data/excel")
+#     files    = glob.glob(os.path.join(data_dir, "*.xlsx"))
+#     if not files:
+#         raise FileNotFoundError(f"Không tìm thấy file xlsx trong {data_dir}")
+#     for file_path in sorted(files, key=_sort_key):
+#         print(f"📂 Đang chạy: {file_path}")
+#         try:
+#             save_trade(file_path)
+#         except Exception as e:
+#             print(f"⚠️ Lỗi {file_path}: {e} — upsert null")
+#             try:
+#                 time = parse_time_from_filename(file_path)
+#                 df = pd.DataFrame([{"time": time}])
+#                 upsert_trade(df)
+#             except Exception as e2:
+#                 print(f"⚠️ Bỏ qua {file_path}: {e2}")
 
 #===============================================================
 

@@ -27,21 +27,53 @@ def parse_time_from_filename(file_path: str) -> date:
 
 def get_sheet_name(file_path: str) -> str:
     xl = pd.ExcelFile(file_path)
+
     for sheet in xl.sheet_names:
-        if 'tongmuc' in sheet.lower().replace(' ', '').replace('.', ''):
-            return sheet
-    raise ValueError(f"Không tìm thấy sheet Tongmuc trong {file_path}")
+        try:
+            df = pd.read_excel(file_path, sheet_name=sheet, header=None, nrows=5)
+
+            text = " ".join(
+                df.fillna("")
+                  .astype(str)
+                  .values
+                  .ravel()
+            ).lower()
+
+            if "tổng mức bán lẻ" in text or "tong muc ban le" in text:
+                return sheet
+
+        except Exception:
+            continue
+
+    raise ValueError(f"Không tìm thấy sheet retail sales trong {file_path}")
 
 
-def get_value(row: pd.Series, month: int):
-    """Lấy giá trị tháng từ dòng theo format."""
+def get_value(row: pd.Series, report_time: date):
+    """Lấy giá trị tháng từ dòng theo từng format file."""
+    month = report_time.month
+    year = report_time.year
+
     if month == 1:
-        val = row.iloc[3] if not pd.isna(row.iloc[3]) else None
+        col_idx = 3
+
     elif month in [2, 3, 4, 5, 7, 8, 10, 11]:
-        val = row.iloc[2] if not pd.isna(row.iloc[2]) else None
-    else:  # T6, T9, T12
-        val = row.iloc[3] if not pd.isna(row.iloc[3]) else None
-    return round(val * 1_000_000_000) if val is not None else None
+        col_idx = 2
+
+    elif month in [6, 9]:
+        col_idx = 3
+
+    elif month == 12:
+        # Từ năm 2022 trở về trước, tháng 12 nằm ở cột iloc[2]
+        # Từ năm 2023 trở đi, tháng 12 nằm ở cột iloc[3]
+        col_idx = 2 if year <= 2022 else 3
+
+    else:
+        return None
+
+    if len(row) <= col_idx or pd.isna(row.iloc[col_idx]):
+        return None
+
+    return round(float(row.iloc[col_idx]) * 1_000_000_000)
 
 
 def parse_retail_sales(file_path: str) -> pd.DataFrame:
@@ -59,7 +91,7 @@ def parse_retail_sales(file_path: str) -> pd.DataFrame:
 
     for i, key in enumerate(keys):
         row = df.iloc[tong_idx + i]
-        result[key] = get_value(row, month)
+        result[key] = get_value(row, time)
 
     return pd.DataFrame([result])
 
@@ -123,17 +155,6 @@ def save_retail_sales(file_path: str):
     print(df)
     upsert_retail_sales(df)
 
-#=======================Chạy file chỉ định trực tiếp trong terminal=====================
-# def retail_sales(**context):
-#     """Chạy file chỉ định."""
-#     save_retail_sales("../data/2023_01.xlsx")
-
-#=======================Chạy file chỉ định airflow=====================
-# def retail_sales(**context):
-#     """Chạy file chỉ định."""
-#     save_retail_sales("/opt/airflow/dags/utils/vimo/data/2023_01.xlsx")
-
-# =====================Chạy file mới nhất=====================
 def _sort_key(f):
     name = os.path.basename(f)
     match = re.search(r'(\d{4})_(\d{2})', name)
@@ -145,33 +166,43 @@ def get_latest_file(data_dir: str) -> str:
         raise FileNotFoundError(f"Không tìm thấy file xlsx trong {data_dir}")
     return sorted(files, key=_sort_key)[-1]
 
-
+#=======================Chạy file chỉ định trực tiếp trong terminal=====================
 # def retail_sales(**context):
-#     """Hàm entrypoint cho Airflow: tự tìm file mới nhất và upsert."""
-#     data_dir = os.path.join(os.path.dirname(__file__), "../../data")
-#     file_path = get_latest_file(data_dir)
-#     print(f"📂 File mới nhất: {file_path}")
-#     save_retail_sales(file_path)
+#     """Chạy file chỉ định."""
+#     save_retail_sales("../data/excel/2023_01.xlsx")
 
-# =====================Chạy tất cả file=====================
+# #=======================Chạy file chỉ định airflow=====================
+# def retail_sales(**context):
+#     """Chạy file chỉ định."""
+#     save_retail_sales("/opt/airflow/dags/utils/vimo/data/excel/2020_09.xlsx")
+
+# =====================Chạy file mới nhất=====================
 def retail_sales(**context):
-    """Chạy tất cả file trong thư mục data."""
-    data_dir = os.path.join(os.path.dirname(__file__), "../../data")
-    files = glob.glob(os.path.join(data_dir, "*.xlsx"))
-    if not files:
-        raise FileNotFoundError(f"Không tìm thấy file xlsx trong {data_dir}")
-    for file_path in sorted(files, key=_sort_key):
-        print(f"📂 Đang chạy: {file_path}")
-        try:
-            save_retail_sales(file_path)
-        except Exception as e:
-            print(f"⚠️ Lỗi {file_path}: {e} — upsert null")
-            try:
-                time = parse_time_from_filename(file_path)
-                df = pd.DataFrame([{"time": time}])
-                upsert_retail_sales(df)
-            except Exception as e2:
-                print(f"⚠️ Bỏ qua {file_path}: {e2}")
+    """Hàm entrypoint cho Airflow: tự tìm file mới nhất và upsert."""
+    data_dir = os.path.join(os.path.dirname(__file__), "../../data/excel")
+    file_path = get_latest_file(data_dir)
+    print(f"📂 File mới nhất: {file_path}")
+    save_retail_sales(file_path)
+
+## =====================Chạy tất cả file=====================
+# def retail_sales(**context):
+#     """Chạy tất cả file trong thư mục data."""
+#     data_dir = os.path.join(os.path.dirname(__file__), "../../data/excel")
+#     files = glob.glob(os.path.join(data_dir, "*.xlsx"))
+#     if not files:
+#         raise FileNotFoundError(f"Không tìm thấy file xlsx trong {data_dir}")
+#     for file_path in sorted(files, key=_sort_key):
+#         print(f"📂 Đang chạy: {file_path}")
+#         try:
+#             save_retail_sales(file_path)
+#         except Exception as e:
+#             print(f"⚠️ Lỗi {file_path}: {e} — upsert null")
+#             try:
+#                 time = parse_time_from_filename(file_path)
+#                 df = pd.DataFrame([{"time": time}])
+#                 upsert_retail_sales(df)
+#             except Exception as e2:
+#                 print(f"⚠️ Bỏ qua {file_path}: {e2}")
 
 #===============================================================
  

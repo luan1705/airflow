@@ -1,1 +1,1 @@
-from .fa_chart import fa_chart_history
+from .fa_chart import fa_chart_history, fa_chart_update, check_update

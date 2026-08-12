@@ -1061,3 +1061,138 @@ def fa_chart_history():
         executor.map(calc_fa, symbols)
 
     print("Hoàn tất!")
+
+from datetime import datetime
+from pytz import timezone
+
+
+def get_target_quarter():
+    now = datetime.now(timezone("Asia/Ho_Chi_Minh"))
+
+    current_year = now.year
+    current_quarter = ((now.month - 1) // 3) + 1
+
+    if current_quarter == 1:
+        target_year = current_year - 1
+        target_quarter = 4
+    else:
+        target_year = current_year
+        target_quarter = current_quarter - 1
+
+    return target_year, target_quarter
+
+
+def get_fa_chart_missing_symbols():
+    target_year, target_quarter = get_target_quarter()
+
+    print(f"🔎 Kiểm tra FA Chart Q{target_quarter}/{target_year}")
+
+    symbols = pd.read_sql(text("""
+        SELECT symbol, sector
+        FROM info.asset
+        WHERE type = 'Stock'
+          AND exchange IN ('HOSE', 'HNX', 'UPCOM')
+        ORDER BY symbol
+    """), engine).to_dict('records')
+
+    missing = []
+
+    with engine.begin() as conn:
+        for row in symbols:
+            symbol = row['symbol']
+
+            table_exists = conn.execute(text("""
+                SELECT EXISTS (
+                    SELECT 1
+                    FROM information_schema.tables
+                    WHERE table_schema = 'fa_chart_asset'
+                      AND table_name = :symbol
+                )
+            """), {
+                'symbol': symbol
+            }).scalar()
+
+            if not table_exists:
+                missing.append(row)
+                continue
+
+            period_exists = conn.execute(text(f"""
+                SELECT EXISTS (
+                    SELECT 1
+                    FROM fa_chart_asset."{symbol}"
+                    WHERE "yearReport" = :year
+                      AND "lengthReport" = :quarter
+                )
+            """), {
+                'year': target_year,
+                'quarter': target_quarter,
+            }).scalar()
+
+            if not period_exists:
+                missing.append(row)
+
+    return missing
+
+
+def check_update(**context):
+    """
+    True  -> còn symbol thiếu FA Chart quý trước
+    False -> đã đủ, không cần chạy update
+    """
+
+    target_year, target_quarter = get_target_quarter()
+    missing = get_fa_chart_missing_symbols()
+
+    if missing:
+        print(
+            f"⚠️ Còn {len(missing)} mã thiếu "
+            f"FA Chart Q{target_quarter}/{target_year}"
+        )
+
+        print(
+            f"📛 Ví dụ mã thiếu: "
+            f"{[row['symbol'] for row in missing[:30]]}"
+        )
+
+        return True
+
+    print(
+        f"✅ FA Chart đã đủ "
+        f"Q{target_quarter}/{target_year}"
+    )
+
+    return False
+
+
+def fa_chart_update():
+    """
+    Chỉ chạy calc_fa() cho các symbol còn thiếu quý trước.
+
+    calc_fa() và toàn bộ công thức giữ nguyên.
+    """
+
+    target_year, target_quarter = get_target_quarter()
+    missing = get_fa_chart_missing_symbols()
+
+    if not missing:
+        print(
+            f"✅ Không có mã nào thiếu "
+            f"Q{target_quarter}/{target_year}"
+        )
+        return "không cần update"
+
+    print(
+        f"🚀 Update FA Chart "
+        f"{len(missing)} mã "
+        f"cho Q{target_quarter}/{target_year}"
+    )
+
+    with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
+        executor.map(calc_fa, missing)
+
+    print(
+        f"✅ Hoàn tất update FA Chart "
+        f"{len(missing)} mã"
+    )
+
+    return f"updated {len(missing)} symbols"

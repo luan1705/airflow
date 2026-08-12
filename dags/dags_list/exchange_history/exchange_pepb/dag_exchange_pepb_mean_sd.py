@@ -16,7 +16,7 @@ with DAG(
     dag_id="exchange_pepb_mean_sd",
     default_args=default_args,
     start_date=datetime(2025, 9, 17, tzinfo=timezone("Asia/Ho_Chi_Minh")),
-    schedule="0 1 * * 1-5",
+    schedule="3 9 * * 1-5",
     catchup=False,
     tags=["exchange_history", "exchange_pepb","pepb_mean_sd"],
 ) as dag:

@@ -18,7 +18,7 @@ with DAG(
     start_date=datetime(2025, 9, 11, tzinfo=timezone("Asia/Ho_Chi_Minh")),
     schedule_interval="30 8 * * 1-5",
     catchup=False,
-    tags=["DB", "market_data"]
+    tags=["liquidity_history"]
 ) as dag:
 
     save_liquidity_history = PythonOperator(

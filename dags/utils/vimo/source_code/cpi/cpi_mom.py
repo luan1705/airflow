@@ -24,6 +24,7 @@ COMPONENTS = {
     "May mặc, mũ nón và giày dép ":             "clothing",
     "Nhà ở, điện nước, chất đốt và VLXD(*)":   "housing",
     "Nhà ở, điện nước, chất đốt và VLXD (*)":  "housing",
+    "Nhà ở, điện, nước, chất đốt và vật liệu xây dựng": "housing",
     "Nhà ở và vật liệu xây dựng":               "housing",
     "Nhà ở và vật liệu xây dựng(*)":            "housing",
     "Thiết bị và đồ dùng gia đình":             "household",
@@ -68,32 +69,83 @@ def to_float(val):
         return None
 
 
-def get_mom_col(ws):
-    """Detect động cột MoM (cột cuối cùng có 'tháng' trong header, bỏ kỳ gốc và YTD).
-    Cột cuối = tháng gần nhất = tháng trước.
-    T1 chỉ có 1 cột tháng (so T12 năm trước) → trả về cột đó.
+def get_mom_col(ws, report_time: date):
     """
-    col_texts = {}
-    for i, row in enumerate(ws.iter_rows(values_only=True)):
-        if any(v is not None for v in row):
-            for ci, val in enumerate(row):
-                if val is not None and not isinstance(val, float):
-                    col_texts[ci] = col_texts.get(ci, '') + ' ' + str(val).strip().lower()
-        if i > 10:
+    Tìm cột so với tháng trước.
+
+    Ví dụ:
+        file 2026_07 -> tìm "Tháng 6", năm 2026
+        file 2025_05 -> tìm "Tháng 4", năm 2025
+        file 2026_01 -> tìm "Tháng 12", năm 2025
+    """
+    if report_time.month == 1:
+        previous_month = 12
+        previous_year = report_time.year - 1
+    else:
+        previous_month = report_time.month - 1
+        previous_year = report_time.year
+
+    headers = {}
+
+    for row_idx, row in enumerate(
+        ws.iter_rows(values_only=True),
+        start=1,
+    ):
+        if row_idx > 12:
             break
 
-    month_cols = []
-    for ci, text in sorted(col_texts.items()):
-        if ci <= 1:
-            continue
-        if 'kỳ gốc' in text:
-            continue
-        if 'bình quân' in text or ('năm 20' in text and 'tháng' not in text):
-            continue
-        if 'tháng' in text and 'quý' not in text:
-            month_cols.append(ci)
+        for col_idx, value in enumerate(row):
+            if value is None:
+                continue
 
-    return month_cols[-1] if month_cols else None
+            headers[col_idx] = (
+                headers.get(col_idx, "")
+                + " "
+                + str(value).strip().lower()
+            )
+
+    month_pattern = re.compile(
+        rf"\btháng\s*0?{previous_month}\b",
+        flags=re.IGNORECASE,
+    )
+
+    candidates = []
+
+    for col_idx, header in headers.items():
+        normalized = re.sub(r"\s+", " ", header)
+
+        if not month_pattern.search(normalized):
+            continue
+
+        if str(previous_year) not in normalized:
+            continue
+
+        if "bình quân" in normalized:
+            continue
+
+        if "cùng kỳ" in normalized:
+            continue
+
+        if "kỳ gốc" in normalized:
+            continue
+
+        candidates.append(col_idx)
+
+    if not candidates:
+        raise ValueError(
+            f"Không tìm thấy cột MoM tương ứng "
+            f"tháng {previous_month}/{previous_year}"
+        )
+
+    mom_col = candidates[-1]
+
+    print(
+        f"✅ Cột MoM: index={mom_col}, "
+        f"Excel column={openpyxl.utils.get_column_letter(mom_col + 1)}, "
+        f"header={headers[mom_col]}"
+    )
+
+    return mom_col
 
 
 def parse_cpi_mom(file_path: str) -> pd.DataFrame:
@@ -102,7 +154,7 @@ def parse_cpi_mom(file_path: str) -> pd.DataFrame:
 
     wb      = openpyxl.load_workbook(file_path, read_only=True)
     ws      = wb[sheet]
-    mom_col = get_mom_col(ws)
+    mom_col = get_mom_col(ws,time)
 
     unique_cols = list(dict.fromkeys(COMPONENTS.values()))
     result = {"time": time}
@@ -192,37 +244,37 @@ def get_latest_file(data_dir: str) -> str:
 
 #=======================Chạy file chỉ định trực tiếp trong terminal=====================
 # def cpi_mom(**context):
-#     save_cpi_mom("../../data/2023_01.xlsx")
+#     save_cpi_mom("../../data/excel/2023_01.xlsx")
 
 #=======================Chạy file chỉ định airflow=====================
 # def cpi_mom(**context):
-#     save_cpi_mom("/opt/airflow/dags/utils/vimo/data/2026_01.xlsx")
+#     save_cpi_mom("/opt/airflow/dags/utils/vimo/data/excel/2026_01.xlsx")
 
-# =====================Chạy file mới nhất=====================
-# def cpi_mom(**context):
-#     data_dir  = os.path.join(os.path.dirname(__file__), "../../data")
-#     file_path = get_latest_file(data_dir)
-#     print(f"📂 File mới nhất: {file_path}")
-#     save_cpi_mom(file_path)
-
-# =====================Chạy tất cả file=====================
+#=====================Chạy file mới nhất=====================
 def cpi_mom(**context):
-    data_dir = os.path.join(os.path.dirname(__file__), "../../data")
-    files    = glob.glob(os.path.join(data_dir, "*.xlsx"))
-    if not files:
-        raise FileNotFoundError(f"Không tìm thấy file xlsx trong {data_dir}")
-    for file_path in sorted(files, key=_sort_key):
-        print(f"📂 Đang chạy: {file_path}")
-        try:
-            save_cpi_mom(file_path)
-        except Exception as e:
-            print(f"⚠️ Lỗi {file_path}: {e} — upsert null")
-            try:
-                time = parse_time_from_filename(file_path)
-                df = pd.DataFrame([{"time": time}])
-                upsert_cpi_mom(df)
-            except Exception as e2:
-                print(f"⚠️ Bỏ qua {file_path}: {e2}")
+    data_dir  = os.path.join(os.path.dirname(__file__), "../../data/excel")
+    file_path = get_latest_file(data_dir)
+    print(f"📂 File mới nhất: {file_path}")
+    save_cpi_mom(file_path)
+
+# # =====================Chạy tất cả file=====================
+# def cpi_mom(**context):
+#     data_dir = os.path.join(os.path.dirname(__file__), "../../data/excel")
+#     files    = glob.glob(os.path.join(data_dir, "*.xlsx"))
+#     if not files:
+#         raise FileNotFoundError(f"Không tìm thấy file xlsx trong {data_dir}")
+#     for file_path in sorted(files, key=_sort_key):
+#         print(f"📂 Đang chạy: {file_path}")
+#         try:
+#             save_cpi_mom(file_path)
+#         except Exception as e:
+#             print(f"⚠️ Lỗi {file_path}: {e} — upsert null")
+#             try:
+#                 time = parse_time_from_filename(file_path)
+#                 df = pd.DataFrame([{"time": time}])
+#                 upsert_cpi_mom(df)
+#             except Exception as e2:
+#                 print(f"⚠️ Bỏ qua {file_path}: {e2}")
 
 #===============================================================
 

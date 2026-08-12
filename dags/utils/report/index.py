@@ -169,6 +169,309 @@ def index_missing():
     print(f"🔍 Phát hiện {len(missing_symbols)} symbol thiếu: {missing_symbols}")
     return _run_symbols(missing_symbols)
 
+def insert_new_index_periods(conn, table_name, rows):
+    """
+    Chỉ insert các kỳ chưa tồn tại theo:
+        yearReport + lengthReport
+
+    Không drop table.
+    Không alter table.
+    Không update dữ liệu cũ.
+    """
+    if not rows:
+        return 0
+
+    rows = [normalize_row(r) for r in rows]
+
+    # Lấy các kỳ đã có trong DB
+    with conn.cursor() as cur:
+        cur.execute(f"""
+            SELECT
+                "yearReport",
+                "lengthReport"
+            FROM index."{table_name}"
+        """)
+
+        existing_rows = cur.fetchall()
+
+    existing_keys = {
+        (
+            to_float(year_report),
+            to_float(length_report),
+        )
+        for year_report, length_report in existing_rows
+    }
+
+    # Chỉ giữ kỳ API có nhưng DB chưa có
+    new_rows = []
+
+    for row in rows:
+        key = (
+            to_float(row.get("yearReport")),
+            to_float(row.get("lengthReport")),
+        )
+
+        if key not in existing_keys:
+            new_rows.append(row)
+
+    if not new_rows:
+        return 0
+
+    # Insert kỳ mới
+    keys = new_rows[0].keys()
+
+    cols = ",".join(
+        f'"{k}"'
+        for k in keys
+    )
+
+    values = [
+        [
+            row.get(k)
+            for k in keys
+        ]
+        for row in new_rows
+    ]
+
+    sql = f"""
+        INSERT INTO index."{table_name}" ({cols})
+        VALUES %s
+    """
+
+    with conn.cursor() as cur:
+        execute_values(
+            cur,
+            sql,
+            values,
+        )
+
+    conn.commit()
+
+    return len(new_rows)
+
+
+def update_one_index_symbol(symbol):
+    """
+    Chỉ thêm kỳ mới cho một symbol.
+    Không drop bảng.
+    Không alter bảng.
+    """
+    try:
+        symbol = symbol.upper()
+
+        url = BASE_URL.format(
+            symbol=symbol
+        )
+
+        res = requests.get(
+            url,
+            headers=HEADERS,
+            timeout=10,
+        )
+
+        if res.status_code != 200:
+            return f"[ERROR] {symbol} {res.status_code}"
+
+        data = res.json().get(
+            "data",
+            [],
+        )
+
+        if not data:
+            return f"[EMPTY] {symbol}"
+
+        table_name = sanitize_table_name(
+            symbol
+        )
+
+        with psycopg2.connect(DB_URL) as conn:
+
+            # Kiểm tra bảng đã tồn tại chưa
+            with conn.cursor() as cur:
+                cur.execute("""
+                    SELECT EXISTS (
+                        SELECT 1
+                        FROM information_schema.tables
+                        WHERE table_schema = 'index'
+                          AND table_name = %s
+                    )
+                """, (table_name,))
+
+                table_exists = cur.fetchone()[0]
+
+            # Chưa có bảng:
+            # tạo bảng và insert toàn bộ như logic cũ
+            if not table_exists:
+                create_table_if_not_exists(
+                    conn,
+                    table_name,
+                    data[0],
+                )
+
+                insert_data(
+                    conn,
+                    table_name,
+                    data,
+                )
+
+                return (
+                    f"[OK] {symbol}: "
+                    f"tạo mới {len(data)} rows"
+                )
+
+            # Đã có bảng:
+            # chỉ thêm kỳ mới
+            inserted = insert_new_index_periods(
+                conn,
+                table_name,
+                data,
+            )
+
+        if inserted == 0:
+            log.info(
+                f"✅ {symbol}: Không có kỳ mới"
+            )
+
+            return (
+                f"{symbol}: No new period"
+            )
+
+        log.info(
+            f"✅ {symbol}: thêm {inserted} kỳ mới"
+        )
+
+        return f"{symbol}: +{inserted}"
+
+    except Exception as e:
+        log.error(
+            f"❌ {symbol}: {e}"
+        )
+
+        return (
+            f"[FAIL] {symbol}: {e}"
+        )
+
+
+def _run_index_update(symbols):
+    print(
+        f"🚀 Kiểm tra cập nhật "
+        f"{len(symbols)} symbol..."
+    )
+
+    results = []
+
+    with concurrent.futures.ThreadPoolExecutor(
+        max_workers=20
+    ) as executor:
+
+        futures = {
+            executor.submit(
+                update_one_index_symbol,
+                symbol,
+            ): symbol
+            for symbol in symbols
+        }
+
+        for future in concurrent.futures.as_completed(
+            futures
+        ):
+            symbol = futures[future]
+
+            try:
+                results.append(
+                    future.result()
+                )
+
+            except Exception as exc:
+                log.error(
+                    f"❌ {symbol}: {exc}"
+                )
+
+                results.append(
+                    f"[FAIL] {symbol}: {exc}"
+                )
+
+    updated = [
+        result
+        for result in results
+        if ": +" in result
+    ]
+
+    errors = [
+        result
+        for result in results
+        if (
+            "[ERROR]" in result
+            or "[EMPTY]" in result
+            or "[FAIL]" in result
+        )
+    ]
+
+    log.info(
+        f"✅ Tổng số mã kiểm tra: "
+        f"{len(results)}"
+    )
+
+    log.info(
+        f"🆕 Có kỳ mới: "
+        f"{len(updated)} mã"
+    )
+
+    log.info(
+        f"❌ Tổng số lỗi: "
+        f"{len(errors)}"
+    )
+
+    if updated:
+        log.info(
+            "📈 Các mã có dữ liệu mới:"
+        )
+
+        for result in updated:
+            log.info(result)
+
+    if errors:
+        log.warning(
+            "📛 Chi tiết các mã lỗi:"
+        )
+
+        for result in errors:
+            log.warning(result)
+
+    print("✅ Hoàn tất cập nhật!")
+
+    return {
+        "total": len(results),
+        "updated": len(updated),
+        "errors": len(errors),
+    }
+
+
+def index_update():
+    """
+    Chỉ cập nhật kỳ tài chính mới.
+
+    Không drop bảng.
+    Không alter bảng.
+    Không sửa kỳ cũ.
+    """
+    symbols = pd.read_sql(
+        text("""
+            SELECT symbol
+            FROM info.asset
+            WHERE exchange IN (
+                'HOSE',
+                'HNX',
+                'UPCOM'
+            )
+              AND type = 'Stock'
+        """),
+        engine,
+    )["symbol"].tolist()
+
+    return _run_index_update(
+        symbols
+    )
 
 if __name__ == "__main__":
     index_full()

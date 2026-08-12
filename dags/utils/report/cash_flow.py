@@ -205,6 +205,273 @@ def cash_flow_missing():
     print(f"🔍 Phát hiện {len(missing_symbols)} symbol thiếu: {missing_symbols}")
     return _run_symbols(missing_symbols, page)
 
+def insert_new_periods(conn, schema: str, table: str, df: pd.DataFrame):
+    """
+    Chỉ insert các kỳ tài chính chưa tồn tại.
+    Khóa logic: yearReport + lengthReport
+    """
+    if df.empty:
+        return 0
+
+    table_exists = conn.execute(
+        text("""
+            SELECT EXISTS (
+                SELECT 1
+                FROM information_schema.tables
+                WHERE table_schema = :schema
+                  AND table_name = :table
+            )
+        """),
+        {
+            "schema": schema,
+            "table": table,
+        },
+    ).scalar()
+
+    if not table_exists:
+        create_table_with_typed_columns(
+            conn,
+            schema,
+            table,
+            df,
+        )
+
+        insert_df(
+            conn,
+            schema,
+            table,
+            df,
+        )
+
+        return len(df)
+
+    existing = pd.read_sql(
+        text(f"""
+            SELECT
+                "yearReport",
+                "lengthReport"
+            FROM "{schema}"."{table}"
+        """),
+        conn,
+    )
+
+    if existing.empty:
+        new_df = df.copy()
+
+    else:
+        existing["yearReport"] = pd.to_numeric(
+            existing["yearReport"],
+            errors="coerce",
+        )
+
+        existing["lengthReport"] = pd.to_numeric(
+            existing["lengthReport"],
+            errors="coerce",
+        )
+
+        api_df = df.copy()
+
+        api_df["yearReport"] = pd.to_numeric(
+            api_df["yearReport"],
+            errors="coerce",
+        )
+
+        api_df["lengthReport"] = pd.to_numeric(
+            api_df["lengthReport"],
+            errors="coerce",
+        )
+
+        existing_keys = set(
+            zip(
+                existing["yearReport"],
+                existing["lengthReport"],
+            )
+        )
+
+        mask = [
+            (year, length) not in existing_keys
+            for year, length in zip(
+                api_df["yearReport"],
+                api_df["lengthReport"],
+            )
+        ]
+
+        new_df = api_df.loc[mask].copy()
+
+    if new_df.empty:
+        return 0
+
+    insert_df(
+        conn,
+        schema,
+        table,
+        new_df,
+    )
+
+    return len(new_df)
+
+
+def update_one_cash_flow_symbol(symbol: str, page: str):
+    """
+    Chỉ thêm quý/năm mới cho một symbol.
+    Không drop bảng cũ.
+    Không đụng tới METRIC.
+    """
+    try:
+        data, _ = fetch_cash_flow(
+            symbol,
+            page,
+        )
+
+        if data.empty:
+            log.warning(f"⚠️ {symbol}: No data")
+            return f"{symbol}: No data"
+
+        table_data = symbol.upper()
+
+        with engine.begin() as conn:
+            inserted = insert_new_periods(
+                conn,
+                SCHEMA,
+                table_data,
+                data,
+            )
+
+        if inserted == 0:
+            log.info(f"✅ {symbol}: Không có kỳ mới")
+            return f"{symbol}: No new period"
+
+        log.info(
+            f"✅ {symbol}: thêm {inserted} kỳ mới"
+        )
+
+        return f"{symbol}: +{inserted}"
+
+    except Exception as e:
+        log.error(
+            f"❌ {symbol}: {e}"
+        )
+        return f"{symbol}: ERROR ({e})"
+
+
+def _run_cash_flow_update(
+    symbols,
+    page,
+):
+    print(
+        f"🚀 Kiểm tra cập nhật {len(symbols)} symbol..."
+    )
+
+    results = []
+
+    with concurrent.futures.ThreadPoolExecutor(
+        max_workers=5
+    ) as executor:
+
+        futures = {
+            executor.submit(
+                update_one_cash_flow_symbol,
+                symbol,
+                page,
+            ): symbol
+            for symbol in symbols
+        }
+
+        for future in concurrent.futures.as_completed(
+            futures
+        ):
+            symbol = futures[future]
+
+            try:
+                results.append(
+                    future.result()
+                )
+
+            except Exception as exc:
+                log.error(
+                    f"❌ {symbol}: {exc}"
+                )
+
+                results.append(
+                    f"{symbol}: ERROR ({exc})"
+                )
+
+            time.sleep(0.3)
+
+    updated = [
+        result
+        for result in results
+        if ": +" in result
+    ]
+
+    errors = [
+        result
+        for result in results
+        if "ERROR" in result
+        or "No data" in result
+    ]
+
+    log.info(
+        f"✅ Tổng số mã kiểm tra: {len(results)}"
+    )
+
+    log.info(
+        f"🆕 Có kỳ mới: {len(updated)} mã"
+    )
+
+    log.info(
+        f"❌ Lỗi: {len(errors)} mã"
+    )
+
+    if updated:
+        log.info("📈 Các mã có dữ liệu mới:")
+
+        for result in updated:
+            log.info(result)
+
+    if errors:
+        log.warning("📛 Các mã lỗi:")
+
+        for result in errors:
+            log.warning(result)
+
+    print("✅ Hoàn tất cập nhật!")
+
+    return {
+        "total": len(results),
+        "updated": len(updated),
+        "errors": len(errors),
+    }
+
+
+def cash_flow_update():
+    """
+    Chạy định kỳ để lấy quý/năm mới.
+
+    Không drop dữ liệu cash_flow cũ.
+    Chỉ insert kỳ chưa có theo:
+        yearReport + lengthReport
+    """
+    page = "CASH_FLOW"
+
+    symbols = pd.read_sql(
+        text("""
+            SELECT symbol
+            FROM info.asset
+            WHERE exchange IN (
+                'HOSE',
+                'HNX',
+                'UPCOM'
+            )
+              AND type = 'Stock'
+        """),
+        engine,
+    )["symbol"].tolist()
+
+    return _run_cash_flow_update(
+        symbols,
+        page,
+    )
 
 if __name__ == "__main__":
     cash_flow_full()

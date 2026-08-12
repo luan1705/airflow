@@ -174,22 +174,22 @@ def get_latest_file(data_dir: str) -> str:
 
 #=======================Chạy file chỉ định trực tiếp trong terminal=====================
 # def business(**context):
-#     save_business("../../data/2026_01.xlsx")
+#     save_business("../../data/excel/2026_01.xlsx")
 
 #=======================Chạy file chỉ định airflow=====================
 # def business(**context):
-#     save_business("/opt/airflow/dags/utils/vimo/data/2020_09.xlsx")
+#     save_business("/opt/airflow/dags/utils/vimo/data/excel/2020_09.xlsx")
 
 # =====================Chạy file mới nhất=====================
 def business(**context):
-    data_dir  = os.path.join(os.path.dirname(__file__), "../../data")
+    data_dir  = os.path.join(os.path.dirname(__file__), "../../data/excel")
     file_path = get_latest_file(data_dir)
     print(f"📂 File mới nhất: {file_path}")
     save_business(file_path)
 
 # =====================Chạy tất cả file=====================
 # def business(**context):
-#     data_dir = os.path.join(os.path.dirname(__file__), "../../data")
+#     data_dir = os.path.join(os.path.dirname(__file__), "../../data/excel")
 #     files    = glob.glob(os.path.join(data_dir, "*.xlsx"))
 #     if not files:
 #         raise FileNotFoundError(f"Không tìm thấy file xlsx trong {data_dir}")
