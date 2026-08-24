@@ -27,45 +27,65 @@ def pepb_breadth():
     df_all['time'] = pd.to_datetime(df_all['time'])
     df_all = df_all.merge(asset, on='symbol', how='inner').sort_values(['symbol', 'time'])
 
+    WINDOW_1Y = 252
+    WINDOW_3Y = 756
+    WINDOW_5Y = 1260
+
     for exchange in ['HOSE', 'HNX', 'UPCOM']:
         df_ex = df_all[df_all['exchange'] == exchange].copy()
 
         pe = df_ex.pivot(index='time', columns='symbol', values='pe').sort_index()
         pb = df_ex.pivot(index='time', columns='symbol', values='pb').sort_index()
 
-        den_pe = pe.notna().sum(axis=1).replace(0, float('nan'))
-        den_pb = pb.notna().sum(axis=1).replace(0, float('nan'))
+        pe_hist = pe.shift(1)
+        pb_hist = pb.shift(1)
 
-        WINDOW_1Y = 252
-        WINDOW_3Y = 756
-        WINDOW_5Y = 1260
+        pe_mean_1y = pe_hist.rolling(WINDOW_1Y, min_periods=60).mean()
+        pe_std_1y  = pe_hist.rolling(WINDOW_1Y, min_periods=60).std()
+        pb_mean_1y = pb_hist.rolling(WINDOW_1Y, min_periods=60).mean()
 
-        pe_mean_1y = pe.rolling(WINDOW_1Y, min_periods=60).mean()
-        pe_std_1y  = pe.rolling(WINDOW_1Y, min_periods=60).std()
-        pb_mean_1y = pb.rolling(WINDOW_1Y, min_periods=60).mean()
+        pe_mean_3y = pe_hist.rolling(WINDOW_3Y, min_periods=180).mean()
+        pe_std_3y  = pe_hist.rolling(WINDOW_3Y, min_periods=180).std()
+        pb_mean_3y = pb_hist.rolling(WINDOW_3Y, min_periods=180).mean()
 
-        pe_mean_3y = pe.rolling(WINDOW_3Y, min_periods=180).mean()
-        pe_std_3y  = pe.rolling(WINDOW_3Y, min_periods=180).std()
-        pb_mean_3y = pb.rolling(WINDOW_3Y, min_periods=180).mean()
+        pe_mean_5y = pe_hist.rolling(WINDOW_5Y, min_periods=252).mean()
+        pe_std_5y  = pe_hist.rolling(WINDOW_5Y, min_periods=252).std()
+        pb_mean_5y = pb_hist.rolling(WINDOW_5Y, min_periods=252).mean()
 
-        pe_mean_5y = pe.rolling(WINDOW_5Y, min_periods=252).mean()
-        pe_std_5y  = pe.rolling(WINDOW_5Y, min_periods=252).std()
-        pb_mean_5y = pb.rolling(WINDOW_5Y, min_periods=252).mean()
+        valid_pe_1y = pe.notna() & pe_mean_1y.notna()
+        valid_pe_3y = pe.notna() & pe_mean_3y.notna()
+        valid_pe_5y = pe.notna() & pe_mean_5y.notna()
 
+        valid_pb_1y = pb.notna() & pb_mean_1y.notna()
+        valid_pb_3y = pb.notna() & pb_mean_3y.notna()
+        valid_pb_5y = pb.notna() & pb_mean_5y.notna()
+
+        valid_pe_std_1y = valid_pe_1y & pe_std_1y.notna()
+        valid_pe_std_3y = valid_pe_3y & pe_std_3y.notna()
+        valid_pe_std_5y = valid_pe_5y & pe_std_5y.notna()
+
+        def pct(condition, valid):
+            numerator = condition.where(valid, False).sum(axis=1)
+            denominator = valid.sum(axis=1).replace(0, float('nan'))
+            return (numerator / denominator * 100).round(2)
 
         result = pd.DataFrame({
-            'peBelowAvg1YPct':  ((pe < pe_mean_1y).sum(axis=1) / den_pe * 100).round(2),
-            'pbBelowAvg1YPct':  ((pb < pb_mean_1y).sum(axis=1) / den_pb * 100).round(2),
-            'peAbove1Std1YPct': ((pe > (pe_mean_1y + pe_std_1y)).sum(axis=1) / den_pe * 100).round(2),
-            'peBelowAvg3YPct':  ((pe < pe_mean_3y).sum(axis=1) / den_pe * 100).round(2),
-            'pbBelowAvg3YPct':  ((pb < pb_mean_3y).sum(axis=1) / den_pb * 100).round(2),
-            'peAbove1Std3YPct': ((pe > (pe_mean_3y + pe_std_3y)).sum(axis=1) / den_pe * 100).round(2),
-            'peBelowAvg5YPct':  ((pe < pe_mean_5y).sum(axis=1) / den_pe * 100).round(2),
-            'pbBelowAvg5YPct':  ((pb < pb_mean_5y).sum(axis=1) / den_pb * 100).round(2),
-            'peAbove1Std5YPct': ((pe > (pe_mean_5y + pe_std_5y)).sum(axis=1) / den_pe * 100).round(2),
+            'peBelowAvg1YPct': pct(pe < pe_mean_1y, valid_pe_1y),
+            'pbBelowAvg1YPct': pct(pb < pb_mean_1y, valid_pb_1y),
+            'peAbove1Std1YPct': pct(pe > (pe_mean_1y + pe_std_1y), valid_pe_std_1y),
+            'peBelowAvg3YPct': pct(pe < pe_mean_3y, valid_pe_3y),
+            'pbBelowAvg3YPct': pct(pb < pb_mean_3y, valid_pb_3y),
+            'peAbove1Std3YPct': pct(pe > (pe_mean_3y + pe_std_3y), valid_pe_std_3y),
+            'peBelowAvg5YPct': pct(pe < pe_mean_5y, valid_pe_5y),
+            'pbBelowAvg5YPct': pct(pb < pb_mean_5y, valid_pb_5y),
+            'peAbove1Std5YPct': pct(pe > (pe_mean_5y + pe_std_5y), valid_pe_std_5y),
         }).reset_index()
 
-        result = result.dropna(subset=['peBelowAvg1YPct', 'pbBelowAvg1YPct', 'peBelowAvg3YPct', 'pbBelowAvg3YPct', 'peBelowAvg5YPct', 'pbBelowAvg5YPct'], how='all')
+        result = result.dropna(subset=[
+            'peBelowAvg1YPct', 'pbBelowAvg1YPct', 'peAbove1Std1YPct',
+            'peBelowAvg3YPct', 'pbBelowAvg3YPct', 'peAbove1Std3YPct',
+            'peBelowAvg5YPct', 'pbBelowAvg5YPct', 'peAbove1Std5YPct'
+        ], how='all')
 
         table = f'breadth_{exchange}'
         with engine.begin() as conn:

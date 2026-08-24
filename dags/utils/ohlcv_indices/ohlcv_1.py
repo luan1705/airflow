@@ -1,8 +1,8 @@
 from sqlalchemy import create_engine, text
 import pandas as pd
 import concurrent.futures
-from datetime import datetime
-from .tradingview import tradingview
+from datetime import datetime, timedelta
+from .ohlcv_api import tradingview
 from utils.create_list.symbol_list import HOSE, HNX, UPCOM, DERIVATIVES, CW, HNXBOND, ETFHOSE, indices, custom_list
 import time
 import logging
@@ -55,7 +55,7 @@ def ensure_table_and_pk(conn, schema: str, table: str):
         close    DOUBLE PRECISION,
         high     DOUBLE PRECISION,
         low      DOUBLE PRECISION,
-        volume   BIGINT,
+        volume   DOUBLE PRECISION,
         CONSTRAINT {_qi(pk_name)} PRIMARY KEY (time)
     );
     """
@@ -77,7 +77,7 @@ def ensure_table_and_pk(conn, schema: str, table: str):
     if not pk_cols:
         try:
             conn.execute(text(f'ALTER TABLE {fqtn} ADD CONSTRAINT {_qi(pk_name)} PRIMARY KEY (time);'))
-        except Exception:
+        except Exception as e:
             # Có thể PK đã tồn tại với tên khác / dữ liệu trùng, cứ bỏ qua
             log.warning(f"Không thể ADD PRIMARY KEY cho {schema}.{table}: {e}")
     elif pk_cols != {"time"}:
@@ -88,10 +88,13 @@ def ensure_table_and_pk(conn, schema: str, table: str):
 def get_stock(symbol):
     try:
         time.sleep(1)
-        today = datetime.now().strftime('%Y-%m-%d')
+        today = datetime.now()
+        batdau = today - timedelta(days=3)
+        today = today.strftime('%Y-%m-%d')
+        batdau = batdau.strftime('%Y-%m-%d')
 
         # Lấy dữ liệu lịch sử
-        stock = tradingview(symbol=symbol, start='2000-01-01', end=today, time='minutes')
+        stock = tradingview(symbol=symbol, start=batdau, end=today, time='minutes')
         # exch = (
         #  'HOSE' if symbol in HOSE else
         #  'HNX' if symbol in HNX else
@@ -128,20 +131,29 @@ def get_stock(symbol):
 
         # Ghi vào PostgreSQL
         with engine.begin() as conn:
-            # Đảm bảo bảng + PK(time)
+            # Tạo bảng (nếu chưa có) với PK(time)
             ensure_table_and_pk(conn, SCHEMA, table_name)
 
-            # Replace-all: TRUNCATE rồi insert lại
-            conn.execute(text(f"TRUNCATE TABLE {_quoted(SCHEMA, table_name)};"))
+            # UPSERT theo time
+            rows = [tuple(x) for x in stock.to_numpy()]
+            cols = ', '.join([_qi(c) for c in stock.columns])
+            update_cols = [c for c in stock.columns if c not in ['time']]
+            update_set = ', '.join([f'{_qi(c)} = EXCLUDED.{_qi(c)}' for c in update_cols])
 
-            stock.to_sql(
-                name=table_name,
-                con=conn,               # dùng connection trong transaction
-                schema=SCHEMA,
-                if_exists='append',
-                index=False,
-                chunksize=800,
-                method='multi'
+            insert_sql = f"""
+                INSERT INTO {_quoted(SCHEMA, table_name)} ({cols})
+                VALUES %s
+                ON CONFLICT ("time")
+                DO UPDATE SET
+                    {update_set};
+            """
+
+            from psycopg2.extras import execute_values
+            execute_values(
+                conn.connection.cursor(),
+                insert_sql,
+                rows,
+                page_size=800
             )
     
         msg = f"✅ Đã lưu {symbol}"

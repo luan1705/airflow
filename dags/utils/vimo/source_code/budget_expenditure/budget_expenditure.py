@@ -427,57 +427,57 @@ def get_latest_file(data_dir: str) -> str:
 
 #=====================Chạy file mới nhất=====================
 
-# def budget_expenditure(**context):
-#     data_dir = os.path.join(
-#         os.path.dirname(__file__),
-#         "../../data/word",
-#     )
-#
-#     file_path = get_latest_file(data_dir)
-#
-#     print(f"📂 File mới nhất: {file_path}")
-#
-#     save_budget_expenditure(
-#         file_path
-#     )
-
-
-#=====================Chạy tất cả file=====================
-
 def budget_expenditure(**context):
     data_dir = os.path.join(
         os.path.dirname(__file__),
         "../../data/word",
     )
 
-    files = glob.glob(
-        os.path.join(data_dir, "*.docx")
+    file_path = get_latest_file(data_dir)
+
+    print(f"📂 File mới nhất: {file_path}")
+
+    save_budget_expenditure(
+        file_path
     )
 
-    if not files:
-        raise FileNotFoundError(
-            f"Không tìm thấy file docx trong {data_dir}"
-        )
 
-    for file_path in sorted(
-        files,
-        key=_sort_key,
-    ):
-        print(
-            f"📂 Đang chạy: {file_path}"
-        )
+#=====================Chạy tất cả file=====================
 
-        try:
-            save_budget_expenditure(
-                file_path
-            )
+# def budget_expenditure(**context):
+#     data_dir = os.path.join(
+#         os.path.dirname(__file__),
+#         "../../data/word",
+#     )
 
-        except Exception as exc:
-            log.exception(
-                "Lỗi file %s: %s",
-                file_path,
-                exc,
-            )
+#     files = glob.glob(
+#         os.path.join(data_dir, "*.docx")
+#     )
+
+#     if not files:
+#         raise FileNotFoundError(
+#             f"Không tìm thấy file docx trong {data_dir}"
+#         )
+
+#     for file_path in sorted(
+#         files,
+#         key=_sort_key,
+#     ):
+#         print(
+#             f"📂 Đang chạy: {file_path}"
+#         )
+
+#         try:
+#             save_budget_expenditure(
+#                 file_path
+#             )
+
+#         except Exception as exc:
+#             log.exception(
+#                 "Lỗi file %s: %s",
+#                 file_path,
+#                 exc,
+#             )
 
 
 if __name__ == "__main__":

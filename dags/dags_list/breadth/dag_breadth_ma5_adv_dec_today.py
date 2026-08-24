@@ -9,7 +9,7 @@ from utils.exchange_history.breadth.today import ma5_adv_dec_today
 VN_TZ = timezone("Asia/Ho_Chi_Minh")
 
 default_args = {
-    "retries": 10,
+    "retries": 3,
     "retry_delay": timedelta(seconds=3),
     "retry_exponential_backoff": True,
     "max_retry_delay": timedelta(minutes=5),
@@ -41,11 +41,12 @@ with DAG(
     gate_continue = ShortCircuitOperator(
         task_id="in_live_hours",
         python_callable=should_continue,
+        trigger_rule="all_done"
     )
 
     wait = TimeDeltaSensor(
-        task_id="wait_10s",
-        delta=timedelta(seconds=10),
+        task_id="wait_5s",
+        delta=timedelta(seconds=5),
     )
 
     trigger_next = TriggerDagRunOperator(

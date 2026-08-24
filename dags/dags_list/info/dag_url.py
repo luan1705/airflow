@@ -13,10 +13,10 @@ default_args = {
 }
 
 with DAG(
-    dag_id="url",
+    dag_id="info_url",
     default_args=default_args,
     start_date=datetime(2026, 6, 28, tzinfo=timezone("Asia/Ho_Chi_Minh")),
-    schedule_interval= None,   # chạy mỗi phút
+    schedule_interval= "0 17 * * 1-5",  # Chạy vào 17h00 từ thứ 2 đến thứ 6 hàng tuần
     catchup=False,
     tags=["info", "asset", "url"]
 ) as dag:

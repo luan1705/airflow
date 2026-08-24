@@ -16,7 +16,7 @@ with DAG(
     start_date=datetime(2025,12,18,tzinfo=timezone("Asia/Ho_Chi_Minh")),
     schedule="15 15 * * 1-5",
     catchup= False,
-    tags=["DB", "ETL"]
+    tags=["ohlcv", "asset", "ssi"],
 ) as dag:
 
     tradingview_1D=PythonOperator(

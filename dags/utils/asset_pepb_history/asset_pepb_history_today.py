@@ -44,7 +44,7 @@ def calc_pepb_today(symbol: str):
             SELECT "numberOfSharesMktCap"
             FROM index."{symbol}"
             WHERE "ratioType" = 'RATIO_TTM'
-              AND "quarter" = {target_quarter}
+              AND "lengthReport" = {target_quarter}
               AND "yearReport" = {target_year}
             LIMIT 1
         """, engine)

@@ -63,12 +63,12 @@ def calc_pepb(symbol: str):
         idx = pd.read_sql(f"""
             SELECT
                 "yearReport",
-                "quarter" AS "lengthReport",
+                "lengthReport",
                 "numberOfSharesMktCap"
             FROM index."{symbol}"
             WHERE "ratioType" = 'RATIO_TTM'
-              AND "quarter" != 5
-            ORDER BY "yearReport", "quarter"
+              AND "lengthReport" != 5
+            ORDER BY "yearReport", "lengthReport"
         """, engine)
 
         idx['yearReport'] = pd.to_numeric(

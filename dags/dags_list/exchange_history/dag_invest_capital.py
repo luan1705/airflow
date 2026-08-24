@@ -16,7 +16,7 @@ with DAG(
     dag_id="invest_capital",
     default_args=default_args,
     start_date=datetime(2026, 6, 4, tzinfo=timezone("Asia/Ho_Chi_Minh")),
-    schedule_interval="0 9 * * 1-5",   # chạy mỗi ngày
+    schedule_interval="16 18 * * 1-5",   # chạy mỗi ngày
     catchup=False,
     tags=["exchange_history", "invest_capital"]
 ) as dag:

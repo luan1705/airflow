@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, text
 import pandas as pd
 import logging
 
@@ -8,13 +8,18 @@ logging.basicConfig(
     handlers=[logging.StreamHandler()]
 )
 
+DB_URL = "postgresql+psycopg2://root:Dnl_123456@tanhungsoft.com:5432/dnl"
+
 def impact():
-    enginedb = create_engine("postgresql+psycopg2://root:Dnl_123456@tanhungsoft.com:5432/dnl")
+    enginedb = create_engine(DB_URL)
 
     try:
         logging.info("Kết nối DB")
 
-        # ====== LOAD asset ======
+        # =========================
+        # LOAD ASSET
+        # =========================
+
         df1 = pd.read_sql(
             """
             SELECT * 
@@ -47,19 +52,52 @@ def impact():
         # ====== ✅ CHỈ LƯU 1 BẢNG GỘP ======
         out = data[["exchange", "symbol", "impact"]].copy()
         out = out.sort_values(by=["exchange", "impact"], ascending=[True, False]).reset_index(drop=True)
+        rows = out.to_dict("records")
 
-        out.to_sql(
-            name="exchange_impact",
-            schema="details",
-            con=enginedb,
-            if_exists="replace",
-            index=False
+        if not rows:
+            logging.warning("⚠️ Không có dữ liệu impact")
+            return
+
+        # =========================
+        # CREATE TABLE + TRUNCATE + INSERT
+        # =========================
+        with enginedb.begin() as conn:
+
+            conn.execute(text("""
+                CREATE TABLE IF NOT EXISTS details.exchange_impact (
+                    exchange TEXT NOT NULL,
+                    symbol TEXT NOT NULL,
+                    impact DOUBLE PRECISION
+                )
+            """))
+
+            conn.execute(text("""
+                TRUNCATE TABLE details.exchange_impact
+            """))
+
+            conn.execute(
+                text("""
+                    INSERT INTO details.exchange_impact (
+                        exchange,
+                        symbol,
+                        impact
+                    )
+                    VALUES (
+                        :exchange,
+                        :symbol,
+                        :impact
+                    )
+                """),
+                rows
+            )
+
+        logging.info(
+            "✅ Đã truncate + insert %d rows vào details.exchange_impact",
+            len(rows)
         )
 
-        logging.info("✅ Đã lưu market_data.impact_exchange")
-
     except Exception:
-        logging.exception("❌ Lỗi lưu impact_exchange")
+        logging.exception("❌ Lỗi lưu details.exchange_impact")
         raise
     finally:
         enginedb.dispose()

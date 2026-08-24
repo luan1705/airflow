@@ -11,7 +11,7 @@ default_args = {
 }
 
 with DAG(
-    dag_id="info_update_indicator",
+    dag_id="info_indicator",
     default_args=default_args,
     start_date=datetime(2026, 5, 7, tzinfo=timezone("Asia/Ho_Chi_Minh")),
     schedule="0 16 * * 1-5",

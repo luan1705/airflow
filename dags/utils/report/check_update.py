@@ -16,10 +16,7 @@ def check_update(schema: str, **context):
     True  -> schema này còn thiếu dữ liệu quý trước -> chạy update
     False -> schema này đã đủ dữ liệu quý trước -> skip
 
-    index:
-        year + quarter
-
-    các schema khác:
+    Tất cả schema:
         yearReport + lengthReport
     """
 
@@ -77,37 +74,20 @@ def check_update(schema: str, **context):
                 missing_symbols.append(symbol)
                 continue
 
-            if schema == "index":
-                period_exists = conn.execute(
-                    text(f"""
-                        SELECT EXISTS (
-                            SELECT 1
-                            FROM "{schema}"."{symbol}"
-                            WHERE "year" = :year
-                              AND "quarter" = :quarter
-                        )
-                    """),
-                    {
-                        "year": target_year,
-                        "quarter": target_quarter,
-                    },
-                ).scalar()
-
-            else:
-                period_exists = conn.execute(
-                    text(f"""
-                        SELECT EXISTS (
-                            SELECT 1
-                            FROM "{schema}"."{symbol}"
-                            WHERE "yearReport" = :year
-                              AND "lengthReport" = :quarter
-                        )
-                    """),
-                    {
-                        "year": target_year,
-                        "quarter": target_quarter,
-                    },
-                ).scalar()
+            period_exists = conn.execute(
+                text(f"""
+                    SELECT EXISTS (
+                        SELECT 1
+                        FROM "{schema}"."{symbol}"
+                        WHERE "yearReport" = :year
+                          AND "lengthReport" = :quarter
+                    )
+                """),
+                {
+                    "year": target_year,
+                    "quarter": target_quarter,
+                },
+            ).scalar()
 
             if not period_exists:
                 missing_symbols.append(symbol)

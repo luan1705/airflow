@@ -44,6 +44,7 @@ with DAG(
     gate_continue = ShortCircuitOperator(
         task_id="in_live_hours",
         python_callable=should_continue,
+        trigger_rule="all_done"
     )
 
     # ✅ Delay để tránh trigger liên tục => giảm spam DB/connection

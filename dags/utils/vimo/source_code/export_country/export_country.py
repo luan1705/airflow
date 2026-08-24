@@ -53,6 +53,27 @@ def normalize_text(value) -> str:
 
     return value.strip()
 
+def normalize_text_keep_newline(value) -> str:
+    if value is None:
+        return ""
+
+    value = str(value).lower()
+    value = unicodedata.normalize("NFD", value)
+
+    value = "".join(
+        char for char in value
+        if unicodedata.category(char) != "Mn"
+    )
+
+    value = value.replace("đ", "d")
+
+    lines = []
+
+    for line in value.splitlines():
+        line = re.sub(r"[ \t]+", " ", line).strip()
+        lines.append(line)
+
+    return "\n".join(lines)
 
 def parse_time_from_filename(file_path: str) -> date:
     """
@@ -249,19 +270,6 @@ def parse_chart_xml(chart_content: bytes) -> list[dict]:
 
 
 def find_export_country_chart(file_path: str) -> list[dict]:
-    """
-    Tự tìm chart có:
-        - Series xuất khẩu hàng hóa
-        - Các quốc gia: Hoa Kỳ, Trung Quốc, Hàn Quốc, ASEAN, EU
-    """
-    required_categories = {
-        "hoa ky",
-        "trung quoc",
-        "han quoc",
-        "asean",
-        "eu",
-    }
-
     with zipfile.ZipFile(file_path, "r") as docx_zip:
         chart_files = sorted(
             file_name
@@ -273,49 +281,45 @@ def find_export_country_chart(file_path: str) -> list[dict]:
         )
 
         for chart_file in chart_files:
-            try:
-                series_list = parse_chart_xml(
-                    docx_zip.read(chart_file)
-                )
+            xml_content = docx_zip.read(chart_file)
+            root = ET.fromstring(xml_content)
 
-                all_categories = {
-                    normalize_text(category)
-                    for series in series_list
-                    for category in series["categories"]
-                }
+            title_parts = [
+                node.text
+                for node in root.findall(".//a:t", {
+                    "a": "http://schemas.openxmlformats.org/drawingml/2006/main"
+                })
+                if node.text
+            ]
 
-                series_names = [
-                    normalize_text(series["name"])
-                    for series in series_list
-                ]
+            chart_title = normalize_text(
+                " ".join(title_parts)
+            )
 
-                has_export_series = any(
-                    "xuat khau" in name
-                    for name in series_names
-                )
+            # CHỈ lấy chart kim ngạch
+            if (
+                "kim ngach xuat, nhap khau hang hoa"
+                not in chart_title
+            ):
+                continue
 
-                has_required_countries = (
-                    required_categories
-                    .issubset(all_categories)
-                )
+            series_list = parse_chart_xml(
+                xml_content
+            )
 
-                if has_export_series and has_required_countries:
-                    log.info(
-                        "Tìm thấy chart xuất khẩu quốc gia: %s",
-                        chart_file,
-                    )
+            print(
+                f"✅ Chọn chart kim ngạch: {chart_file}"
+            )
+            print(
+                f"✅ Chart title: {chart_title}"
+            )
 
-                    return series_list
-
-            except Exception:
-                log.exception(
-                    "Không đọc được chart %s",
-                    chart_file,
-                )
+            return series_list
 
     raise ValueError(
-        f"Không tìm thấy biểu đồ xuất khẩu theo quốc gia "
-        f"trong file {file_path}"
+        f"Không tìm thấy chart "
+        f"'Kim ngạch xuất, nhập khẩu hàng hóa' "
+        f"trong {file_path}"
     )
 
 
@@ -333,15 +337,16 @@ def series_to_dict(series: dict) -> dict[str, float | None]:
 
 
 def get_export_series(series_list: list[dict]) -> dict:
-    """Lấy đúng series 'Xuất khẩu hàng hóa'."""
     for series in series_list:
-        series_name = normalize_text(series["name"])
+        name = normalize_text(
+            series.get("name")
+        )
 
-        if "xuat khau" in series_name:
+        if name == "xuat khau hang hoa":
             return series
 
     raise ValueError(
-        "Không tìm thấy series 'Xuất khẩu hàng hóa'"
+        "Không tìm thấy series Xuất khẩu hàng hóa"
     )
 
 def get_document_text(file_path: str) -> str:
@@ -364,42 +369,189 @@ def get_document_text(file_path: str) -> str:
 
     return "\n".join(paragraphs)
 
-
-def find_export_country_from_text(file_path: str):
-    full_text = normalize_text(
-        get_document_text(file_path)
+def get_export_section(file_path: str) -> str:
+    paragraphs = get_document_paragraphs(
+        file_path
     )
 
-    countries = {
-        "usa": "hoa ky",
-        "china": "trung quoc",
-        "korea": "han quoc",
-        "asean": "asean",
-        "eu": "eu",
-        "japan": "nhat ban",
-    }
+    export_paragraphs = []
+    inside_export = False
+
+    for paragraph in paragraphs:
+        normalized = normalize_text(
+            paragraph
+        )
+
+        # Bắt đầu đúng block xuất khẩu.
+        is_export_heading = (
+            "xuat khau hang hoa" in normalized
+            or "hang hoa xuat khau" in normalized
+        ) and len(normalized) <= 80
+
+        if not inside_export and is_export_heading:
+            inside_export = True
+            continue
+
+        # Kết thúc khi tới block nhập khẩu.
+        is_import_heading = (
+            "nhap khau hang hoa" in normalized
+            or "hang hoa nhap khau" in normalized
+        ) and len(normalized) <= 80
+
+        if inside_export and is_import_heading:
+            break
+
+        if inside_export:
+            export_paragraphs.append(
+                paragraph
+            )
+
+    if not export_paragraphs:
+        raise ValueError(
+            "Không tìm thấy block Xuất khẩu hàng hóa"
+        )
+
+    return "\n".join(
+        export_paragraphs
+    )
+def get_document_paragraphs(file_path: str) -> list[str]:
+    with zipfile.ZipFile(file_path, "r") as docx_zip:
+        content = docx_zip.read(
+            "word/document.xml"
+        )
+
+    root = ET.fromstring(
+        content
+    )
+
+    paragraphs = []
+
+    for paragraph in root.findall(
+        ".//w:p",
+        WORD_NS,
+    ):
+        texts = []
+
+        for text_node in paragraph.findall(
+            ".//w:t",
+            WORD_NS,
+        ):
+            if text_node.text:
+                texts.append(
+                    text_node.text
+                )
+
+        if texts:
+            value = "".join(
+                texts
+            ).strip()
+
+            if value:
+                paragraphs.append(
+                    value
+                )
+
+    return paragraphs
+
+def find_export_country_from_text(file_path: str):
+    # Chỉ đọc trong block Xuất khẩu hàng hóa -> trước Nhập khẩu hàng hóa.
+    export_section = get_export_section(
+        file_path
+    )
+
+    normalized_export_section = normalize_text(
+        export_section
+    )
+
+    # Trong block xuất khẩu, chỉ lấy phần bắt đầu từ "Về thị trường..."
+    # Hỗ trợ cả "thị trường xuất khẩu hàng hóa"
+    # và "thị trường hàng hóa xuất khẩu".
+    market_match = re.search(
+        r"\bve thi truong\b"
+        r".{0,100}?"
+        r"\bxuat khau\b"
+        r"(.+)",
+        normalized_export_section,
+        re.DOTALL,
+    )
+
+    if not market_match:
+        raise ValueError(
+            "Không tìm thấy đoạn Về thị trường xuất khẩu"
+        )
+
+    market_section = market_match.group(1)
 
     result = {}
 
-    for key, country in countries.items():
+    countries = {
+        "usa": ["hoa ky", "my"],
+        "china": ["trung quoc"],
+        "korea": ["han quoc"],
+        "asean": ["asean"],
+        "japan": ["nhat ban"],
+    }
 
-        match = re.search(
-            rf"{country}.{{0,150}}?"
-            rf"(?:uoc\s+)?"
-            rf"(?:dat|voi|kim ngach|xuat khau).{{0,40}}?"
-            rf"([\d.,]+)\s+ty\s+usd",
-            full_text,
-            re.IGNORECASE | re.DOTALL,
+    for key, aliases in countries.items():
+        value = None
+
+        for country in aliases:
+            match = re.search(
+                rf"\b{country}\b"
+                rf"[^.]{{0,220}}?"
+                rf"([\d.,]+)\s+ty\s+usd",
+                market_section,
+                re.DOTALL,
+            )
+
+            if match:
+                value = to_float(
+                    match.group(1)
+                )
+                break
+
+        result[key] = value
+
+    # EU xử lý riêng trên text gốc:
+    # chỉ nhận đúng "EU" viết hoa và đứng độc lập.
+    original_market_match = re.search(
+        r"Về thị trường"
+        r".{0,100}?"
+        r"(?:xuất khẩu|hàng hóa xuất khẩu)"
+        r"(.+)",
+        export_section,
+        re.DOTALL,
+    )
+
+    result["eu"] = None
+
+    if original_market_match:
+        eu_match = re.search(
+            r"\bEU\b"
+            r"[^.]{0,220}?"
+            r"([\d.,]+)\s+tỷ\s+USD",
+            original_market_match.group(1),
+            re.DOTALL,
         )
 
-        result[key] = (
-            to_float(match.group(1))
-            if match
-            else None
-        )
+        if eu_match:
+            result["eu"] = to_float(
+                eu_match.group(1)
+            )
+
+    print(
+        "✅ Export section:"
+    )
+    print(
+        export_section
+    )
+
+    print(
+        "✅ Export country text:",
+        result,
+    )
 
     return result
-
 def billion_usd_to_usd(value):
     if value is None:
         return None
@@ -677,47 +829,47 @@ def get_latest_file(data_dir: str) -> str:
 
 # ===================== Chạy file mới nhất =====================
 
-# def export_country(**context):
-#     data_dir = os.path.join(
-#         os.path.dirname(__file__),
-#         "../../data/word",
-#     )
-
-#     file_path = get_latest_file(data_dir)
-#     print(f"📂 File mới nhất: {file_path}")
-
-#     save_export_country(file_path)
-
-
-# ===================== Chạy tất cả file =====================
-
 def export_country(**context):
     data_dir = os.path.join(
         os.path.dirname(__file__),
         "../../data/word",
     )
 
-    files = glob.glob(
-        os.path.join(data_dir, "*.docx")
-    )
+    file_path = get_latest_file(data_dir)
+    print(f"📂 File mới nhất: {file_path}")
 
-    if not files:
-        raise FileNotFoundError(
-            f"Không tìm thấy file docx trong {data_dir}"
-        )
+    save_export_country(file_path)
 
-    for file_path in sorted(files, key=_sort_key):
-        print(f"📂 Đang chạy: {file_path}")
 
-        try:
-            save_export_country(file_path)
+# ===================== Chạy tất cả file =====================
 
-        except Exception as exc:
-            log.exception(
-                "Lỗi file %s: %s",
-                file_path,
-                exc,
-            )
+# def export_country(**context):
+#     data_dir = os.path.join(
+#         os.path.dirname(__file__),
+#         "../../data/word",
+#     )
+
+#     files = glob.glob(
+#         os.path.join(data_dir, "*.docx")
+#     )
+
+#     if not files:
+#         raise FileNotFoundError(
+#             f"Không tìm thấy file docx trong {data_dir}"
+#         )
+
+#     for file_path in sorted(files, key=_sort_key):
+#         print(f"📂 Đang chạy: {file_path}")
+
+#         try:
+#             save_export_country(file_path)
+
+#         except Exception as exc:
+#             log.exception(
+#                 "Lỗi file %s: %s",
+#                 file_path,
+#                 exc,
+#             )
 
 
 if __name__ == "__main__":

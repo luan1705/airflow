@@ -93,7 +93,7 @@ def calc_pepb_quarter(
                 SELECT "numberOfSharesMktCap"
                 FROM index."{symbol}"
                 WHERE "ratioType" = 'RATIO_TTM'
-                  AND "quarter" = :quarter
+                  AND "lengthReport" = :quarter
                   AND "yearReport" = :year
                 LIMIT 1
             """,

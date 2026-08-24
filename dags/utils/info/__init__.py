@@ -11,7 +11,7 @@ from .cw import fetch_cw
 from .derivative import fetch_derivatives_futures
 
 # Lấy EPS mới nhất từ income_statement → info.asset mỗi ngày
-from .eps import fetch_eps_all
+# from .eps import fetch_eps_all
 
 # Lấy roa/roe/pe/pb/marketCap/sharesOutstanding từ index → info.asset mỗi ngày
 from .indicator import update_indicator

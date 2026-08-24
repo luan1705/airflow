@@ -33,7 +33,7 @@ def calc_pepb(symbol: str):
 
         # Lấy SLCP theo quý
         idx = pd.read_sql(f"""
-            SELECT "yearReport", "quarter" as "lengthReport", "numberOfSharesMktCap"
+            SELECT "yearReport", "lengthReport", "numberOfSharesMktCap"
             FROM index."{symbol}"
             WHERE "ratioType" = 'RATIO_TTM' AND "quarter" != 5
             ORDER BY "yearReport", "quarter"

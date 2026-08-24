@@ -44,8 +44,7 @@ def fetch_and_upsert(symbol):
                 conn.execute(text("""
                     INSERT INTO info.asset (symbol, url)
                     VALUES (:symbol, :url)
-                    ON CONFLICT (symbol) DO UPDATE SET
-                        url = EXCLUDED.url
+                    ON CONFLICT (symbol) DO NOTHING --UPDATE SET url = EXCLUDED.url
                 """), {'symbol': row['symbol'], 'url': clean_url})
 
         print(f"✅ {symbol}")
@@ -53,11 +52,6 @@ def fetch_and_upsert(symbol):
         print(f"❌ {symbol}: {e}")
 
 def url():
-    with engine.begin() as conn:
-        conn.execute(text("""
-            ALTER TABLE info.asset ADD COLUMN IF NOT EXISTS url TEXT
-        """))
-
     symbols = pd.read_sql(text("""
         SELECT symbol FROM info.asset
         WHERE type = 'Stock'

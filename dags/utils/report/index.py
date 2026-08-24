@@ -10,7 +10,7 @@ from sqlalchemy import create_engine, text
 
 log = logging.getLogger(__name__)
 
-DB_URL = "postgresql+psycopg2://root:Dnl_123456@tanhungsoft.com:5432/dnl"
+DB_URL = "postgresql://root:Dnl_123456@tanhungsoft.com:5432/dnl"
 engine = create_engine(DB_URL)
 
 BASE_URL = "https://iq.vietcap.com.vn/api/iq-insight-service/v1/company/{symbol}/statistics-financial"
@@ -37,6 +37,8 @@ def to_float(value):
 def normalize_row(row):
     new_row = {}
     for k, v in row.items():
+        if k == "quarter":
+            k = "lengthReport"
         val = to_float(v)
         if val is not None:
             if k in ["roa", "roe", "pe", "pb"] and val == 0:
@@ -49,19 +51,28 @@ def normalize_row(row):
 
 
 def create_table_if_not_exists(conn, table_name, sample_row):
+    sample_row = normalize_row(sample_row)
+
     cols = []
+
     for k, v in sample_row.items():
         try:
             float(v)
             t = "DOUBLE PRECISION"
         except:
             t = "TEXT"
+
         cols.append(f'"{k}" {t}')
 
-    sql = f'CREATE TABLE IF NOT EXISTS index."{table_name}" ({",".join(cols)});'
+    sql = f'''
+        CREATE TABLE IF NOT EXISTS index."{table_name}" (
+            {",".join(cols)}
+        );
+    '''
 
     with conn.cursor() as cur:
         cur.execute(sql)
+
     conn.commit()
 
 
