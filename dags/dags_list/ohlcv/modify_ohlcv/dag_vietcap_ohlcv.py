@@ -23,7 +23,7 @@ with DAG(
     save_database_1D=PythonOperator(
         task_id='save_database_1D',
         python_callable=save_DB_1D,
-        op_kwargs={'symbol_list': custom_list}
+        # op_kwargs={'symbol_list': custom_list}
     )
 
     save_database_1=PythonOperator(

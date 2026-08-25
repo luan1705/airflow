@@ -110,6 +110,21 @@ def get_stock(symbol,token):
             msg = f"⚠️ Không có dữ liệu cho {symbol}"
             log.warning(msg)
             return {"symbol": symbol,"status": "warning","message": msg}
+        # Lọc bỏ volume = 0 và volume = NaN
+        if 'volume' in stock.columns:
+            stock = stock[
+                stock['volume'].notna() &
+                (stock['volume'] != 0)
+            ].copy()
+
+            if stock.empty:
+                msg = f"⚠️ Sau khi lọc volume=0/NaN thì không còn dữ liệu cho {symbol}"
+                log.warning(msg)
+                return {
+                    "symbol": symbol,
+                    "status": "warning",
+                    "message": msg
+                }
 
         symbol = 'UPCOMINDEX' if symbol == 'HNXUpcomIndex' else symbol
         symbol = 'HNXINDEX' if symbol == 'HNXIndex' else symbol

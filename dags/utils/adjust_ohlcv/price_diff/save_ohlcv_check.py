@@ -73,7 +73,7 @@ def _ensure_table_with_pk(conn, schema: str, table: str):
     """), {"schema": schema, "table": table}).fetchall()
 
     pk_cols = {r[0] for r in res}
-    if pk_cols != {"time"}:
+    if not pk_cols:
         try:
             conn.execute(text(f'ALTER TABLE {fqtn} ADD CONSTRAINT {_qi(pk_name)} PRIMARY KEY (time);'))
         except Exception as e:
@@ -106,6 +106,18 @@ def get_stock(symbol,token):
 
         if stock is None or stock.empty or "time" not in stock.columns:
             return f"❌ FAIL: {symbol}"
+
+        # Lọc bỏ volume = 0 và volume = NaN
+        if 'volume' in stock.columns:
+            stock = stock[
+                stock['volume'].notna() &
+                (stock['volume'] != 0)
+            ].copy()
+
+            if stock.empty:
+                msg = f"⚠️ Sau khi lọc volume=0/NaN thì không còn dữ liệu cho {symbol}"
+                log.warning(msg)
+                return msg
         
         symbol = 'UPCOMINDEX' if symbol == 'HNXUpcomIndex' else symbol
         symbol = 'HNXINDEX' if symbol == 'HNXIndex' else symbol

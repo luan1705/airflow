@@ -15,7 +15,7 @@ with DAG(
     dag_id="ohlcv_indices",
     default_args=default_args,
     start_date=datetime(2026,8,19,tzinfo=timezone("Asia/Ho_Chi_Minh")),
-    schedule="15 15 * * 1-5",
+    schedule="30 9,10,11,12,13,14,15 * * 1-5",
     catchup= False,
     tags=["ohlcv", "indices", "vietcap"],
 ) as dag:

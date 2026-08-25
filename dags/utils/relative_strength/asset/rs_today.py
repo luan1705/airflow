@@ -146,6 +146,18 @@ def rs_rank_today(today):
                         template="(%s::double precision, %s::timestamptz)",
                         page_size=1000
                     )
+                    # ============================================================
+                    # GHI RSRANK VÀO info.asset
+                    # ============================================================
+                    latest_row = grp.sort_values("time").iloc[-1]
+                    cur.execute(
+                        """
+                        UPDATE info.asset
+                        SET "rsRank" = %s
+                        WHERE symbol = %s
+                        """,
+                        (float(latest_row["rsRank"]), symbol)
+                    )
         except Exception as e:
             msg = f"❌ {symbol}: {e}"
             log.error(msg)

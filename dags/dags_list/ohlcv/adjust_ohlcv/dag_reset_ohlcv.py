@@ -27,7 +27,7 @@ def check_list_not_empty():
 
 def run_reset_ohlcv():
     importlib.reload(symbol_list)
-    from utils.vietcap_ohlcv import save_DB_1D
+    from utils.vietcap_ohlcv import save_DB_1D, save_DB_1
     adjust_list = list(dict.fromkeys(symbol_list.price_diff + symbol_list.dividend_date))
     print(f"adjust_list có {len(adjust_list)} mã: {adjust_list}")
     return save_DB_1D(symbol_list=adjust_list)

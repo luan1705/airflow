@@ -240,14 +240,13 @@ indices =["VNINDEX","HNXIndex","HNXUpcomIndex","VN100","VN30", "VNALLSHARE","VNC
 additional_indice = ["HNXIndex","HNXUpcomIndex","HNX30",]
 
 
-custom_list = ["KLB"
+custom_list = ["DGC"
 ]
 
 # <price_diff START>
 
 price_diff = [
-    "BID",  "BVB",  "CTI",  "LPS",  "SSI",  "MBS",  "SEB",  "CNN",
-    "DNW",  "THN",  "TMW",
+    "DMX",  "RAL",  "CNN",  "DNW",  "HLS",  "KHD",  "TMW",  "TSJ",
 ]
 
 # <price_diff END>
@@ -255,7 +254,7 @@ price_diff = [
 # <dividend_date START>
 
 dividend_date = [
-    "CHP",  "KHD",  "NSC",  "PMC",  "TSJ",  "VSN",  "X20",
+    "HU4",  "MIG",  "NNC",  "SDN",  "SDV",  "TRS",  "VAB",  "YTC",
 ]
 
 # <dividend_date END>
