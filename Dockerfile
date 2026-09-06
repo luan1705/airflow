@@ -24,3 +24,10 @@ RUN pip install selenium
 RUN pip install webdriver-manager
 RUN pip install VNSFintech
 RUN pip install openpyxl
+# PDF -> MinIO pipeline
+RUN pip install minio
+RUN pip install psycopg2-binary
+RUN pip install pandas
+RUN pip install python-dateutil
+RUN pip install requests
+RUN pip install urllib3

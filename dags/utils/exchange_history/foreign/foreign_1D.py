@@ -43,8 +43,35 @@ def foreign(symbol,enginedb):
                 execute_values(cur, insert_sql, rows, page_size=1000)
             finally:
                 cur.close()
+
+            logging.info(f'Đã lưu foreign_{symbol}')
+
+        #=========================Upsert netVal -> netForeign vào invest_capital =========================
+
+        invest_table = f"invest_capital_{symbol}"
+
+        invest_rows = [
+            (pd.to_datetime(row["time"]).date(), row["netVal"])
+            for _, row in df.iterrows()
+        ]
+
+        invest_sql = f"""
+            INSERT INTO "{SCHEMA}"."{invest_table}" ("date", "netForeign")
+            VALUES %s
+            ON CONFLICT ("date") DO UPDATE SET
+                "netForeign" = EXCLUDED."netForeign";
+        """
+
+        with enginedb.begin() as conn:
+            cur = conn.connection.cursor()
+            try:
+                execute_values(cur, invest_sql, invest_rows, page_size=1000)
+            finally:
+                cur.close()
+
+        logging.info(f'Đã lưu foreign_{symbol} và invest_capital_{symbol}')
                 
-        logging.info(f'Đã lưu foreign_{symbol}')
+        
     except Exception as E:
         logging.exception(f'Lỗi lưu foreign_{symbol}')
         

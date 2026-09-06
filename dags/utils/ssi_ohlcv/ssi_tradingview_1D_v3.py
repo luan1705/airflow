@@ -87,7 +87,7 @@ def ssi_tradingview_1D(symbol, token):
     # ========================================================
 
     end = datetime.now().strftime("%Y/%m/%d 23:59:59")
-    start = (datetime.now() - timedelta(days=10)).strftime("%Y/%m/%d 00:00:00")
+    start = (datetime.now() - timedelta(days=5)).strftime("%Y/%m/%d 00:00:00")
 
     # ========================================================
     # FETCH

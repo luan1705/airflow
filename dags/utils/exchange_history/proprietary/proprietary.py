@@ -99,6 +99,46 @@ def save_proprietary(symbol, enginedb, n_last=3):
                 """, rows_data, page_size=1000)
 
         logging.info(f'Đã upsert proprietary_{symbol}_1D ({len(data)} dòng mới nhất)')
+
+        # ========================= Upsert netVal -> netProprietary vào invest_capital =========================
+        invest_table = f"invest_capital_{showsymbol}"
+
+        invest_rows = [
+            (row["time"], row["netVal"])
+            for _, row in data.iterrows()
+        ]
+
+        invest_sql = f"""
+            INSERT INTO exchange_history."{invest_table}" ("date", "netProprietary")
+            VALUES %s
+            ON CONFLICT ("date") DO UPDATE SET
+                "netProprietary" = EXCLUDED."netProprietary";
+        """
+
+        with enginedb.begin() as conn:
+            with conn.connection.cursor() as cur:
+                execute_values(cur, invest_sql, invest_rows, page_size=1000)
+
+        logging.info(f'Đã upsert netProprietary vào {invest_table}')
+        
+        # ========================= Cập nhật netDomestic =========================
+        update_domestic_sql = f"""
+            UPDATE exchange_history."{invest_table}"
+            SET "netDomestic" = -(
+                COALESCE("netProprietary", 0) +
+                COALESCE("netForeign", 0)
+            )
+            WHERE "date" IN %s;
+        """
+
+        dates = [row["time"] for _, row in data.iterrows()]
+
+        with enginedb.begin() as conn:
+            with conn.connection.cursor() as cur:
+                cur.execute(update_domestic_sql, (tuple(dates),))
+
+        logging.info(f'Đã cập nhật netDomestic vào {invest_table}')
+
     except Exception as E:
         logging.exception(f'Lỗi lưu proprietary_{symbol}_1D')
 

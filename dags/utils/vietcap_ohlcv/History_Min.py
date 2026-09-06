@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine, text
 import pandas as pd
 import concurrent.futures
-from datetime import datetime
+from datetime import datetime, timedelta
 from .tradingview import tradingview
 from utils.create_list.symbol_list import HOSE, HNX, UPCOM, DERIVATIVES, CW, HNXBOND, ETFHOSE, indices, custom_list, total_list
 import time
@@ -88,10 +88,14 @@ def ensure_table_and_pk(conn, schema: str, table: str):
 def get_stock(symbol):
     try:
         time.sleep(1)
-        today = datetime.now().strftime('%Y-%m-%d')
+        today = datetime.now()
+        # batdau='2000-01-01'
+        batdau = today - timedelta(days=10)
+        batdau = batdau.strftime('%Y-%m-%d')
+        today = today.strftime('%Y-%m-%d')
 
         # Lấy dữ liệu lịch sử
-        stock = tradingview(symbol=symbol, start='2000-01-01', end=today, time='minutes')
+        stock = tradingview(symbol=symbol, start=batdau, end=today, time='minutes')
         # exch = (
         #  'HOSE' if symbol in HOSE else
         #  'HNX' if symbol in HNX else
@@ -180,8 +184,8 @@ def save_DB_1(symbol_list=None):
         # result += update_all_stocks(HNXBOND)
         # result += update_all_stocks(ETFHOSE)
         # result += update_all_stocks(indices)
-        result += update_all_stocks(custom_list)
-        # result = update_all_stocks(total_list)
+        # result += update_all_stocks(custom_list)
+        result = update_all_stocks(total_list)
         
     errors = [msg for msg in result if msg.startswith("❌") or msg.startswith("⚠️")]
 

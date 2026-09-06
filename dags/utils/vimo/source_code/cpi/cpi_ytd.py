@@ -24,6 +24,7 @@ COMPONENTS = {
     "May mặc, mũ nón và giày dép ":             "clothing",
     "Nhà ở, điện nước, chất đốt và VLXD(*)":   "housing",
     "Nhà ở, điện nước, chất đốt và VLXD (*)":  "housing",
+    "Nhà ở, điện, nước, chất đốt và vật liệu xây dựng": "housing",
     "Nhà ở và vật liệu xây dựng":               "housing",
     "Nhà ở và vật liệu xây dựng(*)":            "housing",
     "Thiết bị và đồ dùng gia đình":             "household",
@@ -224,7 +225,7 @@ def get_latest_file(data_dir: str) -> str:
 
 #=======================Chạy file chỉ định airflow=====================
 # def cpi_ytd(**context):
-#     save_cpi_ytd("/opt/airflow/dags/utils/vimo/data/excel/2026_01.xlsx")
+#     save_cpi_ytd("/opt/airflow/dags/utils/vimo/data/excel/2026_07.xlsx")
 
 # =====================Chạy file mới nhất=====================
 def cpi_ytd(**context):

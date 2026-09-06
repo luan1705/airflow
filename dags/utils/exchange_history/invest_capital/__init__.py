@@ -1,2 +1,2 @@
-from .invest_capital import invest_capital
-
+from .invest_capital_24h import invest_capital
+from .invest_capital_full import invest_capital_full

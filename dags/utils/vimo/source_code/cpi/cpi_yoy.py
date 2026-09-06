@@ -24,6 +24,7 @@ COMPONENTS = {
     "May mặc, mũ nón và giày dép ":             "clothing",
     "Nhà ở, điện nước, chất đốt và VLXD(*)":   "housing",
     "Nhà ở, điện nước, chất đốt và VLXD (*)":  "housing",
+    "Nhà ở, điện, nước, chất đốt và vật liệu xây dựng":  "housing",
     "Nhà ở và vật liệu xây dựng":               "housing",
     "Nhà ở và vật liệu xây dựng(*)":            "housing",
     "Thiết bị và đồ dùng gia đình":             "household",

@@ -28,13 +28,13 @@ def should_continue() -> bool:
     return dtime(9, 0) <= t <= dtime(15, 0)
 
 with DAG(
-    dag_id="foreign_exchange_1_live",
+    dag_id="exchange_foreign_history_1_live",
     default_args=default_args,
     start_date=datetime(2025,12,16,tzinfo=timezone("Asia/Ho_Chi_Minh")),
     schedule="0 9 * * 1-5",
     catchup= False,
     max_active_runs=1,
-    tags=["DB", "market_data"]
+    tags=["exchange_history", "foreign", "live"],
 ) as dag:
 
 

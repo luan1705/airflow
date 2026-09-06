@@ -1,3 +1,7 @@
+import time
+import logging
+from datetime import datetime
+import pytz
 import requests
 import pandas as pd
 import numpy as np
@@ -8,11 +12,46 @@ from psycopg2.extensions import register_adapter, AsIs
 register_adapter(np.float64, lambda v: AsIs(float(v)))
 register_adapter(np.int64,   lambda v: AsIs(int(v)))
 
+log = logging.getLogger(__name__)
 
-def invest_capital(n_days=3):
+def invest_capital_full(n_days=3):
     url = "https://api-feature.sstock.vn/api/v1/chart/general-data-series?dataSeriesNames=T%E1%BB%B1+doanh+r%C3%B2ng&dataSeriesNames=C%C3%A1+nh%C3%A2n+trong+n%C6%B0%E1%BB%9Bc+r%C3%B2ng&dataSeriesNames=T%E1%BB%95+ch%E1%BB%A9c+trong+n%C6%B0%E1%BB%9Bc+r%C3%B2ng&dataSeriesNames=C%C3%A1+nh%C3%A2n+n%C6%B0%E1%BB%9Bc+ngo%C3%A0i+r%C3%B2ng&dataSeriesNames=T%E1%BB%95+ch%E1%BB%A9c+n%C6%B0%E1%BB%9Bc+ngo%C3%A0i+r%C3%B2ng"
     headers = {'Cookie': '__Secure-better-auth.session_token=67ahD0YRN0VvUfQFJTZ66G2dU99QkO8S.0Mrc0z5D1n7DP%2Bjmv1bSTqIcKwi3ZteatV94FjLWTOo%3D; __Secure-better-auth.session_data=eyJzZXNzaW9uIjp7InNlc3Npb24iOnsiZXhwaXJlc0F0IjoiMjAyNi0wNi0xNVQwNzoyODowNS41NDZaIiwidG9rZW4iOiI2N2FoRDBZUk4wVnZVZlFGSlRaNjZHMmRVOTlRa084UyIsImNyZWF0ZWRBdCI6IjIwMjYtMDYtMDhUMDc6Mjg6MDUuNTQ2WiIsInVwZGF0ZWRBdCI6IjIwMjYtMDYtMDhUMDc6Mjg6MDUuNTQ2WiIsImlwQWRkcmVzcyI6IjEwLjQyLjAuMTQ3IiwidXNlckFnZW50IjoiTW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzE0OC4wLjAuMCBTYWZhcmkvNTM3LjM2IiwidXNlcklkIjoiaUV5YTZXNEFQUzAyUWFibHRtR2o2M3JMWTRFeHJyZUIiLCJpbXBlcnNvbmF0ZWRCeSI6bnVsbCwiYWN0aXZlT3JnYW5pemF0aW9uSWQiOm51bGwsImFjdGl2ZVRlYW1JZCI6bnVsbCwiaWQiOiI5YWlWaHVvUjRBYnIwN0lURUIxSVcyR1dwV09qdzNBZCJ9LCJ1c2VyIjp7Im5hbWUiOiJQaGFuIExvaSIsImVtYWlsIjoiY3NvbGl1bG9AZ21haWwuY29tIiwiZW1haWxWZXJpZmllZCI6dHJ1ZSwiaW1hZ2UiOiJodHRwczovL2xoMy5nb29nbGV1c2VyY29udGVudC5jb20vYS9BQ2c4b2NMaGFoNkYwa0JLckh1RmZsdG0wdnpKamZKWVJ1VFo2RWVYZ1VXSWdqWWlseDk1RGc9czk2LWMiLCJjcmVhdGVkQXQiOiIyMDI2LTA1LTI1VDAyOjU2OjU0LjM4N1oiLCJ1cGRhdGVkQXQiOiIyMDI2LTA1LTI1VDAyOjU2OjU0LjM4N1oiLCJ1c2VybmFtZSI6bnVsbCwiZGlzcGxheVVzZXJuYW1lIjpudWxsLCJyb2xlIjoidXNlciIsImJhbm5lZCI6ZmFsc2UsImJhblJlYXNvbiI6bnVsbCwiYmFuRXhwaXJlcyI6bnVsbCwidXNlclR5cGUiOm51bGwsImRpc3BsYXlQaG9uZU51bWJlciI6bnVsbCwiaWQiOiJpRXlhNlc0QVBTMDJRYWJsdG1HajYzckxZNEV4cnJlQiJ9LCJ1cGRhdGVkQXQiOjE3ODA5MDM2ODU1NzQsInZlcnNpb24iOiIxIn0sImV4cGlyZXNBdCI6MTc4MDkwMzk4NTU3NCwic2lnbmF0dXJlIjoiTC04Q0o4MDA4ZXpYMnFoY0JuZlFGcU9mUlJKWHMxRDdWOWI5ZHZQbEE3YyJ9; ph_phc_2O2eCgo6AOpwUykoQ5ufJGvaahcsg9cOPCMp4sZwSMh_posthog=%7B%22%24device_id%22%3A%220198d510-c557-74c1-98a3-4deb13835f48%22%2C%22distinct_id%22%3A%220198d510-c557-74c1-98a3-4deb13835f48%22%2C%22%24sesid%22%3A%5B1780903985308%2C%22019ea60a-2ff9-7412-a60f-d749c2504c20%22%2C1780902146032%5D%2C%22%24initial_person_info%22%3A%7B%22r%22%3A%22%24direct%22%2C%22u%22%3A%22https%3A%2F%2Fsstock.vn%2Ftong-quan-kenh-tai-san%22%7D%2C%22%24user_state%22%3A%22anonymous%22%7D'}
-    data = requests.get(url, headers=headers).json()['dataSeriesValuesInfo']
+    
+    while True:
+        today = datetime.now(
+            pytz.timezone("Asia/Ho_Chi_Minh")
+        ).date()
+
+        try:
+            response = requests.get(url, headers=headers, timeout=30)
+            response.raise_for_status()
+
+            data = response.json()['dataSeriesValuesInfo']
+
+            # Kiểm tra API đã có dữ liệu ngày hôm nay chưa
+            api_dates = set()
+
+            for records in data.values():
+                for record in records:
+                    api_dates.add(pd.to_datetime(record['date']).date())
+
+            if today in api_dates:
+                log.info(f"✅ Đã có dữ liệu invest_capital ngày {today}.")
+                break
+
+            log.info(
+                f"⏳ Chưa có dữ liệu invest_capital ngày {today}. "
+                f"Thử lại sau 5 phút..."
+            )
+
+        except Exception as e:
+            log.warning(
+                f"⚠️ Lỗi gọi API invest_capital: {e}. "
+                f"Thử lại sau 5 phút..."
+            )
+
+        time.sleep(300)
 
     # gộp + pivot
     frames = []
@@ -61,8 +100,9 @@ def invest_capital(n_days=3):
         '''))
 
     # upsert n ngày mới nhất
-    out = table.nlargest(n_days, 'date').copy()
+    # out = table.nlargest(n_days, 'date').copy()
     out['date'] = out['date'].dt.date
+
     cols = list(out.columns)
     rows = [tuple(None if pd.isna(x) else x for x in r)
             for r in out.itertuples(index=False, name=None)]
@@ -80,6 +120,12 @@ def invest_capital(n_days=3):
         with conn.cursor() as cur:
             execute_values(cur, sql, rows)
         conn.commit()
+        now = datetime.now(pytz.timezone("Asia/Ho_Chi_Minh"))
+        log.info(
+            f"✅ Đã upsert {len(rows)} dòng vào exchange_history.invest_capital: "
+            f"{out['date'].min()} → {out['date'].max()}"
+            f" lúc {now.strftime('%Y-%m-%d %H:%M:%S')}"
+        )
     finally:
         conn.close()
 

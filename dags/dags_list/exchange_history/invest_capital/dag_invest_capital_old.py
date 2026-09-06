@@ -13,12 +13,12 @@ default_args = {
 }
 
 with DAG(
-    dag_id="invest_capital",
+    dag_id="invest_capital_old",
     default_args=default_args,
     start_date=datetime(2026, 6, 4, tzinfo=timezone("Asia/Ho_Chi_Minh")),
-    schedule_interval="16 18 * * 1-5",   # chạy mỗi ngày
+    schedule_interval="30 17 * * 1-5",   # chạy mỗi ngày
     catchup=False,
-    tags=["exchange_history", "invest_capital"]
+    tags=["exchange_history", "invest_capital","24hmoney"]
 ) as dag:
 
     save_invest_capital = PythonOperator(

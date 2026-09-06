@@ -79,6 +79,21 @@ def live_foreign_exchange(exchange: str):
 
             logging.info(f"✅ {ex} OK | day={day} | netVol={sums['netVol']} netVal={sums['netVal']}")
 
+            # 5) UPSERT netVal -> invest_capital
+            invest_table = f'exchange_history."invest_capital_{ex}"'
+
+            conn.execute(text(f"""
+                INSERT INTO {invest_table} ("date", "netForeign")
+                VALUES (:date, :netForeign)
+                ON CONFLICT ("date") DO UPDATE SET
+                    "netForeign" = EXCLUDED."netForeign";
+            """), {
+                "date": day,
+                "netForeign": sums["netVal"]
+            })
+
+            logging.info(f"✅ Đã upsert invest_capital_{ex} | date={day} | netForeign={sums['netVal']}")
+
     except Exception:
         logging.exception(f"❌ live_foreign_exchange failed: {ex}")
         raise  # để Airflow retry

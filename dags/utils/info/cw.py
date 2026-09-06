@@ -7,7 +7,7 @@ import logging
 log = logging.getLogger(__name__)
 
 DB_URL = "postgresql+psycopg2://root:Dnl_123456@tanhungsoft.com:5432/dnl"
-engine = create_engine(DB_URL)
+
 
 HEADERS = {
     "content-type": "application/json",
@@ -25,6 +25,7 @@ def clean_name(name: str) -> str:
 
 
 def fetch_cw():
+    engine = create_engine(DB_URL)
     symbols = pd.read_sql(
         text("SELECT symbol FROM info.asset WHERE type = 'Warrant'"),
         engine
