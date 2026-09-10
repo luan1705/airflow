@@ -4,6 +4,7 @@ import pandas as pd
 import logging
 from datetime import datetime, timedelta
 from .foreign_history_1D import foreign_history
+from db_config import POSTGRES_URL
 
 logging.basicConfig(
     level=logging.INFO,                 # cấp log: DEBUG / INFO / WARNING / ERROR
@@ -76,7 +77,7 @@ def foreign(symbol,enginedb):
         logging.exception(f'Lỗi lưu foreign_{symbol}')
         
 def main():
-    enginedb = create_engine("postgresql+psycopg2://root:Dnl_123456@tanhungsoft.com:5432/dnl")
+    enginedb = create_engine(POSTGRES_URL)
     try:
         logging.info("Kết nối DB thành công")
         for sym in symbols:

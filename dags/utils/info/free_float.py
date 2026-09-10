@@ -6,12 +6,15 @@ from psycopg2.extras import execute_values
 import concurrent.futures
 from utils.create_list.symbol_list import HOSE, HNX, UPCOM, custom_list
 import logging
+from sqlalchemy.pool import NullPool
+from db_config import POSTGRES_URL
 
 logging.basicConfig(level=logging.INFO)
 log = logging.getLogger(__name__)
 
 engine = create_engine(
-    "postgresql+psycopg2://root:Dnl_123456@tanhungsoft.com:5432/dnl"
+    POSTGRES_URL,
+    poolclass=NullPool
 )
 
 def free_float(symbol):

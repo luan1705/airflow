@@ -6,6 +6,7 @@ import concurrent.futures
 import logging
 
 from datetime import date, timedelta
+from db_config import POSTGRES_URL
 
 
 # ============================================================
@@ -25,10 +26,8 @@ log = logging.getLogger(__name__)
 # DATABASE
 # ============================================================
 
-DB_URL = "postgresql+psycopg2://root:Dnl_123456@tanhungsoft.com:5432/dnl"
-
 engine = create_engine(
-    DB_URL,
+    POSTGRES_URL,
     pool_size=10,
     max_overflow=20,
     pool_timeout=60,

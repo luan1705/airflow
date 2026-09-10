@@ -3,6 +3,7 @@ import concurrent.futures
 import pandas as pd
 import logging
 from utils.create_list.symbol_list import total_list
+from db_config import POSTGRES_URL
 
 logging.basicConfig(
     level=logging.INFO,                 # cấp log: DEBUG / INFO / WARNING / ERROR
@@ -13,7 +14,7 @@ logging.basicConfig(
     ]
 )
 # enginedb=create_engine('postgresql://vnsfintech:%40Vns123456@tanhungsoft.com:5432/vnsfintech')
-enginedbnews=create_engine("postgresql+psycopg2://root:Dnl_123456@tanhungsoft.com:5432/dnl")
+enginedbnews=create_engine(POSTGRES_URL)
 
 
 def break_out_break_down(symbol):

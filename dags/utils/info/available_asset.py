@@ -1,8 +1,9 @@
 from sqlalchemy import create_engine, text
 from utils.create_list.symbol_list import total_list as keep
+from db_config import POSTGRES_URL
 
 def available_asset():
-    engine = create_engine("postgresql+psycopg2://root:Dnl_123456@tanhungsoft.com:5432/dnl")
+    engine = create_engine(POSTGRES_URL, poolclass=NullPool)
     sql = text("""
     UPDATE info.asset
     SET available = COALESCE(symbol = ANY(CAST(:keep AS text[])), FALSE)

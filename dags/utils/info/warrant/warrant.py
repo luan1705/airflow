@@ -5,6 +5,8 @@ from sqlalchemy import create_engine, text
 import concurrent.futures
 import logging
 from utils.create_list.symbol_list import CW
+from sqlalchemy.pool import NullPool
+from db_config import POSTGRES_URL
 
 # =========================
 # LOGGING
@@ -15,7 +17,8 @@ log = logging.getLogger(__name__)
 # DB
 # =========================
 engine = create_engine(
-    "postgresql+psycopg2://root:Dnl_123456@tanhungsoft.com:5432/dnl"
+    POSTGRES_URL,
+    poolclass=NullPool
 )
 
 # =========================

@@ -6,6 +6,7 @@ from utils.create_list.symbol_list import indices
 import time
 import logging
 from .tradingview import tradingview
+from db_config import POSTGRES_URL
 
 # Thiết lập logging 
 logging.basicConfig(
@@ -20,7 +21,7 @@ log=logging.getLogger(__name__)
 
 # Kết nối PostgreSQL
 engine = create_engine(
-    "postgresql+psycopg2://root:Dnl_123456@tanhungsoft.com:5432/dnl",
+    POSTGRES_URL,
     pool_size=10, max_overflow=20, pool_timeout=60,
     pool_pre_ping=True, pool_recycle=1800,
     connect_args={"keepalives":1, "keepalives_idle":30, "keepalives_interval":10, "keepalives_count":3},

@@ -4,11 +4,12 @@ import pandas as pd
 import concurrent.futures
 import logging
 from utils.exchange_history.breadth.update import pepb_breadth_update
+from db_config import POSTGRES_URL
 
 log = logging.getLogger(__name__)
 
 engine = create_engine(
-    "postgresql+psycopg2://root:Dnl_123456@tanhungsoft.com:5432/dnl",
+    POSTGRES_URL,
     poolclass=NullPool
 )
 

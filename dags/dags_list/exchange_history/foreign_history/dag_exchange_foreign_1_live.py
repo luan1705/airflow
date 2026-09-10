@@ -71,7 +71,7 @@ with DAG(
 
     trigger_next = TriggerDagRunOperator(
         task_id="trigger_next_run",
-        trigger_dag_id="foreign_exchange_1_live",
+        trigger_dag_id="exchange_foreign_history_1_live",
         wait_for_completion=False,
     )
     

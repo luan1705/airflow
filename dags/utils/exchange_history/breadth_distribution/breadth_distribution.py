@@ -4,13 +4,11 @@ from datetime import date, datetime
 from sqlalchemy import create_engine, text
 from sqlalchemy.pool import QueuePool
 from zoneinfo import ZoneInfo
+from db_config import POSTGRES_URL
 
 # =========================================================
 # CONFIG
 # =========================================================
-
-DB_URL = "postgresql+psycopg2://root:Dnl_123456@tanhungsoft.com:5432/dnl"
-
 SCHEMA = "exchange_history"
 
 EXCHANGES = (
@@ -24,7 +22,7 @@ MAX_WORKERS = 15
 log = logging.getLogger(__name__)
 
 engine = create_engine(
-    DB_URL,
+    POSTGRES_URL,
     poolclass=QueuePool,
     pool_size=10,
     max_overflow=20,

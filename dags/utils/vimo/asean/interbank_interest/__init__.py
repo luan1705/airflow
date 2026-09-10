@@ -1,0 +1,6 @@
+from .interbank_interest_1w import interbank_interest as interbank_interest_1w
+from .interbank_interest_2w import interbank_interest as interbank_interest_2w
+from .interbank_interest_1m import interbank_interest as interbank_interest_1m
+from .interbank_interest_3m import interbank_interest as interbank_interest_3m
+from .interbank_interest_6m import interbank_interest as interbank_interest_6m
+from .interbank_interest_on import interbank_interest as interbank_interest_on

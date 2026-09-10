@@ -2,13 +2,15 @@ from sqlalchemy import create_engine, text
 import pandas as pd
 import concurrent.futures
 import logging
+from sqlalchemy.pool import NullPool
+from db_config import POSTGRES_URL
 
 log = logging.getLogger(__name__)
 
 engine = create_engine(
-    "postgresql+psycopg2://root:Dnl_123456@tanhungsoft.com:5432/dnl",
-    pool_size=10, max_overflow=20, pool_timeout=60,
-    pool_pre_ping=True, pool_recycle=1800,
+    POSTGRES_URL,
+    poolclass=NullPool,
+    pool_pre_ping=True
 )
 
 def update_bvps(symbol):

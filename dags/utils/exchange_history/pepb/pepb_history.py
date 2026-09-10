@@ -4,6 +4,7 @@ import pandas as pd
 import requests
 from psycopg2.extras import execute_values
 from sqlalchemy import create_engine
+from db_config import POSTGRES_URL
 
 logging.basicConfig(
     level=logging.INFO,
@@ -147,7 +148,8 @@ def ensure_tables(enginedb) -> None:
 
 def main() -> None:
     enginedb = create_engine(
-        "postgresql+psycopg2://root:Dnl_123456@tanhungsoft.com:5432/dnl"
+        POSTGRES_URL,
+        poolclass=NullPool
     )
     try:
         logging.info("Ket noi DB thanh cong")

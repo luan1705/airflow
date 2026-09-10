@@ -6,11 +6,12 @@ from psycopg2.extras import execute_values
 from utils.create_list.indices_map import indices_map
 from datetime import datetime
 import pytz
+from db_config import POSTGRES_URL
 
 log = logging.getLogger(__name__)
 
 engine = create_engine(
-    "postgresql+psycopg2://root:Dnl_123456@tanhungsoft.com:5432/dnl",
+    POSTGRES_URL,
     pool_size=10, max_overflow=20, pool_timeout=60
 )
 
@@ -33,33 +34,62 @@ def calc_rs_today(symbol: str, today) -> str:
         if not exchange:
             return f"⚠️ Không tìm thấy exchange cho {symbol}"
 
-        # Chỉ đọc 121 dòng gần nhất — đủ để tính shift(120)
-        df = pd.read_sql(f"""
+        benchmark = pd.read_sql(f"""
             SELECT * FROM (
-                SELECT s.time, s.symbol, s.open, s.close,
-                       e.open AS e_open, e.close AS e_close
-                FROM ohlcv."{symbol}_1D" s
-                JOIN ohlcv."{exchange}_1D" e ON e.time = s.time
-                ORDER BY s.time DESC
+                SELECT time, close
+                FROM ohlcv."{exchange}_1D"
+                ORDER BY time DESC
                 LIMIT 121
             ) t ORDER BY time ASC
         """, engine)
 
-        if df.empty:
+        if benchmark.empty:
+            return f"⚠️ Không có dữ liệu benchmark {exchange}"
+
+        stock = pd.read_sql(f"""
+            SELECT * FROM (
+                SELECT time, close
+                FROM ohlcv."{symbol}_1D"
+                WHERE time <= '{benchmark["time"].iloc[-1]}'
+                ORDER BY time DESC
+                LIMIT 140
+            ) t ORDER BY time ASC
+        """, engine)
+
+        if stock.empty or benchmark.empty:
             return f"⚠️ Không có dữ liệu cho {symbol}"
 
-        df["time"] = pd.to_datetime(df["time"], utc=True).dt.tz_convert("Asia/Ho_Chi_Minh")
+        stock["time"] = pd.to_datetime(stock["time"], utc=True)
+        benchmark["time"] = pd.to_datetime(benchmark["time"], utc=True)
+
+        stock = stock.set_index("time")["close"]
+        benchmark = benchmark.set_index("time")["close"]
+
+        calendar = benchmark.index
+
+        # ngày stock không giao dịch -> lấy close gần nhất trước đó
+        stock = (
+            stock
+            .reindex(stock.index.union(calendar))
+            .sort_index()
+            .ffill()
+            .reindex(calendar)
+        )
+
+        df = pd.DataFrame({
+            "close": stock,
+            "e_close": benchmark
+        }).dropna()      
 
         for n, label in [(20, "1m"), (60, "3m"), (120, "6m")]:
-            open_n   = df["open"].shift(n)
-            e_open_n = df["e_open"].shift(n)
-            df[f"rs_{label}"] = (
-                (df["close"] - open_n)     / open_n   * 100 -
-                (df["e_close"] - e_open_n) / e_open_n * 100
-            )
+            stock_return = df["close"] / df["close"].shift(n) - 1
+            index_return = df["e_close"] / df["e_close"].shift(n) - 1
+            df[f"rs_{label}"] = (stock_return - index_return) * 100
+        
+        df["rs"] = (df["rs_1m"] * 0.5 + df["rs_3m"] * 0.3 + df["rs_6m"] * 0.2)
 
-        df["rs"] = df["rs_1m"] * 0.5 + df["rs_3m"] * 0.3 + df["rs_6m"] * 0.2
-        df = df[["time", "rs"]].dropna(subset=["rs"])
+        df = df[["rs"]].dropna().reset_index()
+        df["time"] = pd.to_datetime(df["time"], utc=True).dt.tz_convert("Asia/Ho_Chi_Minh")
 
         # Chỉ lấy dòng hôm nay
         df = df[df["time"].dt.date == today]

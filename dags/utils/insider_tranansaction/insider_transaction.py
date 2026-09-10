@@ -6,12 +6,15 @@ from psycopg2.extras import execute_values
 import concurrent.futures
 from utils.create_list.symbol_list import HOSE, HNX, UPCOM, DERIVATIVES, CW, HNXBOND, ETFHOSE, indices, custom_list
 import logging
+from sqlalchemy.pool import NullPool
+from db_config import POSTGRES_URL
 
 # Thiết lập logging 
 log=logging.getLogger(__name__)
 
 engine = create_engine(
-    "postgresql+psycopg2://root:Dnl_123456@tanhungsoft.com:5432/dnl"
+    POSTGRES_URL,
+    poolclass=NullPool
 )
 def chucvu(symbol):
     table = f'leader."{symbol}"'

@@ -8,6 +8,7 @@ import concurrent.futures
 import logging
 import math
 from utils.create_list.symbol_list import HOSE, HNX, UPCOM, DERIVATIVES, CW, HNXBOND, ETFHOSE, indices, custom_list
+from db_config import POSTGRES_URL
 
 logging.basicConfig(
     level=logging.INFO,
@@ -20,7 +21,7 @@ today = datetime.now().date()
 batdau=today-timedelta(days=50)
 
 engine = create_engine(
-    "postgresql+psycopg2://root:Dnl_123456@tanhungsoft.com:5432/dnl"
+    POSTGRES_URL
 )
 
 def d_trading_signals(symbol,swing=5):

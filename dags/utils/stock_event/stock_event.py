@@ -3,6 +3,8 @@ import pandas as pd
 import logging
 import concurrent.futures
 import re
+from psycopg2.extras import execute_values
+from db_config import POSTGRES_URL
 
 from .event import get_event
 from utils.create_list.symbol_list import total_list
@@ -15,7 +17,7 @@ logging.basicConfig(
 log = logging.getLogger(__name__)
 
 enginedb = create_engine(
-    "postgresql+psycopg2://root:Dnl_123456@tanhungsoft.com:5432/dnl",
+    POSTGRES_URL,
     pool_size=10,
     max_overflow=20,
     pool_pre_ping=True,

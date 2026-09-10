@@ -5,6 +5,7 @@ import concurrent.futures
 import logging
 from pathlib import Path
 import re
+from db_config import POSTGRES_URL
 
 from utils.create_list.symbol_list import (
     HOSE,
@@ -20,7 +21,7 @@ from utils.create_list.symbol_list import (
 log = logging.getLogger(__name__)
 
 engine = create_engine(
-    "postgresql+psycopg2://root:Dnl_123456@tanhungsoft.com:5432/dnl",
+    POSTGRES_URL,
     pool_size=10,
     max_overflow=20,
     pool_timeout=60,

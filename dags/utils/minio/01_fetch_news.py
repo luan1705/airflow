@@ -7,9 +7,10 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from utils.create_list.symbol_list import (
     HOSE, HNX, UPCOM
 )
+from db_config import POSTGRES_URL
 
 # ── Cấu hình ────────────────────────────────────────────────────────────────────
-DB_URL = "postgresql://root:Dnl_123456@tanhungsoft.com:5432/dnl"
+DB_URL = POSTGRES_URL
 API_URL = "https://iq.vietcap.com.vn/api/iq-insight-service/v1/news-events-for-chart"
 
 HEADERS = {

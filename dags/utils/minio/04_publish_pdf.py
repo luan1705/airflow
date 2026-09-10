@@ -1,8 +1,9 @@
 import psycopg2
 import pandas as pd
+from db_config import POSTGRES_URL
 
 # Kết nối database
-DB_URL = "postgresql://root:Dnl_123456@tanhungsoft.com:5432/dnl"
+DB_URL = POSTGRES_URL
 
 def extract_filename_from_url(pdf_link):
     """Lấy tên file từ URL (phần sau dấu / cuối cùng)"""

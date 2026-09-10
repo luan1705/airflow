@@ -2,12 +2,13 @@ import numpy as np
 import pandas as pd
 from sqlalchemy import create_engine, text
 from psycopg2.extras import execute_values
+from db_config import POSTGRES_URL
 
 SECTOR_WINDOW = 180
 BASE = 100.0
 
 engine = create_engine(
-    "postgresql+psycopg2://root:Dnl_123456@tanhungsoft.com:5432/dnl"
+    POSTGRES_URL
 )
 
 def get_all_sectors():

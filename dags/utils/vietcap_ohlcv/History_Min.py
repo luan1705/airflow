@@ -7,6 +7,8 @@ from utils.create_list.symbol_list import HOSE, HNX, UPCOM, DERIVATIVES, CW, HNX
 import time
 import logging
 import re
+from psycopg2.extras import execute_values
+from db_config import POSTGRES_URL
 
 # Thiết lập logging
 log=logging.getLogger(__name__)
@@ -14,7 +16,7 @@ log=logging.getLogger(__name__)
 # Kết nối PostgreSQL
 engine = create_engine(
     # method://user:pass@host:port/dbName
-    "postgresql+psycopg2://root:Dnl_123456@tanhungsoft.com:5432/dnl",
+    POSTGRES_URL,
     pool_size=20,
     max_overflow=30,
     pool_timeout=6000

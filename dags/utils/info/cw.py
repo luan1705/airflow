@@ -3,10 +3,12 @@ import pandas as pd
 from sqlalchemy import create_engine, text
 import re
 import logging
+from sqlalchemy.pool import NullPool
+from db_config import POSTGRES_URL
 
 log = logging.getLogger(__name__)
 
-DB_URL = "postgresql+psycopg2://root:Dnl_123456@tanhungsoft.com:5432/dnl"
+engine = create_engine(POSTGRES_URL, poolclass=NullPool)
 
 
 HEADERS = {

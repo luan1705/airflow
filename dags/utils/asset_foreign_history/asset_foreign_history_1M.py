@@ -6,6 +6,7 @@ import numpy as np
 import concurrent.futures
 from utils.create_list.symbol_list import HOSE, HNX, UPCOM, DERIVATIVES, CW
 from .def_asset_foreign_history import foreign_history_1D
+from db_config import POSTGRES_URL
 
 logging.basicConfig(
     level=logging.INFO,                 # cấp log: DEBUG / INFO / WARNING / ERROR
@@ -16,7 +17,7 @@ logging.basicConfig(
     ]
 )
 
-enginedb=create_engine("postgresql+psycopg2://root:Dnl_123456@tanhungsoft.com:5432/dnl",
+enginedb=create_engine(POSTGRES_URL,
                         pool_pre_ping=True,       # kiểm tra kết nối trước khi dùng lại
                         pool_size=5,              # số connection giữ trong pool
                         max_overflow=10 

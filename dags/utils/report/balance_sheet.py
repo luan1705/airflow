@@ -6,10 +6,11 @@ import re
 import time
 import concurrent.futures
 import logging
+from db_config import POSTGRES_URL
 
 log = logging.getLogger(__name__)
 
-DB_URL = "postgresql+psycopg2://root:Dnl_123456@tanhungsoft.com:5432/dnl"
+DB_URL = POSTGRES_URL
 SCHEMA = "balance_sheet"
 engine = create_engine(DB_URL)
 

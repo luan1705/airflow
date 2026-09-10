@@ -3,6 +3,7 @@ import pandas as pd
 import logging
 import numpy as np
 from psycopg2.extras import execute_values
+from db_config import POSTGRES_URL
 
 logging.basicConfig(
     level=logging.INFO,
@@ -10,12 +11,10 @@ logging.basicConfig(
     handlers=[logging.StreamHandler()],
 )
 
-DB_URL = "postgresql+psycopg2://root:Dnl_123456@tanhungsoft.com:5432/dnl"
-
 def sector():
     enginedb = None
     try:
-        enginedb = create_engine(DB_URL, pool_pre_ping=True)
+        enginedb = create_engine(POSTGRES_URL, pool_pre_ping=True)
         logging.info("Kết nối DB")
 
         # === Lấy dữ liệu gốc ===

@@ -1,6 +1,7 @@
 from sqlalchemy import create_engine
 import pandas as pd
 import logging
+from db_config import POSTGRES_URL
 
 logging.basicConfig(
     level=logging.INFO,                 # cấp log: DEBUG / INFO / WARNING / ERROR
@@ -12,7 +13,7 @@ logging.basicConfig(
 )
 
 enginedb = create_engine(
-    "postgresql+psycopg2://root:Dnl_123456@tanhungsoft.com:5432/dnl",
+    POSTGRES_URL,
     pool_size=10, max_overflow=20, pool_timeout=60,
     pool_pre_ping=True, pool_recycle=1800,
 )

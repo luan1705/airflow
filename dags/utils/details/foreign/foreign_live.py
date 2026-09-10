@@ -1,5 +1,6 @@
 from sqlalchemy import create_engine, text
 import logging
+from db_config import POSTGRES_URL
 
 logging.basicConfig(
     level=logging.INFO,
@@ -7,8 +8,7 @@ logging.basicConfig(
     handlers=[logging.StreamHandler()],
 )
 
-DB_URL = "postgresql+psycopg2://root:Dnl_123456@tanhungsoft.com:5432/dnl"
-engine = create_engine(DB_URL, pool_pre_ping=True)
+engine = create_engine(POSTGRES_URL, pool_pre_ping=True)
 
 # lưu exchange dạng TEXT trong details.exchange_foreign
 EX_LIST = {"HOSE", "HNX", "UPCOM"}

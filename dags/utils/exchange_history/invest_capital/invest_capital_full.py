@@ -8,6 +8,7 @@ import numpy as np
 from sqlalchemy import create_engine, text
 from psycopg2.extras import execute_values
 from psycopg2.extensions import register_adapter, AsIs
+from db_config import POSTGRES_URL
 
 register_adapter(np.float64, lambda v: AsIs(float(v)))
 register_adapter(np.int64,   lambda v: AsIs(int(v)))
@@ -81,7 +82,7 @@ def invest_capital_full(n_days=3):
     table['totalInstitution'] = table['netDomesticInstitution'] + table['netForeignInstitution']
 
     # DB
-    engine = create_engine("postgresql+psycopg2://root:Dnl_123456@tanhungsoft.com:5432/dnl")
+    engine = create_engine(POSTGRES_URL, poolclass=NullPool)
 
     with engine.begin() as con:
         con.execute(text("CREATE SCHEMA IF NOT EXISTS exchange_history"))

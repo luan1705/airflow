@@ -10,6 +10,7 @@ import numpy as np
 from sqlalchemy import create_engine, text
 from psycopg2.extras import execute_values
 from psycopg2.extensions import register_adapter, AsIs
+from db_config import POSTGRES_URL
 
 
 # ============================================================
@@ -270,7 +271,8 @@ def invest_capital(n_days=3):
     # ========================================================
 
     engine = create_engine(
-        "postgresql+psycopg2://root:Dnl_123456@tanhungsoft.com:5432/dnl"
+        POSTGRES_URL,
+        poolclass=NullPool
     )
 
     # ========================================================

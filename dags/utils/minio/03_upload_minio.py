@@ -23,11 +23,12 @@ import psycopg2.pool
 from minio import Minio
 from minio.error import S3Error
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from db_config import POSTGRES_URL
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 # ── Config ────────────────────────────────────────────────────────────────────
-DB_URL           = "postgresql://root:Dnl_123456@tanhungsoft.com:5432/dnl"
+DB_URL           = POSTGRES_URL
 MINIO_ENDPOINT   = "minio-server:9000"
 MINIO_ACCESS_KEY = "tsjjRn5kFRhHDfYHkWe3"
 MINIO_SECRET_KEY = "HNFt1AZU1tDrki5YbDwcsuZSt0AROzIZa2A1Xgib"

@@ -1,6 +1,7 @@
 from sqlalchemy import create_engine, text
 import pandas as pd
 import logging
+from db_config import POSTGRES_URL
 
 logging.basicConfig(
     level=logging.INFO,
@@ -8,10 +9,8 @@ logging.basicConfig(
     handlers=[logging.StreamHandler()]
 )
 
-DB_URL = "postgresql+psycopg2://root:Dnl_123456@tanhungsoft.com:5432/dnl"
-
 def impact():
-    enginedb = create_engine(DB_URL)
+    enginedb = create_engine(POSTGRES_URL)
 
     try:
         logging.info("Kết nối DB")

@@ -4,11 +4,12 @@ import concurrent.futures
 import logging
 from psycopg2.extras import execute_values
 from utils.create_list.indices_map import indices_map
+from db_config import POSTGRES_URL
 
 log = logging.getLogger(__name__)
 
 engine = create_engine(
-    "postgresql+psycopg2://root:Dnl_123456@tanhungsoft.com:5432/dnl",
+    POSTGRES_URL,
     pool_size=10, max_overflow=20, pool_timeout=60
 )
 
@@ -53,32 +54,49 @@ def calc_rs(symbol: str) -> str:
             msg = f"⚠️ Không tìm thấy exchange cho {symbol}"
             log.warning(msg)
             return msg
+        # Lấy calendar từ INDEX làm timeline chuẩn 
+        stock = pd.read_sql(f''' 
+                SELECT time, close 
+                FROM ohlcv."{symbol}_1D" 
+                ORDER BY time ASC ''', engine)
 
-        df = pd.read_sql(f"""
-            SELECT s.time, s.symbol, s.open, s.close,
-                   e.open AS e_open, e.close AS e_close
-            FROM ohlcv."{symbol}_1D" s
-            JOIN ohlcv."{exchange}_1D" e ON e.time = s.time
-            ORDER BY s.time ASC
-        """, engine)
+        benchmark = pd.read_sql(f''' 
+                SELECT time, close 
+                FROM ohlcv."{exchange}_1D" 
+                ORDER BY time ASC ''', engine)
 
-        if df.empty:
-            msg = f"⚠️ Không có dữ liệu cho {symbol}"
-            log.warning(msg)
-            return msg
+        if stock.empty or benchmark.empty: 
+            msg = f"⚠️ Không đủ dữ liệu cho {symbol}" 
+            log.warning(msg) 
+            return msg   
 
-        df["time"] = pd.to_datetime(df["time"], utc=True).dt.tz_convert("Asia/Ho_Chi_Minh")
+        stock["time"] = pd.to_datetime(stock["time"], utc=True) 
+        benchmark["time"] = pd.to_datetime(benchmark["time"], utc=True) 
 
-        for n, label in [(20, "1m"), (60, "3m"), (120, "6m")]:
-            open_n   = df["open"].shift(n)
-            e_open_n = df["e_open"].shift(n)
-            df[f"rs_{label}"] = (
-                (df["close"] - open_n)     / open_n   * 100 -
-                (df["e_close"] - e_open_n) / e_open_n * 100
-            )
+        stock = stock.set_index("time")["close"] 
+        benchmark = benchmark.set_index("time")["close"]     
+
+        # Timeline chuẩn = các ngày index có giao dịch 
+        calendar = benchmark.index 
+        # Reindex stock theo calendar index. 
+        # Nếu hôm nay stock không giao dịch -> lấy close gần nhất trước đó. 
+        stock = stock.reindex(calendar).ffill()
+
+        df = pd.DataFrame({ 
+            "close": stock, 
+            "e_close": benchmark.reindex(calendar) 
+        })
+
+        # Không dùng dữ liệu trước ngày cổ phiếu có giá đầu tiên 
+        df = df.dropna(subset=["close", "e_close"])
+
+        for n, label in [(20, "1m"), (60, "3m"), (120, "6m")]: 
+            stock_return = df["close"] / df["close"].shift(n) - 1 
+            index_return = df["e_close"] / df["e_close"].shift(n) - 1 
+            df[f"rs_{label}"] = ( stock_return - index_return ) * 100
 
         df["rs"] = df["rs_1m"] * 0.5 + df["rs_3m"] * 0.3 + df["rs_6m"] * 0.2
-        df = df[["time", "rs"]].dropna(subset=["rs"])
+        df = df[["rs"]].dropna(subset=["rs"]).reset_index()
 
         if df.empty:
             msg = f"⚠️ Chưa đủ dữ liệu để tính rs cho {symbol}"

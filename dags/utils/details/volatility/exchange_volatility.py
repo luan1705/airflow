@@ -2,6 +2,7 @@ from sqlalchemy import create_engine, text
 from sqlalchemy.pool import NullPool
 import pandas as pd
 import logging
+from db_config import POSTGRES_URL
 
 logging.basicConfig(
     level=logging.INFO,
@@ -9,14 +10,11 @@ logging.basicConfig(
     handlers=[logging.StreamHandler()],
 )
 
-DB_URL = "postgresql+psycopg2://root:Dnl_123456@tanhungsoft.com:5432/dnl"
-
-
 # ✅ Nếu DB hay báo "too many clients already" thì NullPool là an toàn nhất trong Airflow
 # (mỗi task mở 1 connection rồi đóng ngay, không giữ connection trong pool)
 def get_engine():
     return create_engine(
-        DB_URL,
+        POSTGRES_URL,
         pool_pre_ping=True,
         poolclass=NullPool,
     )

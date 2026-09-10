@@ -9,12 +9,13 @@ import logging
 from datetime import datetime, timedelta
 import numpy as np
 from pandas import json_normalize
+from db_config import POSTGRES_URL
 
 # Thiết lập logging 
 log=logging.getLogger(__name__)
 
 engine = create_engine(
-    "postgresql+psycopg2://root:Dnl_123456@tanhungsoft.com:5432/dnl"
+    POSTGRES_URL
 )
 create_table_sql = """
     CREATE TABLE IF NOT EXISTS dividend.dividend (

@@ -4,7 +4,7 @@ import pandas as pd
 import requests
 import psycopg2
 from psycopg2.extras import execute_values
-
+from db_config import POSTGRES_URL
 
 def gdp_growth():
     # =========================
@@ -72,7 +72,7 @@ def gdp_growth():
     # =========================
     # DB CONNECT
     # =========================
-    conn = psycopg2.connect("postgresql://root:Dnl_123456@tanhungsoft.com:5432/dnl")
+    conn = psycopg2.connect(POSTGRES_URL)
     cursor = conn.cursor()
 
     try:

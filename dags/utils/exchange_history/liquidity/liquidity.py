@@ -7,6 +7,10 @@ from datetime import datetime,timezone,timedelta
 import logging
 from sqlalchemy import create_engine, text
 import logging
+from sqlalchemy.pool import NullPool
+from db_config import POSTGRES_URL
+
+
 logging.basicConfig(
     level=logging.INFO,                 # cấp log: DEBUG / INFO / WARNING / ERROR
     format="%(asctime)s [%(levelname)s] %(message)s",  # format log
@@ -123,7 +127,7 @@ def save_liquidity(symbol,enginedb):
     logging.exception(f"Lỗi lưu liquidity_{symbol}")
 symbols=['HOSE','HNX','UPCOM']
 def main():
-    enginedb = create_engine("postgresql+psycopg2://root:Dnl_123456@tanhungsoft.com:5432/dnl")
+    enginedb = create_engine(POSTGRES_URL, poolclass=NullPool)
     try:
         for sym in symbols:
             save_liquidity(sym,enginedb)

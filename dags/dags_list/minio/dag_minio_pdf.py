@@ -22,7 +22,7 @@ with DAG(
     description="Vietcap -> Find PDF -> MinIO -> Publish PDF metadata",
     default_args=default_args,
     start_date=datetime(2026, 9, 1),
-    schedule="0 6 * * 2-5",   # 06:00 mỗi ngày
+    schedule="0 6 * * 1-5",   # 06:00 mỗi ngày
     catchup=False,
     max_active_runs=1,
     tags=["pdf", "document", "minio"],

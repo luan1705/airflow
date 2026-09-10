@@ -1,8 +1,10 @@
 from sqlalchemy import create_engine, text
+from db_config import POSTGRES_URL
 
 def active_asset():
     engine = create_engine(
-        "postgresql+psycopg2://root:Dnl_123456@tanhungsoft.com:5432/dnl"
+        POSTGRES_URL,
+        poolclass=NullPool
     )
 
     try:

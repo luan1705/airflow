@@ -3,10 +3,11 @@ import pandas as pd
 from sqlalchemy import create_engine
 from psycopg2.extras import execute_values
 from datetime import date, timedelta
+from db_config import POSTGRES_URL
 
 WINDOW = 180
 BASE = 100.0
-engine = create_engine("postgresql+psycopg2://root:Dnl_123456@tanhungsoft.com:5432/dnl")
+engine = create_engine(POSTGRES_URL)
 
 def rs_rank_sector_today(exchange, benchmark, n_upsert=1):
     # 1) meta: LỌC GIỐNG HỆT bản full

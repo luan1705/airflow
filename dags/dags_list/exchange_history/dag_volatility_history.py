@@ -2,7 +2,7 @@ from airflow import DAG
 from airflow.operators.python import PythonOperator
 from datetime import datetime, timedelta
 from pytz import timezone
-from utils.volatility_history import upsert_volatility_history
+from utils.exchange_history.volatility_history import upsert_volatility_history
 
 default_args = {
     "retries": 10,

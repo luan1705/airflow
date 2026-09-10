@@ -2,6 +2,7 @@ from sqlalchemy import create_engine
 from psycopg2.extras import execute_values
 import logging
 from .foreign_history_1 import foreign_history
+from db_config import POSTGRES_URL
 
 logging.basicConfig(
     level=logging.INFO,
@@ -50,7 +51,7 @@ def foreign(symbol, enginedb):
 
 def main():
     enginedb = create_engine(
-        "postgresql+psycopg2://root:Dnl_123456@tanhungsoft.com:5432/dnl"
+        POSTGRES_URL
     )
     try:
         logging.info("Kết nối DB thành công")

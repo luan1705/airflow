@@ -1,0 +1,6 @@
+from .bank_interest import bank_interest
+from .bank_interest_history_1m import bank_interest_history_1m
+from .bank_interest_history_3m import bank_interest_history_3m
+from .bank_interest_history_6m import bank_interest_history_6m
+from .bank_interest_history_1y import bank_interest_history_1y
+from .bank_interest_history_3y import bank_interest_history_3y

@@ -5,6 +5,7 @@ from zoneinfo import ZoneInfo
 
 import psycopg2
 from psycopg2 import sql
+from db_config import POSTGRES_URL
 
 
 logging.basicConfig(
@@ -13,10 +14,6 @@ logging.basicConfig(
 )
 
 logger = logging.getLogger(__name__)
-
-DATABASE_URL = (
-    "postgresql://root:Dnl_123456@tanhungsoft.com:5432/dnl"
-)
 
 VN_TIMEZONE = ZoneInfo("Asia/Ho_Chi_Minh")
 
@@ -218,7 +215,7 @@ def liquidity_history_today() -> None:
         today,
     )
 
-    connection = psycopg2.connect(DATABASE_URL)
+    connection = psycopg2.connect(POSTGRES_URL)
 
     try:
         with connection.cursor() as cursor:

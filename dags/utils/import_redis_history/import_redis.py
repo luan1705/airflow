@@ -7,15 +7,16 @@ from sqlalchemy import create_engine, text
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import sys
 import os
+from sqlalchemy.pool import NullPool
+from db_config import POSTGRES_URL, REDIS_URL
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from utils.create_list.symbol_list import total_list
 
 # Kết nối DB
-engine = create_engine("postgresql+psycopg2://root:Dnl_123456@tanhungsoft.com:5432/dnl")
+engine = create_engine(POSTGRES_URL, poolclass=NullPool)
 
 # Kết nối Redis
-REDIS_URL   = "redis://root:Dnl_123456@tanhungsoft.com:6379"
 POOL = redis.BlockingConnectionPool.from_url(
     REDIS_URL,
     decode_responses=True,

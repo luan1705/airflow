@@ -4,11 +4,12 @@ import concurrent.futures
 import logging
 from psycopg2.extras import execute_values
 from utils.create_list.indices_map import indices_map
+from db_config import POSTGRES_URL
 
 log = logging.getLogger(__name__)
 
 engine = create_engine(
-    "postgresql+psycopg2://root:Dnl_123456@tanhungsoft.com:5432/dnl",
+    POSTGRES_URL,
     pool_size=10, max_overflow=20, pool_timeout=60
 )
 

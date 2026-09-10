@@ -4,6 +4,7 @@ from collections import defaultdict
 
 import psycopg2
 from psycopg2 import sql
+from db_config import POSTGRES_URL
 
 
 logging.basicConfig(
@@ -12,11 +13,6 @@ logging.basicConfig(
 )
 
 logger = logging.getLogger(__name__)
-
-DATABASE_URL = (
-    "postgresql://root:Dnl_123456@tanhungsoft.com:5432/dnl"
-)
-
 
 def normalize_exchange(exchange: str) -> str:
     exchange = exchange.strip().upper()
@@ -236,7 +232,7 @@ def liquidity_history(
     from_date=None,
     to_date=None,
 ) -> None:
-    connection = psycopg2.connect(DATABASE_URL)
+    connection = psycopg2.connect(POSTGRES_URL)
 
     try:
         with connection.cursor() as cursor:

@@ -1,5 +1,6 @@
 from sqlalchemy import create_engine, text
 import logging
+from db_config import POSTGRES_URL
 
 logging.basicConfig(
     level=logging.INFO,
@@ -7,11 +8,9 @@ logging.basicConfig(
     handlers=[logging.StreamHandler()],
 )
 
-DB_URL = "postgresql+psycopg2://root:Dnl_123456@tanhungsoft.com:5432/dnl"
-
 # dùng 1 engine chung (đỡ tạo nhiều connection)
 engine = create_engine(
-    DB_URL,
+    POSTGRES_URL,
     pool_pre_ping=True,
     pool_size=2,
     max_overflow=2,

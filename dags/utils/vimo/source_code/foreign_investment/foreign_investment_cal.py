@@ -1,9 +1,9 @@
 import pandas as pd
 from sqlalchemy import create_engine, text
+from db_config import POSTGRES_URL
 
-DB_URL = "postgresql+psycopg2://root:Dnl_123456@tanhungsoft.com:5432/dnl"
 engine = create_engine(
-    DB_URL,
+    POSTGRES_URL,
     pool_pre_ping=True,
 )
 

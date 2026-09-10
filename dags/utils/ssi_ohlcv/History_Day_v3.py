@@ -9,13 +9,14 @@ import logging
 import re
 from psycopg2.extras import execute_values
 import requests
+from db_config import POSTGRES_URL
 
 # Thiết lập logging 
 log=logging.getLogger(__name__)
 
 # Kết nối PostgreSQL
 engine = create_engine(# method://user:pass@host:port/dbName
-                       "postgresql+psycopg2://root:Dnl_123456@tanhungsoft.com:5432/dnl",
+                       POSTGRES_URL,
                         pool_size=10,
                         max_overflow=20,
                         pool_timeout=60

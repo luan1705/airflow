@@ -4,6 +4,7 @@ from sqlalchemy import create_engine, MetaData, Table
 from sqlalchemy.dialects.postgresql import insert as pg_insert
 from utils.create_list.symbol_list import total_list, EXCHANGE_LISTS, HOSE, HNX, UPCOM, DERIVATIVES, CW, HNXBOND, ETFHOSE
 from utils.create_list.indices_map import indices_map
+from db_config import POSTGRES_URL
 
 logger = logging.getLogger(__name__)
 
@@ -28,7 +29,7 @@ _TYPE = {
 
 # ---------- DB ----------
 engine = create_engine(
-    "postgresql+psycopg2://root:Dnl_123456@tanhungsoft.com:5432/dnl",
+    POSTGRES_URL,
     pool_pre_ping=True, pool_size=10, max_overflow=20,
 )
 _table = Table("asset", MetaData(), schema="info", autoload_with=engine)

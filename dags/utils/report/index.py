@@ -7,10 +7,11 @@ import time
 import concurrent.futures
 import logging
 from sqlalchemy import create_engine, text
+from db_config import POSTGRES_URL
 
 log = logging.getLogger(__name__)
 
-DB_URL = "postgresql://root:Dnl_123456@tanhungsoft.com:5432/dnl"
+DB_URL = POSTGRES_URL
 engine = create_engine(DB_URL)
 
 BASE_URL = "https://iq.vietcap.com.vn/api/iq-insight-service/v1/company/{symbol}/statistics-financial"

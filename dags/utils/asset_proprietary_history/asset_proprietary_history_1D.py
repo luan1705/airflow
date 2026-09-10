@@ -4,6 +4,7 @@ import logging
 from datetime import timedelta
 import concurrent.futures
 import re
+from db_config import POSTGRES_URL
 
 from utils.create_list.symbol_list import HOSE, HNX, UPCOM, DERIVATIVES, CW
 from .def_asset_proprietary_history import proprietary_history
@@ -16,7 +17,7 @@ logging.basicConfig(
 log = logging.getLogger(__name__)
 
 enginedb = create_engine(
-    "postgresql+psycopg2://root:Dnl_123456@tanhungsoft.com:5432/dnl",
+    POSTGRES_URL,
     pool_pre_ping=True,
     pool_size=5,
     max_overflow=10
